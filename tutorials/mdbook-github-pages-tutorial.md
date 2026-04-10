@@ -7,8 +7,8 @@
 - 目录结构与 `SUMMARY.md` 编写规则
 - `book.toml` 完整配置说明
 - 自定义外观（主题色、字体、favicon）
-- GitHub Actions 自动部署
-- 常见报错与修复
+- GitHub Actions 自动部署、`.gitignore` 与 Pages 设置
+- 文末 **「十一、常见错误与修复」** 速查表
 
 ---
 
@@ -36,7 +36,8 @@ cargo install mdbook
 
 ```bash
 mdbook --version
-# mdbook v0.4.x
+# 常见为 v0.5.x（与 CI 里 mdbook-version: "latest" 一致）
+# 若需与旧版插件兼容，可固定为 0.4.x，例如：cargo install mdbook --locked --version 0.4.52
 ```
 
 ### 方式 B：下载二进制（无需 Rust）
@@ -82,6 +83,8 @@ mdbook init --force .
 
 然后手动调整 `book.toml` 中的 `src` 路径（下一节详解）。
 
+**注意**：`mdbook build` 的默认输出目录是仓库根下的 **`book/`**。请尽早添加根目录 **`.gitignore`** 中的 `book/`（见第九节），**不要**把 `book/` 当成子模块提交；否则既没有 `.gitmodules` 里的 URL，又会在 CI 的 `actions/checkout` 拉子模块时报错。
+
 ---
 
 ## 四、book.toml 完整配置详解
@@ -104,7 +107,7 @@ site-url = "/AI-Fullstack-Notes/"           # GitHub Pages 子路径，必须与
                                              # 本地预览时注释掉此行，否则资源路径会错
 
 git-repository-url  = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
-# git-repository-icon：mdBook 0.5+ 用 SVG Font Awesome，fa-github 等品牌图标可能报 Missing font github，可先省略此行。
+# mdBook 0.5+：品牌图标 fa-github 等会触发构建错误 Missing font github，请省略 git-repository-icon。
 # git-repository-icon = "fa-github"
 
 # 每个页面底部显示"在 GitHub 上编辑此页"链接
@@ -272,6 +275,7 @@ your-repo/
 │       └── deploy.yml   ← 新建此文件
 ├── book.toml
 ├── SUMMARY.md
+├── .gitignore           ← 建议：忽略 book/（见第九节）
 └── ...（你的 .md 文件）
 ```
 
@@ -293,11 +297,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: false   # 若误把 book/ 登记成 submodule 且无 .gitmodules，拉子模块会失败；显式关闭更稳妥
 
       - name: Install mdBook
         uses: peaceiris/actions-mdbook@v2
         with:
-          mdbook-version: "latest"   # 可固定版本号，如 "0.4.40"
+          mdbook-version: "latest"   # 可固定版本号，如 "0.4.52"（需与本地/插件兼容时再考虑）
 
       - name: Build
         run: mdbook build
@@ -306,7 +312,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book        # mdBook 默认输出目录
+          publish_dir: ./book        # 只发布构建产物，勿把整个仓库推到 gh-pages
+          # force_orphan: true      # 可选：每次用单提交覆盖 gh-pages，清掉历史上误提交的源码/混杂文件
 ```
 
 ### 8.3 GitHub 仓库设置
@@ -316,7 +323,11 @@ jobs:
 3. Branch 选择 `gh-pages`，目录选 `/ (root)`
 4. 点击 **Save**
 
-> **不要**选成 `main` + **`/docs`**。那样会触发 GitHub 自带的 **Jekyll** 工作流（日志里会出现 `jekyll-build-pages`、`Source: .../docs`）。本仓库没有 Jekyll 站点、也没有 `docs/` 目录，构建会报 `No such file or directory ... /docs`。mdBook 方案一律用 **`gh-pages` + 根目录**（内容由 `deploy.yml` 推送到 `gh-pages`）。
+> **Pages 源不要选错：**
+>
+> - **不要** `main` + **`/docs`**：会跑 **Jekyll**（日志里常见 `jekyll-build-pages`、`Source: .../docs`）。没有 Jekyll 项目时会报 **`/docs` 目录不存在**。
+> - **不要** `main` + **`/ (root)`**：GitHub 仍会用 Jekyll 处理仓库，首页往往是 **`README.md`**，看起来像「单页文档」，**不是 mdBook 的书本界面**。在线阅读必须来自 **`gh-pages`** 上的静态文件。
+> - **正确**：**`gh-pages` + `/ (root)`**（内容由上一节的 `deploy.yml` 把 **`./book/`** 推送到 `gh-pages`）。
 
 第一次 `git push main` 后，Actions 跑完（约 1-2 分钟），访问：
 
@@ -332,7 +343,7 @@ git push main
      ▼
 GitHub Actions 触发
      │
-     ├─ actions/checkout@v4        # 拉取代码
+     ├─ actions/checkout@v4        # 拉取代码（submodules: false）
      ├─ peaceiris/actions-mdbook@v2 # 安装 mdBook 二进制
      ├─ mdbook build               # 编译 → ./book/
      └─ peaceiris/actions-gh-pages@v4
@@ -346,8 +357,13 @@ GitHub Actions 触发
 
 ## 九、.gitignore 配置
 
+构建输出目录 **`book/`** 应加入忽略，避免：
+
+- 把大量生成文件提交进 `main`；
+- 误将 **`book/` 登记为 git submodule**（索引里出现 `160000` 模式且无 `.gitmodules` 时，CI 在拉子模块阶段会报 **`No url found for submodule path 'book'`**）。
+
 ```gitignore
-# mdBook 构建输出，不需要提交
+# mdBook 构建输出（勿提交；勿误登记为 submodule）
 book/
 ```
 
@@ -380,6 +396,18 @@ AI-Fullstack-Notes/
 
 ---
 
+## 十一、常见错误与修复
+
+| 现象 | 原因与处理 |
+|------|------------|
+| **`Missing font github`**，`Error rendering "index" line …` | mdBook **0.5+** 与 **`git-repository-icon = "fa-github"`** 等品牌图标不兼容。第四节：注释掉 **`git-repository-icon`**；`index` 指内置模板而非某篇 Markdown 行号。 |
+| **`No url found for submodule path 'book' in .gitmodules`** | 曾把 **`book/`** 误登记为子模块。从索引移除该 gitlink（`git rm --cached book`），根目录保留 **`.gitignore`** 的 `book/`，**`deploy.yml`** 里 **`submodules: false`**（第八节）。 |
+| **Jekyll 报错 `/docs` 不存在** | Pages 选成了 **`main` + `/docs`**。改为 **`gh-pages` + `/ (root)`**（第八节）。 |
+| **网站只有 README、没有 mdBook 侧栏** | Pages 指向 **`main`**（含 `/ (root)`）而非 **`gh-pages`**。改为 **`gh-pages` + `/ (root)`**，并确认 **Deploy mdBook** 工作流已成功跑完。 |
+| **`gh-pages` 上混有 `book.toml`、`ai/` 等源码** | 历史部署曾把整仓推上去。之后应用 **`publish_dir: ./book`**；必要时在 **`peaceiris/actions-gh-pages`** 上启用 **`force_orphan: true`** 做一次干净覆盖（第八节 YAML 注释）。 |
+
+---
+
 ## 总结
 
 | 步骤 | 操作 |
@@ -387,10 +415,11 @@ AI-Fullstack-Notes/
 | 1 | `cargo install mdbook` 或下载二进制 |
 | 2 | `mdbook init` 或在已有仓库根目录添加 `book.toml` |
 | 3 | 编写 `SUMMARY.md` 定义目录结构 |
-| 4 | 配置 `book.toml`（重点：`src`、`site-url`） |
-| 5 | `mdbook serve` 本地预览 |
-| 6 | 添加 `.github/workflows/deploy.yml` |
-| 7 | GitHub Pages 设置选 `gh-pages` 分支 |
-| 8 | `git push` → 自动构建部署 |
+| 4 | 配置 `book.toml`（重点：`src`、`site-url`；0.5+ 勿启用 `fa-github` 图标） |
+| 5 | 根目录 `.gitignore` 加入 `book/` |
+| 6 | `mdbook serve` 本地预览 |
+| 7 | 添加 `.github/workflows/deploy.yml`（`checkout` 建议 `submodules: false`） |
+| 8 | GitHub Pages：**`gh-pages` + `/ (root)`**，勿用 `main` |
+| 9 | `git push main` → Actions 构建并更新 `gh-pages` |
 
-整个流程下来，你得到的是：一个**自动化发布**、**全文可搜索**、**支持暗色模式**、**免费托管**的技术知识库。以后只需专注写 Markdown，`git push` 一键发布。
+整个流程下来，你得到的是：一个**自动化发布**、**全文可搜索**、**支持暗色模式**、**免费托管**的技术知识库。以后在 **`main`** 上改 Markdown 并 `git push`，由 Actions 重新 **`mdbook build`** 后更新 **`gh-pages`**；读者通过 Pages 绑定的 **`gh-pages` 根目录**访问的才是 mdBook 站点。

@@ -35,4 +35,7 @@
 - [FastSAM-Demo V1 — SAM 2.1 全栈图像分割](projects/fastsam-demo-v1-fullstack.md)
 - [FastSAM-Demo V2 — Docker 部署与导出功能](projects/fastsam-demo-v2-docker-export.md)
 - [GitHub Profile README 搭建指南](projects/github-profile-readme-guide.md)
-- [用 mdBook + GitHub Pages 搭建个人技术笔记站](projects/mdbook-github-pages-tutorial.md)
+
+# 教程 / 上手指南
+
+- [用 mdBook + GitHub Pages 搭建个人技术笔记站](tutorials/mdbook-github-pages-tutorial.md)
