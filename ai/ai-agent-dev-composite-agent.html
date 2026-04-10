@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>AI Agent 开发：零基础构建复合智能体 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-6bdf9cc5.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-53796998.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./ai/ai-agent-dev-composite-agent.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="技术笔记ai-agent-开发零基础构建复合智能体知识梳理"><a class="header" href="#技术笔记ai-agent-开发零基础构建复合智能体知识梳理">技术笔记｜《AI Agent 开发：零基础构建复合智能体》知识梳理</a></h1>
+<p>在人工智能从“对话框“走向“行动派“的今天，AI Agent（智能体）正成为大模型落地的核心形态。本文参考梁志远的《AI Agent 开发：零基础构建复合智能体》，依据智能体系统的标准开发范式，从架构设计、核心内核实现到工程化落地三个维度，剖析如何从零构建一个具备感知、决策与执行能力的复合智能体。</p>
+<hr>
+<h2 id="第一部分地基与原理"><a class="header" href="#第一部分地基与原理">第一部分：地基与原理</a></h2>
+<h3 id="11-智能体系统架构设计"><a class="header" href="#11-智能体系统架构设计">1.1 智能体系统架构设计</a></h3>
+<blockquote>
+<p>核心问题：什么是 Agent？它和普通的大模型有什么区别？</p>
+</blockquote>
+<p>AI Agent 的本质是<strong>感知-认知-执行（Perception-Cognition-Action, PCA）模型</strong>在语言智能体领域的具体化。它不再是被动应答的聊天机器人，而是具备主动决策能力的独立实体。</p>
+<p>为了支撑这一闭环，典型的系统架构采用分层部署：</p>
+<pre><code>基础模型层（底层 LLM、Embedding、多模态）
+        ↓
+智能体能力层（核心逻辑）
+        ↓
+应用接口层（交互终端）
+</code></pre>
+<p>在智能体能力层中，<strong>五大核心功能模块</strong>各司其职：</p>
+<ul>
+<li><strong>感知模块（Perception）</strong>：连接外部世界的桥梁。负责将非结构化的自然语言（如用户的模糊指令）转换为结构化的意图表示或 JSON 对象。</li>
+<li><strong>认知模块（Cognition）</strong>：智能体的“大脑“与推理中心。涉及信息整合、逻辑推理、策略选择与任务规划。</li>
+<li><strong>执行模块（Action）</strong>：任务的“最后一公里“。将认知决策转换为具体动作（如 API 调用、数据库查询）。</li>
+<li><strong>记忆模块（Memory）</strong>：维持多轮交互与状态保持的关键，存储用户历史与运行中间状态。</li>
+<li><strong>接口模块（Interface）</strong>：确保系统可嵌入多种运行环境（Web、终端等）。</li>
+</ul>
+<h3 id="12-大模型的能力边界与限制"><a class="header" href="#12-大模型的能力边界与限制">1.2 大模型的能力边界与限制</a></h3>
+<blockquote>
+<p>模型能做什么？有什么短板？</p>
+</blockquote>
+<p><strong>1. 核心能力（模型能做什么）</strong></p>
+<p>大模型是 Agent 的引擎，其推理能力决定了 Agent 的上限：</p>
+<ul>
+<li><strong>逻辑与常识推理</strong>：基于训练语料中的世界知识，判断命题合理性。</li>
+<li><strong>思维链（Chain of Thought）</strong>：在面对复杂问题时，生成中间步骤，逐步推导结论。</li>
+<li><strong>条件与假设验证</strong>：模拟“如果……那么……“的情境，这是任务规划的基础。</li>
+</ul>
+<p><strong>2. 短板与应对：上下文窗口限制</strong></p>
+<p>模型单次推理能看到的 Token 总量（上下文窗口）是有限的。为了在有限的预算内处理海量信息，必须采用窗口控制策略：</p>
+<ul>
+<li><strong>Prompt 压缩与摘要</strong>：仅保留核心事实与关键信息片段，对历史对话进行有损压缩。</li>
+<li><strong>Token 预算分配</strong>：为 System Prompt、用户输入、工具描述预先设定 Token 预算，防止某一部分挤占推理空间。</li>
+<li><strong>滑动窗口与截断</strong>：分段式输入，保留最近 N 轮对话，较远轮次转入长期记忆或丢弃。</li>
+</ul>
+<h3 id="13-构建基本流程与任务建模"><a class="header" href="#13-构建基本流程与任务建模">1.3 构建基本流程与任务建模</a></h3>
+<blockquote>
+<p>怎么把用户的需求变成代码任务？</p>
+</blockquote>
+<p><strong>1. 结构化输入</strong></p>
+<p>大模型本质是条件生成器，高质量的 Prompt 是任务建模的起点。一个标准的 Prompt 模板应包含：</p>
+<ul>
+<li><strong>System Prompt</strong>：定义角色边界（如“你是一个资深 DBA“）。</li>
+<li><strong>Instruction</strong>：明确当前任务目标。</li>
+<li><strong>Input Content</strong>：提供任务所需的背景信息。</li>
+<li><strong>Output Format</strong>：强制模型输出 JSON 或特定 XML 标签，以便程序解析。</li>
+</ul>
+<p><strong>2. 流程闭环</strong></p>
+<p>智能体的运行不是一次性的问答，而是循环：</p>
+<pre><code>感知状态 → 规划路径 → 拆解步骤 → 执行反馈 → 感知状态（循环）
+</code></pre>
+<p><strong>动态规划</strong>：通过在 Prompt 中嵌入“状态标签“（如任务阶段：规划中），引导模型根据当前上下文决定是继续执行、分支处理还是终止任务。</p>
+<hr>
+<h2 id="第二部分核心组件详解"><a class="header" href="#第二部分核心组件详解">第二部分：核心组件详解</a></h2>
+<h3 id="21-四大模块的深度技术细节"><a class="header" href="#21-四大模块的深度技术细节">2.1 四大模块的深度技术细节</a></h3>
+<blockquote>
+<p>每个模块具体怎么写代码？哪四大模块？</p>
+</blockquote>
+<p><strong>1. 感知模块：从文本到结构</strong></p>
+<p>感知不仅是“读“，更是“解析“。该模块利用 Prompt 解析器和辅助函数，将自然语言输入转化为系统可理解的结构化意图。</p>
+<ul>
+<li><strong>技术点</strong>：识别实体要素、抽取任务参数，并处理多模态输入（利用 ViT 等编码器将图像转为统一表示）。</li>
+</ul>
+<p><strong>2. 决策模块（认知）：任务链拆解</strong></p>
+<p>这是最核心的逻辑单元。认知过程细分为四个步骤：</p>
+<ol>
+<li><strong>意图识别与任务分类</strong>：确定是查询、生成还是操作。</li>
+<li><strong>任务分解</strong>：将宏观目标拆解为子步骤序列（DAG 或线性链）。</li>
+<li><strong>工具选择</strong>：根据子步骤目标，从工具库中匹配最合适的 API。</li>
+<li><strong>错误预判</strong>：识别潜在失败路径，提前构造容错机制。</li>
+</ol>
+<p><strong>3. 行动模块：以工具改变世界</strong></p>
+<p>行动模块包含工具注册、调度器与反馈管理。</p>
+<ul>
+<li><strong>容错与重试机制</strong>：外部 API 极不稳定。行动模块必须具备异常捕获能力。如果工具调用失败（如网络超时、参数错误），应触发自动重试或让模型根据报错信息重新生成参数（Self-Correction），而不是直接崩溃。</li>
+</ul>
+<p><strong>4. 记忆模块：短期与长期的协作</strong></p>
+<ul>
+<li><strong>短期记忆（Short-term）</strong>：存放在 Prompt 或内存变量中，包含最近几轮对话和中间变量。旨在维持语义连续性，解决指代消解问题。</li>
+<li><strong>长期记忆（Long-term）</strong>：基于向量数据库（Vector DB）如 Chroma 或 FAISS。
+<ul>
+<li><strong>存</strong>：将重要信息 Embedding 后存入库。</li>
+<li><strong>取</strong>：通过语义相似度检索（RAG），随时“捞“出相关历史知识。</li>
+<li><strong>更新策略</strong>：采用滚动更新或基于重要性评分进行记忆剪裁。</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-智能体的生命周期管理"><a class="header" href="#22-智能体的生命周期管理">2.2 智能体的生命周期管理</a></h3>
+<blockquote>
+<p>一个 Agent 从启动到关闭的全过程</p>
+</blockquote>
+<p><strong>1. 初始化（Initialization）</strong></p>
+<p>Agent 启动时需加载模型配置（Temperature, Max Tokens）、注册工具函数表，并加载默认的系统记忆。</p>
+<p><strong>2. 运行中：状态追踪（State Tracking）</strong></p>
+<ul>
+<li><strong>Session ID</strong>：每个会话必须有唯一标识。</li>
+<li><strong>断点续传</strong>：复杂任务往往跨越长时间周期。系统需周期性将“恢复状态（Resumption State）“持久化存储。一旦中断，可重建 Prompt 上下文，恢复现场继续执行。</li>
+</ul>
+<p><strong>3. 注销（Termination）</strong></p>
+<p>任务完成后，触发清理操作：释放数据库连接、清除临时缓存、持久化必要的日志，确保系统资源回收。</p>
+<h3 id="23-与外部系统的集成"><a class="header" href="#23-与外部系统的集成">2.3 与外部系统的集成</a></h3>
+<blockquote>
+<p>Agent 怎么跟外面的世界打交道？</p>
+</blockquote>
+<p>智能体通过以下方式与物理/数字世界交互：</p>
+<ul>
+<li><strong>API 调用</strong>：将用户指令映射为 RESTful HTTP 请求。技术上常使用 Function Calling 标准，定义函数结构体由模型填充参数。</li>
+<li><strong>数据库交互</strong>：遵循分层设计：语义解析 → 生成 SQL → 执行查询 → 结果写入记忆。严禁直接让 LLM 无限制操作 DB。</li>
+<li><strong>文件系统与沙箱</strong>：涉及文件读写或代码执行（Code Interpreter）时，必须在隔离的沙箱环境（Docker 容器或虚拟环境）中运行，防止恶意指令破坏宿主机。</li>
+</ul>
+<hr>
+<h2 id="第三部分工程优化与安全"><a class="header" href="#第三部分工程优化与安全">第三部分：工程优化与安全</a></h2>
+<h3 id="31-api-调用设计模式"><a class="header" href="#31-api-调用设计模式">3.1 API 调用设计模式</a></h3>
+<blockquote>
+<p>怎么调大模型更高效？</p>
+</blockquote>
+<p><strong>1. 流式传输</strong></p>
+<p>为了解决大模型推理延迟高的问题，采用流式响应机制（Server-Sent Events）。像打字机一样逐个 Token 输出，让用户在完整结果生成前就能看到进度，通过提升首字响应速度优化体验。</p>
+<p><strong>2. 上下文缓存与并发</strong></p>
+<p>对高频访问的基础知识进行预处理缓存；在处理非依赖性子任务时，设计并行调用链路以提升吞吐量。</p>
+<h3 id="32-安全与内容控制"><a class="header" href="#32-安全与内容控制">3.2 安全与内容控制</a></h3>
+<blockquote>
+<p>怎么防止 Agent 乱说话或干坏事？</p>
+</blockquote>
+<p><strong>1. 敏感词过滤（红线防御）</strong></p>
+<ul>
+<li><strong>静态防御</strong>：使用 Aho-Corasick 自动机算法对输入输出进行高效的关键词匹配（违禁词库）。</li>
+<li><strong>动态防御</strong>：结合语义分析模型，拦截隐晦的违规指令。</li>
+</ul>
+<p><strong>2. 防幻觉与可信度评估</strong></p>
+<ul>
+<li><strong>置信度打分</strong>：对模型生成的 Token 序列进行概率打分，低分内容触发拦截。</li>
+<li><strong>一致性校验</strong>：对同一问题进行多次不同 Prompt 的询问，对比答案一致性。</li>
+<li><strong>引用验证</strong>：强制模型在回答中通过 RAG 机制引用知识库来源，若无来源则标记为不可信，进行人工接管。</li>
+</ul>
+<hr>
+<h2 id="结语"><a class="header" href="#结语">结语</a></h2>
+<p>以上就是基于梁志远老师《AI Agent 开发：零基础构建复合智能体》前两章梳理的核心脉络。从架构设计到工程落地，希望能帮你把 Agent 的内部逻辑理顺。当然，如果想看更底层的代码实现，还是推荐去翻翻原书。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ai/rag-mvp-to-production.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../ai/claude-code-quickstart.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ai/rag-mvp-to-production.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../ai/claude-code-quickstart.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

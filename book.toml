@@ -1,0 +1,13 @@
+[book]
+title = "AI-Fullstack-Notes"
+description = "全栈工程师的 AI/Agent 学习笔记"
+authors = ["Eva"]
+language = "zh"
+src = "."
+
+[output.html]
+site-url = "/AI-Fullstack-Notes/"
+git-repository-url = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
+# fa-github omitted on mdBook 0.5+ (brand icons → "Missing font github").
+# git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/{path}"

@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>高并发架构设计思考 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-6bdf9cc5.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-53796998.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./backend/high-concurrency-architecture.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="面向中小型企业内部系统的高并发架构设计思考"><a class="header" href="#面向中小型企业内部系统的高并发架构设计思考">面向中小型企业内部系统的高并发架构设计思考</a></h1>
+<p>在现代企业数字化转型中，为三百至五百名员工提供同时在线、体验流畅、响应稳定的内部系统，已成为系统开发的核心挑战之一。尽管用户规模看似有限，但企业内部系统往往具有复杂业务逻辑、高密度操作、严格权限模型、大量 I/O 请求等特点，使其并发压力并不逊于中型互联网平台。</p>
+<p>并发性能的关键不在于拼硬件，而在于在架构层面做到<strong>异步化、解耦化、缓存优先、水平扩展与可观测性建设</strong>。本文将从后端、数据库、前端、消息队列、负载均衡与可观测性六大维度进行分析思考探讨。</p>
+<hr>
+<h2 id="一后端并发处理从-wsgi-到-asgi-的必然演化"><a class="header" href="#一后端并发处理从-wsgi-到-asgi-的必然演化">一、后端并发处理：从 WSGI 到 ASGI 的必然演化</a></h2>
+<h3 id="1-wsgi-模型的并发局限"><a class="header" href="#1-wsgi-模型的并发局限">1. WSGI 模型的并发局限</a></h3>
+<p>传统 Python Web 框架（如 Flask、Django）依赖 WSGI（同步阻塞模型）。其问题在于：</p>
+<ul>
+<li>每个请求占据一个线程 / 进程</li>
+<li>大量 I/O（数据库、外部 API、磁盘）造成阻塞</li>
+<li>五百用户并发时会出现进程爆炸、上下文切换开销巨大</li>
+<li>高峰期容易出现系统雪崩</li>
+</ul>
+<p>WSGI 模型对 I/O 密集型场景支持有限。每个请求都占用一个线程或进程，一旦请求中涉及外部 I/O（数据库、存储、第三方接口），线程就会被锁住。在并发规模扩大到几百时，进程数增长、切换开销变大，系统吞吐量反而下降。</p>
+<h3 id="2-asgi企业级高并发的标准解"><a class="header" href="#2-asgi企业级高并发的标准解">2. ASGI：企业级高并发的标准解</a></h3>
+<p>ASGI 基于<strong>事件循环（Event Loop）+ 协程（Coroutine）</strong>，特点是：</p>
+<ul>
+<li>单进程可处理成千上万个连接</li>
+<li>I/O 等待时自动让出执行权</li>
+<li>高效利用 CPU 时间片</li>
+<li>天然支持 WebSockets、SSE、后台任务等实时业务</li>
+</ul>
+<p>采用 ASGI 架构（如 FastAPI）能从根本上改变这一点。事件循环和协程机制让请求在等待 I/O 时主动让出执行权，使单进程能同时处理大量连接。对于企业内部系统常见的场景（表单提交、查询、批量业务处理等），这类并发模型更契合。</p>
+<h3 id="3-协程与-gil-的关系"><a class="header" href="#3-协程与-gil-的关系">3. 协程与 GIL 的关系</a></h3>
+<p>GIL 限制 Python 线程的 CPU 并行执行，但企业级系统主要瓶颈在 I/O 而非 CPU。</p>
+<p>借助 <code>asyncio</code>：</p>
+<ul>
+<li>I/O 等待期间协程挂起</li>
+<li>避免线程阻塞</li>
+<li>单核可以模拟高并发行为</li>
+</ul>
+<p>因此：GIL 的限制主要影响 CPU 密集型任务，而内部系统通常以数据库和网络 I/O 为主，只要使用异步框架和异步驱动，就能较好地避免阻塞问题。</p>
+<hr>
+<h2 id="二数据库高并发治理连接池异步驱动与查询优化"><a class="header" href="#二数据库高并发治理连接池异步驱动与查询优化">二、数据库高并发治理：连接池、异步驱动与查询优化</a></h2>
+<p>数据库通常是内部系统的第一瓶颈。</p>
+<p>应用层使用 SQLAlchemy 的连接池可以减少频繁建连带来的开销，但当后端服务实例增多时，每个实例的连接池会叠加，容易超过数据库的最大连接数。</p>
+<p>因此，大规模并发下通常需要在数据库前面增加 <strong>PgBouncer</strong>，让其在连接层做统一的复用与限流。通过事务级别的池化，PgBouncer 可以用少量物理连接支撑大量逻辑连接，避免数据库压力过大。</p>
+<p>除此之外，查询本身的效率同样重要。慢查询会长时间占用连接，最终导致连接池耗尽。必要的索引、合理的 SQL 结构、避免 N+1 查询，以及使用 <code>asyncpg</code> 等异步驱动，都是提升整体并发能力的关键。</p>
+<hr>
+<h2 id="三redis缓存限流与会话的三重角色"><a class="header" href="#三redis缓存限流与会话的三重角色">三、Redis：缓存、限流与会话的三重角色</a></h2>
+<p>Redis 在高并发架构中承担三个核心任务。</p>
+<h3 id="1-热点缓存cache-aside"><a class="header" href="#1-热点缓存cache-aside">1. 热点缓存（Cache-Aside）</a></h3>
+<p>将频繁读取的权限树、组织架构、配置字典、菜单数据缓存至 Redis，可减少 80% 以上数据库读取压力。</p>
+<p>采用：</p>
+<ul>
+<li>TTL + 随机偏移（防雪崩）</li>
+<li>旁路缓存（Cache-Aside）模式</li>
+</ul>
+<h3 id="2-并发限流rate-limit"><a class="header" href="#2-并发限流rate-limit">2. 并发限流（Rate Limit）</a></h3>
+<p>基于 Redis <code>INCR</code> 实现：固定窗口 / 滑动窗口、令牌桶、漏桶。</p>
+<p>用于防止：</p>
+<ul>
+<li>异常脚本压力</li>
+<li>爆量操作冲击后端</li>
+<li>内部压力测试导致系统宕机</li>
+</ul>
+<h3 id="3-会话管理与权限缓存"><a class="header" href="#3-会话管理与权限缓存">3. 会话管理与权限缓存</a></h3>
+<p>对比 JWT 与 Redis Session：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>项目</th><th>JWT</th><th>Redis Session</th></tr>
+</thead>
+<tbody>
+<tr><td>状态</td><td>无状态</td><td>有状态</td></tr>
+<tr><td>撤销</td><td>难</td><td>易（删 key 即可）</td></tr>
+<tr><td>并发</td><td>优秀</td><td>优秀</td></tr>
+<tr><td>存储</td><td>客户端</td><td>Redis</td></tr>
+<tr><td>安全</td><td>易受 XSS</td><td>易管理</td></tr>
+</tbody>
+</table>
+</div>
+<p>在企业场景中，Redis 存储 Session 比 JWT 更易管理，特别是在需要立即登出某个用户时，删除 Redis 中的键即可。<strong>企业内部系统推荐 Redis Session + 权限缓存</strong>，Session 的查找延迟较低，不会拖慢鉴权流程。</p>
+<hr>
+<h2 id="四react-前端企业级高频交互与大数据渲染优化"><a class="header" href="#四react-前端企业级高频交互与大数据渲染优化">四、React 前端：企业级高频交互与大数据渲染优化</a></h2>
+<p>企业内部系统的前端压力主要来自大量数据渲染和高频操作，例如：</p>
+<ul>
+<li>大量实时数据刷新</li>
+<li>海量列表渲染（如审批列表、订单列表）</li>
+<li>多人协同引发的数据竞态</li>
+<li>复杂权限控制导致的 diff 计算</li>
+</ul>
+<p>React 虽然已经有较好的渲染调度能力，但在大型表格和列表中，如果不进行优化，浏览器主线程很容易被拖慢。</p>
+<h3 id="1-列表虚拟化"><a class="header" href="#1-列表虚拟化">1. 列表虚拟化</a></h3>
+<p>使用 <code>react-window</code> 或 <code>react-virtualized</code>，只渲染视口区域能显著降低 DOM 节点数量。这对操作大量业务数据的页面非常关键。</p>
+<h3 id="2-状态管理"><a class="header" href="#2-状态管理">2. 状态管理</a></h3>
+<p>Redux Toolkit 和 RTK Query 在企业应用中更实际，它们能自动做请求去重、缓存失效控制，减少对后端的不必要请求。</p>
+<h3 id="3-用户交互优化"><a class="header" href="#3-用户交互优化">3. 用户交互优化</a></h3>
+<p>防抖、节流、请求竞态处理（始终以最新返回的数据为准）等逻辑，对减少实际并发量和提升体验都有帮助。</p>
+<hr>
+<h2 id="五耗时任务与异步队列把时间从请求链路中拆出去"><a class="header" href="#五耗时任务与异步队列把时间从请求链路中拆出去">五、耗时任务与异步队列：把时间从请求链路中拆出去</a></h2>
+<p>某些任务（如 AI 处理、大批量导出、同步外部接口）不可同步执行。</p>
+<p>内部系统常常有一些耗时任务：大批量导出、AI 处理、大型同步任务等。如果让它们直接在 HTTP 请求中执行，会导致后端 Worker 长时间被占用，继而影响所有用户的响应时间。</p>
+<p>标准做法是将这些任务交给 <strong>Celery</strong> 执行。这种方式可以让任务排队处理，系统不会因为某个用户的重操作卡住整体服务。</p>
+<p>优势：</p>
+<ul>
+<li>HTTP 层不被阻塞</li>
+<li>高峰任务自动排队</li>
+<li>后台 Worker 可横向扩容</li>
+<li>让系统不因大任务而卡死</li>
+</ul>
+<hr>
+<h2 id="六nginx流量入口的负载均衡与优化"><a class="header" href="#六nginx流量入口的负载均衡与优化">六、Nginx：流量入口的负载均衡与优化</a></h2>
+<p>作为入口的 Nginx 主要承担三件事：</p>
+<h3 id="1-负载均衡"><a class="header" href="#1-负载均衡">1. 负载均衡</a></h3>
+<ul>
+<li><code>least_conn</code>：更适合请求耗时差异较大的内部系统</li>
+<li><code>ip_hash</code>：适合 WebSocket 长连接场景</li>
+</ul>
+<h3 id="2-连接数与系统参数"><a class="header" href="#2-连接数与系统参数">2. 连接数与系统参数</a></h3>
+<p>操作系统和 Nginx 的最大文件描述符限制决定了系统能承受多少并发连接。在高并发场景中，这类参数必须根据峰值预期进行调整。</p>
+<h3 id="3-ssl-和-http2"><a class="header" href="#3-ssl-和-http2">3. SSL 和 HTTP/2</a></h3>
+<p>统一在 Nginx 层做 SSL 卸载可以减少后端负担；开启 HTTP/2 的多路复用能加快 React 静态资源加载，尤其在网络状况一般的环境里提升明显。</p>
+<hr>
+<h2 id="七可观测性企业级系统的自愈能力"><a class="header" href="#七可观测性企业级系统的自愈能力">七、可观测性：企业级系统的“自愈能力“</a></h2>
+<p>能否找到瓶颈、能不能及时恢复，比单点性能更重要。</p>
+<p>常见做法包括：</p>
+<ul>
+<li>使用 <strong>Prometheus</strong> 采集指标（RPS、延迟、连接池占用、队列长度等）</li>
+<li>使用 <strong>Grafana</strong> 做可视化</li>
+<li>使用链路追踪（如 <strong>Jaeger</strong>）定位请求中具体的耗时环节</li>
+<li>设置存活和就绪探针，确保负载均衡器只将流量分配给健康实例</li>
+</ul>
+<p>在多人协作和频繁发布的场景中，这些监测至关重要。</p>
+<hr>
+<h2 id="总结高并发不是堆硬件而是减少等待降低阻塞合理分流"><a class="header" href="#总结高并发不是堆硬件而是减少等待降低阻塞合理分流">总结：高并发不是“堆硬件“，而是减少等待、降低阻塞、合理分流</a></h2>
+<p>一个稳定的三百至五百人并发内部系统，靠的不是昂贵服务器，而是各个环节的合理架构：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>组件</th><th>作用</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>ASGI + FastAPI</strong></td><td>提供异步调度能力</td></tr>
+<tr><td><strong>PgBouncer + 异步驱动</strong></td><td>共同提升数据库并发</td></tr>
+<tr><td><strong>Redis</strong></td><td>提供缓存、限流、会话与权限加速</td></tr>
+<tr><td><strong>React + Virtualization + RTK Query</strong></td><td>提升前端渲染效率</td></tr>
+<tr><td><strong>Celery</strong></td><td>让耗时任务脱离请求链路</td></tr>
+<tr><td><strong>Nginx</strong></td><td>做好入口的分发与协议处理</td></tr>
+<tr><td><strong>完整监控体系</strong></td><td>帮助系统在高负载时维持可控状态</td></tr>
+</tbody>
+</table>
+</div>
+<p>当这些组件协同工作后，系统不但能承受高并发，也更容易扩展、调优和长期维护。</p>
+<hr>
+<p>参考：https://gemini.google.com/share/36973feb7c42</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ai/codex-plugin-claude-code.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../backend/nginx-reverse-proxy-load-balance.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ai/codex-plugin-claude-code.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../backend/nginx-reverse-proxy-load-balance.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
