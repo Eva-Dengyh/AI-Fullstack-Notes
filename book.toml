@@ -8,5 +8,6 @@ src = "."
 [output.html]
 site-url = "/AI-Fullstack-Notes/"
 git-repository-url = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
-git-repository-icon = "fa-github"
+# fa-github omitted on mdBook 0.5+ (brand icons → "Missing font github").
+# git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/{path}"

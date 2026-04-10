@@ -104,7 +104,8 @@ site-url = "/AI-Fullstack-Notes/"           # GitHub Pages 子路径，必须与
                                              # 本地预览时注释掉此行，否则资源路径会错
 
 git-repository-url  = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
-git-repository-icon = "fa-github"           # 右上角 GitHub 图标
+# git-repository-icon：mdBook 0.5+ 用 SVG Font Awesome，fa-github 等品牌图标可能报 Missing font github，可先省略此行。
+# git-repository-icon = "fa-github"
 
 # 每个页面底部显示"在 GitHub 上编辑此页"链接
 edit-url-template = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/{path}"
