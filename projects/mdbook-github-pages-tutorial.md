@@ -316,6 +316,8 @@ jobs:
 3. Branch 选择 `gh-pages`，目录选 `/ (root)`
 4. 点击 **Save**
 
+> **不要**选成 `main` + **`/docs`**。那样会触发 GitHub 自带的 **Jekyll** 工作流（日志里会出现 `jekyll-build-pages`、`Source: .../docs`）。本仓库没有 Jekyll 站点、也没有 `docs/` 目录，构建会报 `No such file or directory ... /docs`。mdBook 方案一律用 **`gh-pages` + 根目录**（内容由 `deploy.yml` 推送到 `gh-pages`）。
+
 第一次 `git push main` 后，Actions 跑完（约 1-2 分钟），访问：
 
 ```
