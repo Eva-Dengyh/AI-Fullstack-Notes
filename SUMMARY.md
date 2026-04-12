@@ -35,6 +35,8 @@
 - [FastSAM-Demo V1 — SAM 2.1 全栈图像分割](projects/fastsam-demo-v1-fullstack.md)
 - [FastSAM-Demo V2 — Docker 部署与导出功能](projects/fastsam-demo-v2-docker-export.md)
 - [GitHub Profile README 搭建指南](projects/github-profile-readme-guide.md)
+- [Hermes Agent 系列](projects/hermes-agent/README.md)
+  - [（1）本地启动与项目结构](projects/hermes-agent/01-setup-and-project-structure.md)
 
 # 教程 / 上手指南
 
