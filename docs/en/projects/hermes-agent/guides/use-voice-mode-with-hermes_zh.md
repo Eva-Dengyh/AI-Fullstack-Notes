@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "在 Hermes 中使用语音模式"
 description: "一份实用指南，讲解如何在 CLI、Telegram、Discord 和 Discord 语音频道中配置并使用 Hermes 语音模式"
 ---

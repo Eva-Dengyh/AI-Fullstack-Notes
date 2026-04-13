@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "Android / Termux"
 description: "Run Hermes Agent directly on an Android phone with Termux"
 ---

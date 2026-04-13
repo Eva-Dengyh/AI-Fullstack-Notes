@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "技巧与最佳实践"
 description: "帮助你更高效使用 Hermes Agent 的实用建议，包括提示词技巧、CLI 快捷方式、上下文文件、记忆、成本优化与安全性"
 ---

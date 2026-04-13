@@ -2,7 +2,6 @@
 title: 提供商路由
 description: 配置 OpenRouter 提供商偏好以优化成本、速度或质量。
 sidebar_label: 提供商路由
-sidebar_position: 7
 ---
 
 # 提供商路由

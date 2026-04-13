@@ -1,5 +1,4 @@
 ---
-sidebar_position: 14
 title: "API 服务器"
 description: "将 hermes-agent 公开为 OpenAI 兼容的 API，用于任何前端"
 ---

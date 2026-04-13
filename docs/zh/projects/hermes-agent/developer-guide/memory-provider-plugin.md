@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "Memory Provider Plugins"
 description: "How to build a memory provider plugin for Hermes Agent"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "Provider Runtime Resolution"
 description: "How Hermes resolves providers, credentials, API modes, and auxiliary models at runtime"
 ---

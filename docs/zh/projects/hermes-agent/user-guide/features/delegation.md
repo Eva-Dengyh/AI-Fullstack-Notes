@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "Subagent Delegation"
 description: "Spawn isolated child agents for parallel workstreams with delegate_task"
 ---

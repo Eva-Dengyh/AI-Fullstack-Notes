@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "快速开始"
 description: "你与 Hermes Agent 的第一次对话 — 从安装到 2 分钟内开始聊天"
 ---

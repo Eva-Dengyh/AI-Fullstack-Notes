@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 title: "Optional Skills Catalog"
 description: "Official optional skills shipped with hermes-agent — install via hermes skills install official/<category>/<skill>"
 ---

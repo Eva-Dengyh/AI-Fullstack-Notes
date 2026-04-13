@@ -2,7 +2,6 @@
 title: 视觉和图像粘贴
 description: 将图像从剪贴板粘贴到 Hermes CLI 中，进行多模态视觉分析。
 sidebar_label: 视觉和图像粘贴
-sidebar_position: 7
 ---
 
 # 视觉和图像粘贴

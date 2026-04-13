@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 title: "个性化 & SOUL.md"
 description: "使用全局 SOUL.md、内置个性和自定义人物定义自定义 Hermes Agent 个性"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 title: "Context Engine Plugins"
 description: "How to build a context engine plugin that replaces the built-in ContextCompressor"
 ---

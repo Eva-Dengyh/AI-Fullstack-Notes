@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "Gateway Internals"
 description: "How the messaging gateway boots, authorizes users, routes sessions, and delivers messages"
 ---

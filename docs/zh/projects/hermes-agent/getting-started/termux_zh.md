@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "Android / Termux"
 description: "通过 Termux 在 Android 手机上直接运行 Hermes Agent"
 ---

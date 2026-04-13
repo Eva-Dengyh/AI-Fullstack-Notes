@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "内存提供商"
 description: "外部内存提供商插件 — Honcho、OpenViking、Mem0、Hindsight、Holographic、RetainDB、ByteRover、Supermemory"
 ---

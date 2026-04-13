@@ -1,5 +1,4 @@
 ---
-sidebar_position: 13
 title: "RL Training"
 description: "Reinforcement learning on agent behaviors with Tinker-Atropos — environment discovery, training, and evaluation"
 ---

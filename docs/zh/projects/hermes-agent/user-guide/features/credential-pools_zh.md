@@ -2,7 +2,6 @@
 title: 凭证池
 description: 为同一提供商汇集多个 API 密钥或 OAuth 令牌以实现自动轮换和速率限制恢复。
 sidebar_label: 凭证池
-sidebar_position: 9
 ---
 
 # 凭证池

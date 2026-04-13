@@ -1,5 +1,4 @@
 ---
-sidebar_position: 11
 sidebar_label: "插件"
 title: "插件"
 description: "通过插件系统用自定义工具、hooks 和集成扩展 Hermes，不用修改核心代码"

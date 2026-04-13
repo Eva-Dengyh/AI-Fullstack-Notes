@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "Adding Tools"
 description: "How to add a new tool to Hermes Agent — schemas, handlers, registration, and toolsets"
 ---

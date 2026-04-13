@@ -1,5 +1,4 @@
 ---
-sidebar_position: 10
 title: "语音模式"
 description: "与 Hermes Agent 进行实时语音对话 — CLI、Telegram、Discord（DM、文本频道和语音频道）"
 ---

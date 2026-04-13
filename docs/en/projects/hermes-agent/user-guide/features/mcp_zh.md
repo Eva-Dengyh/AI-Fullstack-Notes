@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "MCP（模型上下文协议）"
 description: "连接 Hermes Agent 到外部工具服务器的 MCP — 并精确控制 Hermes 加载哪些 MCP 工具"
 ---

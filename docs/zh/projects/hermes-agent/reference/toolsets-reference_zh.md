@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "工具集参考"
 description: "Hermes 核心、组合、平台与动态工具集参考"
 ---

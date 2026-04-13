@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "工具和工具集"
 description: "Hermes Agent 工具概览 — 可用工具、工具集工作方式以及终端后端"
 ---

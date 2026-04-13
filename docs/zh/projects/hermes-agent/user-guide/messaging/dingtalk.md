@@ -1,5 +1,4 @@
 ---
-sidebar_position: 10
 title: "DingTalk"
 description: "Set up Hermes Agent as a DingTalk chatbot"
 ---

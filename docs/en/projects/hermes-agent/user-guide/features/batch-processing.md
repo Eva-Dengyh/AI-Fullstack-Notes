@@ -1,5 +1,4 @@
 ---
-sidebar_position: 12
 title: "Batch Processing"
 description: "Generate agent trajectories at scale — parallel processing, checkpointing, and toolset distributions"
 ---

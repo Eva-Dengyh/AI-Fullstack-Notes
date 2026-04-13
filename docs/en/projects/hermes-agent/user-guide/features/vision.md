@@ -2,7 +2,6 @@
 title: Vision & Image Paste
 description: Paste images from your clipboard into the Hermes CLI for multimodal vision analysis.
 sidebar_label: Vision & Image Paste
-sidebar_position: 7
 ---
 
 # Vision & Image Paste

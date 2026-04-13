@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "子 Agent 委托"
 description: "用 delegate_task 生成隔离上下文的子 Agent 以进行并行工作流"
 ---

@@ -1,7 +1,6 @@
 ---
 title: "功能概览"
 sidebar_label: "概览"
-sidebar_position: 1
 ---
 
 # 功能概览

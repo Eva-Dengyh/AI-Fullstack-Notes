@@ -1,7 +1,6 @@
 ---
 title: "AI Providers"
 sidebar_label: "AI Providers"
-sidebar_position: 1
 ---
 
 # AI Providers

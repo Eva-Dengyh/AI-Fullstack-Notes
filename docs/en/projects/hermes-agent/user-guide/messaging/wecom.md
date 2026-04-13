@@ -1,5 +1,4 @@
 ---
-sidebar_position: 14
 title: "WeCom (Enterprise WeChat)"
 description: "Connect Hermes Agent to WeCom via the AI Bot WebSocket gateway"
 ---

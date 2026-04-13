@@ -1,5 +1,4 @@
 ---
-sidebar_position: 6
 title: "Use MCP with Hermes"
 description: "A practical guide to connecting MCP servers to Hermes Agent, filtering their tools, and using them safely in real workflows"
 ---

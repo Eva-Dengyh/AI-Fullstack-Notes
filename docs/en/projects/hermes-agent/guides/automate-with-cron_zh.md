@@ -1,5 +1,4 @@
 ---
-sidebar_position: 11
 title: "用 Cron 自动化任何事"
 description: "使用 Hermes cron 的真实自动化模式，包括监控、报告、流水线和多 skill 工作流"
 ---

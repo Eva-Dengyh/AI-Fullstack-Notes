@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "教程：团队 Telegram 助手"
 description: "逐步搭建一个整个团队都能使用的 Telegram 机器人，用于代码协助、研究、系统管理等场景"
 ---

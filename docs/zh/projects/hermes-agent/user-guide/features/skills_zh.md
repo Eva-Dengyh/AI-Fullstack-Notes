@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "技能系统"
 description: "按需知识文档 — 渐进式披露、Agent 管理的技能和技能中心"
 ---

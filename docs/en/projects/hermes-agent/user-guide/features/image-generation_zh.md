@@ -2,7 +2,6 @@
 title: 图像生成
 description: 使用 FLUX 2 Pro 通过 FAL.ai 和通过 Clarity Upscaler 的自动升采样生成高质量图像。
 sidebar_label: 图像生成
-sidebar_position: 6
 ---
 
 # 图像生成

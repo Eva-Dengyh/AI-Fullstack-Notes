@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "Memory Providers"
 description: "External memory provider plugins — Honcho, OpenViking, Mem0, Hindsight, Holographic, RetainDB, ByteRover, Supermemory"
 ---

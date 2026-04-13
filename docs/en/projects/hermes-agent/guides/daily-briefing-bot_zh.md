@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "教程：每日简报机器人"
 description: "构建一个自动化的每日简报机器人，每天早上自动调研主题、总结结果，并发送到 Telegram 或 Discord"
 ---

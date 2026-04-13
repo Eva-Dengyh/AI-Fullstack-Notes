@@ -1,5 +1,4 @@
 ---
-sidebar_position: 10
 title: "Skins & Themes（皮肤和主题）"
 description: "使用内置和用户定义的 skins 自定义 Hermes CLI"
 ---

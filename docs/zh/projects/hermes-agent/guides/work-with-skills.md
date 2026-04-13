@@ -1,5 +1,4 @@
 ---
-sidebar_position: 12
 title: "Working with Skills"
 description: "Find, install, use, and create skills — on-demand knowledge that teaches Hermes new workflows"
 ---

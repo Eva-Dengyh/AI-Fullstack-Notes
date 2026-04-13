@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: '学习路径'
 description: '根据你的经验级别和目标选择穿过 Hermes Agent 文档的学习路径。'
 ---

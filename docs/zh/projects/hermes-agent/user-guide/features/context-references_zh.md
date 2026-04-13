@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 sidebar_label: "上下文引用"
 title: "上下文引用"
 description: "内联 @-语法用于直接附加文件、文件夹、git 差异和 URL 到你的消息中"

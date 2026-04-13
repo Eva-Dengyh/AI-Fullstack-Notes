@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "更新和卸载"
 description: "如何更新 Hermes Agent 至最新版本或卸载它"
 ---

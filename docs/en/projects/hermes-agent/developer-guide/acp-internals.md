@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "ACP Internals"
 description: "How the ACP adapter works: lifecycle, sessions, event bridge, approvals, and tool rendering"
 ---

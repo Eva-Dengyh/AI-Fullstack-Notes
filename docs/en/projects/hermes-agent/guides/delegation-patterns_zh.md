@@ -1,5 +1,4 @@
 ---
-sidebar_position: 13
 title: "委派与并行工作"
 description: "何时以及如何使用子 agent 委派，涵盖并行调研、代码审查和多文件协作等模式"
 ---

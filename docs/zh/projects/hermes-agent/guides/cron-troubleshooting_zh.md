@@ -1,5 +1,4 @@
 ---
-sidebar_position: 12
 title: "Cron 排障指南"
 description: "诊断并修复常见的 Hermes cron 问题，包括任务不触发、投递失败、skill 加载错误和性能问题"
 ---

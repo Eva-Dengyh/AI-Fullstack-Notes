@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "CLI Commands Reference"
 description: "Authoritative reference for Hermes terminal commands and command families"
 ---

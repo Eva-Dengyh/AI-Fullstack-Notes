@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "Run Local LLMs on Mac"
 description: "Set up a local OpenAI-compatible LLM server on macOS with llama.cpp or MLX, including model selection, memory optimization, and real benchmarks on Apple Silicon"
 ---

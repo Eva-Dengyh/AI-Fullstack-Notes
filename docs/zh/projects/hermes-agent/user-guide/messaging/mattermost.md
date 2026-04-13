@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "Mattermost"
 description: "Set up Hermes Agent as a Mattermost bot"
 ---

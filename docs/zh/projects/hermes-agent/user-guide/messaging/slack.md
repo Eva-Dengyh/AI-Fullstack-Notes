@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "Slack"
 description: "Set up Hermes Agent as a Slack bot using Socket Mode"
 ---

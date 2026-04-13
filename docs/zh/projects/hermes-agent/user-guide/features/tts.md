@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 title: "Voice & TTS"
 description: "Text-to-speech and voice message transcription across all platforms"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "MCP 配置参考"
 description: "Hermes Agent MCP 配置键、过滤语义与实用工具策略参考"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 title: "把 Hermes 当作 Python 库使用"
 description: "将 AIAgent 嵌入你自己的 Python 脚本、Web 应用或自动化流水线中，无需 CLI"
 ---

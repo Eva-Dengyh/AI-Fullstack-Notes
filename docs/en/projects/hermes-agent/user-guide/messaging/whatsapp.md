@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 title: "WhatsApp"
 description: "Set up Hermes Agent as a WhatsApp bot via the built-in Baileys bridge"
 ---

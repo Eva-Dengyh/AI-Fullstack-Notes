@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "Code Execution"
 description: "Sandboxed Python execution with RPC tool access — collapse multi-step workflows into a single turn"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 15
 ---
 
 # WeCom Callback (Self-Built App)

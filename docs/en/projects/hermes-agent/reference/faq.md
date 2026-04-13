@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "FAQ & Troubleshooting"
 description: "Frequently asked questions and solutions to common issues with Hermes Agent"
 ---

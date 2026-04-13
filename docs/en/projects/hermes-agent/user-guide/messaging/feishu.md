@@ -1,5 +1,4 @@
 ---
-sidebar_position: 11
 title: "Feishu / Lark"
 description: "Set up Hermes Agent as a Feishu or Lark bot"
 ---

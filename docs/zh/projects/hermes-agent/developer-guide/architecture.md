@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "Architecture"
 description: "Hermes Agent internals — major subsystems, execution paths, data flow, and where to read next"
 ---

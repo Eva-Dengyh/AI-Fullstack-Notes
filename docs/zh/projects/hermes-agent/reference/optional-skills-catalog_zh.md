@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 title: "可选技能目录"
 description: "hermes-agent 随仓库提供的官方可选技能，可通过 hermes skills install official/<category>/<skill> 安装"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 6
 title: "在 Hermes 中使用 MCP"
 description: "一份实战指南，讲清楚如何把 MCP 服务器接入 Hermes Agent、如何过滤工具，以及如何在真实工作流中安全使用"
 ---

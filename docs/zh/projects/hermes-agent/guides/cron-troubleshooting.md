@@ -1,5 +1,4 @@
 ---
-sidebar_position: 12
 title: "Cron Troubleshooting"
 description: "Diagnose and fix common Hermes cron issues — jobs not firing, delivery failures, skill loading errors, and performance problems"
 ---

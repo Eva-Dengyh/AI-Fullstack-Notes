@@ -1,5 +1,4 @@
 ---
-sidebar_position: 99
 title: "Honcho 内存"
 description: "通过 Honcho 的 AI 原生持久内存 — 辩证推理、多 Agent 用户建模和深度个性化"
 ---

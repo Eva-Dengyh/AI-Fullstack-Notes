@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "FAQ 与故障排查"
 description: "Hermes Agent 常见问题与排错方案"
 ---

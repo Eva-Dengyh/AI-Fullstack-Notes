@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "Toolsets Reference"
 description: "Reference for Hermes core, composite, platform, and dynamic toolsets"
 ---

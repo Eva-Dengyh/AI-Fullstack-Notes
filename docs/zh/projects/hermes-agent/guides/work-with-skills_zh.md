@@ -1,5 +1,4 @@
 ---
-sidebar_position: 12
 title: "使用 Skills"
 description: "查找、安装、使用和创建 skills，用按需知识让 Hermes 学会新的工作流"
 ---

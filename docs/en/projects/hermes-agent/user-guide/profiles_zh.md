@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 ---
 
 # Profiles：运行多个 Agent

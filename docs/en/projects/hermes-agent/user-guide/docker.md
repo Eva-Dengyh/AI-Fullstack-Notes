@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "Docker"
 description: "Running Hermes Agent in Docker and using Docker as a terminal backend"
 ---

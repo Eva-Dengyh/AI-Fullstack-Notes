@@ -1,5 +1,4 @@
 ---
-sidebar_position: 99
 title: "Honcho Memory"
 description: "AI-native persistent memory via Honcho — dialectic reasoning, multi-agent user modeling, and deep personalization"
 ---

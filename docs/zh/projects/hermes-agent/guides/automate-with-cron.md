@@ -1,5 +1,4 @@
 ---
-sidebar_position: 11
 title: "Automate Anything with Cron"
 description: "Real-world automation patterns using Hermes cron — monitoring, reports, pipelines, and multi-skill workflows"
 ---

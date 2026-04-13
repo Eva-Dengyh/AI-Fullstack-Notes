@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "持久记忆"
 description: "Hermes Agent 如何跨会话记住 — MEMORY.md、USER.md 和会话搜索"
 ---

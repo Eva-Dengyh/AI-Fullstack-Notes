@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "添加工具"
 description: "如何为 Hermes Agent 添加新工具：schema、handler、注册流程以及 toolset 集成。"
 ---

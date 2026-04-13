@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 title: "Scheduled Tasks (Cron)"
 description: "Schedule automated tasks with natural language, manage them with one cron tool, and attach one or more skills"
 ---

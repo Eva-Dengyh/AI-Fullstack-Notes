@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "MCP (Model Context Protocol)"
 description: "Connect Hermes Agent to external tool servers via MCP — and control exactly which MCP tools Hermes loads"
 ---

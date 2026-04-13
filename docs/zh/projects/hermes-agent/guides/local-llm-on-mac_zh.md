@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "在 Mac 上运行本地 LLM"
 description: "在 macOS 上使用 llama.cpp 或 MLX 搭建兼容 OpenAI 的本地 LLM 服务，包括模型选择、内存优化，以及 Apple Silicon 上的真实基准"
 ---

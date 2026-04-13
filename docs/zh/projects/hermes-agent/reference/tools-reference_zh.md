@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 title: "内置工具参考"
 description: "按工具集分组的 Hermes 内置工具权威参考"
 ---

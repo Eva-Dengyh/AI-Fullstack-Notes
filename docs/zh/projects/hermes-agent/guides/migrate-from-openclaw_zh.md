@@ -1,5 +1,4 @@
 ---
-sidebar_position: 10
 title: "从 OpenClaw 迁移"
 description: "完整迁移指南，讲解如何把 OpenClaw / Clawdbot 配置迁移到 Hermes Agent，包括迁移内容、配置映射和迁移后检查项"
 ---

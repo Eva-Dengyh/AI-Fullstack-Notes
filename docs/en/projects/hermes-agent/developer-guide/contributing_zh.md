@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 title: "贡献指南"
 description: "如何为 Hermes Agent 做贡献：开发环境、代码风格与 PR 流程。"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 9
 sidebar_label: "构建插件"
 title: "构建一个 Hermes 插件"
 description: "一步一步构建完整的 Hermes 插件，涵盖工具、hooks、数据文件和 skills"

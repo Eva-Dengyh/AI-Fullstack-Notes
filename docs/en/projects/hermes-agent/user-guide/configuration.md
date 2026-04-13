@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "Configuration"
 description: "Configure Hermes Agent — config.yaml, providers, models, API keys, and more"
 ---

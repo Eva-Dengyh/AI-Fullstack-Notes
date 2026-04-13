@@ -1,5 +1,4 @@
 ---
-sidebar_position: 13
 title: "RL 训练"
 description: "使用 Tinker-Atropos 进行 Agent 行为的强化学习 — 环境发现、训练和评估"
 ---

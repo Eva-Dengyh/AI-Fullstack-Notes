@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "Profile 命令参考"
 description: "Hermes profile 相关命令完整参考"
 ---

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 6
 title: "Event Hooks（事件钩子）"
 description: "在关键生命周期点运行自定义代码 — 记录活动、发送警报、发布到 webhooks"
 ---

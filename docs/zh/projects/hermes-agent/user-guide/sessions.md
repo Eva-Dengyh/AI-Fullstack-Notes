@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 title: "Sessions"
 description: "Session persistence, resume, search, management, and per-platform session tracking"
 ---

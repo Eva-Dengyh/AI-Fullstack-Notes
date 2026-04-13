@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 title: "CLI 命令参考"
 description: "Hermes 终端命令与命令族的权威参考"
 ---

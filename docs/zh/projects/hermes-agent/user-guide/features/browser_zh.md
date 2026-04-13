@@ -2,7 +2,6 @@
 title: 浏览器自动化
 description: 用多个提供商控制浏览器，本地 Chrome via CDP，或云浏览器用于网页交互、表单填充、抓取等。
 sidebar_label: Browser
-sidebar_position: 5
 ---
 
 # 浏览器自动化

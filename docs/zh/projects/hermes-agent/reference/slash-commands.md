@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "Slash Commands Reference"
 description: "Complete reference for interactive CLI and messaging slash commands"
 ---

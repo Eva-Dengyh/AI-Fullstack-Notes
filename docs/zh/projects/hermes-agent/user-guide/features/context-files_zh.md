@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 title: "上下文文件"
 description: "项目上下文文件 — .hermes.md、AGENTS.md、CLAUDE.md、全局 SOUL.md 和 .cursorrules — 自动注入每个对话"
 ---

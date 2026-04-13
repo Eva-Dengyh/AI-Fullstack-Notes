@@ -2,7 +2,6 @@
 title: 备用提供商
 description: 配置自动故障转移到备用 LLM 提供商，当主提供商不可用时。
 sidebar_label: 备用提供商
-sidebar_position: 8
 ---
 
 # 备用提供商

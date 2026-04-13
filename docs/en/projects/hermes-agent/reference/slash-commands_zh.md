@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 title: "斜杠命令参考"
 description: "交互式 CLI 与消息平台斜杠命令完整参考"
 ---
