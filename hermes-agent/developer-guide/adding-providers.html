@@ -1,0 +1,578 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Adding Providers - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/developer-guide/adding-providers.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-5-title-adding-providers-description-how-to-add-a-new-inference-provider-to-hermes-agent--auth-runtime-resolution-cli-flows-adapters-tests-and-docs"><a class="header" href="#sidebar_position-5-title-adding-providers-description-how-to-add-a-new-inference-provider-to-hermes-agent--auth-runtime-resolution-cli-flows-adapters-tests-and-docs">sidebar_position: 5
+title: “Adding Providers”
+description: “How to add a new inference provider to Hermes Agent — auth, runtime resolution, CLI flows, adapters, tests, and docs”</a></h2>
+<h1 id="adding-providers"><a class="header" href="#adding-providers">Adding Providers</a></h1>
+<p>Hermes can already talk to any OpenAI-compatible endpoint through the custom provider path. Do not add a built-in provider unless you want first-class UX for that service:</p>
+<ul>
+<li>provider-specific auth or token refresh</li>
+<li>a curated model catalog</li>
+<li>setup / <code>hermes model</code> menu entries</li>
+<li>provider aliases for <code>provider:model</code> syntax</li>
+<li>a non-OpenAI API shape that needs an adapter</li>
+</ul>
+<p>If the provider is just “another OpenAI-compatible base URL and API key”, a named custom provider may be enough.</p>
+<h2 id="the-mental-model"><a class="header" href="#the-mental-model">The mental model</a></h2>
+<p>A built-in provider has to line up across a few layers:</p>
+<ol>
+<li><code>hermes_cli/auth.py</code> decides how credentials are found.</li>
+<li><code>hermes_cli/runtime_provider.py</code> turns that into runtime data:
+<ul>
+<li><code>provider</code></li>
+<li><code>api_mode</code></li>
+<li><code>base_url</code></li>
+<li><code>api_key</code></li>
+<li><code>source</code></li>
+</ul>
+</li>
+<li><code>run_agent.py</code> uses <code>api_mode</code> to decide how requests are built and sent.</li>
+<li><code>hermes_cli/models.py</code> and <code>hermes_cli/main.py</code> make the provider show up in the CLI. (<code>hermes_cli/setup.py</code> delegates to <code>main.py</code> automatically — no changes needed there.)</li>
+<li><code>agent/auxiliary_client.py</code> and <code>agent/model_metadata.py</code> keep side tasks and token budgeting working.</li>
+</ol>
+<p>The important abstraction is <code>api_mode</code>.</p>
+<ul>
+<li>Most providers use <code>chat_completions</code>.</li>
+<li>Codex uses <code>codex_responses</code>.</li>
+<li>Anthropic uses <code>anthropic_messages</code>.</li>
+<li>A new non-OpenAI protocol usually means adding a new adapter and a new <code>api_mode</code> branch.</li>
+</ul>
+<h2 id="choose-the-implementation-path-first"><a class="header" href="#choose-the-implementation-path-first">Choose the implementation path first</a></h2>
+<h3 id="path-a--openai-compatible-provider"><a class="header" href="#path-a--openai-compatible-provider">Path A — OpenAI-compatible provider</a></h3>
+<p>Use this when the provider accepts standard chat-completions style requests.</p>
+<p>Typical work:</p>
+<ul>
+<li>add auth metadata</li>
+<li>add model catalog / aliases</li>
+<li>add runtime resolution</li>
+<li>add CLI menu wiring</li>
+<li>add aux-model defaults</li>
+<li>add tests and user docs</li>
+</ul>
+<p>You usually do not need a new adapter or a new <code>api_mode</code>.</p>
+<h3 id="path-b--native-provider"><a class="header" href="#path-b--native-provider">Path B — Native provider</a></h3>
+<p>Use this when the provider does not behave like OpenAI chat completions.</p>
+<p>Examples in-tree today:</p>
+<ul>
+<li><code>codex_responses</code></li>
+<li><code>anthropic_messages</code></li>
+</ul>
+<p>This path includes everything from Path A plus:</p>
+<ul>
+<li>a provider adapter in <code>agent/</code></li>
+<li><code>run_agent.py</code> branches for request building, dispatch, usage extraction, interrupt handling, and response normalization</li>
+<li>adapter tests</li>
+</ul>
+<h2 id="file-checklist"><a class="header" href="#file-checklist">File checklist</a></h2>
+<h3 id="required-for-every-built-in-provider"><a class="header" href="#required-for-every-built-in-provider">Required for every built-in provider</a></h3>
+<ol>
+<li><code>hermes_cli/auth.py</code></li>
+<li><code>hermes_cli/models.py</code></li>
+<li><code>hermes_cli/runtime_provider.py</code></li>
+<li><code>hermes_cli/main.py</code></li>
+<li><code>agent/auxiliary_client.py</code></li>
+<li><code>agent/model_metadata.py</code></li>
+<li>tests</li>
+<li>user-facing docs under <code>website/docs/</code></li>
+</ol>
+<dl>
+<dt id="tip-hermes_clisetuppy-does-not-need-changes-the-setup-wizard-delegates-providermodel-selection-to-select_provider_and_model-in-mainpy--any-provider-added-there-is-automatically-available-in-hermes-setup"><a class="header" href="#tip-hermes_clisetuppy-does-not-need-changes-the-setup-wizard-delegates-providermodel-selection-to-select_provider_and_model-in-mainpy--any-provider-added-there-is-automatically-available-in-hermes-setup">:::tip
+<code>hermes_cli/setup.py</code> does <strong>not</strong> need changes. The setup wizard delegates provider/model selection to <code>select_provider_and_model()</code> in <code>main.py</code> — any provider added there is automatically available in <code>hermes setup</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="additional-for-native--non-openai-providers"><a class="header" href="#additional-for-native--non-openai-providers">Additional for native / non-OpenAI providers</a></h3>
+<ol start="10">
+<li><code>agent/&lt;provider&gt;_adapter.py</code></li>
+<li><code>run_agent.py</code></li>
+<li><code>pyproject.toml</code> if a provider SDK is required</li>
+</ol>
+<h2 id="step-1-pick-one-canonical-provider-id"><a class="header" href="#step-1-pick-one-canonical-provider-id">Step 1: Pick one canonical provider id</a></h2>
+<p>Choose a single provider id and use it everywhere.</p>
+<p>Examples from the repo:</p>
+<ul>
+<li><code>openai-codex</code></li>
+<li><code>kimi-coding</code></li>
+<li><code>minimax-cn</code></li>
+</ul>
+<p>That same id should appear in:</p>
+<ul>
+<li><code>PROVIDER_REGISTRY</code> in <code>hermes_cli/auth.py</code></li>
+<li><code>_PROVIDER_LABELS</code> in <code>hermes_cli/models.py</code></li>
+<li><code>_PROVIDER_ALIASES</code> in both <code>hermes_cli/auth.py</code> and <code>hermes_cli/models.py</code></li>
+<li>CLI <code>--provider</code> choices in <code>hermes_cli/main.py</code></li>
+<li>setup / model selection branches</li>
+<li>auxiliary-model defaults</li>
+<li>tests</li>
+</ul>
+<p>If the id differs between those files, the provider will feel half-wired: auth may work while <code>/model</code>, setup, or runtime resolution silently misses it.</p>
+<h2 id="step-2-add-auth-metadata-in-hermes_cliauthpy"><a class="header" href="#step-2-add-auth-metadata-in-hermes_cliauthpy">Step 2: Add auth metadata in <code>hermes_cli/auth.py</code></a></h2>
+<p>For API-key providers, add a <code>ProviderConfig</code> entry to <code>PROVIDER_REGISTRY</code> with:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>auth_type="api_key"</code></li>
+<li><code>inference_base_url</code></li>
+<li><code>api_key_env_vars</code></li>
+<li>optional <code>base_url_env_var</code></li>
+</ul>
+<p>Also add aliases to <code>_PROVIDER_ALIASES</code>.</p>
+<p>Use the existing providers as templates:</p>
+<ul>
+<li>simple API-key path: Z.AI, MiniMax</li>
+<li>API-key path with endpoint detection: Kimi, Z.AI</li>
+<li>native token resolution: Anthropic</li>
+<li>OAuth / auth-store path: Nous, OpenAI Codex</li>
+</ul>
+<p>Questions to answer here:</p>
+<ul>
+<li>What env vars should Hermes check, and in what priority order?</li>
+<li>Does the provider need base-URL overrides?</li>
+<li>Does it need endpoint probing or token refresh?</li>
+<li>What should the auth error say when credentials are missing?</li>
+</ul>
+<p>If the provider needs something more than “look up an API key”, add a dedicated credential resolver instead of shoving logic into unrelated branches.</p>
+<h2 id="step-3-add-model-catalog-and-aliases-in-hermes_climodelspy"><a class="header" href="#step-3-add-model-catalog-and-aliases-in-hermes_climodelspy">Step 3: Add model catalog and aliases in <code>hermes_cli/models.py</code></a></h2>
+<p>Update the provider catalog so the provider works in menus and in <code>provider:model</code> syntax.</p>
+<p>Typical edits:</p>
+<ul>
+<li><code>_PROVIDER_MODELS</code></li>
+<li><code>_PROVIDER_LABELS</code></li>
+<li><code>_PROVIDER_ALIASES</code></li>
+<li>provider display order inside <code>list_available_providers()</code></li>
+<li><code>provider_model_ids()</code> if the provider supports a live <code>/models</code> fetch</li>
+</ul>
+<p>If the provider exposes a live model list, prefer that first and keep <code>_PROVIDER_MODELS</code> as the static fallback.</p>
+<p>This file is also what makes inputs like these work:</p>
+<pre><code class="language-text">anthropic:claude-sonnet-4-6
+kimi:model-name
+</code></pre>
+<p>If aliases are missing here, the provider may authenticate correctly but still fail in <code>/model</code> parsing.</p>
+<h2 id="step-4-resolve-runtime-data-in-hermes_cliruntime_providerpy"><a class="header" href="#step-4-resolve-runtime-data-in-hermes_cliruntime_providerpy">Step 4: Resolve runtime data in <code>hermes_cli/runtime_provider.py</code></a></h2>
+<p><code>resolve_runtime_provider()</code> is the shared path used by CLI, gateway, cron, ACP, and helper clients.</p>
+<p>Add a branch that returns a dict with at least:</p>
+<pre><code class="language-python">{
+    "provider": "your-provider",
+    "api_mode": "chat_completions",  # or your native mode
+    "base_url": "https://...",
+    "api_key": "...",
+    "source": "env|portal|auth-store|explicit",
+    "requested_provider": requested_provider,
+}
+</code></pre>
+<p>If the provider is OpenAI-compatible, <code>api_mode</code> should usually stay <code>chat_completions</code>.</p>
+<p>Be careful with API-key precedence. Hermes already contains logic to avoid leaking an OpenRouter key to unrelated endpoints. A new provider should be equally explicit about which key goes to which base URL.</p>
+<h2 id="step-5-wire-the-cli-in-hermes_climainpy"><a class="header" href="#step-5-wire-the-cli-in-hermes_climainpy">Step 5: Wire the CLI in <code>hermes_cli/main.py</code></a></h2>
+<p>A provider is not discoverable until it shows up in the interactive <code>hermes model</code> flow.</p>
+<p>Update these in <code>hermes_cli/main.py</code>:</p>
+<ul>
+<li><code>provider_labels</code> dict</li>
+<li><code>providers</code> list in <code>select_provider_and_model()</code></li>
+<li>provider dispatch (<code>if selected_provider == ...</code>)</li>
+<li><code>--provider</code> argument choices</li>
+<li>login/logout choices if the provider supports those flows</li>
+<li>a <code>_model_flow_&lt;provider&gt;()</code> function, or reuse <code>_model_flow_api_key_provider()</code> if it fits</li>
+</ul>
+<dl>
+<dt id="tip-hermes_clisetuppy-does-not-need-changes--it-calls-select_provider_and_model-from-mainpy-so-your-new-provider-appears-in-both-hermes-model-and-hermes-setup-automatically"><a class="header" href="#tip-hermes_clisetuppy-does-not-need-changes--it-calls-select_provider_and_model-from-mainpy-so-your-new-provider-appears-in-both-hermes-model-and-hermes-setup-automatically">:::tip
+<code>hermes_cli/setup.py</code> does not need changes — it calls <code>select_provider_and_model()</code> from <code>main.py</code>, so your new provider appears in both <code>hermes model</code> and <code>hermes setup</code> automatically.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="step-6-keep-auxiliary-calls-working"><a class="header" href="#step-6-keep-auxiliary-calls-working">Step 6: Keep auxiliary calls working</a></h2>
+<p>Two files matter here:</p>
+<h3 id="agentauxiliary_clientpy"><a class="header" href="#agentauxiliary_clientpy"><code>agent/auxiliary_client.py</code></a></h3>
+<p>Add a cheap / fast default aux model to <code>_API_KEY_PROVIDER_AUX_MODELS</code> if this is a direct API-key provider.</p>
+<p>Auxiliary tasks include things like:</p>
+<ul>
+<li>vision summarization</li>
+<li>web extraction summarization</li>
+<li>context compression summaries</li>
+<li>session-search summaries</li>
+<li>memory flushes</li>
+</ul>
+<p>If the provider has no sensible aux default, side tasks may fall back badly or use an expensive main model unexpectedly.</p>
+<h3 id="agentmodel_metadatapy"><a class="header" href="#agentmodel_metadatapy"><code>agent/model_metadata.py</code></a></h3>
+<p>Add context lengths for the provider’s models so token budgeting, compression thresholds, and limits stay sane.</p>
+<h2 id="step-7-if-the-provider-is-native-add-an-adapter-and-run_agentpy-support"><a class="header" href="#step-7-if-the-provider-is-native-add-an-adapter-and-run_agentpy-support">Step 7: If the provider is native, add an adapter and <code>run_agent.py</code> support</a></h2>
+<p>If the provider is not plain chat completions, isolate the provider-specific logic in <code>agent/&lt;provider&gt;_adapter.py</code>.</p>
+<p>Keep <code>run_agent.py</code> focused on orchestration. It should call adapter helpers, not hand-build provider payloads inline all over the file.</p>
+<p>A native provider usually needs work in these places:</p>
+<h3 id="new-adapter-file"><a class="header" href="#new-adapter-file">New adapter file</a></h3>
+<p>Typical responsibilities:</p>
+<ul>
+<li>build the SDK / HTTP client</li>
+<li>resolve tokens</li>
+<li>convert OpenAI-style conversation messages to the provider’s request format</li>
+<li>convert tool schemas if needed</li>
+<li>normalize provider responses back into what <code>run_agent.py</code> expects</li>
+<li>extract usage and finish-reason data</li>
+</ul>
+<h3 id="run_agentpy"><a class="header" href="#run_agentpy"><code>run_agent.py</code></a></h3>
+<p>Search for <code>api_mode</code> and audit every switch point. At minimum, verify:</p>
+<ul>
+<li><code>__init__</code> chooses the new <code>api_mode</code></li>
+<li>client construction works for the provider</li>
+<li><code>_build_api_kwargs()</code> knows how to format requests</li>
+<li><code>_api_call_with_interrupt()</code> dispatches to the right client call</li>
+<li>interrupt / client rebuild paths work</li>
+<li>response validation accepts the provider’s shape</li>
+<li>finish-reason extraction is correct</li>
+<li>token-usage extraction is correct</li>
+<li>fallback-model activation can switch into the new provider cleanly</li>
+<li>summary-generation and memory-flush paths still work</li>
+</ul>
+<p>Also search <code>run_agent.py</code> for <code>self.client.</code>. Any code path that assumes the standard OpenAI client exists can break when a native provider uses a different client object or <code>self.client = None</code>.</p>
+<h3 id="prompt-caching-and-provider-specific-request-fields"><a class="header" href="#prompt-caching-and-provider-specific-request-fields">Prompt caching and provider-specific request fields</a></h3>
+<p>Prompt caching and provider-specific knobs are easy to regress.</p>
+<p>Examples already in-tree:</p>
+<ul>
+<li>Anthropic has a native prompt-caching path</li>
+<li>OpenRouter gets provider-routing fields</li>
+<li>not every provider should receive every request-side option</li>
+</ul>
+<p>When you add a native provider, double-check that Hermes is only sending fields that provider actually understands.</p>
+<h2 id="step-8-tests"><a class="header" href="#step-8-tests">Step 8: Tests</a></h2>
+<p>At minimum, touch the tests that guard provider wiring.</p>
+<p>Common places:</p>
+<ul>
+<li><code>tests/test_runtime_provider_resolution.py</code></li>
+<li><code>tests/test_cli_provider_resolution.py</code></li>
+<li><code>tests/test_cli_model_command.py</code></li>
+<li><code>tests/test_setup_model_selection.py</code></li>
+<li><code>tests/test_provider_parity.py</code></li>
+<li><code>tests/test_run_agent.py</code></li>
+<li><code>tests/test_&lt;provider&gt;_adapter.py</code> for a native provider</li>
+</ul>
+<p>For docs-only examples, the exact file set may differ. The point is to cover:</p>
+<ul>
+<li>auth resolution</li>
+<li>CLI menu / provider selection</li>
+<li>runtime provider resolution</li>
+<li>agent execution path</li>
+<li>provider:model parsing</li>
+<li>any adapter-specific message conversion</li>
+</ul>
+<p>Run tests with xdist disabled:</p>
+<pre><code class="language-bash">source venv/bin/activate
+python -m pytest tests/test_runtime_provider_resolution.py tests/test_cli_provider_resolution.py tests/test_cli_model_command.py tests/test_setup_model_selection.py -n0 -q
+</code></pre>
+<p>For deeper changes, run the full suite before pushing:</p>
+<pre><code class="language-bash">source venv/bin/activate
+python -m pytest tests/ -n0 -q
+</code></pre>
+<h2 id="step-9-live-verification"><a class="header" href="#step-9-live-verification">Step 9: Live verification</a></h2>
+<p>After tests, run a real smoke test.</p>
+<pre><code class="language-bash">source venv/bin/activate
+python -m hermes_cli.main chat -q "Say hello" --provider your-provider --model your-model
+</code></pre>
+<p>Also test the interactive flows if you changed menus:</p>
+<pre><code class="language-bash">source venv/bin/activate
+python -m hermes_cli.main model
+python -m hermes_cli.main setup
+</code></pre>
+<p>For native providers, verify at least one tool call too, not just a plain text response.</p>
+<h2 id="step-10-update-user-facing-docs"><a class="header" href="#step-10-update-user-facing-docs">Step 10: Update user-facing docs</a></h2>
+<p>If the provider is meant to ship as a first-class option, update the user docs too:</p>
+<ul>
+<li><code>website/docs/getting-started/quickstart.md</code></li>
+<li><code>website/docs/user-guide/configuration.md</code></li>
+<li><code>website/docs/reference/environment-variables.md</code></li>
+</ul>
+<p>A developer can wire the provider perfectly and still leave users unable to discover the required env vars or setup flow.</p>
+<h2 id="openai-compatible-provider-checklist"><a class="header" href="#openai-compatible-provider-checklist">OpenAI-compatible provider checklist</a></h2>
+<p>Use this if the provider is standard chat completions.</p>
+<ul>
+<li><input disabled="" type="checkbox"> <code>ProviderConfig</code> added in <code>hermes_cli/auth.py</code></li>
+<li><input disabled="" type="checkbox"> aliases added in <code>hermes_cli/auth.py</code> and <code>hermes_cli/models.py</code></li>
+<li><input disabled="" type="checkbox"> model catalog added in <code>hermes_cli/models.py</code></li>
+<li><input disabled="" type="checkbox"> runtime branch added in <code>hermes_cli/runtime_provider.py</code></li>
+<li><input disabled="" type="checkbox"> CLI wiring added in <code>hermes_cli/main.py</code> (setup.py inherits automatically)</li>
+<li><input disabled="" type="checkbox"> aux model added in <code>agent/auxiliary_client.py</code></li>
+<li><input disabled="" type="checkbox"> context lengths added in <code>agent/model_metadata.py</code></li>
+<li><input disabled="" type="checkbox"> runtime / CLI tests updated</li>
+<li><input disabled="" type="checkbox"> user docs updated</li>
+</ul>
+<h2 id="native-provider-checklist"><a class="header" href="#native-provider-checklist">Native provider checklist</a></h2>
+<p>Use this when the provider needs a new protocol path.</p>
+<ul>
+<li><input disabled="" type="checkbox"> everything in the OpenAI-compatible checklist</li>
+<li><input disabled="" type="checkbox"> adapter added in <code>agent/&lt;provider&gt;_adapter.py</code></li>
+<li><input disabled="" type="checkbox"> new <code>api_mode</code> supported in <code>run_agent.py</code></li>
+<li><input disabled="" type="checkbox"> interrupt / rebuild path works</li>
+<li><input disabled="" type="checkbox"> usage and finish-reason extraction works</li>
+<li><input disabled="" type="checkbox"> fallback path works</li>
+<li><input disabled="" type="checkbox"> adapter tests added</li>
+<li><input disabled="" type="checkbox"> live smoke test passes</li>
+</ul>
+<h2 id="common-pitfalls"><a class="header" href="#common-pitfalls">Common pitfalls</a></h2>
+<h3 id="1-adding-the-provider-to-auth-but-not-to-model-parsing"><a class="header" href="#1-adding-the-provider-to-auth-but-not-to-model-parsing">1. Adding the provider to auth but not to model parsing</a></h3>
+<p>That makes credentials resolve correctly while <code>/model</code> and <code>provider:model</code> inputs fail.</p>
+<h3 id="2-forgetting-that-configmodel-can-be-a-string-or-a-dict"><a class="header" href="#2-forgetting-that-configmodel-can-be-a-string-or-a-dict">2. Forgetting that <code>config["model"]</code> can be a string or a dict</a></h3>
+<p>A lot of provider-selection code has to normalize both forms.</p>
+<h3 id="3-assuming-a-built-in-provider-is-required"><a class="header" href="#3-assuming-a-built-in-provider-is-required">3. Assuming a built-in provider is required</a></h3>
+<p>If the service is just OpenAI-compatible, a custom provider may already solve the user problem with less maintenance.</p>
+<h3 id="4-forgetting-auxiliary-paths"><a class="header" href="#4-forgetting-auxiliary-paths">4. Forgetting auxiliary paths</a></h3>
+<p>The main chat path can work while summarization, memory flushes, or vision helpers fail because aux routing was never updated.</p>
+<h3 id="5-native-provider-branches-hiding-in-run_agentpy"><a class="header" href="#5-native-provider-branches-hiding-in-run_agentpy">5. Native-provider branches hiding in <code>run_agent.py</code></a></h3>
+<p>Search for <code>api_mode</code> and <code>self.client.</code>. Do not assume the obvious request path is the only one.</p>
+<h3 id="6-sending-openrouter-only-knobs-to-other-providers"><a class="header" href="#6-sending-openrouter-only-knobs-to-other-providers">6. Sending OpenRouter-only knobs to other providers</a></h3>
+<p>Fields like provider routing belong only on the providers that support them.</p>
+<h3 id="7-updating-hermes-model-but-not-hermes-setup"><a class="header" href="#7-updating-hermes-model-but-not-hermes-setup">7. Updating <code>hermes model</code> but not <code>hermes setup</code></a></h3>
+<p>Both flows need to know about the provider.</p>
+<h2 id="good-search-targets-while-implementing"><a class="header" href="#good-search-targets-while-implementing">Good search targets while implementing</a></h2>
+<p>If you are hunting for all the places a provider touches, search these symbols:</p>
+<ul>
+<li><code>PROVIDER_REGISTRY</code></li>
+<li><code>_PROVIDER_ALIASES</code></li>
+<li><code>_PROVIDER_MODELS</code></li>
+<li><code>resolve_runtime_provider</code></li>
+<li><code>_model_flow_</code></li>
+<li><code>select_provider_and_model</code></li>
+<li><code>api_mode</code></li>
+<li><code>_API_KEY_PROVIDER_AUX_MODELS</code></li>
+<li><code>self.client.</code></li>
+</ul>
+<h2 id="related-docs"><a class="header" href="#related-docs">Related docs</a></h2>
+<ul>
+<li><a href="./provider-runtime.html">Provider Runtime Resolution</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/developer-guide/adding-platform-adapters.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/developer-guide/adding-tools.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/developer-guide/adding-platform-adapters.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/developer-guide/adding-tools.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

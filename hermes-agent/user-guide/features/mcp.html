@@ -1,0 +1,660 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MCP (Model Context Protocol) - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/features/mcp.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-4-title-mcp-model-context-protocol-description-connect-hermes-agent-to-external-tool-servers-via-mcp--and-control-exactly-which-mcp-tools-hermes-loads"><a class="header" href="#sidebar_position-4-title-mcp-model-context-protocol-description-connect-hermes-agent-to-external-tool-servers-via-mcp--and-control-exactly-which-mcp-tools-hermes-loads">sidebar_position: 4
+title: “MCP (Model Context Protocol)”
+description: “Connect Hermes Agent to external tool servers via MCP — and control exactly which MCP tools Hermes loads”</a></h2>
+<h1 id="mcp-model-context-protocol"><a class="header" href="#mcp-model-context-protocol">MCP (Model Context Protocol)</a></h1>
+<p>MCP lets Hermes Agent connect to external tool servers so the agent can use tools that live outside Hermes itself — GitHub, databases, file systems, browser stacks, internal APIs, and more.</p>
+<p>If you have ever wanted Hermes to use a tool that already exists somewhere else, MCP is usually the cleanest way to do it.</p>
+<h2 id="what-mcp-gives-you"><a class="header" href="#what-mcp-gives-you">What MCP gives you</a></h2>
+<ul>
+<li>Access to external tool ecosystems without writing a native Hermes tool first</li>
+<li>Local stdio servers and remote HTTP MCP servers in the same config</li>
+<li>Automatic tool discovery and registration at startup</li>
+<li>Utility wrappers for MCP resources and prompts when supported by the server</li>
+<li>Per-server filtering so you can expose only the MCP tools you actually want Hermes to see</li>
+</ul>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h2>
+<ol>
+<li>Install MCP support (already included if you used the standard install script):</li>
+</ol>
+<pre><code class="language-bash">cd ~/.hermes/hermes-agent
+uv pip install -e ".[mcp]"
+</code></pre>
+<ol start="2">
+<li>Add an MCP server to <code>~/.hermes/config.yaml</code>:</li>
+</ol>
+<pre><code class="language-yaml">mcp_servers:
+  filesystem:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/projects"]
+</code></pre>
+<ol start="3">
+<li>Start Hermes:</li>
+</ol>
+<pre><code class="language-bash">hermes chat
+</code></pre>
+<ol start="4">
+<li>Ask Hermes to use the MCP-backed capability.</li>
+</ol>
+<p>For example:</p>
+<pre><code class="language-text">List the files in /home/user/projects and summarize the repo structure.
+</code></pre>
+<p>Hermes will discover the MCP server’s tools and use them like any other tool.</p>
+<h2 id="two-kinds-of-mcp-servers"><a class="header" href="#two-kinds-of-mcp-servers">Two kinds of MCP servers</a></h2>
+<h3 id="stdio-servers"><a class="header" href="#stdio-servers">Stdio servers</a></h3>
+<p>Stdio servers run as local subprocesses and talk over stdin/stdout.</p>
+<pre><code class="language-yaml">mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "***"
+</code></pre>
+<p>Use stdio servers when:</p>
+<ul>
+<li>the server is installed locally</li>
+<li>you want low-latency access to local resources</li>
+<li>you are following MCP server docs that show <code>command</code>, <code>args</code>, and <code>env</code></li>
+</ul>
+<h3 id="http-servers"><a class="header" href="#http-servers">HTTP servers</a></h3>
+<p>HTTP MCP servers are remote endpoints Hermes connects to directly.</p>
+<pre><code class="language-yaml">mcp_servers:
+  remote_api:
+    url: "https://mcp.example.com/mcp"
+    headers:
+      Authorization: "Bearer ***"
+</code></pre>
+<p>Use HTTP servers when:</p>
+<ul>
+<li>the MCP server is hosted elsewhere</li>
+<li>your organization exposes internal MCP endpoints</li>
+<li>you do not want Hermes spawning a local subprocess for that integration</li>
+</ul>
+<h2 id="basic-configuration-reference"><a class="header" href="#basic-configuration-reference">Basic configuration reference</a></h2>
+<p>Hermes reads MCP config from <code>~/.hermes/config.yaml</code> under <code>mcp_servers</code>.</p>
+<h3 id="common-keys"><a class="header" href="#common-keys">Common keys</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Type</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>command</code></td><td>string</td><td>Executable for a stdio MCP server</td></tr>
+<tr><td><code>args</code></td><td>list</td><td>Arguments for the stdio server</td></tr>
+<tr><td><code>env</code></td><td>mapping</td><td>Environment variables passed to the stdio server</td></tr>
+<tr><td><code>url</code></td><td>string</td><td>HTTP MCP endpoint</td></tr>
+<tr><td><code>headers</code></td><td>mapping</td><td>HTTP headers for remote servers</td></tr>
+<tr><td><code>timeout</code></td><td>number</td><td>Tool call timeout</td></tr>
+<tr><td><code>connect_timeout</code></td><td>number</td><td>Initial connection timeout</td></tr>
+<tr><td><code>enabled</code></td><td>bool</td><td>If <code>false</code>, Hermes skips the server entirely</td></tr>
+<tr><td><code>tools</code></td><td>mapping</td><td>Per-server tool filtering and utility policy</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="minimal-stdio-example"><a class="header" href="#minimal-stdio-example">Minimal stdio example</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  filesystem:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+</code></pre>
+<h3 id="minimal-http-example"><a class="header" href="#minimal-http-example">Minimal HTTP example</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  company_api:
+    url: "https://mcp.internal.example.com"
+    headers:
+      Authorization: "Bearer ***"
+</code></pre>
+<h2 id="how-hermes-registers-mcp-tools"><a class="header" href="#how-hermes-registers-mcp-tools">How Hermes registers MCP tools</a></h2>
+<p>Hermes prefixes MCP tools so they do not collide with built-in names:</p>
+<pre><code class="language-text">mcp_&lt;server_name&gt;_&lt;tool_name&gt;
+</code></pre>
+<p>Examples:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Server</th><th>MCP tool</th><th>Registered name</th></tr>
+</thead>
+<tbody>
+<tr><td><code>filesystem</code></td><td><code>read_file</code></td><td><code>mcp_filesystem_read_file</code></td></tr>
+<tr><td><code>github</code></td><td><code>create-issue</code></td><td><code>mcp_github_create_issue</code></td></tr>
+<tr><td><code>my-api</code></td><td><code>query.data</code></td><td><code>mcp_my_api_query_data</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>In practice, you usually do not need to call the prefixed name manually — Hermes sees the tool and chooses it during normal reasoning.</p>
+<h2 id="mcp-utility-tools"><a class="header" href="#mcp-utility-tools">MCP utility tools</a></h2>
+<p>When supported, Hermes also registers utility tools around MCP resources and prompts:</p>
+<ul>
+<li><code>list_resources</code></li>
+<li><code>read_resource</code></li>
+<li><code>list_prompts</code></li>
+<li><code>get_prompt</code></li>
+</ul>
+<p>These are registered per server with the same prefix pattern, for example:</p>
+<ul>
+<li><code>mcp_github_list_resources</code></li>
+<li><code>mcp_github_get_prompt</code></li>
+</ul>
+<h3 id="important"><a class="header" href="#important">Important</a></h3>
+<p>These utility tools are now capability-aware:</p>
+<ul>
+<li>Hermes only registers resource utilities if the MCP session actually supports resource operations</li>
+<li>Hermes only registers prompt utilities if the MCP session actually supports prompt operations</li>
+</ul>
+<p>So a server that exposes callable tools but no resources/prompts will not get those extra wrappers.</p>
+<h2 id="per-server-filtering"><a class="header" href="#per-server-filtering">Per-server filtering</a></h2>
+<p>You can control which tools each MCP server contributes to Hermes, allowing fine-grained management of your tool namespace.</p>
+<h3 id="disable-a-server-entirely"><a class="header" href="#disable-a-server-entirely">Disable a server entirely</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  legacy:
+    url: "https://mcp.legacy.internal"
+    enabled: false
+</code></pre>
+<p>If <code>enabled: false</code>, Hermes skips the server completely and does not even attempt a connection.</p>
+<h3 id="whitelist-server-tools"><a class="header" href="#whitelist-server-tools">Whitelist server tools</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "***"
+    tools:
+      include: [create_issue, list_issues]
+</code></pre>
+<p>Only those MCP server tools are registered.</p>
+<h3 id="blacklist-server-tools"><a class="header" href="#blacklist-server-tools">Blacklist server tools</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  stripe:
+    url: "https://mcp.stripe.com"
+    tools:
+      exclude: [delete_customer]
+</code></pre>
+<p>All server tools are registered except the excluded ones.</p>
+<h3 id="precedence-rule"><a class="header" href="#precedence-rule">Precedence rule</a></h3>
+<p>If both are present:</p>
+<pre><code class="language-yaml">tools:
+  include: [create_issue]
+  exclude: [create_issue, delete_issue]
+</code></pre>
+<p><code>include</code> wins.</p>
+<h3 id="filter-utility-tools-too"><a class="header" href="#filter-utility-tools-too">Filter utility tools too</a></h3>
+<p>You can also separately disable Hermes-added utility wrappers:</p>
+<pre><code class="language-yaml">mcp_servers:
+  docs:
+    url: "https://mcp.docs.example.com"
+    tools:
+      prompts: false
+      resources: false
+</code></pre>
+<p>That means:</p>
+<ul>
+<li><code>tools.resources: false</code> disables <code>list_resources</code> and <code>read_resource</code></li>
+<li><code>tools.prompts: false</code> disables <code>list_prompts</code> and <code>get_prompt</code></li>
+</ul>
+<h3 id="full-example"><a class="header" href="#full-example">Full example</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "***"
+    tools:
+      include: [create_issue, list_issues, search_code]
+      prompts: false
+
+  stripe:
+    url: "https://mcp.stripe.com"
+    headers:
+      Authorization: "Bearer ***"
+    tools:
+      exclude: [delete_customer]
+      resources: false
+
+  legacy:
+    url: "https://mcp.legacy.internal"
+    enabled: false
+</code></pre>
+<h2 id="what-happens-if-everything-is-filtered-out"><a class="header" href="#what-happens-if-everything-is-filtered-out">What happens if everything is filtered out?</a></h2>
+<p>If your config filters out all callable tools and disables or omits all supported utilities, Hermes does not create an empty runtime MCP toolset for that server.</p>
+<p>That keeps the tool list clean.</p>
+<h2 id="runtime-behavior"><a class="header" href="#runtime-behavior">Runtime behavior</a></h2>
+<h3 id="discovery-time"><a class="header" href="#discovery-time">Discovery time</a></h3>
+<p>Hermes discovers MCP servers at startup and registers their tools into the normal tool registry.</p>
+<h3 id="dynamic-tool-discovery"><a class="header" href="#dynamic-tool-discovery">Dynamic Tool Discovery</a></h3>
+<p>MCP servers can notify Hermes when their available tools change at runtime by sending a <code>notifications/tools/list_changed</code> notification. When Hermes receives this notification, it automatically re-fetches the server’s tool list and updates the registry — no manual <code>/reload-mcp</code> required.</p>
+<p>This is useful for MCP servers whose capabilities change dynamically (e.g. a server that adds tools when a new database schema is loaded, or removes tools when a service goes offline).</p>
+<p>The refresh is lock-protected so rapid-fire notifications from the same server don’t cause overlapping refreshes. Prompt and resource change notifications (<code>prompts/list_changed</code>, <code>resources/list_changed</code>) are received but not yet acted on.</p>
+<h3 id="reloading"><a class="header" href="#reloading">Reloading</a></h3>
+<p>If you change MCP config, use:</p>
+<pre><code class="language-text">/reload-mcp
+</code></pre>
+<p>This reloads MCP servers from config and refreshes the available tool list. For runtime tool changes pushed by the server itself, see <a href="#dynamic-tool-discovery">Dynamic Tool Discovery</a> above.</p>
+<h3 id="toolsets"><a class="header" href="#toolsets">Toolsets</a></h3>
+<p>Each configured MCP server also creates a runtime toolset when it contributes at least one registered tool:</p>
+<pre><code class="language-text">mcp-&lt;server&gt;
+</code></pre>
+<p>That makes MCP servers easier to reason about at the toolset level.</p>
+<h2 id="security-model"><a class="header" href="#security-model">Security model</a></h2>
+<h3 id="stdio-env-filtering"><a class="header" href="#stdio-env-filtering">Stdio env filtering</a></h3>
+<p>For stdio servers, Hermes does not blindly pass your full shell environment.</p>
+<p>Only explicitly configured <code>env</code> plus a safe baseline are passed through. This reduces accidental secret leakage.</p>
+<h3 id="config-level-exposure-control"><a class="header" href="#config-level-exposure-control">Config-level exposure control</a></h3>
+<p>The new filtering support is also a security control:</p>
+<ul>
+<li>disable dangerous tools you do not want the model to see</li>
+<li>expose only a minimal whitelist for a sensitive server</li>
+<li>disable resource/prompt wrappers when you do not want that surface exposed</li>
+</ul>
+<h2 id="example-use-cases"><a class="header" href="#example-use-cases">Example use cases</a></h2>
+<h3 id="github-server-with-a-minimal-issue-management-surface"><a class="header" href="#github-server-with-a-minimal-issue-management-surface">GitHub server with a minimal issue-management surface</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "***"
+    tools:
+      include: [list_issues, create_issue, update_issue]
+      prompts: false
+      resources: false
+</code></pre>
+<p>Use it like:</p>
+<pre><code class="language-text">Show me open issues labeled bug, then draft a new issue for the flaky MCP reconnection behavior.
+</code></pre>
+<h3 id="stripe-server-with-dangerous-actions-removed"><a class="header" href="#stripe-server-with-dangerous-actions-removed">Stripe server with dangerous actions removed</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  stripe:
+    url: "https://mcp.stripe.com"
+    headers:
+      Authorization: "Bearer ***"
+    tools:
+      exclude: [delete_customer, refund_payment]
+</code></pre>
+<p>Use it like:</p>
+<pre><code class="language-text">Look up the last 10 failed payments and summarize common failure reasons.
+</code></pre>
+<h3 id="filesystem-server-for-a-single-project-root"><a class="header" href="#filesystem-server-for-a-single-project-root">Filesystem server for a single project root</a></h3>
+<pre><code class="language-yaml">mcp_servers:
+  project_fs:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/my-project"]
+</code></pre>
+<p>Use it like:</p>
+<pre><code class="language-text">Inspect the project root and explain the directory layout.
+</code></pre>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="mcp-server-not-connecting"><a class="header" href="#mcp-server-not-connecting">MCP server not connecting</a></h3>
+<p>Check:</p>
+<pre><code class="language-bash"># Verify MCP deps are installed (already included in standard install)
+cd ~/.hermes/hermes-agent &amp;&amp; uv pip install -e ".[mcp]"
+
+node --version
+npx --version
+</code></pre>
+<p>Then verify your config and restart Hermes.</p>
+<h3 id="tools-not-appearing"><a class="header" href="#tools-not-appearing">Tools not appearing</a></h3>
+<p>Possible causes:</p>
+<ul>
+<li>the server failed to connect</li>
+<li>discovery failed</li>
+<li>your filter config excluded the tools</li>
+<li>the utility capability does not exist on that server</li>
+<li>the server is disabled with <code>enabled: false</code></li>
+</ul>
+<p>If you are intentionally filtering, this is expected.</p>
+<h3 id="why-didnt-resource-or-prompt-utilities-appear"><a class="header" href="#why-didnt-resource-or-prompt-utilities-appear">Why didn’t resource or prompt utilities appear?</a></h3>
+<p>Because Hermes now only registers those wrappers when both are true:</p>
+<ol>
+<li>your config allows them</li>
+<li>the server session actually supports the capability</li>
+</ol>
+<p>This is intentional and keeps the tool list honest.</p>
+<h2 id="mcp-sampling-support"><a class="header" href="#mcp-sampling-support">MCP Sampling Support</a></h2>
+<p>MCP servers can request LLM inference from Hermes via the <code>sampling/createMessage</code> protocol. This allows an MCP server to ask Hermes to generate text on its behalf — useful for servers that need LLM capabilities but don’t have their own model access.</p>
+<p>Sampling is <strong>enabled by default</strong> for all MCP servers (when the MCP SDK supports it). Configure it per-server under the <code>sampling</code> key:</p>
+<pre><code class="language-yaml">mcp_servers:
+  my_server:
+    command: "my-mcp-server"
+    sampling:
+      enabled: true            # Enable sampling (default: true)
+      model: "openai/gpt-4o"  # Override model for sampling requests (optional)
+      max_tokens_cap: 4096     # Max tokens per sampling response (default: 4096)
+      timeout: 30              # Timeout in seconds per request (default: 30)
+      max_rpm: 10              # Rate limit: max requests per minute (default: 10)
+      max_tool_rounds: 5       # Max tool-use rounds in sampling loops (default: 5)
+      allowed_models: []       # Allowlist of model names the server may request (empty = any)
+      log_level: "info"        # Audit log level: debug, info, or warning (default: info)
+</code></pre>
+<p>The sampling handler includes a sliding-window rate limiter, per-request timeouts, and tool-loop depth limits to prevent runaway usage. Metrics (request count, errors, tokens used) are tracked per server instance.</p>
+<p>To disable sampling for a specific server:</p>
+<pre><code class="language-yaml">mcp_servers:
+  untrusted_server:
+    url: "https://mcp.example.com"
+    sampling:
+      enabled: false
+</code></pre>
+<h2 id="running-hermes-as-an-mcp-server"><a class="header" href="#running-hermes-as-an-mcp-server">Running Hermes as an MCP server</a></h2>
+<p>In addition to connecting <strong>to</strong> MCP servers, Hermes can also <strong>be</strong> an MCP server. This lets other MCP-capable agents (Claude Code, Cursor, Codex, or any MCP client) use Hermes’s messaging capabilities — list conversations, read message history, and send messages across all your connected platforms.</p>
+<h3 id="when-to-use-this"><a class="header" href="#when-to-use-this">When to use this</a></h3>
+<ul>
+<li>You want Claude Code, Cursor, or another coding agent to send and read Telegram/Discord/Slack messages through Hermes</li>
+<li>You want a single MCP server that bridges to all of Hermes’s connected messaging platforms at once</li>
+<li>You already have a running Hermes gateway with connected platforms</li>
+</ul>
+<h3 id="quick-start-1"><a class="header" href="#quick-start-1">Quick start</a></h3>
+<pre><code class="language-bash">hermes mcp serve
+</code></pre>
+<p>This starts a stdio MCP server. The MCP client (not you) manages the process lifecycle.</p>
+<h3 id="mcp-client-configuration"><a class="header" href="#mcp-client-configuration">MCP client configuration</a></h3>
+<p>Add Hermes to your MCP client config. For example, in Claude Code’s <code>~/.claude/claude_desktop_config.json</code>:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "hermes": {
+      "command": "hermes",
+      "args": ["mcp", "serve"]
+    }
+  }
+}
+</code></pre>
+<p>Or if you installed Hermes in a specific location:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "hermes": {
+      "command": "/home/user/.hermes/hermes-agent/venv/bin/hermes",
+      "args": ["mcp", "serve"]
+    }
+  }
+}
+</code></pre>
+<h3 id="available-tools"><a class="header" href="#available-tools">Available tools</a></h3>
+<p>The MCP server exposes 10 tools, matching OpenClaw’s channel bridge surface plus a Hermes-specific channel browser:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tool</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>conversations_list</code></td><td>List active messaging conversations. Filter by platform or search by name.</td></tr>
+<tr><td><code>conversation_get</code></td><td>Get detailed info about one conversation by session key.</td></tr>
+<tr><td><code>messages_read</code></td><td>Read recent message history for a conversation.</td></tr>
+<tr><td><code>attachments_fetch</code></td><td>Extract non-text attachments (images, media) from a specific message.</td></tr>
+<tr><td><code>events_poll</code></td><td>Poll for new conversation events since a cursor position.</td></tr>
+<tr><td><code>events_wait</code></td><td>Long-poll / block until the next event arrives (near-real-time).</td></tr>
+<tr><td><code>messages_send</code></td><td>Send a message through a platform (e.g. <code>telegram:123456</code>, <code>discord:#general</code>).</td></tr>
+<tr><td><code>channels_list</code></td><td>List available messaging targets across all platforms.</td></tr>
+<tr><td><code>permissions_list_open</code></td><td>List pending approval requests observed during this bridge session.</td></tr>
+<tr><td><code>permissions_respond</code></td><td>Allow or deny a pending approval request.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="event-system"><a class="header" href="#event-system">Event system</a></h3>
+<p>The MCP server includes a live event bridge that polls Hermes’s session database for new messages. This gives MCP clients near-real-time awareness of incoming conversations:</p>
+<pre><code># Poll for new events (non-blocking)
+events_poll(after_cursor=0)
+
+# Wait for next event (blocks up to timeout)
+events_wait(after_cursor=42, timeout_ms=30000)
+</code></pre>
+<p>Event types: <code>message</code>, <code>approval_requested</code>, <code>approval_resolved</code></p>
+<p>The event queue is in-memory and starts when the bridge connects. Older messages are available through <code>messages_read</code>.</p>
+<h3 id="options"><a class="header" href="#options">Options</a></h3>
+<pre><code class="language-bash">hermes mcp serve              # Normal mode
+hermes mcp serve --verbose    # Debug logging on stderr
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h3>
+<p>The MCP server reads conversation data directly from Hermes’s session store (<code>~/.hermes/sessions/sessions.json</code> and the SQLite database). A background thread polls the database for new messages and maintains an in-memory event queue. For sending messages, it uses the same <code>send_message</code> infrastructure as the Hermes agent itself.</p>
+<p>The gateway does NOT need to be running for read operations (listing conversations, reading history, polling events). It DOES need to be running for send operations, since the platform adapters need active connections.</p>
+<h3 id="current-limits"><a class="header" href="#current-limits">Current limits</a></h3>
+<ul>
+<li>Stdio transport only (no HTTP MCP transport yet)</li>
+<li>Event polling at ~200ms intervals via mtime-optimized DB polling (skips work when files are unchanged)</li>
+<li>No <code>claude/channel</code> push notification protocol yet</li>
+<li>Text-only sends (no media/attachment sending through <code>messages_send</code>)</li>
+</ul>
+<h2 id="related-docs"><a class="header" href="#related-docs">Related docs</a></h2>
+<ul>
+<li><a href="/docs/guides/use-mcp-with-hermes">Use MCP with Hermes</a></li>
+<li><a href="/docs/reference/cli-commands">CLI Commands</a></li>
+<li><a href="/docs/reference/slash-commands">Slash Commands</a></li>
+<li><a href="/docs/reference/faq">FAQ</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/features/image-generation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/memory.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/features/image-generation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/memory.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

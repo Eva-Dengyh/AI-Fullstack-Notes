@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Creating Skills - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/developer-guide/creating-skills.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-3-title-creating-skills-description-how-to-create-skills-for-hermes-agent--skillmd-format-guidelines-and-publishing"><a class="header" href="#sidebar_position-3-title-creating-skills-description-how-to-create-skills-for-hermes-agent--skillmd-format-guidelines-and-publishing">sidebar_position: 3
+title: “Creating Skills”
+description: “How to create skills for Hermes Agent — SKILL.md format, guidelines, and publishing”</a></h2>
+<h1 id="creating-skills"><a class="header" href="#creating-skills">Creating Skills</a></h1>
+<p>Skills are the preferred way to add new capabilities to Hermes Agent. They’re easier to create than tools, require no code changes to the agent, and can be shared with the community.</p>
+<h2 id="should-it-be-a-skill-or-a-tool"><a class="header" href="#should-it-be-a-skill-or-a-tool">Should it be a Skill or a Tool?</a></h2>
+<p>Make it a <strong>Skill</strong> when:</p>
+<ul>
+<li>The capability can be expressed as instructions + shell commands + existing tools</li>
+<li>It wraps an external CLI or API that the agent can call via <code>terminal</code> or <code>web_extract</code></li>
+<li>It doesn’t need custom Python integration or API key management baked into the agent</li>
+<li>Examples: arXiv search, git workflows, Docker management, PDF processing, email via CLI tools</li>
+</ul>
+<p>Make it a <strong>Tool</strong> when:</p>
+<ul>
+<li>It requires end-to-end integration with API keys, auth flows, or multi-component configuration</li>
+<li>It needs custom processing logic that must execute precisely every time</li>
+<li>It handles binary data, streaming, or real-time events</li>
+<li>Examples: browser automation, TTS, vision analysis</li>
+</ul>
+<h2 id="skill-directory-structure"><a class="header" href="#skill-directory-structure">Skill Directory Structure</a></h2>
+<p>Bundled skills live in <code>skills/</code> organized by category. Official optional skills use the same structure in <code>optional-skills/</code>:</p>
+<pre><code class="language-text">skills/
+├── research/
+│   └── arxiv/
+│       ├── SKILL.md              # Required: main instructions
+│       └── scripts/              # Optional: helper scripts
+│           └── search_arxiv.py
+├── productivity/
+│   └── ocr-and-documents/
+│       ├── SKILL.md
+│       ├── scripts/
+│       └── references/
+└── ...
+</code></pre>
+<h2 id="skillmd-format"><a class="header" href="#skillmd-format">SKILL.md Format</a></h2>
+<pre><code class="language-markdown">---
+name: my-skill
+description: Brief description (shown in skill search results)
+version: 1.0.0
+author: Your Name
+license: MIT
+platforms: [macos, linux]          # Optional — restrict to specific OS platforms
+                                   #   Valid: macos, linux, windows
+                                   #   Omit to load on all platforms (default)
+metadata:
+  hermes:
+    tags: [Category, Subcategory, Keywords]
+    related_skills: [other-skill-name]
+    requires_toolsets: [web]            # Optional — only show when these toolsets are active
+    requires_tools: [web_search]        # Optional — only show when these tools are available
+    fallback_for_toolsets: [browser]    # Optional — hide when these toolsets are active
+    fallback_for_tools: [browser_navigate]  # Optional — hide when these tools exist
+    config:                              # Optional — config.yaml settings the skill needs
+      - key: my.setting
+        description: "What this setting controls"
+        default: "sensible-default"
+        prompt: "Display prompt for setup"
+required_environment_variables:          # Optional — env vars the skill needs
+  - name: MY_API_KEY
+    prompt: "Enter your API key"
+    help: "Get one at https://example.com"
+    required_for: "API access"
+---
+
+# Skill Title
+
+Brief intro.
+
+## When to Use
+Trigger conditions — when should the agent load this skill?
+
+## Quick Reference
+Table of common commands or API calls.
+
+## Procedure
+Step-by-step instructions the agent follows.
+
+## Pitfalls
+Known failure modes and how to handle them.
+
+## Verification
+How the agent confirms it worked.
+</code></pre>
+<h3 id="platform-specific-skills"><a class="header" href="#platform-specific-skills">Platform-Specific Skills</a></h3>
+<p>Skills can restrict themselves to specific operating systems using the <code>platforms</code> field:</p>
+<pre><code class="language-yaml">platforms: [macos]            # macOS only (e.g., iMessage, Apple Reminders)
+platforms: [macos, linux]     # macOS and Linux
+platforms: [windows]          # Windows only
+</code></pre>
+<p>When set, the skill is automatically hidden from the system prompt, <code>skills_list()</code>, and slash commands on incompatible platforms. If omitted or empty, the skill loads on all platforms (backward compatible).</p>
+<h3 id="conditional-skill-activation"><a class="header" href="#conditional-skill-activation">Conditional Skill Activation</a></h3>
+<p>Skills can declare dependencies on specific tools or toolsets. This controls whether the skill appears in the system prompt for a given session.</p>
+<pre><code class="language-yaml">metadata:
+  hermes:
+    requires_toolsets: [web]           # Hide if the web toolset is NOT active
+    requires_tools: [web_search]       # Hide if web_search tool is NOT available
+    fallback_for_toolsets: [browser]   # Hide if the browser toolset IS active
+    fallback_for_tools: [browser_navigate]  # Hide if browser_navigate IS available
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>requires_toolsets</code></td><td>Skill is <strong>hidden</strong> when ANY listed toolset is <strong>not</strong> available</td></tr>
+<tr><td><code>requires_tools</code></td><td>Skill is <strong>hidden</strong> when ANY listed tool is <strong>not</strong> available</td></tr>
+<tr><td><code>fallback_for_toolsets</code></td><td>Skill is <strong>hidden</strong> when ANY listed toolset <strong>is</strong> available</td></tr>
+<tr><td><code>fallback_for_tools</code></td><td>Skill is <strong>hidden</strong> when ANY listed tool <strong>is</strong> available</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Use case for <code>fallback_for_*</code>:</strong> Create a skill that serves as a workaround when a primary tool isn’t available. For example, a <code>duckduckgo-search</code> skill with <code>fallback_for_tools: [web_search]</code> only shows when the web search tool (which requires an API key) is not configured.</p>
+<p><strong>Use case for <code>requires_*</code>:</strong> Create a skill that only makes sense when certain tools are present. For example, a web scraping workflow skill with <code>requires_toolsets: [web]</code> won’t clutter the prompt when web tools are disabled.</p>
+<h3 id="environment-variable-requirements"><a class="header" href="#environment-variable-requirements">Environment Variable Requirements</a></h3>
+<p>Skills can declare environment variables they need. When a skill is loaded via <code>skill_view</code>, its required vars are automatically registered for passthrough into sandboxed execution environments (terminal, execute_code).</p>
+<pre><code class="language-yaml">required_environment_variables:
+  - name: TENOR_API_KEY
+    prompt: "Tenor API key"               # Shown when prompting user
+    help: "Get your key at https://tenor.com"  # Help text or URL
+    required_for: "GIF search functionality"   # What needs this var
+</code></pre>
+<p>Each entry supports:</p>
+<ul>
+<li><code>name</code> (required) — the environment variable name</li>
+<li><code>prompt</code> (optional) — prompt text when asking the user for the value</li>
+<li><code>help</code> (optional) — help text or URL for obtaining the value</li>
+<li><code>required_for</code> (optional) — describes which feature needs this variable</li>
+</ul>
+<p>Users can also manually configure passthrough variables in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  env_passthrough:
+    - MY_CUSTOM_VAR
+    - ANOTHER_VAR
+</code></pre>
+<p>See <code>skills/apple/</code> for examples of macOS-only skills.</p>
+<h2 id="secure-setup-on-load"><a class="header" href="#secure-setup-on-load">Secure Setup on Load</a></h2>
+<p>Use <code>required_environment_variables</code> when a skill needs an API key or token. Missing values do <strong>not</strong> hide the skill from discovery. Instead, Hermes prompts for them securely when the skill is loaded in the local CLI.</p>
+<pre><code class="language-yaml">required_environment_variables:
+  - name: TENOR_API_KEY
+    prompt: Tenor API key
+    help: Get a key from https://developers.google.com/tenor
+    required_for: full functionality
+</code></pre>
+<dl>
+<dt id="the-user-can-skip-setup-and-keep-loading-the-skill-hermes-never-exposes-the-raw-secret-value-to-the-model-gateway-and-messaging-sessions-show-local-setup-guidance-instead-of-collecting-secrets-in-band"><a class="header" href="#the-user-can-skip-setup-and-keep-loading-the-skill-hermes-never-exposes-the-raw-secret-value-to-the-model-gateway-and-messaging-sessions-show-local-setup-guidance-instead-of-collecting-secrets-in-band">The user can skip setup and keep loading the skill. Hermes never exposes the raw secret value to the model. Gateway and messaging sessions show local setup guidance instead of collecting secrets in-band.</a></dt>
+<dd>
+<p>::tip Sandbox Passthrough
+When your skill is loaded, any declared <code>required_environment_variables</code> that are set are <strong>automatically passed through</strong> to <code>execute_code</code> and <code>terminal</code> sandboxes — including remote backends like Docker and Modal. Your skill’s scripts can access <code>$TENOR_API_KEY</code> (or <code>os.environ["TENOR_API_KEY"]</code> in Python) without the user needing to configure anything extra. See <a href="/docs/user-guide/security#environment-variable-passthrough">Environment Variable Passthrough</a> for details.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<p>Legacy <code>prerequisites.env_vars</code> remains supported as a backward-compatible alias.</p>
+<h3 id="config-settings-configyaml"><a class="header" href="#config-settings-configyaml">Config Settings (config.yaml)</a></h3>
+<p>Skills can declare non-secret settings that are stored in <code>config.yaml</code> under the <code>skills.config</code> namespace. Unlike environment variables (which are secrets stored in <code>.env</code>), config settings are for paths, preferences, and other non-sensitive values.</p>
+<pre><code class="language-yaml">metadata:
+  hermes:
+    config:
+      - key: wiki.path
+        description: Path to the LLM Wiki knowledge base directory
+        default: "~/wiki"
+        prompt: Wiki directory path
+      - key: wiki.domain
+        description: Domain the wiki covers
+        default: ""
+        prompt: Wiki domain (e.g., AI/ML research)
+</code></pre>
+<p>Each entry supports:</p>
+<ul>
+<li><code>key</code> (required) — dotpath for the setting (e.g., <code>wiki.path</code>)</li>
+<li><code>description</code> (required) — explains what the setting controls</li>
+<li><code>default</code> (optional) — default value if the user doesn’t configure it</li>
+<li><code>prompt</code> (optional) — prompt text shown during <code>hermes config migrate</code>; falls back to <code>description</code></li>
+</ul>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>
+<p><strong>Storage:</strong> Values are written to <code>config.yaml</code> under <code>skills.config.&lt;key&gt;</code>:</p>
+<pre><code class="language-yaml">skills:
+  config:
+    wiki:
+      path: ~/my-research
+</code></pre>
+</li>
+<li>
+<p><strong>Discovery:</strong> <code>hermes config migrate</code> scans all enabled skills, finds unconfigured settings, and prompts the user. Settings also appear in <code>hermes config show</code> under “Skill Settings.”</p>
+</li>
+<li>
+<p><strong>Runtime injection:</strong> When a skill loads, its config values are resolved and appended to the skill message:</p>
+<pre><code>[Skill config (from ~/.hermes/config.yaml):
+  wiki.path = /home/user/my-research
+]
+</code></pre>
+<p>The agent sees the configured values without needing to read <code>config.yaml</code> itself.</p>
+</li>
+<li>
+<p><strong>Manual setup:</strong> Users can also set values directly:</p>
+<pre><code class="language-bash">hermes config set skills.config.wiki.path ~/my-wiki
+</code></pre>
+</li>
+</ol>
+<dl>
+<dt id="tip-when-to-use-which-use-required_environment_variables-for-api-keys-tokens-and-other-secrets-stored-in-hermesenv-never-shown-to-the-model-use-config-for-paths-preferences-and-non-sensitive-settings-stored-in-configyaml-visible-in-config-show"><a class="header" href="#tip-when-to-use-which-use-required_environment_variables-for-api-keys-tokens-and-other-secrets-stored-in-hermesenv-never-shown-to-the-model-use-config-for-paths-preferences-and-non-sensitive-settings-stored-in-configyaml-visible-in-config-show">:::tip When to use which
+Use <code>required_environment_variables</code> for API keys, tokens, and other <strong>secrets</strong> (stored in <code>~/.hermes/.env</code>, never shown to the model). Use <code>config</code> for <strong>paths, preferences, and non-sensitive settings</strong> (stored in <code>config.yaml</code>, visible in config show).</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="credential-file-requirements-oauth-tokens-etc"><a class="header" href="#credential-file-requirements-oauth-tokens-etc">Credential File Requirements (OAuth tokens, etc.)</a></h3>
+<p>Skills that use OAuth or file-based credentials can declare files that need to be mounted into remote sandboxes. This is for credentials stored as <strong>files</strong> (not env vars) — typically OAuth token files produced by a setup script.</p>
+<pre><code class="language-yaml">required_credential_files:
+  - path: google_token.json
+    description: Google OAuth2 token (created by setup script)
+  - path: google_client_secret.json
+    description: Google OAuth2 client credentials
+</code></pre>
+<p>Each entry supports:</p>
+<ul>
+<li><code>path</code> (required) — file path relative to <code>~/.hermes/</code></li>
+<li><code>description</code> (optional) — explains what the file is and how it’s created</li>
+</ul>
+<p>When loaded, Hermes checks if these files exist. Missing files trigger <code>setup_needed</code>. Existing files are automatically:</p>
+<ul>
+<li><strong>Mounted into Docker</strong> containers as read-only bind mounts</li>
+<li><strong>Synced into Modal</strong> sandboxes (at creation + before each command, so mid-session OAuth works)</li>
+<li>Available on <strong>local</strong> backend without any special handling</li>
+</ul>
+<dl>
+<dt id="tip-when-to-use-which-use-required_environment_variables-for-simple-api-keys-and-tokens-strings-stored-in-hermesenv-use-required_credential_files-for-oauth-token-files-client-secrets-service-account-json-certificates-or-any-credential-thats-a-file-on-disk"><a class="header" href="#tip-when-to-use-which-use-required_environment_variables-for-simple-api-keys-and-tokens-strings-stored-in-hermesenv-use-required_credential_files-for-oauth-token-files-client-secrets-service-account-json-certificates-or-any-credential-thats-a-file-on-disk">:::tip When to use which
+Use <code>required_environment_variables</code> for simple API keys and tokens (strings stored in <code>~/.hermes/.env</code>). Use <code>required_credential_files</code> for OAuth token files, client secrets, service account JSON, certificates, or any credential that’s a file on disk.</a></dt>
+<dd>::</dd>
+</dl>
+<p>See the <code>skills/productivity/google-workspace/SKILL.md</code> for a complete example using both.</p>
+<h2 id="skill-guidelines"><a class="header" href="#skill-guidelines">Skill Guidelines</a></h2>
+<h3 id="no-external-dependencies"><a class="header" href="#no-external-dependencies">No External Dependencies</a></h3>
+<p>Prefer stdlib Python, curl, and existing Hermes tools (<code>web_extract</code>, <code>terminal</code>, <code>read_file</code>). If a dependency is needed, document installation steps in the skill.</p>
+<h3 id="progressive-disclosure"><a class="header" href="#progressive-disclosure">Progressive Disclosure</a></h3>
+<p>Put the most common workflow first. Edge cases and advanced usage go at the bottom. This keeps token usage low for common tasks.</p>
+<h3 id="include-helper-scripts"><a class="header" href="#include-helper-scripts">Include Helper Scripts</a></h3>
+<p>For XML/JSON parsing or complex logic, include helper scripts in <code>scripts/</code> — don’t expect the LLM to write parsers inline every time.</p>
+<h3 id="test-it"><a class="header" href="#test-it">Test It</a></h3>
+<p>Run the skill and verify the agent follows the instructions correctly:</p>
+<pre><code class="language-bash">hermes chat --toolsets skills -q "Use the X skill to do Y"
+</code></pre>
+<h2 id="where-should-the-skill-live"><a class="header" href="#where-should-the-skill-live">Where Should the Skill Live?</a></h2>
+<p>Bundled skills (in <code>skills/</code>) ship with every Hermes install. They should be <strong>broadly useful to most users</strong>:</p>
+<ul>
+<li>Document handling, web research, common dev workflows, system administration</li>
+<li>Used regularly by a wide range of people</li>
+</ul>
+<p>If your skill is official and useful but not universally needed (e.g., a paid service integration, a heavyweight dependency), put it in <strong><code>optional-skills/</code></strong> — it ships with the repo, is discoverable via <code>hermes skills browse</code> (labeled “official”), and installs with builtin trust.</p>
+<p>If your skill is specialized, community-contributed, or niche, it’s better suited for a <strong>Skills Hub</strong> — upload it to a registry and share it via <code>hermes skills install</code>.</p>
+<h2 id="publishing-skills"><a class="header" href="#publishing-skills">Publishing Skills</a></h2>
+<h3 id="to-the-skills-hub"><a class="header" href="#to-the-skills-hub">To the Skills Hub</a></h3>
+<pre><code class="language-bash">hermes skills publish skills/my-skill --to github --repo owner/repo
+</code></pre>
+<h3 id="to-a-custom-repository"><a class="header" href="#to-a-custom-repository">To a Custom Repository</a></h3>
+<p>Add your repo as a tap:</p>
+<pre><code class="language-bash">hermes skills tap add owner/repo
+</code></pre>
+<p>Users can then search and install from your repository.</p>
+<h2 id="security-scanning"><a class="header" href="#security-scanning">Security Scanning</a></h2>
+<p>All hub-installed skills go through a security scanner that checks for:</p>
+<ul>
+<li>Data exfiltration patterns</li>
+<li>Prompt injection attempts</li>
+<li>Destructive commands</li>
+<li>Shell injection</li>
+</ul>
+<p>Trust levels:</p>
+<ul>
+<li><code>builtin</code> — ships with Hermes (always trusted)</li>
+<li><code>official</code> — from <code>optional-skills/</code> in the repo (builtin trust, no third-party warning)</li>
+<li><code>trusted</code> — from openai/skills, anthropics/skills</li>
+<li><code>community</code> — non-dangerous findings can be overridden with <code>--force</code>; <code>dangerous</code> verdicts remain blocked</li>
+</ul>
+<p>Hermes can now consume third-party skills from multiple external discovery models:</p>
+<ul>
+<li>direct GitHub identifiers (for example <code>openai/skills/k8s</code>)</li>
+<li><code>skills.sh</code> identifiers (for example <code>skills-sh/vercel-labs/json-render/json-render-react</code>)</li>
+<li>well-known endpoints served from <code>/.well-known/skills/index.json</code></li>
+</ul>
+<p>If you want your skills to be discoverable without a GitHub-specific installer, consider serving them from a well-known endpoint in addition to publishing them in a repo or marketplace.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/developer-guide/contributing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/developer-guide/cron-internals.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/developer-guide/contributing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/developer-guide/cron-internals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

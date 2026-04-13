@@ -1,0 +1,684 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Discord - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/messaging/discord.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-3-title-discord-description-set-up-hermes-agent-as-a-discord-bot"><a class="header" href="#sidebar_position-3-title-discord-description-set-up-hermes-agent-as-a-discord-bot">sidebar_position: 3
+title: “Discord”
+description: “Set up Hermes Agent as a Discord bot”</a></h2>
+<h1 id="discord-setup"><a class="header" href="#discord-setup">Discord Setup</a></h1>
+<p>Hermes Agent integrates with Discord as a bot, letting you chat with your AI assistant through direct messages or server channels. The bot receives your messages, processes them through the Hermes Agent pipeline (including tool use, memory, and reasoning), and responds in real time. It supports text, voice messages, file attachments, and slash commands.</p>
+<p>Before setup, here’s the part most people want to know: how Hermes behaves once it’s in your server.</p>
+<h2 id="how-hermes-behaves"><a class="header" href="#how-hermes-behaves">How Hermes Behaves</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Context</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>DMs</strong></td><td>Hermes responds to every message. No <code>@mention</code> needed. Each DM has its own session.</td></tr>
+<tr><td><strong>Server channels</strong></td><td>By default, Hermes only responds when you <code>@mention</code> it. If you post in a channel without mentioning it, Hermes ignores the message.</td></tr>
+<tr><td><strong>Free-response channels</strong></td><td>You can make specific channels mention-free with <code>DISCORD_FREE_RESPONSE_CHANNELS</code>, or disable mentions globally with <code>DISCORD_REQUIRE_MENTION=false</code>.</td></tr>
+<tr><td><strong>Threads</strong></td><td>Hermes replies in the same thread. Mention rules still apply unless that thread or its parent channel is configured as free-response. Threads stay isolated from the parent channel for session history.</td></tr>
+<tr><td><strong>Shared channels with multiple users</strong></td><td>By default, Hermes isolates session history per user inside the channel for safety and clarity. Two people talking in the same channel do not share one transcript unless you explicitly disable that.</td></tr>
+<tr><td><strong>Messages mentioning other users</strong></td><td>When <code>DISCORD_IGNORE_NO_MENTION</code> is <code>true</code> (the default), Hermes stays silent if a message @mentions other users but does <strong>not</strong> mention the bot. This prevents the bot from jumping into conversations directed at other people. Set to <code>false</code> if you want the bot to respond to all messages regardless of who is mentioned. This only applies in server channels, not DMs.</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-if-you-want-a-normal-bot-help-channel-where-people-can-talk-to-hermes-without-tagging-it-every-time-add-that-channel-to-discord_free_response_channels"><a class="header" href="#tip-if-you-want-a-normal-bot-help-channel-where-people-can-talk-to-hermes-without-tagging-it-every-time-add-that-channel-to-discord_free_response_channels">:::tip
+If you want a normal bot-help channel where people can talk to Hermes without tagging it every time, add that channel to <code>DISCORD_FREE_RESPONSE_CHANNELS</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="discord-gateway-model"><a class="header" href="#discord-gateway-model">Discord Gateway Model</a></h3>
+<p>Hermes on Discord is not a webhook that replies statelessly. It runs through the full messaging gateway, which means each incoming message goes through:</p>
+<ol>
+<li>authorization (<code>DISCORD_ALLOWED_USERS</code>)</li>
+<li>mention / free-response checks</li>
+<li>session lookup</li>
+<li>session transcript loading</li>
+<li>normal Hermes agent execution, including tools, memory, and slash commands</li>
+<li>response delivery back to Discord</li>
+</ol>
+<p>That matters because behavior in a busy server depends on both Discord routing and Hermes session policy.</p>
+<h3 id="session-model-in-discord"><a class="header" href="#session-model-in-discord">Session Model in Discord</a></h3>
+<p>By default:</p>
+<ul>
+<li>each DM gets its own session</li>
+<li>each server thread gets its own session namespace</li>
+<li>each user in a shared channel gets their own session inside that channel</li>
+</ul>
+<p>So if Alice and Bob both talk to Hermes in <code>#research</code>, Hermes treats those as separate conversations by default even though they are using the same visible Discord channel.</p>
+<p>This is controlled by <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">group_sessions_per_user: true
+</code></pre>
+<p>Set it to <code>false</code> only if you explicitly want one shared conversation for the entire room:</p>
+<pre><code class="language-yaml">group_sessions_per_user: false
+</code></pre>
+<p>Shared sessions can be useful for a collaborative room, but they also mean:</p>
+<ul>
+<li>users share context growth and token costs</li>
+<li>one person’s long tool-heavy task can bloat everyone else’s context</li>
+<li>one person’s in-flight run can interrupt another person’s follow-up in the same room</li>
+</ul>
+<h3 id="interrupts-and-concurrency"><a class="header" href="#interrupts-and-concurrency">Interrupts and Concurrency</a></h3>
+<p>Hermes tracks running agents by session key.</p>
+<p>With the default <code>group_sessions_per_user: true</code>:</p>
+<ul>
+<li>Alice interrupting her own in-flight request only affects Alice’s session in that channel</li>
+<li>Bob can keep talking in the same channel without inheriting Alice’s history or interrupting Alice’s run</li>
+</ul>
+<p>With <code>group_sessions_per_user: false</code>:</p>
+<ul>
+<li>the whole room shares one running-agent slot for that channel/thread</li>
+<li>follow-up messages from different people can interrupt or queue behind each other</li>
+</ul>
+<p>This guide walks you through the full setup process — from creating your bot on Discord’s Developer Portal to sending your first message.</p>
+<h2 id="step-1-create-a-discord-application"><a class="header" href="#step-1-create-a-discord-application">Step 1: Create a Discord Application</a></h2>
+<ol>
+<li>Go to the <a href="https://discord.com/developers/applications">Discord Developer Portal</a> and sign in with your Discord account.</li>
+<li>Click <strong>New Application</strong> in the top-right corner.</li>
+<li>Enter a name for your application (e.g., “Hermes Agent”) and accept the Developer Terms of Service.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+<p>You’ll land on the <strong>General Information</strong> page. Note the <strong>Application ID</strong> — you’ll need it later to build the invite URL.</p>
+<h2 id="step-2-create-the-bot"><a class="header" href="#step-2-create-the-bot">Step 2: Create the Bot</a></h2>
+<ol>
+<li>In the left sidebar, click <strong>Bot</strong>.</li>
+<li>Discord automatically creates a bot user for your application. You’ll see the bot’s username, which you can customize.</li>
+<li>Under <strong>Authorization Flow</strong>:
+<ul>
+<li>Set <strong>Public Bot</strong> to <strong>ON</strong> — required to use the Discord-provided invite link (recommended). This allows the Installation tab to generate a default authorization URL.</li>
+<li>Leave <strong>Require OAuth2 Code Grant</strong> set to <strong>OFF</strong>.</li>
+</ul>
+</li>
+</ol>
+<dl>
+<dt id="tip-you-can-set-a-custom-avatar-and-banner-for-your-bot-on-this-page-this-is-what-users-will-see-in-discord"><a class="header" href="#tip-you-can-set-a-custom-avatar-and-banner-for-your-bot-on-this-page-this-is-what-users-will-see-in-discord">:::tip
+You can set a custom avatar and banner for your bot on this page. This is what users will see in Discord.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::info[Private Bot Alternative]
+If you prefer to keep your bot private (Public Bot = OFF), you <strong>must</strong> use the <strong>Manual URL</strong> method in Step 5 instead of the Installation tab. The Discord-provided link requires Public Bot to be enabled.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="step-3-enable-privileged-gateway-intents"><a class="header" href="#step-3-enable-privileged-gateway-intents">Step 3: Enable Privileged Gateway Intents</a></h2>
+<p>This is the most critical step in the entire setup. Without the correct intents enabled, your bot will connect to Discord but <strong>will not be able to read message content</strong>.</p>
+<p>On the <strong>Bot</strong> page, scroll down to <strong>Privileged Gateway Intents</strong>. You’ll see three toggles:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Intent</th><th>Purpose</th><th>Required?</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Presence Intent</strong></td><td>See user online/offline status</td><td>Optional</td></tr>
+<tr><td><strong>Server Members Intent</strong></td><td>Access the member list, resolve usernames</td><td><strong>Required</strong></td></tr>
+<tr><td><strong>Message Content Intent</strong></td><td>Read the text content of messages</td><td><strong>Required</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Enable both Server Members Intent and Message Content Intent</strong> by toggling them <strong>ON</strong>.</p>
+<ul>
+<li>Without <strong>Message Content Intent</strong>, your bot receives message events but the message text is empty — the bot literally cannot see what you typed.</li>
+<li>Without <strong>Server Members Intent</strong>, the bot cannot resolve usernames for the allowed users list and may fail to identify who is messaging it.</li>
+</ul>
+<dl>
+<dt id="warningthis-is-the-1-reason-discord-bots-dont-work-if-your-bot-is-online-but-never-responds-to-messages-the-message-content-intent-is-almost-certainly-disabled-go-back-to-the-developer-portal-select-your-application--bot--privileged-gateway-intents-and-make-sure-message-content-intent-is-toggled-on-click-save-changes"><a class="header" href="#warningthis-is-the-1-reason-discord-bots-dont-work-if-your-bot-is-online-but-never-responds-to-messages-the-message-content-intent-is-almost-certainly-disabled-go-back-to-the-developer-portal-select-your-application--bot--privileged-gateway-intents-and-make-sure-message-content-intent-is-toggled-on-click-save-changes">:::warning[This is the #1 reason Discord bots don’t work]
+If your bot is online but never responds to messages, the <strong>Message Content Intent</strong> is almost certainly disabled. Go back to the <a href="https://discord.com/developers/applications">Developer Portal</a>, select your application → Bot → Privileged Gateway Intents, and make sure <strong>Message Content Intent</strong> is toggled ON. Click <strong>Save Changes</strong>.</a></dt>
+<dd>::</dd>
+</dl>
+<p><strong>Regarding server count:</strong></p>
+<ul>
+<li>If your bot is in <strong>fewer than 100 servers</strong>, you can simply toggle intents on and off freely.</li>
+<li>If your bot is in <strong>100 or more servers</strong>, Discord requires you to submit a verification application to use privileged intents. For personal use, this is not a concern.</li>
+</ul>
+<p>Click <strong>Save Changes</strong> at the bottom of the page.</p>
+<h2 id="step-4-get-the-bot-token"><a class="header" href="#step-4-get-the-bot-token">Step 4: Get the Bot Token</a></h2>
+<p>The bot token is the credential Hermes Agent uses to log in as your bot. Still on the <strong>Bot</strong> page:</p>
+<ol>
+<li>Under the <strong>Token</strong> section, click <strong>Reset Token</strong>.</li>
+<li>If you have two-factor authentication enabled on your Discord account, enter your 2FA code.</li>
+<li>Discord will display your new token. <strong>Copy it immediately.</strong></li>
+</ol>
+<dl>
+<dt id="warningtoken-shown-only-once-the-token-is-only-displayed-once-if-you-lose-it-youll-need-to-reset-it-and-generate-a-new-one-never-share-your-token-publicly-or-commit-it-to-git--anyone-with-this-token-has-full-control-of-your-bot"><a class="header" href="#warningtoken-shown-only-once-the-token-is-only-displayed-once-if-you-lose-it-youll-need-to-reset-it-and-generate-a-new-one-never-share-your-token-publicly-or-commit-it-to-git--anyone-with-this-token-has-full-control-of-your-bot">:::warning[Token shown only once]
+The token is only displayed once. If you lose it, you’ll need to reset it and generate a new one. Never share your token publicly or commit it to Git — anyone with this token has full control of your bot.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Store the token somewhere safe (a password manager, for example). You’ll need it in Step 8.</p>
+<h2 id="step-5-generate-the-invite-url"><a class="header" href="#step-5-generate-the-invite-url">Step 5: Generate the Invite URL</a></h2>
+<p>You need an OAuth2 URL to invite the bot to your server. There are two ways to do this:</p>
+<h3 id="option-a-using-the-installation-tab-recommended"><a class="header" href="#option-a-using-the-installation-tab-recommended">Option A: Using the Installation Tab (Recommended)</a></h3>
+<dl>
+<dt id="noterequires-public-bot-this-method-requires-public-bot-to-be-set-to-on-in-step-2-if-you-set-public-bot-to-off-use-the-manual-url-method-below-instead"><a class="header" href="#noterequires-public-bot-this-method-requires-public-bot-to-be-set-to-on-in-step-2-if-you-set-public-bot-to-off-use-the-manual-url-method-below-instead">:::note[Requires Public Bot]
+This method requires <strong>Public Bot</strong> to be set to <strong>ON</strong> in Step 2. If you set Public Bot to OFF, use the Manual URL method below instead.</a></dt>
+<dd>::</dd>
+</dl>
+<ol>
+<li>In the left sidebar, click <strong>Installation</strong>.</li>
+<li>Under <strong>Installation Contexts</strong>, enable <strong>Guild Install</strong>.</li>
+<li>For <strong>Install Link</strong>, select <strong>Discord Provided Link</strong>.</li>
+<li>Under <strong>Default Install Settings</strong> for Guild Install:
+<ul>
+<li><strong>Scopes</strong>: select <code>bot</code> and <code>applications.commands</code></li>
+<li><strong>Permissions</strong>: select the permissions listed below.</li>
+</ul>
+</li>
+</ol>
+<h3 id="option-b-manual-url"><a class="header" href="#option-b-manual-url">Option B: Manual URL</a></h3>
+<p>You can construct the invite URL directly using this format:</p>
+<pre><code>https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&amp;scope=bot+applications.commands&amp;permissions=274878286912
+</code></pre>
+<p>Replace <code>YOUR_APP_ID</code> with the Application ID from Step 1.</p>
+<h3 id="required-permissions"><a class="header" href="#required-permissions">Required Permissions</a></h3>
+<p>These are the minimum permissions your bot needs:</p>
+<ul>
+<li><strong>View Channels</strong> — see the channels it has access to</li>
+<li><strong>Send Messages</strong> — respond to your messages</li>
+<li><strong>Embed Links</strong> — format rich responses</li>
+<li><strong>Attach Files</strong> — send images, audio, and file outputs</li>
+<li><strong>Read Message History</strong> — maintain conversation context</li>
+</ul>
+<h3 id="recommended-additional-permissions"><a class="header" href="#recommended-additional-permissions">Recommended Additional Permissions</a></h3>
+<ul>
+<li><strong>Send Messages in Threads</strong> — respond in thread conversations</li>
+<li><strong>Add Reactions</strong> — react to messages for acknowledgment</li>
+</ul>
+<h3 id="permission-integers"><a class="header" href="#permission-integers">Permission Integers</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Level</th><th>Permissions Integer</th><th>What’s Included</th></tr>
+</thead>
+<tbody>
+<tr><td>Minimal</td><td><code>117760</code></td><td>View Channels, Send Messages, Read Message History, Attach Files</td></tr>
+<tr><td>Recommended</td><td><code>274878286912</code></td><td>All of the above plus Embed Links, Send Messages in Threads, Add Reactions</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="step-6-invite-to-your-server"><a class="header" href="#step-6-invite-to-your-server">Step 6: Invite to Your Server</a></h2>
+<ol>
+<li>Open the invite URL in your browser (from the Installation tab or the manual URL you constructed).</li>
+<li>In the <strong>Add to Server</strong> dropdown, select your server.</li>
+<li>Click <strong>Continue</strong>, then <strong>Authorize</strong>.</li>
+<li>Complete the CAPTCHA if prompted.</li>
+</ol>
+<dl>
+<dt id="info-you-need-the-manage-server-permission-on-the-discord-server-to-invite-a-bot-if-you-dont-see-your-server-in-the-dropdown-ask-a-server-admin-to-use-the-invite-link-instead"><a class="header" href="#info-you-need-the-manage-server-permission-on-the-discord-server-to-invite-a-bot-if-you-dont-see-your-server-in-the-dropdown-ask-a-server-admin-to-use-the-invite-link-instead">:::info
+You need the <strong>Manage Server</strong> permission on the Discord server to invite a bot. If you don’t see your server in the dropdown, ask a server admin to use the invite link instead.</a></dt>
+<dd>::</dd>
+</dl>
+<p>After authorizing, the bot will appear in your server’s member list (it will show as offline until you start the Hermes gateway).</p>
+<h2 id="step-7-find-your-discord-user-id"><a class="header" href="#step-7-find-your-discord-user-id">Step 7: Find Your Discord User ID</a></h2>
+<p>Hermes Agent uses your Discord User ID to control who can interact with the bot. To find it:</p>
+<ol>
+<li>Open Discord (desktop or web app).</li>
+<li>Go to <strong>Settings</strong> → <strong>Advanced</strong> → toggle <strong>Developer Mode</strong> to <strong>ON</strong>.</li>
+<li>Close settings.</li>
+<li>Right-click your own username (in a message, the member list, or your profile) → <strong>Copy User ID</strong>.</li>
+</ol>
+<dl>
+<dt id="your-user-id-is-a-long-number-like-284102345871466496"><a class="header" href="#your-user-id-is-a-long-number-like-284102345871466496">Your User ID is a long number like <code>284102345871466496</code>.</a></dt>
+<dd>
+<p>::tip
+Developer Mode also lets you copy <strong>Channel IDs</strong> and <strong>Server IDs</strong> the same way — right-click the channel or server name and select Copy ID. You’ll need a Channel ID if you want to set a home channel manually.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="step-8-configure-hermes-agent"><a class="header" href="#step-8-configure-hermes-agent">Step 8: Configure Hermes Agent</a></h2>
+<h3 id="option-a-interactive-setup-recommended"><a class="header" href="#option-a-interactive-setup-recommended">Option A: Interactive Setup (Recommended)</a></h3>
+<p>Run the guided setup command:</p>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>Select <strong>Discord</strong> when prompted, then paste your bot token and user ID when asked.</p>
+<h3 id="option-b-manual-configuration"><a class="header" href="#option-b-manual-configuration">Option B: Manual Configuration</a></h3>
+<p>Add the following to your <code>~/.hermes/.env</code> file:</p>
+<pre><code class="language-bash"># Required
+DISCORD_BOT_TOKEN=your-bot-token
+DISCORD_ALLOWED_USERS=284102345871466496
+
+# Multiple allowed users (comma-separated)
+# DISCORD_ALLOWED_USERS=284102345871466496,198765432109876543
+</code></pre>
+<p>Then start the gateway:</p>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<dl>
+<dt id="the-bot-should-come-online-in-discord-within-a-few-seconds-send-it-a-message--either-a-dm-or-in-a-channel-it-can-see--to-test"><a class="header" href="#the-bot-should-come-online-in-discord-within-a-few-seconds-send-it-a-message--either-a-dm-or-in-a-channel-it-can-see--to-test">The bot should come online in Discord within a few seconds. Send it a message — either a DM or in a channel it can see — to test.</a></dt>
+<dd>
+<p>::tip
+You can run <code>hermes gateway</code> in the background or as a systemd service for persistent operation. See the deployment docs for details.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="configuration-reference"><a class="header" href="#configuration-reference">Configuration Reference</a></h2>
+<p>Discord behavior is controlled through two files: <strong><code>~/.hermes/.env</code></strong> for credentials and env-level toggles, and <strong><code>~/.hermes/config.yaml</code></strong> for structured settings. Environment variables always take precedence over config.yaml values when both are set.</p>
+<h3 id="environment-variables-env"><a class="header" href="#environment-variables-env">Environment Variables (<code>.env</code>)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Required</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DISCORD_BOT_TOKEN</code></td><td><strong>Yes</strong></td><td>—</td><td>Bot token from the <a href="https://discord.com/developers/applications">Discord Developer Portal</a>.</td></tr>
+<tr><td><code>DISCORD_ALLOWED_USERS</code></td><td><strong>Yes</strong></td><td>—</td><td>Comma-separated Discord user IDs allowed to interact with the bot. Without this, the gateway denies all users.</td></tr>
+<tr><td><code>DISCORD_HOME_CHANNEL</code></td><td>No</td><td>—</td><td>Channel ID where the bot sends proactive messages (cron output, reminders, notifications).</td></tr>
+<tr><td><code>DISCORD_HOME_CHANNEL_NAME</code></td><td>No</td><td><code>"Home"</code></td><td>Display name for the home channel in logs and status output.</td></tr>
+<tr><td><code>DISCORD_REQUIRE_MENTION</code></td><td>No</td><td><code>true</code></td><td>When <code>true</code>, the bot only responds in server channels when <code>@mentioned</code>. Set to <code>false</code> to respond to all messages in every channel.</td></tr>
+<tr><td><code>DISCORD_FREE_RESPONSE_CHANNELS</code></td><td>No</td><td>—</td><td>Comma-separated channel IDs where the bot responds without requiring an <code>@mention</code>, even when <code>DISCORD_REQUIRE_MENTION</code> is <code>true</code>.</td></tr>
+<tr><td><code>DISCORD_IGNORE_NO_MENTION</code></td><td>No</td><td><code>true</code></td><td>When <code>true</code>, the bot stays silent if a message <code>@mentions</code> other users but does <strong>not</strong> mention the bot. Prevents the bot from jumping into conversations directed at other people. Only applies in server channels, not DMs.</td></tr>
+<tr><td><code>DISCORD_AUTO_THREAD</code></td><td>No</td><td><code>true</code></td><td>When <code>true</code>, automatically creates a new thread for every <code>@mention</code> in a text channel, so each conversation is isolated (similar to Slack behavior). Messages already inside threads or DMs are unaffected.</td></tr>
+<tr><td><code>DISCORD_ALLOW_BOTS</code></td><td>No</td><td><code>"none"</code></td><td>Controls how the bot handles messages from other Discord bots. <code>"none"</code> — ignore all other bots. <code>"mentions"</code> — only accept bot messages that <code>@mention</code> Hermes. <code>"all"</code> — accept all bot messages.</td></tr>
+<tr><td><code>DISCORD_REACTIONS</code></td><td>No</td><td><code>true</code></td><td>When <code>true</code>, the bot adds emoji reactions to messages during processing (👀 when starting, ✅ on success, ❌ on error). Set to <code>false</code> to disable reactions entirely.</td></tr>
+<tr><td><code>DISCORD_IGNORED_CHANNELS</code></td><td>No</td><td>—</td><td>Comma-separated channel IDs where the bot <strong>never</strong> responds, even when <code>@mentioned</code>. Takes priority over all other channel settings.</td></tr>
+<tr><td><code>DISCORD_NO_THREAD_CHANNELS</code></td><td>No</td><td>—</td><td>Comma-separated channel IDs where the bot responds directly in the channel instead of creating a thread. Only relevant when <code>DISCORD_AUTO_THREAD</code> is <code>true</code>.</td></tr>
+<tr><td><code>DISCORD_REPLY_TO_MODE</code></td><td>No</td><td><code>"first"</code></td><td>Controls reply-reference behavior: <code>"off"</code> — never reply to the original message, <code>"first"</code> — reply-reference on the first message chunk only (default), <code>"all"</code> — reply-reference on every chunk.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="config-file-configyaml"><a class="header" href="#config-file-configyaml">Config File (<code>config.yaml</code>)</a></h3>
+<p>The <code>discord</code> section in <code>~/.hermes/config.yaml</code> mirrors the env vars above. Config.yaml settings are applied as defaults — if the equivalent env var is already set, the env var wins.</p>
+<pre><code class="language-yaml"># Discord-specific settings
+discord:
+  require_mention: true           # Require @mention in server channels
+  free_response_channels: ""      # Comma-separated channel IDs (or YAML list)
+  auto_thread: true               # Auto-create threads on @mention
+  reactions: true                 # Add emoji reactions during processing
+  ignored_channels: []            # Channel IDs where bot never responds
+  no_thread_channels: []          # Channel IDs where bot responds without threading
+
+# Session isolation (applies to all gateway platforms, not just Discord)
+group_sessions_per_user: true     # Isolate sessions per user in shared channels
+</code></pre>
+<h4 id="discordrequire_mention"><a class="header" href="#discordrequire_mention"><code>discord.require_mention</code></a></h4>
+<p><strong>Type:</strong> boolean — <strong>Default:</strong> <code>true</code></p>
+<p>When enabled, the bot only responds in server channels when directly <code>@mentioned</code>. DMs always get a response regardless of this setting.</p>
+<h4 id="discordfree_response_channels"><a class="header" href="#discordfree_response_channels"><code>discord.free_response_channels</code></a></h4>
+<p><strong>Type:</strong> string or list — <strong>Default:</strong> <code>""</code></p>
+<p>Channel IDs where the bot responds to all messages without needing an <code>@mention</code>. Accepts either a comma-separated string or a YAML list:</p>
+<pre><code class="language-yaml"># String format
+discord:
+  free_response_channels: "1234567890,9876543210"
+
+# List format
+discord:
+  free_response_channels:
+    - 1234567890
+    - 9876543210
+</code></pre>
+<p>If a thread’s parent channel is in this list, the thread also becomes mention-free.</p>
+<h4 id="discordauto_thread"><a class="header" href="#discordauto_thread"><code>discord.auto_thread</code></a></h4>
+<p><strong>Type:</strong> boolean — <strong>Default:</strong> <code>true</code></p>
+<p>When enabled, every <code>@mention</code> in a regular text channel automatically creates a new thread for the conversation. This keeps the main channel clean and gives each conversation its own isolated session history. Once a thread is created, subsequent messages in that thread don’t require <code>@mention</code> — the bot knows it’s already participating.</p>
+<p>Messages sent in existing threads or DMs are unaffected by this setting.</p>
+<h4 id="discordreactions"><a class="header" href="#discordreactions"><code>discord.reactions</code></a></h4>
+<p><strong>Type:</strong> boolean — <strong>Default:</strong> <code>true</code></p>
+<p>Controls whether the bot adds emoji reactions to messages as visual feedback:</p>
+<ul>
+<li>👀 added when the bot starts processing your message</li>
+<li>✅ added when the response is delivered successfully</li>
+<li>❌ added if an error occurs during processing</li>
+</ul>
+<p>Disable this if you find the reactions distracting or if the bot’s role doesn’t have the <strong>Add Reactions</strong> permission.</p>
+<h4 id="discordignored_channels"><a class="header" href="#discordignored_channels"><code>discord.ignored_channels</code></a></h4>
+<p><strong>Type:</strong> string or list — <strong>Default:</strong> <code>[]</code></p>
+<p>Channel IDs where the bot <strong>never</strong> responds, even when directly <code>@mentioned</code>. This takes the highest priority — if a channel is in this list, the bot silently ignores all messages there, regardless of <code>require_mention</code>, <code>free_response_channels</code>, or any other setting.</p>
+<pre><code class="language-yaml"># String format
+discord:
+  ignored_channels: "1234567890,9876543210"
+
+# List format
+discord:
+  ignored_channels:
+    - 1234567890
+    - 9876543210
+</code></pre>
+<p>If a thread’s parent channel is in this list, messages in that thread are also ignored.</p>
+<h4 id="discordno_thread_channels"><a class="header" href="#discordno_thread_channels"><code>discord.no_thread_channels</code></a></h4>
+<p><strong>Type:</strong> string or list — <strong>Default:</strong> <code>[]</code></p>
+<p>Channel IDs where the bot responds directly in the channel instead of auto-creating a thread. This only has an effect when <code>auto_thread</code> is <code>true</code> (the default). In these channels, the bot responds inline like a normal message rather than spawning a new thread.</p>
+<pre><code class="language-yaml">discord:
+  no_thread_channels:
+    - 1234567890  # Bot responds inline here
+</code></pre>
+<p>Useful for channels dedicated to bot interaction where threads would add unnecessary noise.</p>
+<h4 id="group_sessions_per_user"><a class="header" href="#group_sessions_per_user"><code>group_sessions_per_user</code></a></h4>
+<p><strong>Type:</strong> boolean — <strong>Default:</strong> <code>true</code></p>
+<p>This is a global gateway setting (not Discord-specific) that controls whether users in the same channel get isolated session histories.</p>
+<p>When <code>true</code>: Alice and Bob talking in <code>#research</code> each have their own separate conversation with Hermes. When <code>false</code>: the entire channel shares one conversation transcript and one running-agent slot.</p>
+<pre><code class="language-yaml">group_sessions_per_user: true
+</code></pre>
+<p>See the <a href="#session-model-in-discord">Session Model</a> section above for the full implications of each mode.</p>
+<h4 id="displaytool_progress"><a class="header" href="#displaytool_progress"><code>display.tool_progress</code></a></h4>
+<p><strong>Type:</strong> string — <strong>Default:</strong> <code>"all"</code> — <strong>Values:</strong> <code>off</code>, <code>new</code>, <code>all</code>, <code>verbose</code></p>
+<p>Controls whether the bot sends progress messages in the chat while processing (e.g., “Reading file…”, “Running terminal command…”). This is a global gateway setting that applies to all platforms.</p>
+<pre><code class="language-yaml">display:
+  tool_progress: "all"    # off | new | all | verbose
+</code></pre>
+<ul>
+<li><code>off</code> — no progress messages</li>
+<li><code>new</code> — only show the first tool call per turn</li>
+<li><code>all</code> — show all tool calls (truncated to 40 characters in gateway messages)</li>
+<li><code>verbose</code> — show full tool call details (can produce long messages)</li>
+</ul>
+<h4 id="displaytool_progress_command"><a class="header" href="#displaytool_progress_command"><code>display.tool_progress_command</code></a></h4>
+<p><strong>Type:</strong> boolean — <strong>Default:</strong> <code>false</code></p>
+<p>When enabled, makes the <code>/verbose</code> slash command available in the gateway, letting you cycle through tool progress modes (<code>off → new → all → verbose → off</code>) without editing config.yaml.</p>
+<pre><code class="language-yaml">display:
+  tool_progress_command: true
+</code></pre>
+<h2 id="interactive-model-picker"><a class="header" href="#interactive-model-picker">Interactive Model Picker</a></h2>
+<p>Send <code>/model</code> with no arguments in a Discord channel to open a dropdown-based model picker:</p>
+<ol>
+<li><strong>Provider selection</strong> — a Select dropdown showing available providers (up to 25).</li>
+<li><strong>Model selection</strong> — a second dropdown with models for the chosen provider (up to 25).</li>
+</ol>
+<p>The picker times out after 120 seconds. Only authorized users (those in <code>DISCORD_ALLOWED_USERS</code>) can interact with it. If you know the model name, type <code>/model &lt;name&gt;</code> directly.</p>
+<h2 id="native-slash-commands-for-skills"><a class="header" href="#native-slash-commands-for-skills">Native Slash Commands for Skills</a></h2>
+<p>Hermes automatically registers installed skills as <strong>native Discord Application Commands</strong>. This means skills appear in Discord’s autocomplete <code>/</code> menu alongside built-in commands.</p>
+<ul>
+<li>Each skill becomes a Discord slash command (e.g., <code>/code-review</code>, <code>/ascii-art</code>)</li>
+<li>Skills accept an optional <code>args</code> string parameter</li>
+<li>Discord has a limit of 100 application commands per bot — if you have more skills than available slots, extra skills are skipped with a warning in the logs</li>
+<li>Skills are registered during bot startup alongside built-in commands like <code>/model</code>, <code>/reset</code>, and <code>/background</code></li>
+</ul>
+<p>No extra configuration is needed — any skill installed via <code>hermes skills install</code> is automatically registered as a Discord slash command on the next gateway restart.</p>
+<h2 id="home-channel"><a class="header" href="#home-channel">Home Channel</a></h2>
+<p>You can designate a “home channel” where the bot sends proactive messages (such as cron job output, reminders, and notifications). There are two ways to set it:</p>
+<h3 id="using-the-slash-command"><a class="header" href="#using-the-slash-command">Using the Slash Command</a></h3>
+<p>Type <code>/sethome</code> in any Discord channel where the bot is present. That channel becomes the home channel.</p>
+<h3 id="manual-configuration"><a class="header" href="#manual-configuration">Manual Configuration</a></h3>
+<p>Add these to your <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">DISCORD_HOME_CHANNEL=123456789012345678
+DISCORD_HOME_CHANNEL_NAME="#bot-updates"
+</code></pre>
+<p>Replace the ID with the actual channel ID (right-click → Copy Channel ID with Developer Mode on).</p>
+<h2 id="voice-messages"><a class="header" href="#voice-messages">Voice Messages</a></h2>
+<p>Hermes Agent supports Discord voice messages:</p>
+<ul>
+<li><strong>Incoming voice messages</strong> are automatically transcribed using the configured STT provider: local <code>faster-whisper</code> (no key), Groq Whisper (<code>GROQ_API_KEY</code>), or OpenAI Whisper (<code>VOICE_TOOLS_OPENAI_KEY</code>).</li>
+<li><strong>Text-to-speech</strong>: Use <code>/voice tts</code> to have the bot send spoken audio responses alongside text replies.</li>
+<li><strong>Discord voice channels</strong>: Hermes can also join a voice channel, listen to users speaking, and talk back in the channel.</li>
+</ul>
+<p>For the full setup and operational guide, see:</p>
+<ul>
+<li><a href="/docs/user-guide/features/voice-mode">Voice Mode</a></li>
+<li><a href="/docs/guides/use-voice-mode-with-hermes">Use Voice Mode with Hermes</a></li>
+</ul>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="bot-is-online-but-not-responding-to-messages"><a class="header" href="#bot-is-online-but-not-responding-to-messages">Bot is online but not responding to messages</a></h3>
+<p><strong>Cause</strong>: Message Content Intent is disabled.</p>
+<p><strong>Fix</strong>: Go to <a href="https://discord.com/developers/applications">Developer Portal</a> → your app → Bot → Privileged Gateway Intents → enable <strong>Message Content Intent</strong> → Save Changes. Restart the gateway.</p>
+<h3 id="disallowed-intents-error-on-startup"><a class="header" href="#disallowed-intents-error-on-startup">“Disallowed Intents” error on startup</a></h3>
+<p><strong>Cause</strong>: Your code requests intents that aren’t enabled in the Developer Portal.</p>
+<p><strong>Fix</strong>: Enable all three Privileged Gateway Intents (Presence, Server Members, Message Content) in the Bot settings, then restart.</p>
+<h3 id="bot-cant-see-messages-in-a-specific-channel"><a class="header" href="#bot-cant-see-messages-in-a-specific-channel">Bot can’t see messages in a specific channel</a></h3>
+<p><strong>Cause</strong>: The bot’s role doesn’t have permission to view that channel.</p>
+<p><strong>Fix</strong>: In Discord, go to the channel’s settings → Permissions → add the bot’s role with <strong>View Channel</strong> and <strong>Read Message History</strong> enabled.</p>
+<h3 id="403-forbidden-errors"><a class="header" href="#403-forbidden-errors">403 Forbidden errors</a></h3>
+<p><strong>Cause</strong>: The bot is missing required permissions.</p>
+<p><strong>Fix</strong>: Re-invite the bot with the correct permissions using the URL from Step 5, or manually adjust the bot’s role permissions in Server Settings → Roles.</p>
+<h3 id="bot-is-offline"><a class="header" href="#bot-is-offline">Bot is offline</a></h3>
+<p><strong>Cause</strong>: The Hermes gateway isn’t running, or the token is incorrect.</p>
+<p><strong>Fix</strong>: Check that <code>hermes gateway</code> is running. Verify <code>DISCORD_BOT_TOKEN</code> in your <code>.env</code> file. If you recently reset the token, update it.</p>
+<h3 id="user-not-allowed--bot-ignores-you"><a class="header" href="#user-not-allowed--bot-ignores-you">“User not allowed” / Bot ignores you</a></h3>
+<p><strong>Cause</strong>: Your User ID isn’t in <code>DISCORD_ALLOWED_USERS</code>.</p>
+<p><strong>Fix</strong>: Add your User ID to <code>DISCORD_ALLOWED_USERS</code> in <code>~/.hermes/.env</code> and restart the gateway.</p>
+<h3 id="people-in-the-same-channel-are-sharing-context-unexpectedly"><a class="header" href="#people-in-the-same-channel-are-sharing-context-unexpectedly">People in the same channel are sharing context unexpectedly</a></h3>
+<p><strong>Cause</strong>: <code>group_sessions_per_user</code> is disabled, or the platform cannot provide a user ID for the messages in that context.</p>
+<p><strong>Fix</strong>: Set this in <code>~/.hermes/config.yaml</code> and restart the gateway:</p>
+<pre><code class="language-yaml">group_sessions_per_user: true
+</code></pre>
+<p>If you intentionally want a shared room conversation, leave it off — just expect shared transcript history and shared interrupt behavior.</p>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<dl>
+<dt id="warning-always-set-discord_allowed_users-to-restrict-who-can-interact-with-the-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure-only-add-user-ids-of-people-you-trust--authorized-users-have-full-access-to-the-agents-capabilities-including-tool-use-and-system-access"><a class="header" href="#warning-always-set-discord_allowed_users-to-restrict-who-can-interact-with-the-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure-only-add-user-ids-of-people-you-trust--authorized-users-have-full-access-to-the-agents-capabilities-including-tool-use-and-system-access">:::warning
+Always set <code>DISCORD_ALLOWED_USERS</code> to restrict who can interact with the bot. Without it, the gateway denies all users by default as a safety measure. Only add User IDs of people you trust — authorized users have full access to the agent’s capabilities, including tool use and system access.</a></dt>
+<dd>::</dd>
+</dl>
+<p>For more information on securing your Hermes Agent deployment, see the <a href="../security.html">Security Guide</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/messaging/dingtalk.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/email.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/messaging/dingtalk.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/email.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

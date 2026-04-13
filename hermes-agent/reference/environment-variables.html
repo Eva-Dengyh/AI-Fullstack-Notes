@@ -1,0 +1,674 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Environment Variables - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/reference/environment-variables.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-2-title-environment-variables-description-complete-reference-of-all-environment-variables-used-by-hermes-agent"><a class="header" href="#sidebar_position-2-title-environment-variables-description-complete-reference-of-all-environment-variables-used-by-hermes-agent">sidebar_position: 2
+title: “Environment Variables”
+description: “Complete reference of all environment variables used by Hermes Agent”</a></h2>
+<h1 id="environment-variables-reference"><a class="header" href="#environment-variables-reference">Environment Variables Reference</a></h1>
+<p>All variables go in <code>~/.hermes/.env</code>. You can also set them with <code>hermes config set VAR value</code>.</p>
+<h2 id="llm-providers"><a class="header" href="#llm-providers">LLM Providers</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>OPENROUTER_API_KEY</code></td><td>OpenRouter API key (recommended for flexibility)</td></tr>
+<tr><td><code>OPENROUTER_BASE_URL</code></td><td>Override the OpenRouter-compatible base URL</td></tr>
+<tr><td><code>AI_GATEWAY_API_KEY</code></td><td>Vercel AI Gateway API key (<a href="https://ai-gateway.vercel.sh">ai-gateway.vercel.sh</a>)</td></tr>
+<tr><td><code>AI_GATEWAY_BASE_URL</code></td><td>Override AI Gateway base URL (default: <code>https://ai-gateway.vercel.sh/v1</code>)</td></tr>
+<tr><td><code>OPENAI_API_KEY</code></td><td>API key for custom OpenAI-compatible endpoints (used with <code>OPENAI_BASE_URL</code>)</td></tr>
+<tr><td><code>OPENAI_BASE_URL</code></td><td>Base URL for custom endpoint (VLLM, SGLang, etc.)</td></tr>
+<tr><td><code>COPILOT_GITHUB_TOKEN</code></td><td>GitHub token for Copilot API — first priority (OAuth <code>gho_*</code> or fine-grained PAT <code>github_pat_*</code>; classic PATs <code>ghp_*</code> are <strong>not supported</strong>)</td></tr>
+<tr><td><code>GH_TOKEN</code></td><td>GitHub token — second priority for Copilot (also used by <code>gh</code> CLI)</td></tr>
+<tr><td><code>GITHUB_TOKEN</code></td><td>GitHub token — third priority for Copilot</td></tr>
+<tr><td><code>HERMES_COPILOT_ACP_COMMAND</code></td><td>Override Copilot ACP CLI binary path (default: <code>copilot</code>)</td></tr>
+<tr><td><code>COPILOT_CLI_PATH</code></td><td>Alias for <code>HERMES_COPILOT_ACP_COMMAND</code></td></tr>
+<tr><td><code>HERMES_COPILOT_ACP_ARGS</code></td><td>Override Copilot ACP arguments (default: <code>--acp --stdio</code>)</td></tr>
+<tr><td><code>COPILOT_ACP_BASE_URL</code></td><td>Override Copilot ACP base URL</td></tr>
+<tr><td><code>GLM_API_KEY</code></td><td>z.ai / ZhipuAI GLM API key (<a href="https://z.ai">z.ai</a>)</td></tr>
+<tr><td><code>ZAI_API_KEY</code></td><td>Alias for <code>GLM_API_KEY</code></td></tr>
+<tr><td><code>Z_AI_API_KEY</code></td><td>Alias for <code>GLM_API_KEY</code></td></tr>
+<tr><td><code>GLM_BASE_URL</code></td><td>Override z.ai base URL (default: <code>https://api.z.ai/api/paas/v4</code>)</td></tr>
+<tr><td><code>KIMI_API_KEY</code></td><td>Kimi / Moonshot AI API key (<a href="https://platform.moonshot.ai">moonshot.ai</a>)</td></tr>
+<tr><td><code>KIMI_BASE_URL</code></td><td>Override Kimi base URL (default: <code>https://api.moonshot.ai/v1</code>)</td></tr>
+<tr><td><code>MINIMAX_API_KEY</code></td><td>MiniMax API key — global endpoint (<a href="https://www.minimax.io">minimax.io</a>)</td></tr>
+<tr><td><code>MINIMAX_BASE_URL</code></td><td>Override MiniMax base URL (default: <code>https://api.minimax.io/v1</code>)</td></tr>
+<tr><td><code>MINIMAX_CN_API_KEY</code></td><td>MiniMax API key — China endpoint (<a href="https://www.minimaxi.com">minimaxi.com</a>)</td></tr>
+<tr><td><code>MINIMAX_CN_BASE_URL</code></td><td>Override MiniMax China base URL (default: <code>https://api.minimaxi.com/v1</code>)</td></tr>
+<tr><td><code>KILOCODE_API_KEY</code></td><td>Kilo Code API key (<a href="https://kilo.ai">kilo.ai</a>)</td></tr>
+<tr><td><code>KILOCODE_BASE_URL</code></td><td>Override Kilo Code base URL (default: <code>https://api.kilo.ai/api/gateway</code>)</td></tr>
+<tr><td><code>XIAOMI_API_KEY</code></td><td>Xiaomi MiMo API key (<a href="https://platform.xiaomimimo.com">platform.xiaomimimo.com</a>)</td></tr>
+<tr><td><code>XIAOMI_BASE_URL</code></td><td>Override Xiaomi MiMo base URL (default: <code>https://api.xiaomimimo.com/v1</code>)</td></tr>
+<tr><td><code>HF_TOKEN</code></td><td>Hugging Face token for Inference Providers (<a href="https://huggingface.co/settings/tokens">huggingface.co/settings/tokens</a>)</td></tr>
+<tr><td><code>HF_BASE_URL</code></td><td>Override Hugging Face base URL (default: <code>https://router.huggingface.co/v1</code>)</td></tr>
+<tr><td><code>GOOGLE_API_KEY</code></td><td>Google AI Studio API key (<a href="https://aistudio.google.com/app/apikey">aistudio.google.com/app/apikey</a>)</td></tr>
+<tr><td><code>GEMINI_API_KEY</code></td><td>Alias for <code>GOOGLE_API_KEY</code></td></tr>
+<tr><td><code>GEMINI_BASE_URL</code></td><td>Override Google AI Studio base URL</td></tr>
+<tr><td><code>ANTHROPIC_API_KEY</code></td><td>Anthropic Console API key (<a href="https://console.anthropic.com/">console.anthropic.com</a>)</td></tr>
+<tr><td><code>ANTHROPIC_TOKEN</code></td><td>Manual or legacy Anthropic OAuth/setup-token override</td></tr>
+<tr><td><code>DASHSCOPE_API_KEY</code></td><td>Alibaba Cloud DashScope API key for Qwen models (<a href="https://modelstudio.console.alibabacloud.com/">modelstudio.console.alibabacloud.com</a>)</td></tr>
+<tr><td><code>DASHSCOPE_BASE_URL</code></td><td>Custom DashScope base URL (default: <code>https://coding-intl.dashscope.aliyuncs.com/v1</code>)</td></tr>
+<tr><td><code>DEEPSEEK_API_KEY</code></td><td>DeepSeek API key for direct DeepSeek access (<a href="https://platform.deepseek.com/api_keys">platform.deepseek.com</a>)</td></tr>
+<tr><td><code>DEEPSEEK_BASE_URL</code></td><td>Custom DeepSeek API base URL</td></tr>
+<tr><td><code>OPENCODE_ZEN_API_KEY</code></td><td>OpenCode Zen API key — pay-as-you-go access to curated models (<a href="https://opencode.ai/auth">opencode.ai</a>)</td></tr>
+<tr><td><code>OPENCODE_ZEN_BASE_URL</code></td><td>Override OpenCode Zen base URL</td></tr>
+<tr><td><code>OPENCODE_GO_API_KEY</code></td><td>OpenCode Go API key — $10/month subscription for open models (<a href="https://opencode.ai/auth">opencode.ai</a>)</td></tr>
+<tr><td><code>OPENCODE_GO_BASE_URL</code></td><td>Override OpenCode Go base URL</td></tr>
+<tr><td><code>CLAUDE_CODE_OAUTH_TOKEN</code></td><td>Explicit Claude Code token override if you export one manually</td></tr>
+<tr><td><code>HERMES_MODEL</code></td><td>Override model name at process level (used by cron scheduler; prefer <code>config.yaml</code> for normal use)</td></tr>
+<tr><td><code>VOICE_TOOLS_OPENAI_KEY</code></td><td>Preferred OpenAI key for OpenAI speech-to-text and text-to-speech providers</td></tr>
+<tr><td><code>HERMES_LOCAL_STT_COMMAND</code></td><td>Optional local speech-to-text command template. Supports <code>{input_path}</code>, <code>{output_dir}</code>, <code>{language}</code>, and <code>{model}</code> placeholders</td></tr>
+<tr><td><code>HERMES_LOCAL_STT_LANGUAGE</code></td><td>Default language passed to <code>HERMES_LOCAL_STT_COMMAND</code> or auto-detected local <code>whisper</code> CLI fallback (default: <code>en</code>)</td></tr>
+<tr><td><code>HERMES_HOME</code></td><td>Override Hermes config directory (default: <code>~/.hermes</code>). Also scopes the gateway PID file and systemd service name, so multiple installations can run concurrently</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="provider-auth-oauth"><a class="header" href="#provider-auth-oauth">Provider Auth (OAuth)</a></h2>
+<p>For native Anthropic auth, Hermes prefers Claude Code’s own credential files when they exist because those credentials can refresh automatically. Environment variables such as <code>ANTHROPIC_TOKEN</code> remain useful as manual overrides, but they are no longer the preferred path for Claude Pro/Max login.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>HERMES_INFERENCE_PROVIDER</code></td><td>Override provider selection: <code>auto</code>, <code>openrouter</code>, <code>nous</code>, <code>openai-codex</code>, <code>copilot</code>, <code>copilot-acp</code>, <code>anthropic</code>, <code>huggingface</code>, <code>zai</code>, <code>kimi-coding</code>, <code>minimax</code>, <code>minimax-cn</code>, <code>kilocode</code>, <code>xiaomi</code>, <code>alibaba</code>, <code>deepseek</code>, <code>opencode-zen</code>, <code>opencode-go</code>, <code>ai-gateway</code> (default: <code>auto</code>)</td></tr>
+<tr><td><code>HERMES_PORTAL_BASE_URL</code></td><td>Override Nous Portal URL (for development/testing)</td></tr>
+<tr><td><code>NOUS_INFERENCE_BASE_URL</code></td><td>Override Nous inference API URL</td></tr>
+<tr><td><code>HERMES_NOUS_MIN_KEY_TTL_SECONDS</code></td><td>Min agent key TTL before re-mint (default: 1800 = 30min)</td></tr>
+<tr><td><code>HERMES_NOUS_TIMEOUT_SECONDS</code></td><td>HTTP timeout for Nous credential / token flows</td></tr>
+<tr><td><code>HERMES_DUMP_REQUESTS</code></td><td>Dump API request payloads to log files (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>HERMES_PREFILL_MESSAGES_FILE</code></td><td>Path to a JSON file of ephemeral prefill messages injected at API-call time</td></tr>
+<tr><td><code>HERMES_TIMEZONE</code></td><td>IANA timezone override (for example <code>America/New_York</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="tool-apis"><a class="header" href="#tool-apis">Tool APIs</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>PARALLEL_API_KEY</code></td><td>AI-native web search (<a href="https://parallel.ai/">parallel.ai</a>)</td></tr>
+<tr><td><code>FIRECRAWL_API_KEY</code></td><td>Web scraping and cloud browser (<a href="https://firecrawl.dev/">firecrawl.dev</a>)</td></tr>
+<tr><td><code>FIRECRAWL_API_URL</code></td><td>Custom Firecrawl API endpoint for self-hosted instances (optional)</td></tr>
+<tr><td><code>TAVILY_API_KEY</code></td><td>Tavily API key for AI-native web search, extract, and crawl (<a href="https://app.tavily.com/home">app.tavily.com</a>)</td></tr>
+<tr><td><code>EXA_API_KEY</code></td><td>Exa API key for AI-native web search and contents (<a href="https://exa.ai/">exa.ai</a>)</td></tr>
+<tr><td><code>BROWSERBASE_API_KEY</code></td><td>Browser automation (<a href="https://browserbase.com/">browserbase.com</a>)</td></tr>
+<tr><td><code>BROWSERBASE_PROJECT_ID</code></td><td>Browserbase project ID</td></tr>
+<tr><td><code>BROWSER_USE_API_KEY</code></td><td>Browser Use cloud browser API key (<a href="https://browser-use.com/">browser-use.com</a>)</td></tr>
+<tr><td><code>FIRECRAWL_BROWSER_TTL</code></td><td>Firecrawl browser session TTL in seconds (default: 300)</td></tr>
+<tr><td><code>BROWSER_CDP_URL</code></td><td>Chrome DevTools Protocol URL for local browser (set via <code>/browser connect</code>, e.g. <code>ws://localhost:9222</code>)</td></tr>
+<tr><td><code>CAMOFOX_URL</code></td><td>Camofox local anti-detection browser URL (default: <code>http://localhost:9377</code>)</td></tr>
+<tr><td><code>BROWSER_INACTIVITY_TIMEOUT</code></td><td>Browser session inactivity timeout in seconds</td></tr>
+<tr><td><code>FAL_KEY</code></td><td>Image generation (<a href="https://fal.ai/">fal.ai</a>)</td></tr>
+<tr><td><code>GROQ_API_KEY</code></td><td>Groq Whisper STT API key (<a href="https://groq.com/">groq.com</a>)</td></tr>
+<tr><td><code>ELEVENLABS_API_KEY</code></td><td>ElevenLabs premium TTS voices (<a href="https://elevenlabs.io/">elevenlabs.io</a>)</td></tr>
+<tr><td><code>STT_GROQ_MODEL</code></td><td>Override the Groq STT model (default: <code>whisper-large-v3-turbo</code>)</td></tr>
+<tr><td><code>GROQ_BASE_URL</code></td><td>Override the Groq OpenAI-compatible STT endpoint</td></tr>
+<tr><td><code>STT_OPENAI_MODEL</code></td><td>Override the OpenAI STT model (default: <code>whisper-1</code>)</td></tr>
+<tr><td><code>STT_OPENAI_BASE_URL</code></td><td>Override the OpenAI-compatible STT endpoint</td></tr>
+<tr><td><code>GITHUB_TOKEN</code></td><td>GitHub token for Skills Hub (higher API rate limits, skill publish)</td></tr>
+<tr><td><code>HONCHO_API_KEY</code></td><td>Cross-session user modeling (<a href="https://honcho.dev/">honcho.dev</a>)</td></tr>
+<tr><td><code>HONCHO_BASE_URL</code></td><td>Base URL for self-hosted Honcho instances (default: Honcho cloud). No API key required for local instances</td></tr>
+<tr><td><code>SUPERMEMORY_API_KEY</code></td><td>Semantic long-term memory with profile recall and session ingest (<a href="https://supermemory.ai">supermemory.ai</a>)</td></tr>
+<tr><td><code>TINKER_API_KEY</code></td><td>RL training (<a href="https://tinker-console.thinkingmachines.ai/">tinker-console.thinkingmachines.ai</a>)</td></tr>
+<tr><td><code>WANDB_API_KEY</code></td><td>RL training metrics (<a href="https://wandb.ai/">wandb.ai</a>)</td></tr>
+<tr><td><code>DAYTONA_API_KEY</code></td><td>Daytona cloud sandboxes (<a href="https://daytona.io/">daytona.io</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="terminal-backend"><a class="header" href="#terminal-backend">Terminal Backend</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TERMINAL_ENV</code></td><td>Backend: <code>local</code>, <code>docker</code>, <code>ssh</code>, <code>singularity</code>, <code>modal</code>, <code>daytona</code></td></tr>
+<tr><td><code>TERMINAL_DOCKER_IMAGE</code></td><td>Docker image (default: <code>nikolaik/python-nodejs:python3.11-nodejs20</code>)</td></tr>
+<tr><td><code>TERMINAL_DOCKER_FORWARD_ENV</code></td><td>JSON array of env var names to explicitly forward into Docker terminal sessions. Note: skill-declared <code>required_environment_variables</code> are forwarded automatically — you only need this for vars not declared by any skill.</td></tr>
+<tr><td><code>TERMINAL_DOCKER_VOLUMES</code></td><td>Additional Docker volume mounts (comma-separated <code>host:container</code> pairs)</td></tr>
+<tr><td><code>TERMINAL_DOCKER_MOUNT_CWD_TO_WORKSPACE</code></td><td>Advanced opt-in: mount the launch cwd into Docker <code>/workspace</code> (<code>true</code>/<code>false</code>, default: <code>false</code>)</td></tr>
+<tr><td><code>TERMINAL_SINGULARITY_IMAGE</code></td><td>Singularity image or <code>.sif</code> path</td></tr>
+<tr><td><code>TERMINAL_MODAL_IMAGE</code></td><td>Modal container image</td></tr>
+<tr><td><code>TERMINAL_DAYTONA_IMAGE</code></td><td>Daytona sandbox image</td></tr>
+<tr><td><code>TERMINAL_TIMEOUT</code></td><td>Command timeout in seconds</td></tr>
+<tr><td><code>TERMINAL_LIFETIME_SECONDS</code></td><td>Max lifetime for terminal sessions in seconds</td></tr>
+<tr><td><code>TERMINAL_CWD</code></td><td>Working directory for all terminal sessions</td></tr>
+<tr><td><code>SUDO_PASSWORD</code></td><td>Enable sudo without interactive prompt</td></tr>
+</tbody>
+</table>
+</div>
+<p>For cloud sandbox backends, persistence is filesystem-oriented. <code>TERMINAL_LIFETIME_SECONDS</code> controls when Hermes cleans up an idle terminal session, and later resumes may recreate the sandbox rather than keep the same live processes running.</p>
+<h2 id="ssh-backend"><a class="header" href="#ssh-backend">SSH Backend</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TERMINAL_SSH_HOST</code></td><td>Remote server hostname</td></tr>
+<tr><td><code>TERMINAL_SSH_USER</code></td><td>SSH username</td></tr>
+<tr><td><code>TERMINAL_SSH_PORT</code></td><td>SSH port (default: 22)</td></tr>
+<tr><td><code>TERMINAL_SSH_KEY</code></td><td>Path to private key</td></tr>
+<tr><td><code>TERMINAL_SSH_PERSISTENT</code></td><td>Override persistent shell for SSH (default: follows <code>TERMINAL_PERSISTENT_SHELL</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="container-resources-docker-singularity-modal-daytona"><a class="header" href="#container-resources-docker-singularity-modal-daytona">Container Resources (Docker, Singularity, Modal, Daytona)</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TERMINAL_CONTAINER_CPU</code></td><td>CPU cores (default: 1)</td></tr>
+<tr><td><code>TERMINAL_CONTAINER_MEMORY</code></td><td>Memory in MB (default: 5120)</td></tr>
+<tr><td><code>TERMINAL_CONTAINER_DISK</code></td><td>Disk in MB (default: 51200)</td></tr>
+<tr><td><code>TERMINAL_CONTAINER_PERSISTENT</code></td><td>Persist container filesystem across sessions (default: <code>true</code>)</td></tr>
+<tr><td><code>TERMINAL_SANDBOX_DIR</code></td><td>Host directory for workspaces and overlays (default: <code>~/.hermes/sandboxes/</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="persistent-shell"><a class="header" href="#persistent-shell">Persistent Shell</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TERMINAL_PERSISTENT_SHELL</code></td><td>Enable persistent shell for non-local backends (default: <code>true</code>). Also settable via <code>terminal.persistent_shell</code> in config.yaml</td></tr>
+<tr><td><code>TERMINAL_LOCAL_PERSISTENT</code></td><td>Enable persistent shell for local backend (default: <code>false</code>)</td></tr>
+<tr><td><code>TERMINAL_SSH_PERSISTENT</code></td><td>Override persistent shell for SSH backend (default: follows <code>TERMINAL_PERSISTENT_SHELL</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="messaging"><a class="header" href="#messaging">Messaging</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TELEGRAM_BOT_TOKEN</code></td><td>Telegram bot token (from @BotFather)</td></tr>
+<tr><td><code>TELEGRAM_ALLOWED_USERS</code></td><td>Comma-separated user IDs allowed to use the bot</td></tr>
+<tr><td><code>TELEGRAM_HOME_CHANNEL</code></td><td>Default Telegram chat/channel for cron delivery</td></tr>
+<tr><td><code>TELEGRAM_HOME_CHANNEL_NAME</code></td><td>Display name for the Telegram home channel</td></tr>
+<tr><td><code>TELEGRAM_WEBHOOK_URL</code></td><td>Public HTTPS URL for webhook mode (enables webhook instead of polling)</td></tr>
+<tr><td><code>TELEGRAM_WEBHOOK_PORT</code></td><td>Local listen port for webhook server (default: <code>8443</code>)</td></tr>
+<tr><td><code>TELEGRAM_WEBHOOK_SECRET</code></td><td>Secret token for verifying updates come from Telegram</td></tr>
+<tr><td><code>TELEGRAM_REACTIONS</code></td><td>Enable emoji reactions on messages during processing (default: <code>false</code>)</td></tr>
+<tr><td><code>DISCORD_BOT_TOKEN</code></td><td>Discord bot token</td></tr>
+<tr><td><code>DISCORD_ALLOWED_USERS</code></td><td>Comma-separated Discord user IDs allowed to use the bot</td></tr>
+<tr><td><code>DISCORD_HOME_CHANNEL</code></td><td>Default Discord channel for cron delivery</td></tr>
+<tr><td><code>DISCORD_HOME_CHANNEL_NAME</code></td><td>Display name for the Discord home channel</td></tr>
+<tr><td><code>DISCORD_REQUIRE_MENTION</code></td><td>Require an @mention before responding in server channels</td></tr>
+<tr><td><code>DISCORD_FREE_RESPONSE_CHANNELS</code></td><td>Comma-separated channel IDs where mention is not required</td></tr>
+<tr><td><code>DISCORD_AUTO_THREAD</code></td><td>Auto-thread long replies when supported</td></tr>
+<tr><td><code>DISCORD_REACTIONS</code></td><td>Enable emoji reactions on messages during processing (default: <code>true</code>)</td></tr>
+<tr><td><code>DISCORD_IGNORED_CHANNELS</code></td><td>Comma-separated channel IDs where the bot never responds</td></tr>
+<tr><td><code>DISCORD_NO_THREAD_CHANNELS</code></td><td>Comma-separated channel IDs where bot responds without auto-threading</td></tr>
+<tr><td><code>DISCORD_REPLY_TO_MODE</code></td><td>Reply-reference behavior: <code>off</code>, <code>first</code> (default), or <code>all</code></td></tr>
+<tr><td><code>SLACK_BOT_TOKEN</code></td><td>Slack bot token (<code>xoxb-...</code>)</td></tr>
+<tr><td><code>SLACK_APP_TOKEN</code></td><td>Slack app-level token (<code>xapp-...</code>, required for Socket Mode)</td></tr>
+<tr><td><code>SLACK_ALLOWED_USERS</code></td><td>Comma-separated Slack user IDs</td></tr>
+<tr><td><code>SLACK_HOME_CHANNEL</code></td><td>Default Slack channel for cron delivery</td></tr>
+<tr><td><code>SLACK_HOME_CHANNEL_NAME</code></td><td>Display name for the Slack home channel</td></tr>
+<tr><td><code>WHATSAPP_ENABLED</code></td><td>Enable the WhatsApp bridge (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>WHATSAPP_MODE</code></td><td><code>bot</code> (separate number) or <code>self-chat</code> (message yourself)</td></tr>
+<tr><td><code>WHATSAPP_ALLOWED_USERS</code></td><td>Comma-separated phone numbers (with country code, no <code>+</code>), or <code>*</code> to allow all senders</td></tr>
+<tr><td><code>WHATSAPP_ALLOW_ALL_USERS</code></td><td>Allow all WhatsApp senders without an allowlist (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>WHATSAPP_DEBUG</code></td><td>Log raw message events in the bridge for troubleshooting (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>SIGNAL_HTTP_URL</code></td><td>signal-cli daemon HTTP endpoint (for example <code>http://127.0.0.1:8080</code>)</td></tr>
+<tr><td><code>SIGNAL_ACCOUNT</code></td><td>Bot phone number in E.164 format</td></tr>
+<tr><td><code>SIGNAL_ALLOWED_USERS</code></td><td>Comma-separated E.164 phone numbers or UUIDs</td></tr>
+<tr><td><code>SIGNAL_GROUP_ALLOWED_USERS</code></td><td>Comma-separated group IDs, or <code>*</code> for all groups</td></tr>
+<tr><td><code>SIGNAL_HOME_CHANNEL_NAME</code></td><td>Display name for the Signal home channel</td></tr>
+<tr><td><code>SIGNAL_IGNORE_STORIES</code></td><td>Ignore Signal stories/status updates</td></tr>
+<tr><td><code>SIGNAL_ALLOW_ALL_USERS</code></td><td>Allow all Signal users without an allowlist</td></tr>
+<tr><td><code>TWILIO_ACCOUNT_SID</code></td><td>Twilio Account SID (shared with telephony skill)</td></tr>
+<tr><td><code>TWILIO_AUTH_TOKEN</code></td><td>Twilio Auth Token (shared with telephony skill; also used for webhook signature validation)</td></tr>
+<tr><td><code>TWILIO_PHONE_NUMBER</code></td><td>Twilio phone number in E.164 format (shared with telephony skill)</td></tr>
+<tr><td><code>SMS_WEBHOOK_URL</code></td><td>Public URL for Twilio signature validation — must match the webhook URL in Twilio Console (required)</td></tr>
+<tr><td><code>SMS_WEBHOOK_PORT</code></td><td>Webhook listener port for inbound SMS (default: <code>8080</code>)</td></tr>
+<tr><td><code>SMS_WEBHOOK_HOST</code></td><td>Webhook bind address (default: <code>0.0.0.0</code>)</td></tr>
+<tr><td><code>SMS_INSECURE_NO_SIGNATURE</code></td><td>Set to <code>true</code> to disable Twilio signature validation (local dev only — not for production)</td></tr>
+<tr><td><code>SMS_ALLOWED_USERS</code></td><td>Comma-separated E.164 phone numbers allowed to chat</td></tr>
+<tr><td><code>SMS_ALLOW_ALL_USERS</code></td><td>Allow all SMS senders without an allowlist</td></tr>
+<tr><td><code>SMS_HOME_CHANNEL</code></td><td>Phone number for cron job / notification delivery</td></tr>
+<tr><td><code>SMS_HOME_CHANNEL_NAME</code></td><td>Display name for the SMS home channel</td></tr>
+<tr><td><code>EMAIL_ADDRESS</code></td><td>Email address for the Email gateway adapter</td></tr>
+<tr><td><code>EMAIL_PASSWORD</code></td><td>Password or app password for the email account</td></tr>
+<tr><td><code>EMAIL_IMAP_HOST</code></td><td>IMAP hostname for the email adapter</td></tr>
+<tr><td><code>EMAIL_IMAP_PORT</code></td><td>IMAP port</td></tr>
+<tr><td><code>EMAIL_SMTP_HOST</code></td><td>SMTP hostname for the email adapter</td></tr>
+<tr><td><code>EMAIL_SMTP_PORT</code></td><td>SMTP port</td></tr>
+<tr><td><code>EMAIL_ALLOWED_USERS</code></td><td>Comma-separated email addresses allowed to message the bot</td></tr>
+<tr><td><code>EMAIL_HOME_ADDRESS</code></td><td>Default recipient for proactive email delivery</td></tr>
+<tr><td><code>EMAIL_HOME_ADDRESS_NAME</code></td><td>Display name for the email home target</td></tr>
+<tr><td><code>EMAIL_POLL_INTERVAL</code></td><td>Email polling interval in seconds</td></tr>
+<tr><td><code>EMAIL_ALLOW_ALL_USERS</code></td><td>Allow all inbound email senders</td></tr>
+<tr><td><code>DINGTALK_CLIENT_ID</code></td><td>DingTalk bot AppKey from developer portal (<a href="https://open.dingtalk.com">open.dingtalk.com</a>)</td></tr>
+<tr><td><code>DINGTALK_CLIENT_SECRET</code></td><td>DingTalk bot AppSecret from developer portal</td></tr>
+<tr><td><code>DINGTALK_ALLOWED_USERS</code></td><td>Comma-separated DingTalk user IDs allowed to message the bot</td></tr>
+<tr><td><code>FEISHU_APP_ID</code></td><td>Feishu/Lark bot App ID from <a href="https://open.feishu.cn/">open.feishu.cn</a></td></tr>
+<tr><td><code>FEISHU_APP_SECRET</code></td><td>Feishu/Lark bot App Secret</td></tr>
+<tr><td><code>FEISHU_DOMAIN</code></td><td><code>feishu</code> (China) or <code>lark</code> (international). Default: <code>feishu</code></td></tr>
+<tr><td><code>FEISHU_CONNECTION_MODE</code></td><td><code>websocket</code> (recommended) or <code>webhook</code>. Default: <code>websocket</code></td></tr>
+<tr><td><code>FEISHU_ENCRYPT_KEY</code></td><td>Optional encryption key for webhook mode</td></tr>
+<tr><td><code>FEISHU_VERIFICATION_TOKEN</code></td><td>Optional verification token for webhook mode</td></tr>
+<tr><td><code>FEISHU_ALLOWED_USERS</code></td><td>Comma-separated Feishu user IDs allowed to message the bot</td></tr>
+<tr><td><code>FEISHU_HOME_CHANNEL</code></td><td>Feishu chat ID for cron delivery and notifications</td></tr>
+<tr><td><code>WECOM_BOT_ID</code></td><td>WeCom AI Bot ID from admin console</td></tr>
+<tr><td><code>WECOM_SECRET</code></td><td>WeCom AI Bot secret</td></tr>
+<tr><td><code>WECOM_WEBSOCKET_URL</code></td><td>Custom WebSocket URL (default: <code>wss://openws.work.weixin.qq.com</code>)</td></tr>
+<tr><td><code>WECOM_ALLOWED_USERS</code></td><td>Comma-separated WeCom user IDs allowed to message the bot</td></tr>
+<tr><td><code>WECOM_HOME_CHANNEL</code></td><td>WeCom chat ID for cron delivery and notifications</td></tr>
+<tr><td><code>WECOM_CALLBACK_CORP_ID</code></td><td>WeCom enterprise Corp ID for callback self-built app</td></tr>
+<tr><td><code>WECOM_CALLBACK_CORP_SECRET</code></td><td>Corp secret for the self-built app</td></tr>
+<tr><td><code>WECOM_CALLBACK_AGENT_ID</code></td><td>Agent ID of the self-built app</td></tr>
+<tr><td><code>WECOM_CALLBACK_TOKEN</code></td><td>Callback verification token</td></tr>
+<tr><td><code>WECOM_CALLBACK_ENCODING_AES_KEY</code></td><td>AES key for callback encryption</td></tr>
+<tr><td><code>WECOM_CALLBACK_HOST</code></td><td>Callback server bind address (default: <code>0.0.0.0</code>)</td></tr>
+<tr><td><code>WECOM_CALLBACK_PORT</code></td><td>Callback server port (default: <code>8645</code>)</td></tr>
+<tr><td><code>WECOM_CALLBACK_ALLOWED_USERS</code></td><td>Comma-separated user IDs for allowlist</td></tr>
+<tr><td><code>WECOM_CALLBACK_ALLOW_ALL_USERS</code></td><td>Set <code>true</code> to allow all users without an allowlist</td></tr>
+<tr><td><code>WEIXIN_ACCOUNT_ID</code></td><td>Weixin account ID obtained via QR login through iLink Bot API</td></tr>
+<tr><td><code>WEIXIN_TOKEN</code></td><td>Weixin authentication token obtained via QR login through iLink Bot API</td></tr>
+<tr><td><code>WEIXIN_BASE_URL</code></td><td>Override Weixin iLink Bot API base URL (default: <code>https://ilinkai.weixin.qq.com</code>)</td></tr>
+<tr><td><code>WEIXIN_CDN_BASE_URL</code></td><td>Override Weixin CDN base URL for media (default: <code>https://novac2c.cdn.weixin.qq.com/c2c</code>)</td></tr>
+<tr><td><code>WEIXIN_DM_POLICY</code></td><td>Direct message policy: <code>open</code>, <code>allowlist</code>, <code>pairing</code>, <code>disabled</code> (default: <code>open</code>)</td></tr>
+<tr><td><code>WEIXIN_GROUP_POLICY</code></td><td>Group message policy: <code>open</code>, <code>allowlist</code>, <code>disabled</code> (default: <code>disabled</code>)</td></tr>
+<tr><td><code>WEIXIN_ALLOWED_USERS</code></td><td>Comma-separated Weixin user IDs allowed to DM the bot</td></tr>
+<tr><td><code>WEIXIN_GROUP_ALLOWED_USERS</code></td><td>Comma-separated Weixin group IDs allowed to interact with the bot</td></tr>
+<tr><td><code>WEIXIN_HOME_CHANNEL</code></td><td>Weixin chat ID for cron delivery and notifications</td></tr>
+<tr><td><code>WEIXIN_HOME_CHANNEL_NAME</code></td><td>Display name for the Weixin home channel</td></tr>
+<tr><td><code>WEIXIN_ALLOW_ALL_USERS</code></td><td>Allow all Weixin users without an allowlist (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>BLUEBUBBLES_SERVER_URL</code></td><td>BlueBubbles server URL (e.g. <code>http://192.168.1.10:1234</code>)</td></tr>
+<tr><td><code>BLUEBUBBLES_PASSWORD</code></td><td>BlueBubbles server password</td></tr>
+<tr><td><code>BLUEBUBBLES_WEBHOOK_HOST</code></td><td>Webhook listener bind address (default: <code>127.0.0.1</code>)</td></tr>
+<tr><td><code>BLUEBUBBLES_WEBHOOK_PORT</code></td><td>Webhook listener port (default: <code>8645</code>)</td></tr>
+<tr><td><code>BLUEBUBBLES_HOME_CHANNEL</code></td><td>Phone/email for cron/notification delivery</td></tr>
+<tr><td><code>BLUEBUBBLES_ALLOWED_USERS</code></td><td>Comma-separated authorized users</td></tr>
+<tr><td><code>BLUEBUBBLES_ALLOW_ALL_USERS</code></td><td>Allow all users (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>MATTERMOST_URL</code></td><td>Mattermost server URL (e.g. <code>https://mm.example.com</code>)</td></tr>
+<tr><td><code>MATTERMOST_TOKEN</code></td><td>Bot token or personal access token for Mattermost</td></tr>
+<tr><td><code>MATTERMOST_ALLOWED_USERS</code></td><td>Comma-separated Mattermost user IDs allowed to message the bot</td></tr>
+<tr><td><code>MATTERMOST_HOME_CHANNEL</code></td><td>Channel ID for proactive message delivery (cron, notifications)</td></tr>
+<tr><td><code>MATTERMOST_REQUIRE_MENTION</code></td><td>Require <code>@mention</code> in channels (default: <code>true</code>). Set to <code>false</code> to respond to all messages.</td></tr>
+<tr><td><code>MATTERMOST_FREE_RESPONSE_CHANNELS</code></td><td>Comma-separated channel IDs where bot responds without <code>@mention</code></td></tr>
+<tr><td><code>MATTERMOST_REPLY_MODE</code></td><td>Reply style: <code>thread</code> (threaded replies) or <code>off</code> (flat messages, default)</td></tr>
+<tr><td><code>MATRIX_HOMESERVER</code></td><td>Matrix homeserver URL (e.g. <code>https://matrix.org</code>)</td></tr>
+<tr><td><code>MATRIX_ACCESS_TOKEN</code></td><td>Matrix access token for bot authentication</td></tr>
+<tr><td><code>MATRIX_USER_ID</code></td><td>Matrix user ID (e.g. <code>@hermes:matrix.org</code>) — required for password login, optional with access token</td></tr>
+<tr><td><code>MATRIX_PASSWORD</code></td><td>Matrix password (alternative to access token)</td></tr>
+<tr><td><code>MATRIX_ALLOWED_USERS</code></td><td>Comma-separated Matrix user IDs allowed to message the bot (e.g. <code>@alice:matrix.org</code>)</td></tr>
+<tr><td><code>MATRIX_HOME_ROOM</code></td><td>Room ID for proactive message delivery (e.g. <code>!abc123:matrix.org</code>)</td></tr>
+<tr><td><code>MATRIX_ENCRYPTION</code></td><td>Enable end-to-end encryption (<code>true</code>/<code>false</code>, default: <code>false</code>)</td></tr>
+<tr><td><code>MATRIX_REQUIRE_MENTION</code></td><td>Require <code>@mention</code> in rooms (default: <code>true</code>). Set to <code>false</code> to respond to all messages.</td></tr>
+<tr><td><code>MATRIX_FREE_RESPONSE_ROOMS</code></td><td>Comma-separated room IDs where bot responds without <code>@mention</code></td></tr>
+<tr><td><code>MATRIX_AUTO_THREAD</code></td><td>Auto-create threads for room messages (default: <code>true</code>)</td></tr>
+<tr><td><code>MATRIX_DM_MENTION_THREADS</code></td><td>Create a thread when bot is <code>@mentioned</code> in a DM (default: <code>false</code>)</td></tr>
+<tr><td><code>MATRIX_RECOVERY_KEY</code></td><td>Recovery key for cross-signing verification after device key rotation. Recommended for E2EE setups with cross-signing enabled.</td></tr>
+<tr><td><code>HASS_TOKEN</code></td><td>Home Assistant Long-Lived Access Token (enables HA platform + tools)</td></tr>
+<tr><td><code>HASS_URL</code></td><td>Home Assistant URL (default: <code>http://homeassistant.local:8123</code>)</td></tr>
+<tr><td><code>WEBHOOK_ENABLED</code></td><td>Enable the webhook platform adapter (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>WEBHOOK_PORT</code></td><td>HTTP server port for receiving webhooks (default: <code>8644</code>)</td></tr>
+<tr><td><code>WEBHOOK_SECRET</code></td><td>Global HMAC secret for webhook signature validation (used as fallback when routes don’t specify their own)</td></tr>
+<tr><td><code>API_SERVER_ENABLED</code></td><td>Enable the OpenAI-compatible API server (<code>true</code>/<code>false</code>). Runs alongside other platforms.</td></tr>
+<tr><td><code>API_SERVER_KEY</code></td><td>Bearer token for API server authentication. Enforced for non-loopback binding.</td></tr>
+<tr><td><code>API_SERVER_CORS_ORIGINS</code></td><td>Comma-separated browser origins allowed to call the API server directly (for example <code>http://localhost:3000,http://127.0.0.1:3000</code>). Default: disabled.</td></tr>
+<tr><td><code>API_SERVER_PORT</code></td><td>Port for the API server (default: <code>8642</code>)</td></tr>
+<tr><td><code>API_SERVER_HOST</code></td><td>Host/bind address for the API server (default: <code>127.0.0.1</code>). Use <code>0.0.0.0</code> for network access — requires <code>API_SERVER_KEY</code> and a narrow <code>API_SERVER_CORS_ORIGINS</code> allowlist.</td></tr>
+<tr><td><code>API_SERVER_MODEL_NAME</code></td><td>Model name advertised on <code>/v1/models</code>. Defaults to the profile name (or <code>hermes-agent</code> for the default profile). Useful for multi-user setups where frontends like Open WebUI need distinct model names per connection.</td></tr>
+<tr><td><code>MESSAGING_CWD</code></td><td>Working directory for terminal commands in messaging mode (default: <code>~</code>)</td></tr>
+<tr><td><code>GATEWAY_ALLOWED_USERS</code></td><td>Comma-separated user IDs allowed across all platforms</td></tr>
+<tr><td><code>GATEWAY_ALLOW_ALL_USERS</code></td><td>Allow all users without allowlists (<code>true</code>/<code>false</code>, default: <code>false</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="agent-behavior"><a class="header" href="#agent-behavior">Agent Behavior</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>HERMES_MAX_ITERATIONS</code></td><td>Max tool-calling iterations per conversation (default: 90)</td></tr>
+<tr><td><code>HERMES_TOOL_PROGRESS</code></td><td>Deprecated compatibility variable for tool progress display. Prefer <code>display.tool_progress</code> in <code>config.yaml</code>.</td></tr>
+<tr><td><code>HERMES_TOOL_PROGRESS_MODE</code></td><td>Deprecated compatibility variable for tool progress mode. Prefer <code>display.tool_progress</code> in <code>config.yaml</code>.</td></tr>
+<tr><td><code>HERMES_HUMAN_DELAY_MODE</code></td><td>Response pacing: <code>off</code>/<code>natural</code>/<code>custom</code></td></tr>
+<tr><td><code>HERMES_HUMAN_DELAY_MIN_MS</code></td><td>Custom delay range minimum (ms)</td></tr>
+<tr><td><code>HERMES_HUMAN_DELAY_MAX_MS</code></td><td>Custom delay range maximum (ms)</td></tr>
+<tr><td><code>HERMES_QUIET</code></td><td>Suppress non-essential output (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>HERMES_API_TIMEOUT</code></td><td>LLM API call timeout in seconds (default: <code>1800</code>)</td></tr>
+<tr><td><code>HERMES_STREAM_READ_TIMEOUT</code></td><td>Streaming socket read timeout in seconds (default: <code>120</code>). Auto-increased to <code>HERMES_API_TIMEOUT</code> for local providers. Increase if local LLMs time out during long code generation.</td></tr>
+<tr><td><code>HERMES_STREAM_STALE_TIMEOUT</code></td><td>Stale stream detection timeout in seconds (default: <code>180</code>). Auto-disabled for local providers. Triggers connection kill if no chunks arrive within this window.</td></tr>
+<tr><td><code>HERMES_EXEC_ASK</code></td><td>Enable execution approval prompts in gateway mode (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>HERMES_ENABLE_PROJECT_PLUGINS</code></td><td>Enable auto-discovery of repo-local plugins from <code>./.hermes/plugins/</code> (<code>true</code>/<code>false</code>, default: <code>false</code>)</td></tr>
+<tr><td><code>HERMES_BACKGROUND_NOTIFICATIONS</code></td><td>Background process notification mode in gateway: <code>all</code> (default), <code>result</code>, <code>error</code>, <code>off</code></td></tr>
+<tr><td><code>HERMES_EPHEMERAL_SYSTEM_PROMPT</code></td><td>Ephemeral system prompt injected at API-call time (never persisted to sessions)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="cron-scheduler"><a class="header" href="#cron-scheduler">Cron Scheduler</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>HERMES_CRON_TIMEOUT</code></td><td>Inactivity timeout for cron job agent runs in seconds (default: <code>600</code>). The agent can run indefinitely while actively calling tools or receiving stream tokens — this only triggers when idle. Set to <code>0</code> for unlimited.</td></tr>
+<tr><td><code>HERMES_CRON_SCRIPT_TIMEOUT</code></td><td>Timeout for pre-run scripts attached to cron jobs in seconds (default: <code>120</code>). Override for scripts that need longer execution (e.g., randomized delays for anti-bot timing). Also configurable via <code>cron.script_timeout_seconds</code> in <code>config.yaml</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="session-settings"><a class="header" href="#session-settings">Session Settings</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>SESSION_IDLE_MINUTES</code></td><td>Reset sessions after N minutes of inactivity (default: 1440)</td></tr>
+<tr><td><code>SESSION_RESET_HOUR</code></td><td>Daily reset hour in 24h format (default: 4 = 4am)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="context-compression-configyaml-only"><a class="header" href="#context-compression-configyaml-only">Context Compression (config.yaml only)</a></h2>
+<p>Context compression is configured exclusively through the <code>compression</code> section in <code>config.yaml</code> — there are no environment variables for it.</p>
+<pre><code class="language-yaml">compression:
+  enabled: true
+  threshold: 0.50
+  summary_model: ""                            # empty = use main configured model
+  summary_provider: auto
+  summary_base_url: null  # Custom OpenAI-compatible endpoint for summaries
+</code></pre>
+<h2 id="auxiliary-task-overrides"><a class="header" href="#auxiliary-task-overrides">Auxiliary Task Overrides</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>AUXILIARY_VISION_PROVIDER</code></td><td>Override provider for vision tasks</td></tr>
+<tr><td><code>AUXILIARY_VISION_MODEL</code></td><td>Override model for vision tasks</td></tr>
+<tr><td><code>AUXILIARY_VISION_BASE_URL</code></td><td>Direct OpenAI-compatible endpoint for vision tasks</td></tr>
+<tr><td><code>AUXILIARY_VISION_API_KEY</code></td><td>API key paired with <code>AUXILIARY_VISION_BASE_URL</code></td></tr>
+<tr><td><code>AUXILIARY_WEB_EXTRACT_PROVIDER</code></td><td>Override provider for web extraction/summarization</td></tr>
+<tr><td><code>AUXILIARY_WEB_EXTRACT_MODEL</code></td><td>Override model for web extraction/summarization</td></tr>
+<tr><td><code>AUXILIARY_WEB_EXTRACT_BASE_URL</code></td><td>Direct OpenAI-compatible endpoint for web extraction/summarization</td></tr>
+<tr><td><code>AUXILIARY_WEB_EXTRACT_API_KEY</code></td><td>API key paired with <code>AUXILIARY_WEB_EXTRACT_BASE_URL</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>For task-specific direct endpoints, Hermes uses the task’s configured API key or <code>OPENAI_API_KEY</code>. It does not reuse <code>OPENROUTER_API_KEY</code> for those custom endpoints.</p>
+<h2 id="fallback-model-configyaml-only"><a class="header" href="#fallback-model-configyaml-only">Fallback Model (config.yaml only)</a></h2>
+<p>The primary model fallback is configured exclusively through <code>config.yaml</code> — there are no environment variables for it. Add a <code>fallback_model</code> section with <code>provider</code> and <code>model</code> keys to enable automatic failover when your main model encounters errors.</p>
+<pre><code class="language-yaml">fallback_model:
+  provider: openrouter
+  model: anthropic/claude-sonnet-4
+</code></pre>
+<p>See <a href="/docs/user-guide/features/fallback-providers">Fallback Providers</a> for full details.</p>
+<h2 id="provider-routing-configyaml-only"><a class="header" href="#provider-routing-configyaml-only">Provider Routing (config.yaml only)</a></h2>
+<p>These go in <code>~/.hermes/config.yaml</code> under the <code>provider_routing</code> section:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>sort</code></td><td>Sort providers: <code>"price"</code> (default), <code>"throughput"</code>, or <code>"latency"</code></td></tr>
+<tr><td><code>only</code></td><td>List of provider slugs to allow (e.g., <code>["anthropic", "google"]</code>)</td></tr>
+<tr><td><code>ignore</code></td><td>List of provider slugs to skip</td></tr>
+<tr><td><code>order</code></td><td>List of provider slugs to try in order</td></tr>
+<tr><td><code>require_parameters</code></td><td>Only use providers supporting all request params (<code>true</code>/<code>false</code>)</td></tr>
+<tr><td><code>data_collection</code></td><td><code>"allow"</code> (default) or <code>"deny"</code> to exclude data-storing providers</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-use-hermes-config-set-to-set-environment-variables--it-automatically-saves-them-to-the-right-file-env-for-secrets-configyaml-for-everything-else"><a class="header" href="#tip-use-hermes-config-set-to-set-environment-variables--it-automatically-saves-them-to-the-right-file-env-for-secrets-configyaml-for-everything-else">:::tip
+Use <code>hermes config set</code> to set environment variables — it automatically saves them to the right file (<code>.env</code> for secrets, <code>config.yaml</code> for everything else).</a></dt>
+<dd>::</dd>
+</dl>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/reference/cli-commands.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/reference/faq.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/reference/cli-commands.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/reference/faq.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,1042 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Nix &amp; NixOS Setup - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/getting-started/nix-setup.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-3-title-nix--nixos-setup-description-install-and-deploy-hermes-agent-with-nix--from-quick-nix-run-to-fully-declarative-nixos-module-with-container-mode"><a class="header" href="#sidebar_position-3-title-nix--nixos-setup-description-install-and-deploy-hermes-agent-with-nix--from-quick-nix-run-to-fully-declarative-nixos-module-with-container-mode">sidebar_position: 3
+title: “Nix &amp; NixOS Setup”
+description: “Install and deploy Hermes Agent with Nix — from quick <code>nix run</code> to fully declarative NixOS module with container mode”</a></h2>
+<h1 id="nix--nixos-setup"><a class="header" href="#nix--nixos-setup">Nix &amp; NixOS Setup</a></h1>
+<p>Hermes Agent ships a Nix flake with three levels of integration:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Level</th><th>Who it’s for</th><th>What you get</th></tr>
+</thead>
+<tbody>
+<tr><td><strong><code>nix run</code> / <code>nix profile install</code></strong></td><td>Any Nix user (macOS, Linux)</td><td>Pre-built binary with all deps — then use the standard CLI workflow</td></tr>
+<tr><td><strong>NixOS module (native)</strong></td><td>NixOS server deployments</td><td>Declarative config, hardened systemd service, managed secrets</td></tr>
+<tr><td><strong>NixOS module (container)</strong></td><td>Agents that need self-modification</td><td>Everything above, plus a persistent Ubuntu container where the agent can <code>apt</code>/<code>pip</code>/<code>npm install</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>:::info What’s different from the standard install
+The <code>curl | bash</code> installer manages Python, Node, and dependencies itself. The Nix flake replaces all of that — every Python dependency is a Nix derivation built by <a href="https://github.com/pyproject-nix/uv2nix">uv2nix</a>, and runtime tools (Node.js, git, ripgrep, ffmpeg) are wrapped into the binary’s PATH. There is no runtime pip, no venv activation, no <code>npm install</code>.</p>
+<p><strong>For non-NixOS users</strong>, this only changes the install step. Everything after (<code>hermes setup</code>, <code>hermes gateway install</code>, config editing) works identically to the standard install.</p>
+<dl>
+<dt id="for-nixos-module-users-the-entire-lifecycle-is-different-configuration-lives-in-configurationnix-secrets-go-through-sops-nixagenix-the-service-is-a-systemd-unit-and-cli-config-commands-are-blocked-you-manage-hermes-the-same-way-you-manage-any-other-nixos-service"><a class="header" href="#for-nixos-module-users-the-entire-lifecycle-is-different-configuration-lives-in-configurationnix-secrets-go-through-sops-nixagenix-the-service-is-a-systemd-unit-and-cli-config-commands-are-blocked-you-manage-hermes-the-same-way-you-manage-any-other-nixos-service"><strong>For NixOS module users</strong>, the entire lifecycle is different: configuration lives in <code>configuration.nix</code>, secrets go through sops-nix/agenix, the service is a systemd unit, and CLI config commands are blocked. You manage hermes the same way you manage any other NixOS service.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li><strong>Nix with flakes enabled</strong> — <a href="https://install.determinate.systems">Determinate Nix</a> recommended (enables flakes by default)</li>
+<li><strong>API keys</strong> for the services you want to use (at minimum: an OpenRouter or Anthropic key)</li>
+</ul>
+<hr>
+<h2 id="quick-start-any-nix-user"><a class="header" href="#quick-start-any-nix-user">Quick Start (Any Nix User)</a></h2>
+<p>No clone needed. Nix fetches, builds, and runs everything:</p>
+<pre><code class="language-bash"># Run directly (builds on first use, cached after)
+nix run github:NousResearch/hermes-agent -- setup
+nix run github:NousResearch/hermes-agent -- chat
+
+# Or install persistently
+nix profile install github:NousResearch/hermes-agent
+hermes setup
+hermes chat
+</code></pre>
+<p>After <code>nix profile install</code>, <code>hermes</code>, <code>hermes-agent</code>, and <code>hermes-acp</code> are on your PATH. From here, the workflow is identical to the <a href="./installation.html">standard installation</a> — <code>hermes setup</code> walks you through provider selection, <code>hermes gateway install</code> sets up a launchd (macOS) or systemd user service, and config lives in <code>~/.hermes/</code>.</p>
+<details>
+<summary><strong>Building from a local clone</strong></summary>
+<pre><code class="language-bash">git clone https://github.com/NousResearch/hermes-agent.git
+cd hermes-agent
+nix build
+./result/bin/hermes setup
+</code></pre>
+</details>
+<hr>
+<h2 id="nixos-module"><a class="header" href="#nixos-module">NixOS Module</a></h2>
+<dl>
+<dt id="the-flake-exports-nixosmodulesdefault--a-full-nixos-service-module-that-declaratively-manages-user-creation-directories-config-generation-secrets-documents-and-service-lifecycle"><a class="header" href="#the-flake-exports-nixosmodulesdefault--a-full-nixos-service-module-that-declaratively-manages-user-creation-directories-config-generation-secrets-documents-and-service-lifecycle">The flake exports <code>nixosModules.default</code> — a full NixOS service module that declaratively manages user creation, directories, config generation, secrets, documents, and service lifecycle.</a></dt>
+<dd>
+<p>::note
+This module requires NixOS. For non-NixOS systems (macOS, other Linux distros), use <code>nix profile install</code> and the standard CLI workflow above.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="add-the-flake-input"><a class="header" href="#add-the-flake-input">Add the Flake Input</a></h3>
+<pre><code class="language-nix"># /etc/nixos/flake.nix (or your system flake)
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+  };
+
+  outputs = { nixpkgs, hermes-agent, ... }: {
+    nixosConfigurations.your-host = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        hermes-agent.nixosModules.default
+        ./configuration.nix
+      ];
+    };
+  };
+}
+</code></pre>
+<h3 id="minimal-configuration"><a class="header" href="#minimal-configuration">Minimal Configuration</a></h3>
+<pre><code class="language-nix"># configuration.nix
+{ config, ... }: {
+  services.hermes-agent = {
+    enable = true;
+    settings.model.default = "anthropic/claude-sonnet-4";
+    environmentFiles = [ config.sops.secrets."hermes-env".path ];
+    addToSystemPackages = true;
+  };
+}
+</code></pre>
+<dl>
+<dt id="thats-it-nixos-rebuild-switch-creates-the-hermes-user-generates-configyaml-wires-up-secrets-and-starts-the-gateway--a-long-running-service-that-connects-the-agent-to-messaging-platforms-telegram-discord-etc-and-listens-for-incoming-messages"><a class="header" href="#thats-it-nixos-rebuild-switch-creates-the-hermes-user-generates-configyaml-wires-up-secrets-and-starts-the-gateway--a-long-running-service-that-connects-the-agent-to-messaging-platforms-telegram-discord-etc-and-listens-for-incoming-messages">That’s it. <code>nixos-rebuild switch</code> creates the <code>hermes</code> user, generates <code>config.yaml</code>, wires up secrets, and starts the gateway — a long-running service that connects the agent to messaging platforms (Telegram, Discord, etc.) and listens for incoming messages.</a></dt>
+<dd>
+<p>::warning Secrets are required
+The <code>environmentFiles</code> line above assumes you have <a href="https://github.com/Mic92/sops-nix">sops-nix</a> or <a href="https://github.com/ryantm/agenix">agenix</a> configured. The file should contain at least one LLM provider key (e.g., <code>OPENROUTER_API_KEY=sk-or-...</code>). See <a href="#secrets-management">Secrets Management</a> for full setup. If you don’t have a secrets manager yet, you can use a plain file as a starting point — just ensure it’s not world-readable:</p>
+</dd>
+</dl>
+<pre><code class="language-bash">echo "OPENROUTER_API_KEY=sk-or-your-key" | sudo install -m 0600 -o hermes /dev/stdin /var/lib/hermes/env
+</code></pre>
+<pre><code class="language-nix">services.hermes-agent.environmentFiles = [ "/var/lib/hermes/env" ];
+</code></pre>
+<dl>
+<dt id=""><a class="header" href="#">:::</a></dt>
+<dd>
+<p>::tip addToSystemPackages
+Setting <code>addToSystemPackages = true</code> does two things: puts the <code>hermes</code> CLI on your system PATH <strong>and</strong> sets <code>HERMES_HOME</code> system-wide so the interactive CLI shares state (sessions, skills, cron) with the gateway service. Without it, running <code>hermes</code> in your shell creates a separate <code>~/.hermes/</code> directory.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::info Container-aware CLI
+When <code>container.enable = true</code> and <code>addToSystemPackages = true</code>, <strong>every</strong> <code>hermes</code> command on the host automatically routes into the managed container. This means your interactive CLI session runs inside the same environment as the gateway service — with access to all container-installed packages and tools.</p>
+</dd>
+</dl>
+<ul>
+<li>The routing is transparent: <code>hermes chat</code>, <code>hermes sessions list</code>, <code>hermes version</code>, etc. all exec into the container under the hood</li>
+<li>All CLI flags are forwarded as-is</li>
+<li>If the container isn’t running, the CLI retries briefly (5s with a spinner for interactive use, 10s silently for scripts) then fails with a clear error — no silent fallback</li>
+<li>For developers working on the hermes codebase, set <code>HERMES_DEV=1</code> to bypass container routing and run the local checkout directly</li>
+</ul>
+<p>Set <code>container.hostUsers</code> to create a <code>~/.hermes</code> symlink to the service state directory, so the host CLI and the container share sessions, config, and memories:</p>
+<pre><code class="language-nix">services.hermes-agent = {
+  container.enable = true;
+  container.hostUsers = [ "your-username" ];
+  addToSystemPackages = true;
+};
+</code></pre>
+<p>Users listed in <code>hostUsers</code> are automatically added to the <code>hermes</code> group for file permission access.</p>
+<p><strong>Podman users:</strong> The NixOS service runs the container as root. Docker users get access via the <code>docker</code> group socket, but Podman’s rootful containers require sudo. Grant passwordless sudo for your container runtime:</p>
+<pre><code class="language-nix">security.sudo.extraRules = [{
+  users = [ "your-username" ];
+  commands = [{
+    command = "/run/current-system/sw/bin/podman";
+    options = [ "NOPASSWD" ];
+  }];
+}];
+</code></pre>
+<dl>
+<dt id="the-cli-auto-detects-when-sudo-is-needed-and-uses-it-transparently-without-this-youll-need-to-run-sudo-hermes-chat-manually"><a class="header" href="#the-cli-auto-detects-when-sudo-is-needed-and-uses-it-transparently-without-this-youll-need-to-run-sudo-hermes-chat-manually">The CLI auto-detects when sudo is needed and uses it transparently. Without this, you’ll need to run <code>sudo hermes chat</code> manually.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="verify-it-works"><a class="header" href="#verify-it-works">Verify It Works</a></h3>
+<p>After <code>nixos-rebuild switch</code>, check that the service is running:</p>
+<pre><code class="language-bash"># Check service status
+systemctl status hermes-agent
+
+# Watch logs (Ctrl+C to stop)
+journalctl -u hermes-agent -f
+
+# If addToSystemPackages is true, test the CLI
+hermes version
+hermes config       # shows the generated config
+</code></pre>
+<h3 id="choosing-a-deployment-mode"><a class="header" href="#choosing-a-deployment-mode">Choosing a Deployment Mode</a></h3>
+<p>The module supports two modes, controlled by <code>container.enable</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th><strong>Native</strong> (default)</th><th><strong>Container</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>How it runs</td><td>Hardened systemd service on the host</td><td>Persistent Ubuntu container with <code>/nix/store</code> bind-mounted</td></tr>
+<tr><td>Security</td><td><code>NoNewPrivileges</code>, <code>ProtectSystem=strict</code>, <code>PrivateTmp</code></td><td>Container isolation, runs as unprivileged user inside</td></tr>
+<tr><td>Agent can self-install packages</td><td>No — only tools on the Nix-provided PATH</td><td>Yes — <code>apt</code>, <code>pip</code>, <code>npm</code> installs persist across restarts</td></tr>
+<tr><td>Config surface</td><td>Same</td><td>Same</td></tr>
+<tr><td>When to choose</td><td>Standard deployments, maximum security, reproducibility</td><td>Agent needs runtime package installation, mutable environment, experimental tools</td></tr>
+</tbody>
+</table>
+</div>
+<p>To enable container mode, add one line:</p>
+<pre><code class="language-nix">{
+  services.hermes-agent = {
+    enable = true;
+    container.enable = true;
+    # ... rest of config is identical
+  };
+}
+</code></pre>
+<dl>
+<dt id="info-container-mode-auto-enables-virtualisationdockerenable-via-mkdefault-if-you-use-podman-instead-set-containerbackend--podman-and-virtualisationdockerenable--false"><a class="header" href="#info-container-mode-auto-enables-virtualisationdockerenable-via-mkdefault-if-you-use-podman-instead-set-containerbackend--podman-and-virtualisationdockerenable--false">:::info
+Container mode auto-enables <code>virtualisation.docker.enable</code> via <code>mkDefault</code>. If you use Podman instead, set <code>container.backend = "podman"</code> and <code>virtualisation.docker.enable = false</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<h3 id="declarative-settings"><a class="header" href="#declarative-settings">Declarative Settings</a></h3>
+<p>The <code>settings</code> option accepts an arbitrary attrset that is rendered as <code>config.yaml</code>. It supports deep merging across multiple module definitions (via <code>lib.recursiveUpdate</code>), so you can split config across files:</p>
+<pre><code class="language-nix"># base.nix
+services.hermes-agent.settings = {
+  model.default = "anthropic/claude-sonnet-4";
+  toolsets = [ "all" ];
+  terminal = { backend = "local"; timeout = 180; };
+};
+
+# personality.nix
+services.hermes-agent.settings = {
+  display = { compact = false; personality = "kawaii"; };
+  memory = { memory_enabled = true; user_profile_enabled = true; };
+};
+</code></pre>
+<dl>
+<dt id="both-are-deep-merged-at-evaluation-time-nix-declared-keys-always-win-over-keys-in-an-existing-configyaml-on-disk-but-user-added-keys-that-nix-doesnt-touch-are-preserved-this-means-if-the-agent-or-a-manual-edit-adds-keys-like-skillsdisabled-or-streamingenabled-they-survive-nixos-rebuild-switch"><a class="header" href="#both-are-deep-merged-at-evaluation-time-nix-declared-keys-always-win-over-keys-in-an-existing-configyaml-on-disk-but-user-added-keys-that-nix-doesnt-touch-are-preserved-this-means-if-the-agent-or-a-manual-edit-adds-keys-like-skillsdisabled-or-streamingenabled-they-survive-nixos-rebuild-switch">Both are deep-merged at evaluation time. Nix-declared keys always win over keys in an existing <code>config.yaml</code> on disk, but <strong>user-added keys that Nix doesn’t touch are preserved</strong>. This means if the agent or a manual edit adds keys like <code>skills.disabled</code> or <code>streaming.enabled</code>, they survive <code>nixos-rebuild switch</code>.</a></dt>
+<dd>
+<p>::note Model naming
+<code>settings.model.default</code> uses the model identifier your provider expects. With <a href="https://openrouter.ai">OpenRouter</a> (the default), these look like <code>"anthropic/claude-sonnet-4"</code> or <code>"google/gemini-3-flash"</code>. If you’re using a provider directly (Anthropic, OpenAI), set <code>settings.model.base_url</code> to point at their API and use their native model IDs (e.g., <code>"claude-sonnet-4-20250514"</code>). When no <code>base_url</code> is set, Hermes defaults to OpenRouter.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip Discovering available config keys
+Run <code>nix build .#configKeys &amp;&amp; cat result</code> to see every leaf config key extracted from Python’s <code>DEFAULT_CONFIG</code>. You can paste your existing <code>config.yaml</code> into the <code>settings</code> attrset — the structure maps 1:1.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<details>
+<summary><strong>Full example: all commonly customized settings</strong></summary>
+<pre><code class="language-nix">{ config, ... }: {
+  services.hermes-agent = {
+    enable = true;
+    container.enable = true;
+
+    # ── Model ──────────────────────────────────────────────────────────
+    settings = {
+      model = {
+        base_url = "https://openrouter.ai/api/v1";
+        default = "anthropic/claude-opus-4.6";
+      };
+      toolsets = [ "all" ];
+      max_turns = 100;
+      terminal = { backend = "local"; cwd = "."; timeout = 180; };
+      compression = {
+        enabled = true;
+        threshold = 0.85;
+        summary_model = "google/gemini-3-flash-preview";
+      };
+      memory = { memory_enabled = true; user_profile_enabled = true; };
+      display = { compact = false; personality = "kawaii"; };
+      agent = { max_turns = 60; verbose = false; };
+    };
+
+    # ── Secrets ────────────────────────────────────────────────────────
+    environmentFiles = [ config.sops.secrets."hermes-env".path ];
+
+    # ── Documents ──────────────────────────────────────────────────────
+    documents = {
+      "SOUL.md" = builtins.readFile /home/user/.hermes/SOUL.md;
+      "USER.md" = ./documents/USER.md;
+    };
+
+    # ── MCP Servers ────────────────────────────────────────────────────
+    mcpServers.filesystem = {
+      command = "npx";
+      args = [ "-y" "@modelcontextprotocol/server-filesystem" "/data/workspace" ];
+    };
+
+    # ── Container options ──────────────────────────────────────────────
+    container = {
+      image = "ubuntu:24.04";
+      backend = "docker";
+      hostUsers = [ "your-username" ];
+      extraVolumes = [ "/home/user/projects:/projects:rw" ];
+      extraOptions = [ "--gpus" "all" ];
+    };
+
+    # ── Service tuning ─────────────────────────────────────────────────
+    addToSystemPackages = true;
+    extraArgs = [ "--verbose" ];
+    restart = "always";
+    restartSec = 5;
+  };
+}
+</code></pre>
+</details>
+<h3 id="escape-hatch-bring-your-own-config"><a class="header" href="#escape-hatch-bring-your-own-config">Escape Hatch: Bring Your Own Config</a></h3>
+<p>If you’d rather manage <code>config.yaml</code> entirely outside Nix, use <code>configFile</code>:</p>
+<pre><code class="language-nix">services.hermes-agent.configFile = /etc/hermes/config.yaml;
+</code></pre>
+<p>This bypasses <code>settings</code> entirely — no merge, no generation. The file is copied as-is to <code>$HERMES_HOME/config.yaml</code> on each activation.</p>
+<h3 id="customization-cheatsheet"><a class="header" href="#customization-cheatsheet">Customization Cheatsheet</a></h3>
+<p>Quick reference for the most common things Nix users want to customize:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>I want to…</th><th>Option</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Change the LLM model</td><td><code>settings.model.default</code></td><td><code>"anthropic/claude-sonnet-4"</code></td></tr>
+<tr><td>Use a different provider endpoint</td><td><code>settings.model.base_url</code></td><td><code>"https://openrouter.ai/api/v1"</code></td></tr>
+<tr><td>Add API keys</td><td><code>environmentFiles</code></td><td><code>[ config.sops.secrets."hermes-env".path ]</code></td></tr>
+<tr><td>Give the agent a personality</td><td><code>documents."SOUL.md"</code></td><td><code>builtins.readFile ./my-soul.md</code></td></tr>
+<tr><td>Add MCP tool servers</td><td><code>mcpServers.&lt;name&gt;</code></td><td>See <a href="#mcp-servers">MCP Servers</a></td></tr>
+<tr><td>Mount host directories into container</td><td><code>container.extraVolumes</code></td><td><code>[ "/data:/data:rw" ]</code></td></tr>
+<tr><td>Pass GPU access to container</td><td><code>container.extraOptions</code></td><td><code>[ "--gpus" "all" ]</code></td></tr>
+<tr><td>Use Podman instead of Docker</td><td><code>container.backend</code></td><td><code>"podman"</code></td></tr>
+<tr><td>Share state between host CLI and container</td><td><code>container.hostUsers</code></td><td><code>[ "sidbin" ]</code></td></tr>
+<tr><td>Add tools to the service PATH (native only)</td><td><code>extraPackages</code></td><td><code>[ pkgs.pandoc pkgs.imagemagick ]</code></td></tr>
+<tr><td>Use a custom base image</td><td><code>container.image</code></td><td><code>"ubuntu:24.04"</code></td></tr>
+<tr><td>Override the hermes package</td><td><code>package</code></td><td><code>inputs.hermes-agent.packages.${system}.default.override { ... }</code></td></tr>
+<tr><td>Change state directory</td><td><code>stateDir</code></td><td><code>"/opt/hermes"</code></td></tr>
+<tr><td>Set the agent’s working directory</td><td><code>workingDirectory</code></td><td><code>"/home/user/projects"</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="secrets-management"><a class="header" href="#secrets-management">Secrets Management</a></h2>
+<dl>
+<dt id="danger-never-put-api-keys-in-settings-or-environment-values-in-nix-expressions-end-up-in-nixstore-which-is-world-readable-always-use-environmentfiles-with-a-secrets-manager"><a class="header" href="#danger-never-put-api-keys-in-settings-or-environment-values-in-nix-expressions-end-up-in-nixstore-which-is-world-readable-always-use-environmentfiles-with-a-secrets-manager">:::danger Never put API keys in <code>settings</code> or <code>environment</code>
+Values in Nix expressions end up in <code>/nix/store</code>, which is world-readable. Always use <code>environmentFiles</code> with a secrets manager.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Both <code>environment</code> (non-secret vars) and <code>environmentFiles</code> (secret files) are merged into <code>$HERMES_HOME/.env</code> at activation time (<code>nixos-rebuild switch</code>). Hermes reads this file on every startup, so changes take effect with a <code>systemctl restart hermes-agent</code> — no container recreation needed.</p>
+<h3 id="sops-nix"><a class="header" href="#sops-nix">sops-nix</a></h3>
+<pre><code class="language-nix">{
+  sops = {
+    defaultSopsFile = ./secrets/hermes.yaml;
+    age.keyFile = "/home/user/.config/sops/age/keys.txt";
+    secrets."hermes-env" = { format = "yaml"; };
+  };
+
+  services.hermes-agent.environmentFiles = [
+    config.sops.secrets."hermes-env".path
+  ];
+}
+</code></pre>
+<p>The secrets file contains key-value pairs:</p>
+<pre><code class="language-yaml"># secrets/hermes.yaml (encrypted with sops)
+hermes-env: |
+    OPENROUTER_API_KEY=sk-or-...
+    TELEGRAM_BOT_TOKEN=123456:ABC...
+    ANTHROPIC_API_KEY=sk-ant-...
+</code></pre>
+<h3 id="agenix"><a class="header" href="#agenix">agenix</a></h3>
+<pre><code class="language-nix">{
+  age.secrets.hermes-env.file = ./secrets/hermes-env.age;
+
+  services.hermes-agent.environmentFiles = [
+    config.age.secrets.hermes-env.path
+  ];
+}
+</code></pre>
+<h3 id="oauth--auth-seeding"><a class="header" href="#oauth--auth-seeding">OAuth / Auth Seeding</a></h3>
+<p>For platforms requiring OAuth (e.g., Discord), use <code>authFile</code> to seed credentials on first deploy:</p>
+<pre><code class="language-nix">{
+  services.hermes-agent = {
+    authFile = config.sops.secrets."hermes/auth.json".path;
+    # authFileForceOverwrite = true;  # overwrite on every activation
+  };
+}
+</code></pre>
+<p>The file is only copied if <code>auth.json</code> doesn’t already exist (unless <code>authFileForceOverwrite = true</code>). Runtime OAuth token refreshes are written to the state directory and preserved across rebuilds.</p>
+<hr>
+<h2 id="documents"><a class="header" href="#documents">Documents</a></h2>
+<p>The <code>documents</code> option installs files into the agent’s working directory (the <code>workingDirectory</code>, which the agent reads as its workspace). Hermes looks for specific filenames by convention:</p>
+<ul>
+<li><strong><code>SOUL.md</code></strong> — the agent’s system prompt / personality. Hermes reads this on startup and uses it as persistent instructions that shape its behavior across all conversations.</li>
+<li><strong><code>USER.md</code></strong> — context about the user the agent is interacting with.</li>
+<li>Any other files you place here are visible to the agent as workspace files.</li>
+</ul>
+<pre><code class="language-nix">{
+  services.hermes-agent.documents = {
+    "SOUL.md" = ''
+      You are a helpful research assistant specializing in NixOS packaging.
+      Always cite sources and prefer reproducible solutions.
+    '';
+    "USER.md" = ./documents/USER.md;  # path reference, copied from Nix store
+  };
+}
+</code></pre>
+<p>Values can be inline strings or path references. Files are installed on every <code>nixos-rebuild switch</code>.</p>
+<hr>
+<h2 id="mcp-servers"><a class="header" href="#mcp-servers">MCP Servers</a></h2>
+<p>The <code>mcpServers</code> option declaratively configures <a href="https://modelcontextprotocol.io">MCP (Model Context Protocol)</a> servers. Each server uses either <strong>stdio</strong> (local command) or <strong>HTTP</strong> (remote URL) transport.</p>
+<h3 id="stdio-transport-local-servers"><a class="header" href="#stdio-transport-local-servers">Stdio Transport (Local Servers)</a></h3>
+<pre><code class="language-nix">{
+  services.hermes-agent.mcpServers = {
+    filesystem = {
+      command = "npx";
+      args = [ "-y" "@modelcontextprotocol/server-filesystem" "/data/workspace" ];
+    };
+    github = {
+      command = "npx";
+      args = [ "-y" "@modelcontextprotocol/server-github" ];
+      env.GITHUB_PERSONAL_ACCESS_TOKEN = "\${GITHUB_TOKEN}"; # resolved from .env
+    };
+  };
+}
+</code></pre>
+<dl>
+<dt id="tip-environment-variables-in-env-values-are-resolved-from-hermes_homeenv-at-runtime-use-environmentfiles-to-inject-secrets--never-put-tokens-directly-in-nix-config"><a class="header" href="#tip-environment-variables-in-env-values-are-resolved-from-hermes_homeenv-at-runtime-use-environmentfiles-to-inject-secrets--never-put-tokens-directly-in-nix-config">:::tip
+Environment variables in <code>env</code> values are resolved from <code>$HERMES_HOME/.env</code> at runtime. Use <code>environmentFiles</code> to inject secrets — never put tokens directly in Nix config.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="http-transport-remote-servers"><a class="header" href="#http-transport-remote-servers">HTTP Transport (Remote Servers)</a></h3>
+<pre><code class="language-nix">{
+  services.hermes-agent.mcpServers.remote-api = {
+    url = "https://mcp.example.com/v1/mcp";
+    headers.Authorization = "Bearer \${MCP_REMOTE_API_KEY}";
+    timeout = 180;
+  };
+}
+</code></pre>
+<h3 id="http-transport-with-oauth"><a class="header" href="#http-transport-with-oauth">HTTP Transport with OAuth</a></h3>
+<p>Set <code>auth = "oauth"</code> for servers using OAuth 2.1. Hermes implements the full PKCE flow — metadata discovery, dynamic client registration, token exchange, and automatic refresh.</p>
+<pre><code class="language-nix">{
+  services.hermes-agent.mcpServers.my-oauth-server = {
+    url = "https://mcp.example.com/mcp";
+    auth = "oauth";
+  };
+}
+</code></pre>
+<p>Tokens are stored in <code>$HERMES_HOME/mcp-tokens/&lt;server-name&gt;.json</code> and persist across restarts and rebuilds.</p>
+<details>
+<summary><strong>Initial OAuth authorization on headless servers</strong></summary>
+<p>The first OAuth authorization requires a browser-based consent flow. In a headless deployment, Hermes prints the authorization URL to stdout/logs instead of opening a browser.</p>
+<p><strong>Option A: Interactive bootstrap</strong> — run the flow once via <code>docker exec</code> (container) or <code>sudo -u hermes</code> (native):</p>
+<pre><code class="language-bash"># Container mode
+docker exec -it hermes-agent \
+  hermes mcp add my-oauth-server --url https://mcp.example.com/mcp --auth oauth
+
+# Native mode
+sudo -u hermes HERMES_HOME=/var/lib/hermes/.hermes \
+  hermes mcp add my-oauth-server --url https://mcp.example.com/mcp --auth oauth
+</code></pre>
+<p>The container uses <code>--network=host</code>, so the OAuth callback listener on <code>127.0.0.1</code> is reachable from the host browser.</p>
+<p><strong>Option B: Pre-seed tokens</strong> — complete the flow on a workstation, then copy tokens:</p>
+<pre><code class="language-bash">hermes mcp add my-oauth-server --url https://mcp.example.com/mcp --auth oauth
+scp ~/.hermes/mcp-tokens/my-oauth-server{,.client}.json \
+    server:/var/lib/hermes/.hermes/mcp-tokens/
+# Ensure: chown hermes:hermes, chmod 0600
+</code></pre>
+</details>
+<h3 id="sampling-server-initiated-llm-requests"><a class="header" href="#sampling-server-initiated-llm-requests">Sampling (Server-Initiated LLM Requests)</a></h3>
+<p>Some MCP servers can request LLM completions from the agent:</p>
+<pre><code class="language-nix">{
+  services.hermes-agent.mcpServers.analysis = {
+    command = "npx";
+    args = [ "-y" "analysis-server" ];
+    sampling = {
+      enabled = true;
+      model = "google/gemini-3-flash";
+      max_tokens_cap = 4096;
+      timeout = 30;
+      max_rpm = 10;
+    };
+  };
+}
+</code></pre>
+<hr>
+<h2 id="managed-mode"><a class="header" href="#managed-mode">Managed Mode</a></h2>
+<p>When hermes runs via the NixOS module, the following CLI commands are <strong>blocked</strong> with a descriptive error pointing you to <code>configuration.nix</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Blocked command</th><th>Why</th></tr>
+</thead>
+<tbody>
+<tr><td><code>hermes setup</code></td><td>Config is declarative — edit <code>settings</code> in your Nix config</td></tr>
+<tr><td><code>hermes config edit</code></td><td>Config is generated from <code>settings</code></td></tr>
+<tr><td><code>hermes config set &lt;key&gt; &lt;value&gt;</code></td><td>Config is generated from <code>settings</code></td></tr>
+<tr><td><code>hermes gateway install</code></td><td>The systemd service is managed by NixOS</td></tr>
+<tr><td><code>hermes gateway uninstall</code></td><td>The systemd service is managed by NixOS</td></tr>
+</tbody>
+</table>
+</div>
+<p>This prevents drift between what Nix declares and what’s on disk. Detection uses two signals:</p>
+<ol>
+<li><strong><code>HERMES_MANAGED=true</code></strong> environment variable — set by the systemd service, visible to the gateway process</li>
+<li><strong><code>.managed</code> marker file</strong> in <code>HERMES_HOME</code> — set by the activation script, visible to interactive shells (e.g., <code>docker exec -it hermes-agent hermes config set ...</code> is also blocked)</li>
+</ol>
+<p>To change configuration, edit your Nix config and run <code>sudo nixos-rebuild switch</code>.</p>
+<hr>
+<h2 id="container-architecture"><a class="header" href="#container-architecture">Container Architecture</a></h2>
+<dl>
+<dt id="info-this-section-is-only-relevant-if-youre-using-containerenable--true-skip-it-for-native-mode-deployments"><a class="header" href="#info-this-section-is-only-relevant-if-youre-using-containerenable--true-skip-it-for-native-mode-deployments">:::info
+This section is only relevant if you’re using <code>container.enable = true</code>. Skip it for native mode deployments.</a></dt>
+<dd>::</dd>
+</dl>
+<p>When container mode is enabled, hermes runs inside a persistent Ubuntu container with the Nix-built binary bind-mounted read-only from the host:</p>
+<pre><code>Host                                    Container
+────                                    ─────────
+/nix/store/...-hermes-agent-0.1.0  ──►  /nix/store/... (ro)
+~/.hermes -&gt; /var/lib/hermes/.hermes       (symlink bridge, per hostUsers)
+/var/lib/hermes/                    ──►  /data/          (rw)
+  ├── current-package -&gt; /nix/store/...    (symlink, updated each rebuild)
+  ├── .gc-root -&gt; /nix/store/...           (prevents nix-collect-garbage)
+  ├── .container-identity                  (sha256 hash, triggers recreation)
+  ├── .hermes/                             (HERMES_HOME)
+  │   ├── .env                             (merged from environment + environmentFiles)
+  │   ├── config.yaml                      (Nix-generated, deep-merged by activation)
+  │   ├── .managed                         (marker file)
+  │   ├── .container-mode                  (routing metadata: backend, exec_user, etc.)
+  │   ├── state.db, sessions/, memories/   (runtime state)
+  │   └── mcp-tokens/                      (OAuth tokens for MCP servers)
+  ├── home/                                ──►  /home/hermes    (rw)
+  └── workspace/                           (MESSAGING_CWD)
+      ├── SOUL.md                          (from documents option)
+      └── (agent-created files)
+
+Container writable layer (apt/pip/npm):   /usr, /usr/local, /tmp
+</code></pre>
+<p>The Nix-built binary works inside the Ubuntu container because <code>/nix/store</code> is bind-mounted — it brings its own interpreter and all dependencies, so there’s no reliance on the container’s system libraries. The container entrypoint resolves through a <code>current-package</code> symlink: <code>/data/current-package/bin/hermes gateway run --replace</code>. On <code>nixos-rebuild switch</code>, only the symlink is updated — the container keeps running.</p>
+<h3 id="what-persists-across-what"><a class="header" href="#what-persists-across-what">What Persists Across What</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Event</th><th>Container recreated?</th><th><code>/data</code> (state)</th><th><code>/home/hermes</code></th><th>Writable layer (<code>apt</code>/<code>pip</code>/<code>npm</code>)</th></tr>
+</thead>
+<tbody>
+<tr><td><code>systemctl restart hermes-agent</code></td><td>No</td><td>Persists</td><td>Persists</td><td>Persists</td></tr>
+<tr><td><code>nixos-rebuild switch</code> (code change)</td><td>No (symlink updated)</td><td>Persists</td><td>Persists</td><td>Persists</td></tr>
+<tr><td>Host reboot</td><td>No</td><td>Persists</td><td>Persists</td><td>Persists</td></tr>
+<tr><td><code>nix-collect-garbage</code></td><td>No (GC root)</td><td>Persists</td><td>Persists</td><td>Persists</td></tr>
+<tr><td>Image change (<code>container.image</code>)</td><td><strong>Yes</strong></td><td>Persists</td><td>Persists</td><td><strong>Lost</strong></td></tr>
+<tr><td>Volume/options change</td><td><strong>Yes</strong></td><td>Persists</td><td>Persists</td><td><strong>Lost</strong></td></tr>
+<tr><td><code>environment</code>/<code>environmentFiles</code> change</td><td>No</td><td>Persists</td><td>Persists</td><td>Persists</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="the-container-is-only-recreated-when-its-identity-hash-changes-the-hash-covers-schema-version-image-extravolumes-extraoptions-and-the-entrypoint-script-changes-to-environment-variables-settings-documents-or-the-hermes-package-itself-do-not-trigger-recreation"><a class="header" href="#the-container-is-only-recreated-when-its-identity-hash-changes-the-hash-covers-schema-version-image-extravolumes-extraoptions-and-the-entrypoint-script-changes-to-environment-variables-settings-documents-or-the-hermes-package-itself-do-not-trigger-recreation">The container is only recreated when its <strong>identity hash</strong> changes. The hash covers: schema version, image, <code>extraVolumes</code>, <code>extraOptions</code>, and the entrypoint script. Changes to environment variables, settings, documents, or the hermes package itself do <strong>not</strong> trigger recreation.</a></dt>
+<dd>
+<p>::warning Writable layer loss
+When the identity hash changes (image upgrade, new volumes, new container options), the container is destroyed and recreated from a fresh pull of <code>container.image</code>. Any <code>apt install</code>, <code>pip install</code>, or <code>npm install</code> packages in the writable layer are lost. State in <code>/data</code> and <code>/home/hermes</code> is preserved (these are bind mounts).</p>
+</dd>
+<dt id="if-the-agent-relies-on-specific-packages-consider-baking-them-into-a-custom-image-containerimage--my-registryhermes-baselatest-or-scripting-their-installation-in-the-agents-soulmd"><a class="header" href="#if-the-agent-relies-on-specific-packages-consider-baking-them-into-a-custom-image-containerimage--my-registryhermes-baselatest-or-scripting-their-installation-in-the-agents-soulmd">If the agent relies on specific packages, consider baking them into a custom image (<code>container.image = "my-registry/hermes-base:latest"</code>) or scripting their installation in the agent’s SOUL.md.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="gc-root-protection"><a class="header" href="#gc-root-protection">GC Root Protection</a></h3>
+<p>The <code>preStart</code> script creates a GC root at <code>${stateDir}/.gc-root</code> pointing to the current hermes package. This prevents <code>nix-collect-garbage</code> from removing the running binary. If the GC root somehow breaks, restarting the service recreates it.</p>
+<hr>
+<h2 id="development"><a class="header" href="#development">Development</a></h2>
+<h3 id="dev-shell"><a class="header" href="#dev-shell">Dev Shell</a></h3>
+<p>The flake provides a development shell with Python 3.11, uv, Node.js, and all runtime tools:</p>
+<pre><code class="language-bash">cd hermes-agent
+nix develop
+
+# Shell provides:
+#   - Python 3.11 + uv (deps installed into .venv on first entry)
+#   - Node.js 20, ripgrep, git, openssh, ffmpeg on PATH
+#   - Stamp-file optimization: re-entry is near-instant if deps haven't changed
+
+hermes setup
+hermes chat
+</code></pre>
+<h3 id="direnv-recommended"><a class="header" href="#direnv-recommended">direnv (Recommended)</a></h3>
+<p>The included <code>.envrc</code> activates the dev shell automatically:</p>
+<pre><code class="language-bash">cd hermes-agent
+direnv allow    # one-time
+# Subsequent entries are near-instant (stamp file skips dep install)
+</code></pre>
+<h3 id="flake-checks"><a class="header" href="#flake-checks">Flake Checks</a></h3>
+<p>The flake includes build-time verification that runs in CI and locally:</p>
+<pre><code class="language-bash"># Run all checks
+nix flake check
+
+# Individual checks
+nix build .#checks.x86_64-linux.package-contents   # binaries exist + version
+nix build .#checks.x86_64-linux.entry-points-sync  # pyproject.toml ↔ Nix package sync
+nix build .#checks.x86_64-linux.cli-commands        # gateway/config subcommands
+nix build .#checks.x86_64-linux.managed-guard       # HERMES_MANAGED blocks mutation
+nix build .#checks.x86_64-linux.bundled-skills      # skills present in package
+nix build .#checks.x86_64-linux.config-roundtrip    # merge script preserves user keys
+</code></pre>
+<details>
+<summary><strong>What each check verifies</strong></summary>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Check</th><th>What it tests</th></tr>
+</thead>
+<tbody>
+<tr><td><code>package-contents</code></td><td><code>hermes</code> and <code>hermes-agent</code> binaries exist and <code>hermes version</code> runs</td></tr>
+<tr><td><code>entry-points-sync</code></td><td>Every <code>[project.scripts]</code> entry in <code>pyproject.toml</code> has a wrapped binary in the Nix package</td></tr>
+<tr><td><code>cli-commands</code></td><td><code>hermes --help</code> exposes <code>gateway</code> and <code>config</code> subcommands</td></tr>
+<tr><td><code>managed-guard</code></td><td><code>HERMES_MANAGED=true hermes config set ...</code> prints the NixOS error</td></tr>
+<tr><td><code>bundled-skills</code></td><td>Skills directory exists, contains SKILL.md files, <code>HERMES_BUNDLED_SKILLS</code> is set in wrapper</td></tr>
+<tr><td><code>config-roundtrip</code></td><td>7 merge scenarios: fresh install, Nix override, user key preservation, mixed merge, MCP additive merge, nested deep merge, idempotency</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<hr>
+<h2 id="options-reference"><a class="header" href="#options-reference">Options Reference</a></h2>
+<h3 id="core"><a class="header" href="#core">Core</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>enable</code></td><td><code>bool</code></td><td><code>false</code></td><td>Enable the hermes-agent service</td></tr>
+<tr><td><code>package</code></td><td><code>package</code></td><td><code>hermes-agent</code></td><td>The hermes-agent package to use</td></tr>
+<tr><td><code>user</code></td><td><code>str</code></td><td><code>"hermes"</code></td><td>System user</td></tr>
+<tr><td><code>group</code></td><td><code>str</code></td><td><code>"hermes"</code></td><td>System group</td></tr>
+<tr><td><code>createUser</code></td><td><code>bool</code></td><td><code>true</code></td><td>Auto-create user/group</td></tr>
+<tr><td><code>stateDir</code></td><td><code>str</code></td><td><code>"/var/lib/hermes"</code></td><td>State directory (<code>HERMES_HOME</code> parent)</td></tr>
+<tr><td><code>workingDirectory</code></td><td><code>str</code></td><td><code>"${stateDir}/workspace"</code></td><td>Agent working directory (<code>MESSAGING_CWD</code>)</td></tr>
+<tr><td><code>addToSystemPackages</code></td><td><code>bool</code></td><td><code>false</code></td><td>Add <code>hermes</code> CLI to system PATH and set <code>HERMES_HOME</code> system-wide</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="configuration-1"><a class="header" href="#configuration-1">Configuration</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>settings</code></td><td><code>attrs</code> (deep-merged)</td><td><code>{}</code></td><td>Declarative config rendered as <code>config.yaml</code>. Supports arbitrary nesting; multiple definitions are merged via <code>lib.recursiveUpdate</code></td></tr>
+<tr><td><code>configFile</code></td><td><code>null</code> or <code>path</code></td><td><code>null</code></td><td>Path to an existing <code>config.yaml</code>. Overrides <code>settings</code> entirely if set</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="secrets--environment"><a class="header" href="#secrets--environment">Secrets &amp; Environment</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>environmentFiles</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Paths to env files with secrets. Merged into <code>$HERMES_HOME/.env</code> at activation time</td></tr>
+<tr><td><code>environment</code></td><td><code>attrsOf str</code></td><td><code>{}</code></td><td>Non-secret env vars. <strong>Visible in Nix store</strong> — do not put secrets here</td></tr>
+<tr><td><code>authFile</code></td><td><code>null</code> or <code>path</code></td><td><code>null</code></td><td>OAuth credentials seed. Only copied on first deploy</td></tr>
+<tr><td><code>authFileForceOverwrite</code></td><td><code>bool</code></td><td><code>false</code></td><td>Always overwrite <code>auth.json</code> from <code>authFile</code> on activation</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="documents-1"><a class="header" href="#documents-1">Documents</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>documents</code></td><td><code>attrsOf (either str path)</code></td><td><code>{}</code></td><td>Workspace files. Keys are filenames, values are inline strings or paths. Installed into <code>workingDirectory</code> on activation</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="mcp-servers-1"><a class="header" href="#mcp-servers-1">MCP Servers</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>mcpServers</code></td><td><code>attrsOf submodule</code></td><td><code>{}</code></td><td>MCP server definitions, merged into <code>settings.mcp_servers</code></td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.command</code></td><td><code>null</code> or <code>str</code></td><td><code>null</code></td><td>Server command (stdio transport)</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.args</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Command arguments</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.env</code></td><td><code>attrsOf str</code></td><td><code>{}</code></td><td>Environment variables for the server process</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.url</code></td><td><code>null</code> or <code>str</code></td><td><code>null</code></td><td>Server endpoint URL (HTTP/StreamableHTTP transport)</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.headers</code></td><td><code>attrsOf str</code></td><td><code>{}</code></td><td>HTTP headers, e.g. <code>Authorization</code></td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.auth</code></td><td><code>null</code> or <code>"oauth"</code></td><td><code>null</code></td><td>Authentication method. <code>"oauth"</code> enables OAuth 2.1 PKCE</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.enabled</code></td><td><code>bool</code></td><td><code>true</code></td><td>Enable or disable this server</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.timeout</code></td><td><code>null</code> or <code>int</code></td><td><code>null</code></td><td>Tool call timeout in seconds (default: 120)</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.connect_timeout</code></td><td><code>null</code> or <code>int</code></td><td><code>null</code></td><td>Connection timeout in seconds (default: 60)</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.tools</code></td><td><code>null</code> or <code>submodule</code></td><td><code>null</code></td><td>Tool filtering (<code>include</code>/<code>exclude</code> lists)</td></tr>
+<tr><td><code>mcpServers.&lt;name&gt;.sampling</code></td><td><code>null</code> or <code>submodule</code></td><td><code>null</code></td><td>Sampling config for server-initiated LLM requests</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="service-behavior"><a class="header" href="#service-behavior">Service Behavior</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>extraArgs</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Extra args for <code>hermes gateway</code></td></tr>
+<tr><td><code>extraPackages</code></td><td><code>listOf package</code></td><td><code>[]</code></td><td>Extra packages on service PATH (native mode only)</td></tr>
+<tr><td><code>restart</code></td><td><code>str</code></td><td><code>"always"</code></td><td>systemd <code>Restart=</code> policy</td></tr>
+<tr><td><code>restartSec</code></td><td><code>int</code></td><td><code>5</code></td><td>systemd <code>RestartSec=</code> value</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="container"><a class="header" href="#container">Container</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>container.enable</code></td><td><code>bool</code></td><td><code>false</code></td><td>Enable OCI container mode</td></tr>
+<tr><td><code>container.backend</code></td><td><code>enum ["docker" "podman"]</code></td><td><code>"docker"</code></td><td>Container runtime</td></tr>
+<tr><td><code>container.image</code></td><td><code>str</code></td><td><code>"ubuntu:24.04"</code></td><td>Base image (pulled at runtime)</td></tr>
+<tr><td><code>container.extraVolumes</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Extra volume mounts (<code>host:container:mode</code>)</td></tr>
+<tr><td><code>container.extraOptions</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Extra args passed to <code>docker create</code></td></tr>
+<tr><td><code>container.hostUsers</code></td><td><code>listOf str</code></td><td><code>[]</code></td><td>Interactive users who get a <code>~/.hermes</code> symlink to the service stateDir and are auto-added to the <code>hermes</code> group</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="directory-layout"><a class="header" href="#directory-layout">Directory Layout</a></h2>
+<h3 id="native-mode"><a class="header" href="#native-mode">Native Mode</a></h3>
+<pre><code>/var/lib/hermes/                     # stateDir (owned by hermes:hermes, 0750)
+├── .hermes/                         # HERMES_HOME
+│   ├── config.yaml                  # Nix-generated (deep-merged each rebuild)
+│   ├── .managed                     # Marker: CLI config mutation blocked
+│   ├── .env                         # Merged from environment + environmentFiles
+│   ├── auth.json                    # OAuth credentials (seeded, then self-managed)
+│   ├── gateway.pid
+│   ├── state.db
+│   ├── mcp-tokens/                  # OAuth tokens for MCP servers
+│   ├── sessions/
+│   ├── memories/
+│   ├── skills/
+│   ├── cron/
+│   └── logs/
+├── home/                            # Agent HOME
+└── workspace/                       # MESSAGING_CWD
+    ├── SOUL.md                      # From documents option
+    └── (agent-created files)
+</code></pre>
+<h3 id="container-mode"><a class="header" href="#container-mode">Container Mode</a></h3>
+<p>Same layout, mounted into the container:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Container path</th><th>Host path</th><th>Mode</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/nix/store</code></td><td><code>/nix/store</code></td><td><code>ro</code></td><td>Hermes binary + all Nix deps</td></tr>
+<tr><td><code>/data</code></td><td><code>/var/lib/hermes</code></td><td><code>rw</code></td><td>All state, config, workspace</td></tr>
+<tr><td><code>/home/hermes</code></td><td><code>${stateDir}/home</code></td><td><code>rw</code></td><td>Persistent agent home — <code>pip install --user</code>, tool caches</td></tr>
+<tr><td><code>/usr</code>, <code>/usr/local</code>, <code>/tmp</code></td><td>(writable layer)</td><td><code>rw</code></td><td><code>apt</code>/<code>pip</code>/<code>npm</code> installs — persists across restarts, lost on recreation</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="updating"><a class="header" href="#updating">Updating</a></h2>
+<pre><code class="language-bash"># Update the flake input
+nix flake update hermes-agent --flake /etc/nixos
+
+# Rebuild
+sudo nixos-rebuild switch
+</code></pre>
+<p>In container mode, the <code>current-package</code> symlink is updated and the agent picks up the new binary on restart. No container recreation, no loss of installed packages.</p>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<dl>
+<dt id="tip-podman-users-all-docker-commands-below-work-the-same-with-podman-substitute-accordingly-if-you-set-containerbackend--podman"><a class="header" href="#tip-podman-users-all-docker-commands-below-work-the-same-with-podman-substitute-accordingly-if-you-set-containerbackend--podman">:::tip Podman users
+All <code>docker</code> commands below work the same with <code>podman</code>. Substitute accordingly if you set <code>container.backend = "podman"</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="service-logs"><a class="header" href="#service-logs">Service Logs</a></h3>
+<pre><code class="language-bash"># Both modes use the same systemd unit
+journalctl -u hermes-agent -f
+
+# Container mode: also available directly
+docker logs -f hermes-agent
+</code></pre>
+<h3 id="container-inspection"><a class="header" href="#container-inspection">Container Inspection</a></h3>
+<pre><code class="language-bash">systemctl status hermes-agent
+docker ps -a --filter name=hermes-agent
+docker inspect hermes-agent --format='{{.State.Status}}'
+docker exec -it hermes-agent bash
+docker exec hermes-agent readlink /data/current-package
+docker exec hermes-agent cat /data/.container-identity
+</code></pre>
+<h3 id="force-container-recreation"><a class="header" href="#force-container-recreation">Force Container Recreation</a></h3>
+<p>If you need to reset the writable layer (fresh Ubuntu):</p>
+<pre><code class="language-bash">sudo systemctl stop hermes-agent
+docker rm -f hermes-agent
+sudo rm /var/lib/hermes/.container-identity
+sudo systemctl start hermes-agent
+</code></pre>
+<h3 id="verify-secrets-are-loaded"><a class="header" href="#verify-secrets-are-loaded">Verify Secrets Are Loaded</a></h3>
+<p>If the agent starts but can’t authenticate with the LLM provider, check that the <code>.env</code> file was merged correctly:</p>
+<pre><code class="language-bash"># Native mode
+sudo -u hermes cat /var/lib/hermes/.hermes/.env
+
+# Container mode
+docker exec hermes-agent cat /data/.hermes/.env
+</code></pre>
+<h3 id="gc-root-verification"><a class="header" href="#gc-root-verification">GC Root Verification</a></h3>
+<pre><code class="language-bash">nix-store --query --roots $(docker exec hermes-agent readlink /data/current-package)
+</code></pre>
+<h3 id="common-issues"><a class="header" href="#common-issues">Common Issues</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Cannot save configuration: managed by NixOS</code></td><td>CLI guards active</td><td>Edit <code>configuration.nix</code> and <code>nixos-rebuild switch</code></td></tr>
+<tr><td>Container recreated unexpectedly</td><td><code>extraVolumes</code>, <code>extraOptions</code>, or <code>image</code> changed</td><td>Expected — writable layer resets. Reinstall packages or use a custom image</td></tr>
+<tr><td><code>hermes version</code> shows old version</td><td>Container not restarted</td><td><code>systemctl restart hermes-agent</code></td></tr>
+<tr><td>Permission denied on <code>/var/lib/hermes</code></td><td>State dir is <code>0750 hermes:hermes</code></td><td>Use <code>docker exec</code> or <code>sudo -u hermes</code></td></tr>
+<tr><td><code>nix-collect-garbage</code> removed hermes</td><td>GC root missing</td><td>Restart the service (preStart recreates the GC root)</td></tr>
+<tr><td><code>no container with name or ID "hermes-agent"</code> (Podman)</td><td>Podman rootful container not visible to regular user</td><td>Add passwordless sudo for podman (see <a href="#container-aware-cli">Container-aware CLI</a> section)</td></tr>
+<tr><td><code>unable to find user hermes</code></td><td>Container still starting (entrypoint hasn’t created user yet)</td><td>Wait a few seconds and retry — the CLI retries automatically</td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/getting-started/01-setup-and-project-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/getting-started/updating.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/getting-started/01-setup-and-project-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/getting-started/updating.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

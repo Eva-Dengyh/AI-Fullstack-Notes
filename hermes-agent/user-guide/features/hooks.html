@@ -1,0 +1,765 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Event Hooks - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/features/hooks.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-6-title-event-hooks-description-run-custom-code-at-key-lifecycle-points--log-activity-send-alerts-post-to-webhooks"><a class="header" href="#sidebar_position-6-title-event-hooks-description-run-custom-code-at-key-lifecycle-points--log-activity-send-alerts-post-to-webhooks">sidebar_position: 6
+title: “Event Hooks”
+description: “Run custom code at key lifecycle points — log activity, send alerts, post to webhooks”</a></h2>
+<h1 id="event-hooks"><a class="header" href="#event-hooks">Event Hooks</a></h1>
+<p>Hermes has two hook systems that run custom code at key lifecycle points:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>System</th><th>Registered via</th><th>Runs in</th><th>Use case</th></tr>
+</thead>
+<tbody>
+<tr><td><strong><a href="#gateway-event-hooks">Gateway hooks</a></strong></td><td><code>HOOK.yaml</code> + <code>handler.py</code> in <code>~/.hermes/hooks/</code></td><td>Gateway only</td><td>Logging, alerts, webhooks</td></tr>
+<tr><td><strong><a href="#plugin-hooks">Plugin hooks</a></strong></td><td><code>ctx.register_hook()</code> in a <a href="/docs/user-guide/features/plugins">plugin</a></td><td>CLI + Gateway</td><td>Tool interception, metrics, guardrails</td></tr>
+</tbody>
+</table>
+</div>
+<p>Both systems are non-blocking — errors in any hook are caught and logged, never crashing the agent.</p>
+<h2 id="gateway-event-hooks"><a class="header" href="#gateway-event-hooks">Gateway Event Hooks</a></h2>
+<p>Gateway hooks fire automatically during gateway operation (Telegram, Discord, Slack, WhatsApp) without blocking the main agent pipeline.</p>
+<h3 id="creating-a-hook"><a class="header" href="#creating-a-hook">Creating a Hook</a></h3>
+<p>Each hook is a directory under <code>~/.hermes/hooks/</code> containing two files:</p>
+<pre><code class="language-text">~/.hermes/hooks/
+└── my-hook/
+    ├── HOOK.yaml      # Declares which events to listen for
+    └── handler.py     # Python handler function
+</code></pre>
+<h4 id="hookyaml"><a class="header" href="#hookyaml">HOOK.yaml</a></h4>
+<pre><code class="language-yaml">name: my-hook
+description: Log all agent activity to a file
+events:
+  - agent:start
+  - agent:end
+  - agent:step
+</code></pre>
+<p>The <code>events</code> list determines which events trigger your handler. You can subscribe to any combination of events, including wildcards like <code>command:*</code>.</p>
+<h4 id="handlerpy"><a class="header" href="#handlerpy">handler.py</a></h4>
+<pre><code class="language-python">import json
+from datetime import datetime
+from pathlib import Path
+
+LOG_FILE = Path.home() / ".hermes" / "hooks" / "my-hook" / "activity.log"
+
+async def handle(event_type: str, context: dict):
+    """Called for each subscribed event. Must be named 'handle'."""
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "event": event_type,
+        **context,
+    }
+    with open(LOG_FILE, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+</code></pre>
+<p><strong>Handler rules:</strong></p>
+<ul>
+<li>Must be named <code>handle</code></li>
+<li>Receives <code>event_type</code> (string) and <code>context</code> (dict)</li>
+<li>Can be <code>async def</code> or regular <code>def</code> — both work</li>
+<li>Errors are caught and logged, never crashing the agent</li>
+</ul>
+<h3 id="available-events"><a class="header" href="#available-events">Available Events</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Event</th><th>When it fires</th><th>Context keys</th></tr>
+</thead>
+<tbody>
+<tr><td><code>gateway:startup</code></td><td>Gateway process starts</td><td><code>platforms</code> (list of active platform names)</td></tr>
+<tr><td><code>session:start</code></td><td>New messaging session created</td><td><code>platform</code>, <code>user_id</code>, <code>session_id</code>, <code>session_key</code></td></tr>
+<tr><td><code>session:end</code></td><td>Session ended (before reset)</td><td><code>platform</code>, <code>user_id</code>, <code>session_key</code></td></tr>
+<tr><td><code>session:reset</code></td><td>User ran <code>/new</code> or <code>/reset</code></td><td><code>platform</code>, <code>user_id</code>, <code>session_key</code></td></tr>
+<tr><td><code>agent:start</code></td><td>Agent begins processing a message</td><td><code>platform</code>, <code>user_id</code>, <code>session_id</code>, <code>message</code></td></tr>
+<tr><td><code>agent:step</code></td><td>Each iteration of the tool-calling loop</td><td><code>platform</code>, <code>user_id</code>, <code>session_id</code>, <code>iteration</code>, <code>tool_names</code></td></tr>
+<tr><td><code>agent:end</code></td><td>Agent finishes processing</td><td><code>platform</code>, <code>user_id</code>, <code>session_id</code>, <code>message</code>, <code>response</code></td></tr>
+<tr><td><code>command:*</code></td><td>Any slash command executed</td><td><code>platform</code>, <code>user_id</code>, <code>command</code>, <code>args</code></td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="wildcard-matching"><a class="header" href="#wildcard-matching">Wildcard Matching</a></h4>
+<p>Handlers registered for <code>command:*</code> fire for any <code>command:</code> event (<code>command:model</code>, <code>command:reset</code>, etc.). Monitor all slash commands with a single subscription.</p>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<h4 id="boot-checklist-bootmd--built-in"><a class="header" href="#boot-checklist-bootmd--built-in">Boot Checklist (BOOT.md) — Built-in</a></h4>
+<p>The gateway ships with a built-in <code>boot-md</code> hook that looks for <code>~/.hermes/BOOT.md</code> on every startup. If the file exists, the agent runs its instructions in a background session. No installation needed — just create the file.</p>
+<p><strong>Create <code>~/.hermes/BOOT.md</code>:</strong></p>
+<pre><code class="language-markdown"># Startup Checklist
+
+1. Check if any cron jobs failed overnight — run `hermes cron list`
+2. Send a message to Discord #general saying "Gateway restarted, all systems go"
+3. Check if /opt/app/deploy.log has any errors from the last 24 hours
+</code></pre>
+<dl>
+<dt id="the-agent-runs-these-instructions-in-a-background-thread-so-it-doesnt-block-gateway-startup-if-nothing-needs-attention-the-agent-replies-with-silent-and-no-message-is-delivered"><a class="header" href="#the-agent-runs-these-instructions-in-a-background-thread-so-it-doesnt-block-gateway-startup-if-nothing-needs-attention-the-agent-replies-with-silent-and-no-message-is-delivered">The agent runs these instructions in a background thread so it doesn’t block gateway startup. If nothing needs attention, the agent replies with <code>[SILENT]</code> and no message is delivered.</a></dt>
+<dd>
+<p>::tip
+No BOOT.md? The hook silently skips — zero overhead. Create the file whenever you need startup automation, delete it when you don’t.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h4 id="telegram-alert-on-long-tasks"><a class="header" href="#telegram-alert-on-long-tasks">Telegram Alert on Long Tasks</a></h4>
+<p>Send yourself a message when the agent takes more than 10 steps:</p>
+<pre><code class="language-yaml"># ~/.hermes/hooks/long-task-alert/HOOK.yaml
+name: long-task-alert
+description: Alert when agent is taking many steps
+events:
+  - agent:step
+</code></pre>
+<pre><code class="language-python"># ~/.hermes/hooks/long-task-alert/handler.py
+import os
+import httpx
+
+THRESHOLD = 10
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_HOME_CHANNEL")
+
+async def handle(event_type: str, context: dict):
+    iteration = context.get("iteration", 0)
+    if iteration == THRESHOLD and BOT_TOKEN and CHAT_ID:
+        tools = ", ".join(context.get("tool_names", []))
+        text = f"⚠️ Agent has been running for {iteration} steps. Last tools: {tools}"
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+                json={"chat_id": CHAT_ID, "text": text},
+            )
+</code></pre>
+<h4 id="command-usage-logger"><a class="header" href="#command-usage-logger">Command Usage Logger</a></h4>
+<p>Track which slash commands are used:</p>
+<pre><code class="language-yaml"># ~/.hermes/hooks/command-logger/HOOK.yaml
+name: command-logger
+description: Log slash command usage
+events:
+  - command:*
+</code></pre>
+<pre><code class="language-python"># ~/.hermes/hooks/command-logger/handler.py
+import json
+from datetime import datetime
+from pathlib import Path
+
+LOG = Path.home() / ".hermes" / "logs" / "command_usage.jsonl"
+
+def handle(event_type: str, context: dict):
+    LOG.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "ts": datetime.now().isoformat(),
+        "command": context.get("command"),
+        "args": context.get("args"),
+        "platform": context.get("platform"),
+        "user": context.get("user_id"),
+    }
+    with open(LOG, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+</code></pre>
+<h4 id="session-start-webhook"><a class="header" href="#session-start-webhook">Session Start Webhook</a></h4>
+<p>POST to an external service on new sessions:</p>
+<pre><code class="language-yaml"># ~/.hermes/hooks/session-webhook/HOOK.yaml
+name: session-webhook
+description: Notify external service on new sessions
+events:
+  - session:start
+  - session:reset
+</code></pre>
+<pre><code class="language-python"># ~/.hermes/hooks/session-webhook/handler.py
+import httpx
+
+WEBHOOK_URL = "https://your-service.example.com/hermes-events"
+
+async def handle(event_type: str, context: dict):
+    async with httpx.AsyncClient() as client:
+        await client.post(WEBHOOK_URL, json={
+            "event": event_type,
+            **context,
+        }, timeout=5)
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<ol>
+<li>On gateway startup, <code>HookRegistry.discover_and_load()</code> scans <code>~/.hermes/hooks/</code></li>
+<li>Each subdirectory with <code>HOOK.yaml</code> + <code>handler.py</code> is loaded dynamically</li>
+<li>Handlers are registered for their declared events</li>
+<li>At each lifecycle point, <code>hooks.emit()</code> fires all matching handlers</li>
+<li>Errors in any handler are caught and logged — a broken hook never crashes the agent</li>
+</ol>
+<dl>
+<dt id="info-gateway-hooks-only-fire-in-the-gateway-telegram-discord-slack-whatsapp-the-cli-does-not-load-gateway-hooks-for-hooks-that-work-everywhere-use-plugin-hooks"><a class="header" href="#info-gateway-hooks-only-fire-in-the-gateway-telegram-discord-slack-whatsapp-the-cli-does-not-load-gateway-hooks-for-hooks-that-work-everywhere-use-plugin-hooks">:::info
+Gateway hooks only fire in the <strong>gateway</strong> (Telegram, Discord, Slack, WhatsApp). The CLI does not load gateway hooks. For hooks that work everywhere, use <a href="#plugin-hooks">plugin hooks</a>.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="plugin-hooks"><a class="header" href="#plugin-hooks">Plugin Hooks</a></h2>
+<p><a href="/docs/user-guide/features/plugins">Plugins</a> can register hooks that fire in <strong>both CLI and gateway</strong> sessions. These are registered programmatically via <code>ctx.register_hook()</code> in your plugin’s <code>register()</code> function.</p>
+<pre><code class="language-python">def register(ctx):
+    ctx.register_hook("pre_tool_call", my_tool_observer)
+    ctx.register_hook("post_tool_call", my_tool_logger)
+    ctx.register_hook("pre_llm_call", my_memory_callback)
+    ctx.register_hook("post_llm_call", my_sync_callback)
+    ctx.register_hook("on_session_start", my_init_callback)
+    ctx.register_hook("on_session_end", my_cleanup_callback)
+</code></pre>
+<p><strong>General rules for all hooks:</strong></p>
+<ul>
+<li>Callbacks receive <strong>keyword arguments</strong>. Always accept <code>**kwargs</code> for forward compatibility — new parameters may be added in future versions without breaking your plugin.</li>
+<li>If a callback <strong>crashes</strong>, it’s logged and skipped. Other hooks and the agent continue normally. A misbehaving plugin can never break the agent.</li>
+<li>All hooks are <strong>fire-and-forget observers</strong> whose return values are ignored — except <code>pre_llm_call</code>, which can <a href="#pre_llm_call">inject context</a>.</li>
+</ul>
+<h3 id="quick-reference"><a class="header" href="#quick-reference">Quick reference</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Hook</th><th>Fires when</th><th>Returns</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#pre_tool_call"><code>pre_tool_call</code></a></td><td>Before any tool executes</td><td>ignored</td></tr>
+<tr><td><a href="#post_tool_call"><code>post_tool_call</code></a></td><td>After any tool returns</td><td>ignored</td></tr>
+<tr><td><a href="#pre_llm_call"><code>pre_llm_call</code></a></td><td>Once per turn, before the tool-calling loop</td><td>context injection</td></tr>
+<tr><td><a href="#post_llm_call"><code>post_llm_call</code></a></td><td>Once per turn, after the tool-calling loop</td><td>ignored</td></tr>
+<tr><td><a href="#on_session_start"><code>on_session_start</code></a></td><td>New session created (first turn only)</td><td>ignored</td></tr>
+<tr><td><a href="#on_session_end"><code>on_session_end</code></a></td><td>Session ends</td><td>ignored</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="pre_tool_call"><a class="header" href="#pre_tool_call"><code>pre_tool_call</code></a></h3>
+<p>Fires <strong>immediately before</strong> every tool execution — built-in tools and plugin tools alike.</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(tool_name: str, args: dict, task_id: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>tool_name</code></td><td><code>str</code></td><td>Name of the tool about to execute (e.g. <code>"terminal"</code>, <code>"web_search"</code>, <code>"read_file"</code>)</td></tr>
+<tr><td><code>args</code></td><td><code>dict</code></td><td>The arguments the model passed to the tool</td></tr>
+<tr><td><code>task_id</code></td><td><code>str</code></td><td>Session/task identifier. Empty string if not set.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In <code>model_tools.py</code>, inside <code>handle_function_call()</code>, before the tool’s handler runs. Fires once per tool call — if the model calls 3 tools in parallel, this fires 3 times.</p>
+<p><strong>Return value:</strong> Ignored.</p>
+<p><strong>Use cases:</strong> Logging, audit trails, tool call counters, blocking dangerous operations (print a warning), rate limiting.</p>
+<p><strong>Example — tool call audit log:</strong></p>
+<pre><code class="language-python">import json, logging
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
+
+def audit_tool_call(tool_name, args, task_id, **kwargs):
+    logger.info("TOOL_CALL session=%s tool=%s args=%s",
+                task_id, tool_name, json.dumps(args)[:200])
+
+def register(ctx):
+    ctx.register_hook("pre_tool_call", audit_tool_call)
+</code></pre>
+<p><strong>Example — warn on dangerous tools:</strong></p>
+<pre><code class="language-python">DANGEROUS = {"terminal", "write_file", "patch"}
+
+def warn_dangerous(tool_name, **kwargs):
+    if tool_name in DANGEROUS:
+        print(f"⚠ Executing potentially dangerous tool: {tool_name}")
+
+def register(ctx):
+    ctx.register_hook("pre_tool_call", warn_dangerous)
+</code></pre>
+<hr>
+<h3 id="post_tool_call"><a class="header" href="#post_tool_call"><code>post_tool_call</code></a></h3>
+<p>Fires <strong>immediately after</strong> every tool execution returns.</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(tool_name: str, args: dict, result: str, task_id: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>tool_name</code></td><td><code>str</code></td><td>Name of the tool that just executed</td></tr>
+<tr><td><code>args</code></td><td><code>dict</code></td><td>The arguments the model passed to the tool</td></tr>
+<tr><td><code>result</code></td><td><code>str</code></td><td>The tool’s return value (always a JSON string)</td></tr>
+<tr><td><code>task_id</code></td><td><code>str</code></td><td>Session/task identifier. Empty string if not set.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In <code>model_tools.py</code>, inside <code>handle_function_call()</code>, after the tool’s handler returns. Fires once per tool call. Does <strong>not</strong> fire if the tool raised an unhandled exception (the error is caught and returned as an error JSON string instead, and <code>post_tool_call</code> fires with that error string as <code>result</code>).</p>
+<p><strong>Return value:</strong> Ignored.</p>
+<p><strong>Use cases:</strong> Logging tool results, metrics collection, tracking tool success/failure rates, sending notifications when specific tools complete.</p>
+<p><strong>Example — track tool usage metrics:</strong></p>
+<pre><code class="language-python">from collections import Counter
+import json
+
+_tool_counts = Counter()
+_error_counts = Counter()
+
+def track_metrics(tool_name, result, **kwargs):
+    _tool_counts[tool_name] += 1
+    try:
+        parsed = json.loads(result)
+        if "error" in parsed:
+            _error_counts[tool_name] += 1
+    except (json.JSONDecodeError, TypeError):
+        pass
+
+def register(ctx):
+    ctx.register_hook("post_tool_call", track_metrics)
+</code></pre>
+<hr>
+<h3 id="pre_llm_call"><a class="header" href="#pre_llm_call"><code>pre_llm_call</code></a></h3>
+<p>Fires <strong>once per turn</strong>, before the tool-calling loop begins. This is the <strong>only hook whose return value is used</strong> — it can inject context into the current turn’s user message.</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(session_id: str, user_message: str, conversation_history: list,
+                is_first_turn: bool, model: str, platform: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>session_id</code></td><td><code>str</code></td><td>Unique identifier for the current session</td></tr>
+<tr><td><code>user_message</code></td><td><code>str</code></td><td>The user’s original message for this turn (before any skill injection)</td></tr>
+<tr><td><code>conversation_history</code></td><td><code>list</code></td><td>Copy of the full message list (OpenAI format: <code>[{"role": "user", "content": "..."}]</code>)</td></tr>
+<tr><td><code>is_first_turn</code></td><td><code>bool</code></td><td><code>True</code> if this is the first turn of a new session, <code>False</code> on subsequent turns</td></tr>
+<tr><td><code>model</code></td><td><code>str</code></td><td>The model identifier (e.g. <code>"anthropic/claude-sonnet-4.6"</code>)</td></tr>
+<tr><td><code>platform</code></td><td><code>str</code></td><td>Where the session is running: <code>"cli"</code>, <code>"telegram"</code>, <code>"discord"</code>, etc.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In <code>run_agent.py</code>, inside <code>run_conversation()</code>, after context compression but before the main <code>while</code> loop. Fires once per <code>run_conversation()</code> call (i.e. once per user turn), not once per API call within the tool loop.</p>
+<p><strong>Return value:</strong> If the callback returns a dict with a <code>"context"</code> key, or a plain non-empty string, the text is appended to the current turn’s user message. Return <code>None</code> for no injection.</p>
+<pre><code class="language-python"># Inject context
+return {"context": "Recalled memories:\n- User likes Python\n- Working on hermes-agent"}
+
+# Plain string (equivalent)
+return "Recalled memories:\n- User likes Python"
+
+# No injection
+return None
+</code></pre>
+<p><strong>Where context is injected:</strong> Always the <strong>user message</strong>, never the system prompt. This preserves the prompt cache — the system prompt stays identical across turns, so cached tokens are reused. The system prompt is Hermes’s territory (model guidance, tool enforcement, personality, skills). Plugins contribute context alongside the user’s input.</p>
+<p>All injected context is <strong>ephemeral</strong> — added at API call time only. The original user message in the conversation history is never mutated, and nothing is persisted to the session database.</p>
+<p>When <strong>multiple plugins</strong> return context, their outputs are joined with double newlines in plugin discovery order (alphabetical by directory name).</p>
+<p><strong>Use cases:</strong> Memory recall, RAG context injection, guardrails, per-turn analytics.</p>
+<p><strong>Example — memory recall:</strong></p>
+<pre><code class="language-python">import httpx
+
+MEMORY_API = "https://your-memory-api.example.com"
+
+def recall(session_id, user_message, is_first_turn, **kwargs):
+    try:
+        resp = httpx.post(f"{MEMORY_API}/recall", json={
+            "session_id": session_id,
+            "query": user_message,
+        }, timeout=3)
+        memories = resp.json().get("results", [])
+        if not memories:
+            return None
+        text = "Recalled context:\n" + "\n".join(f"- {m['text']}" for m in memories)
+        return {"context": text}
+    except Exception:
+        return None
+
+def register(ctx):
+    ctx.register_hook("pre_llm_call", recall)
+</code></pre>
+<p><strong>Example — guardrails:</strong></p>
+<pre><code class="language-python">POLICY = "Never execute commands that delete files without explicit user confirmation."
+
+def guardrails(**kwargs):
+    return {"context": POLICY}
+
+def register(ctx):
+    ctx.register_hook("pre_llm_call", guardrails)
+</code></pre>
+<hr>
+<h3 id="post_llm_call"><a class="header" href="#post_llm_call"><code>post_llm_call</code></a></h3>
+<p>Fires <strong>once per turn</strong>, after the tool-calling loop completes and the agent has produced a final response. Only fires on <strong>successful</strong> turns — does not fire if the turn was interrupted.</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(session_id: str, user_message: str, assistant_response: str,
+                conversation_history: list, model: str, platform: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>session_id</code></td><td><code>str</code></td><td>Unique identifier for the current session</td></tr>
+<tr><td><code>user_message</code></td><td><code>str</code></td><td>The user’s original message for this turn</td></tr>
+<tr><td><code>assistant_response</code></td><td><code>str</code></td><td>The agent’s final text response for this turn</td></tr>
+<tr><td><code>conversation_history</code></td><td><code>list</code></td><td>Copy of the full message list after the turn completed</td></tr>
+<tr><td><code>model</code></td><td><code>str</code></td><td>The model identifier</td></tr>
+<tr><td><code>platform</code></td><td><code>str</code></td><td>Where the session is running</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In <code>run_agent.py</code>, inside <code>run_conversation()</code>, after the tool loop exits with a final response. Guarded by <code>if final_response and not interrupted</code> — so it does <strong>not</strong> fire when the user interrupts mid-turn or the agent hits the iteration limit without producing a response.</p>
+<p><strong>Return value:</strong> Ignored.</p>
+<p><strong>Use cases:</strong> Syncing conversation data to an external memory system, computing response quality metrics, logging turn summaries, triggering follow-up actions.</p>
+<p><strong>Example — sync to external memory:</strong></p>
+<pre><code class="language-python">import httpx
+
+MEMORY_API = "https://your-memory-api.example.com"
+
+def sync_memory(session_id, user_message, assistant_response, **kwargs):
+    try:
+        httpx.post(f"{MEMORY_API}/store", json={
+            "session_id": session_id,
+            "user": user_message,
+            "assistant": assistant_response,
+        }, timeout=5)
+    except Exception:
+        pass  # best-effort
+
+def register(ctx):
+    ctx.register_hook("post_llm_call", sync_memory)
+</code></pre>
+<p><strong>Example — track response lengths:</strong></p>
+<pre><code class="language-python">import logging
+logger = logging.getLogger(__name__)
+
+def log_response_length(session_id, assistant_response, model, **kwargs):
+    logger.info("RESPONSE session=%s model=%s chars=%d",
+                session_id, model, len(assistant_response or ""))
+
+def register(ctx):
+    ctx.register_hook("post_llm_call", log_response_length)
+</code></pre>
+<hr>
+<h3 id="on_session_start"><a class="header" href="#on_session_start"><code>on_session_start</code></a></h3>
+<p>Fires <strong>once</strong> when a brand-new session is created. Does <strong>not</strong> fire on session continuation (when the user sends a second message in an existing session).</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(session_id: str, model: str, platform: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>session_id</code></td><td><code>str</code></td><td>Unique identifier for the new session</td></tr>
+<tr><td><code>model</code></td><td><code>str</code></td><td>The model identifier</td></tr>
+<tr><td><code>platform</code></td><td><code>str</code></td><td>Where the session is running</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In <code>run_agent.py</code>, inside <code>run_conversation()</code>, during the first turn of a new session — specifically after the system prompt is built but before the tool loop starts. The check is <code>if not conversation_history</code> (no prior messages = new session).</p>
+<p><strong>Return value:</strong> Ignored.</p>
+<p><strong>Use cases:</strong> Initializing session-scoped state, warming caches, registering the session with an external service, logging session starts.</p>
+<p><strong>Example — initialize a session cache:</strong></p>
+<pre><code class="language-python">_session_caches = {}
+
+def init_session(session_id, model, platform, **kwargs):
+    _session_caches[session_id] = {
+        "model": model,
+        "platform": platform,
+        "tool_calls": 0,
+        "started": __import__("datetime").datetime.now().isoformat(),
+    }
+
+def register(ctx):
+    ctx.register_hook("on_session_start", init_session)
+</code></pre>
+<hr>
+<h3 id="on_session_end"><a class="header" href="#on_session_end"><code>on_session_end</code></a></h3>
+<p>Fires at the <strong>very end</strong> of every <code>run_conversation()</code> call, regardless of outcome. Also fires from the CLI’s exit handler if the agent was mid-turn when the user quit.</p>
+<p><strong>Callback signature:</strong></p>
+<pre><code class="language-python">def my_callback(session_id: str, completed: bool, interrupted: bool,
+                model: str, platform: str, **kwargs):
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>session_id</code></td><td><code>str</code></td><td>Unique identifier for the session</td></tr>
+<tr><td><code>completed</code></td><td><code>bool</code></td><td><code>True</code> if the agent produced a final response, <code>False</code> otherwise</td></tr>
+<tr><td><code>interrupted</code></td><td><code>bool</code></td><td><code>True</code> if the turn was interrupted (user sent new message, <code>/stop</code>, or quit)</td></tr>
+<tr><td><code>model</code></td><td><code>str</code></td><td>The model identifier</td></tr>
+<tr><td><code>platform</code></td><td><code>str</code></td><td>Where the session is running</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fires:</strong> In two places:</p>
+<ol>
+<li><strong><code>run_agent.py</code></strong> — at the end of every <code>run_conversation()</code> call, after all cleanup. Always fires, even if the turn errored.</li>
+<li><strong><code>cli.py</code></strong> — in the CLI’s atexit handler, but <strong>only</strong> if the agent was mid-turn (<code>_agent_running=True</code>) when the exit occurred. This catches Ctrl+C and <code>/exit</code> during processing. In this case, <code>completed=False</code> and <code>interrupted=True</code>.</li>
+</ol>
+<p><strong>Return value:</strong> Ignored.</p>
+<p><strong>Use cases:</strong> Flushing buffers, closing connections, persisting session state, logging session duration, cleanup of resources initialized in <code>on_session_start</code>.</p>
+<p><strong>Example — flush and cleanup:</strong></p>
+<pre><code class="language-python">_session_caches = {}
+
+def cleanup_session(session_id, completed, interrupted, **kwargs):
+    cache = _session_caches.pop(session_id, None)
+    if cache:
+        # Flush accumulated data to disk or external service
+        status = "completed" if completed else ("interrupted" if interrupted else "failed")
+        print(f"Session {session_id} ended: {status}, {cache['tool_calls']} tool calls")
+
+def register(ctx):
+    ctx.register_hook("on_session_end", cleanup_session)
+</code></pre>
+<p><strong>Example — session duration tracking:</strong></p>
+<pre><code class="language-python">import time, logging
+logger = logging.getLogger(__name__)
+
+_start_times = {}
+
+def on_start(session_id, **kwargs):
+    _start_times[session_id] = time.time()
+
+def on_end(session_id, completed, interrupted, **kwargs):
+    start = _start_times.pop(session_id, None)
+    if start:
+        duration = time.time() - start
+        logger.info("SESSION_DURATION session=%s seconds=%.1f completed=%s interrupted=%s",
+                     session_id, duration, completed, interrupted)
+
+def register(ctx):
+    ctx.register_hook("on_session_start", on_start)
+    ctx.register_hook("on_session_end", on_end)
+</code></pre>
+<hr>
+<p>See the <strong><a href="/docs/guides/build-a-hermes-plugin">Build a Plugin guide</a></strong> for the full walkthrough including tool schemas, handlers, and advanced hook patterns.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/features/delegation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/honcho.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/features/delegation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/honcho.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Webhooks - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/messaging/webhooks.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-13-title-webhooks-description-receive-events-from-github-gitlab-and-other-services-to-trigger-hermes-agent-runs"><a class="header" href="#sidebar_position-13-title-webhooks-description-receive-events-from-github-gitlab-and-other-services-to-trigger-hermes-agent-runs">sidebar_position: 13
+title: “Webhooks”
+description: “Receive events from GitHub, GitLab, and other services to trigger Hermes agent runs”</a></h2>
+<h1 id="webhooks"><a class="header" href="#webhooks">Webhooks</a></h1>
+<p>Receive events from external services (GitHub, GitLab, JIRA, Stripe, etc.) and trigger Hermes agent runs automatically. The webhook adapter runs an HTTP server that accepts POST requests, validates HMAC signatures, transforms payloads into agent prompts, and routes responses back to the source or to another configured platform.</p>
+<p>The agent processes the event and can respond by posting comments on PRs, sending messages to Telegram/Discord, or logging the result.</p>
+<hr>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
+<ol>
+<li>Enable via <code>hermes gateway setup</code> or environment variables</li>
+<li>Define routes in <code>config.yaml</code> <strong>or</strong> create them dynamically with <code>hermes webhook subscribe</code></li>
+<li>Point your service at <code>http://your-server:8644/webhooks/&lt;route-name&gt;</code></li>
+</ol>
+<hr>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<p>There are two ways to enable the webhook adapter.</p>
+<h3 id="via-setup-wizard"><a class="header" href="#via-setup-wizard">Via setup wizard</a></h3>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>Follow the prompts to enable webhooks, set the port, and set a global HMAC secret.</p>
+<h3 id="via-environment-variables"><a class="header" href="#via-environment-variables">Via environment variables</a></h3>
+<p>Add to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">WEBHOOK_ENABLED=true
+WEBHOOK_PORT=8644        # default
+WEBHOOK_SECRET=your-global-secret
+</code></pre>
+<h3 id="verify-the-server"><a class="header" href="#verify-the-server">Verify the server</a></h3>
+<p>Once the gateway is running:</p>
+<pre><code class="language-bash">curl http://localhost:8644/health
+</code></pre>
+<p>Expected response:</p>
+<pre><code class="language-json">{"status": "ok", "platform": "webhook"}
+</code></pre>
+<hr>
+<h2 id="configuring-routes"><a class="header" href="#configuring-routes">Configuring Routes</a></h2>
+<p>Routes define how different webhook sources are handled. Each route is a named entry under <code>platforms.webhook.extra.routes</code> in your <code>config.yaml</code>.</p>
+<h3 id="route-properties"><a class="header" href="#route-properties">Route properties</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Property</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>events</code></td><td>No</td><td>List of event types to accept (e.g. <code>["pull_request"]</code>). If empty, all events are accepted. Event type is read from <code>X-GitHub-Event</code>, <code>X-GitLab-Event</code>, or <code>event_type</code> in the payload.</td></tr>
+<tr><td><code>secret</code></td><td><strong>Yes</strong></td><td>HMAC secret for signature validation. Falls back to the global <code>secret</code> if not set on the route. Set to <code>"INSECURE_NO_AUTH"</code> for testing only (skips validation).</td></tr>
+<tr><td><code>prompt</code></td><td>No</td><td>Template string with dot-notation payload access (e.g. <code>{pull_request.title}</code>). If omitted, the full JSON payload is dumped into the prompt.</td></tr>
+<tr><td><code>skills</code></td><td>No</td><td>List of skill names to load for the agent run.</td></tr>
+<tr><td><code>deliver</code></td><td>No</td><td>Where to send the response: <code>github_comment</code>, <code>telegram</code>, <code>discord</code>, <code>slack</code>, <code>signal</code>, <code>sms</code>, <code>whatsapp</code>, <code>matrix</code>, <code>mattermost</code>, <code>homeassistant</code>, <code>email</code>, <code>dingtalk</code>, <code>feishu</code>, <code>wecom</code>, <code>weixin</code>, <code>bluebubbles</code>, or <code>log</code> (default).</td></tr>
+<tr><td><code>deliver_extra</code></td><td>No</td><td>Additional delivery config — keys depend on <code>deliver</code> type (e.g. <code>repo</code>, <code>pr_number</code>, <code>chat_id</code>). Values support the same <code>{dot.notation}</code> templates as <code>prompt</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="full-example"><a class="header" href="#full-example">Full example</a></h3>
+<pre><code class="language-yaml">platforms:
+  webhook:
+    enabled: true
+    extra:
+      port: 8644
+      secret: "global-fallback-secret"
+      routes:
+        github-pr:
+          events: ["pull_request"]
+          secret: "github-webhook-secret"
+          prompt: |
+            Review this pull request:
+            Repository: {repository.full_name}
+            PR #{number}: {pull_request.title}
+            Author: {pull_request.user.login}
+            URL: {pull_request.html_url}
+            Diff URL: {pull_request.diff_url}
+            Action: {action}
+          skills: ["github-code-review"]
+          deliver: "github_comment"
+          deliver_extra:
+            repo: "{repository.full_name}"
+            pr_number: "{number}"
+        deploy-notify:
+          events: ["push"]
+          secret: "deploy-secret"
+          prompt: "New push to {repository.full_name} branch {ref}: {head_commit.message}"
+          deliver: "telegram"
+</code></pre>
+<h3 id="prompt-templates"><a class="header" href="#prompt-templates">Prompt Templates</a></h3>
+<p>Prompts use dot-notation to access nested fields in the webhook payload:</p>
+<ul>
+<li><code>{pull_request.title}</code> resolves to <code>payload["pull_request"]["title"]</code></li>
+<li><code>{repository.full_name}</code> resolves to <code>payload["repository"]["full_name"]</code></li>
+<li><code>{__raw__}</code> — special token that dumps the <strong>entire payload</strong> as indented JSON (truncated at 4000 characters). Useful for monitoring alerts or generic webhooks where the agent needs the full context.</li>
+<li>Missing keys are left as the literal <code>{key}</code> string (no error)</li>
+<li>Nested dicts and lists are JSON-serialized and truncated at 2000 characters</li>
+</ul>
+<p>You can mix <code>{__raw__}</code> with regular template variables:</p>
+<pre><code class="language-yaml">prompt: "PR #{pull_request.number} by {pull_request.user.login}: {__raw__}"
+</code></pre>
+<p>If no <code>prompt</code> template is configured for a route, the entire payload is dumped as indented JSON (truncated at 4000 characters).</p>
+<p>The same dot-notation templates work in <code>deliver_extra</code> values.</p>
+<h3 id="forum-topic-delivery"><a class="header" href="#forum-topic-delivery">Forum Topic Delivery</a></h3>
+<p>When delivering webhook responses to Telegram, you can target a specific forum topic by including <code>message_thread_id</code> (or <code>thread_id</code>) in <code>deliver_extra</code>:</p>
+<pre><code class="language-yaml">webhooks:
+  routes:
+    alerts:
+      events: ["alert"]
+      prompt: "Alert: {__raw__}"
+      deliver: "telegram"
+      deliver_extra:
+        chat_id: "-1001234567890"
+        message_thread_id: "42"
+</code></pre>
+<p>If <code>chat_id</code> is not provided in <code>deliver_extra</code>, the delivery falls back to the home channel configured for the target platform.</p>
+<hr>
+<h2 id="github-pr-review"><a class="header" href="#github-pr-review">GitHub PR Review (Step by Step)</a></h2>
+<p>This walkthrough sets up automatic code review on every pull request.</p>
+<h3 id="1-create-the-webhook-in-github"><a class="header" href="#1-create-the-webhook-in-github">1. Create the webhook in GitHub</a></h3>
+<ol>
+<li>Go to your repository → <strong>Settings</strong> → <strong>Webhooks</strong> → <strong>Add webhook</strong></li>
+<li>Set <strong>Payload URL</strong> to <code>http://your-server:8644/webhooks/github-pr</code></li>
+<li>Set <strong>Content type</strong> to <code>application/json</code></li>
+<li>Set <strong>Secret</strong> to match your route config (e.g. <code>github-webhook-secret</code>)</li>
+<li>Under <strong>Which events?</strong>, select <strong>Let me select individual events</strong> and check <strong>Pull requests</strong></li>
+<li>Click <strong>Add webhook</strong></li>
+</ol>
+<h3 id="2-add-the-route-config"><a class="header" href="#2-add-the-route-config">2. Add the route config</a></h3>
+<p>Add the <code>github-pr</code> route to your <code>~/.hermes/config.yaml</code> as shown in the example above.</p>
+<h3 id="3-ensure-gh-cli-is-authenticated"><a class="header" href="#3-ensure-gh-cli-is-authenticated">3. Ensure <code>gh</code> CLI is authenticated</a></h3>
+<p>The <code>github_comment</code> delivery type uses the GitHub CLI to post comments:</p>
+<pre><code class="language-bash">gh auth login
+</code></pre>
+<h3 id="4-test-it"><a class="header" href="#4-test-it">4. Test it</a></h3>
+<p>Open a pull request on the repository. The webhook fires, Hermes processes the event, and posts a review comment on the PR.</p>
+<hr>
+<h2 id="gitlab-webhook-setup"><a class="header" href="#gitlab-webhook-setup">GitLab Webhook Setup</a></h2>
+<p>GitLab webhooks work similarly but use a different authentication mechanism. GitLab sends the secret as a plain <code>X-Gitlab-Token</code> header (exact string match, not HMAC).</p>
+<h3 id="1-create-the-webhook-in-gitlab"><a class="header" href="#1-create-the-webhook-in-gitlab">1. Create the webhook in GitLab</a></h3>
+<ol>
+<li>Go to your project → <strong>Settings</strong> → <strong>Webhooks</strong></li>
+<li>Set the <strong>URL</strong> to <code>http://your-server:8644/webhooks/gitlab-mr</code></li>
+<li>Enter your <strong>Secret token</strong></li>
+<li>Select <strong>Merge request events</strong> (and any other events you want)</li>
+<li>Click <strong>Add webhook</strong></li>
+</ol>
+<h3 id="2-add-the-route-config-1"><a class="header" href="#2-add-the-route-config-1">2. Add the route config</a></h3>
+<pre><code class="language-yaml">platforms:
+  webhook:
+    enabled: true
+    extra:
+      routes:
+        gitlab-mr:
+          events: ["merge_request"]
+          secret: "your-gitlab-secret-token"
+          prompt: |
+            Review this merge request:
+            Project: {project.path_with_namespace}
+            MR !{object_attributes.iid}: {object_attributes.title}
+            Author: {object_attributes.last_commit.author.name}
+            URL: {object_attributes.url}
+            Action: {object_attributes.action}
+          deliver: "log"
+</code></pre>
+<hr>
+<h2 id="delivery-options"><a class="header" href="#delivery-options">Delivery Options</a></h2>
+<p>The <code>deliver</code> field controls where the agent’s response goes after processing the webhook event.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Deliver Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>log</code></td><td>Logs the response to the gateway log output. This is the default and is useful for testing.</td></tr>
+<tr><td><code>github_comment</code></td><td>Posts the response as a PR/issue comment via the <code>gh</code> CLI. Requires <code>deliver_extra.repo</code> and <code>deliver_extra.pr_number</code>. The <code>gh</code> CLI must be installed and authenticated on the gateway host (<code>gh auth login</code>).</td></tr>
+<tr><td><code>telegram</code></td><td>Routes the response to Telegram. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>discord</code></td><td>Routes the response to Discord. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>slack</code></td><td>Routes the response to Slack. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>signal</code></td><td>Routes the response to Signal. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>sms</code></td><td>Routes the response to SMS via Twilio. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>whatsapp</code></td><td>Routes the response to WhatsApp. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>matrix</code></td><td>Routes the response to Matrix. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>mattermost</code></td><td>Routes the response to Mattermost. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>homeassistant</code></td><td>Routes the response to Home Assistant. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>email</code></td><td>Routes the response to Email. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>dingtalk</code></td><td>Routes the response to DingTalk. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>feishu</code></td><td>Routes the response to Feishu/Lark. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>wecom</code></td><td>Routes the response to WeCom. Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>weixin</code></td><td>Routes the response to Weixin (WeChat). Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+<tr><td><code>bluebubbles</code></td><td>Routes the response to BlueBubbles (iMessage). Uses the home channel, or specify <code>chat_id</code> in <code>deliver_extra</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<p>For cross-platform delivery, the target platform must also be enabled and connected in the gateway. If no <code>chat_id</code> is provided in <code>deliver_extra</code>, the response is sent to that platform’s configured home channel.</p>
+<hr>
+<h2 id="dynamic-subscriptions"><a class="header" href="#dynamic-subscriptions">Dynamic Subscriptions (CLI)</a></h2>
+<p>In addition to static routes in <code>config.yaml</code>, you can create webhook subscriptions dynamically using the <code>hermes webhook</code> CLI command. This is especially useful when the agent itself needs to set up event-driven triggers.</p>
+<h3 id="create-a-subscription"><a class="header" href="#create-a-subscription">Create a subscription</a></h3>
+<pre><code class="language-bash">hermes webhook subscribe github-issues \
+  --events "issues" \
+  --prompt "New issue #{issue.number}: {issue.title}\nBy: {issue.user.login}\n\n{issue.body}" \
+  --deliver telegram \
+  --deliver-chat-id "-100123456789" \
+  --description "Triage new GitHub issues"
+</code></pre>
+<p>This returns the webhook URL and an auto-generated HMAC secret. Configure your service to POST to that URL.</p>
+<h3 id="list-subscriptions"><a class="header" href="#list-subscriptions">List subscriptions</a></h3>
+<pre><code class="language-bash">hermes webhook list
+</code></pre>
+<h3 id="remove-a-subscription"><a class="header" href="#remove-a-subscription">Remove a subscription</a></h3>
+<pre><code class="language-bash">hermes webhook remove github-issues
+</code></pre>
+<h3 id="test-a-subscription"><a class="header" href="#test-a-subscription">Test a subscription</a></h3>
+<pre><code class="language-bash">hermes webhook test github-issues
+hermes webhook test github-issues --payload '{"issue": {"number": 42, "title": "Test"}}'
+</code></pre>
+<h3 id="how-dynamic-subscriptions-work"><a class="header" href="#how-dynamic-subscriptions-work">How dynamic subscriptions work</a></h3>
+<ul>
+<li>Subscriptions are stored in <code>~/.hermes/webhook_subscriptions.json</code></li>
+<li>The webhook adapter hot-reloads this file on each incoming request (mtime-gated, negligible overhead)</li>
+<li>Static routes from <code>config.yaml</code> always take precedence over dynamic ones with the same name</li>
+<li>Dynamic subscriptions use the same route format and capabilities as static routes (events, prompt templates, skills, delivery)</li>
+<li>No gateway restart required — subscribe and it’s immediately live</li>
+</ul>
+<h3 id="agent-driven-subscriptions"><a class="header" href="#agent-driven-subscriptions">Agent-driven subscriptions</a></h3>
+<p>The agent can create subscriptions via the terminal tool when guided by the <code>webhook-subscriptions</code> skill. Ask the agent to “set up a webhook for GitHub issues” and it will run the appropriate <code>hermes webhook subscribe</code> command.</p>
+<hr>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<p>The webhook adapter includes multiple layers of security:</p>
+<h3 id="hmac-signature-validation"><a class="header" href="#hmac-signature-validation">HMAC signature validation</a></h3>
+<p>The adapter validates incoming webhook signatures using the appropriate method for each source:</p>
+<ul>
+<li><strong>GitHub</strong>: <code>X-Hub-Signature-256</code> header — HMAC-SHA256 hex digest prefixed with <code>sha256=</code></li>
+<li><strong>GitLab</strong>: <code>X-Gitlab-Token</code> header — plain secret string match</li>
+<li><strong>Generic</strong>: <code>X-Webhook-Signature</code> header — raw HMAC-SHA256 hex digest</li>
+</ul>
+<p>If a secret is configured but no recognized signature header is present, the request is rejected.</p>
+<h3 id="secret-is-required"><a class="header" href="#secret-is-required">Secret is required</a></h3>
+<p>Every route must have a secret — either set directly on the route or inherited from the global <code>secret</code>. Routes without a secret cause the adapter to fail at startup with an error. For development/testing only, you can set the secret to <code>"INSECURE_NO_AUTH"</code> to skip validation entirely.</p>
+<h3 id="rate-limiting"><a class="header" href="#rate-limiting">Rate limiting</a></h3>
+<p>Each route is rate-limited to <strong>30 requests per minute</strong> by default (fixed-window). Configure this globally:</p>
+<pre><code class="language-yaml">platforms:
+  webhook:
+    extra:
+      rate_limit: 60  # requests per minute
+</code></pre>
+<p>Requests exceeding the limit receive a <code>429 Too Many Requests</code> response.</p>
+<h3 id="idempotency"><a class="header" href="#idempotency">Idempotency</a></h3>
+<p>Delivery IDs (from <code>X-GitHub-Delivery</code>, <code>X-Request-ID</code>, or a timestamp fallback) are cached for <strong>1 hour</strong>. Duplicate deliveries (e.g. webhook retries) are silently skipped with a <code>200</code> response, preventing duplicate agent runs.</p>
+<h3 id="body-size-limits"><a class="header" href="#body-size-limits">Body size limits</a></h3>
+<p>Payloads exceeding <strong>1 MB</strong> are rejected before the body is read. Configure this:</p>
+<pre><code class="language-yaml">platforms:
+  webhook:
+    extra:
+      max_body_bytes: 2097152  # 2 MB
+</code></pre>
+<h3 id="prompt-injection-risk"><a class="header" href="#prompt-injection-risk">Prompt injection risk</a></h3>
+<dl>
+<dt id="warning-webhook-payloads-contain-attacker-controlled-data--pr-titles-commit-messages-issue-descriptions-etc-can-all-contain-malicious-instructions-run-the-gateway-in-a-sandboxed-environment-docker-vm-when-exposed-to-the-internet-consider-using-the-docker-or-ssh-terminal-backend-for-isolation"><a class="header" href="#warning-webhook-payloads-contain-attacker-controlled-data--pr-titles-commit-messages-issue-descriptions-etc-can-all-contain-malicious-instructions-run-the-gateway-in-a-sandboxed-environment-docker-vm-when-exposed-to-the-internet-consider-using-the-docker-or-ssh-terminal-backend-for-isolation">:::warning
+Webhook payloads contain attacker-controlled data — PR titles, commit messages, issue descriptions, etc. can all contain malicious instructions. Run the gateway in a sandboxed environment (Docker, VM) when exposed to the internet. Consider using the Docker or SSH terminal backend for isolation.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="webhook-not-arriving"><a class="header" href="#webhook-not-arriving">Webhook not arriving</a></h3>
+<ul>
+<li>Verify the port is exposed and accessible from the webhook source</li>
+<li>Check firewall rules — port <code>8644</code> (or your configured port) must be open</li>
+<li>Verify the URL path matches: <code>http://your-server:8644/webhooks/&lt;route-name&gt;</code></li>
+<li>Use the <code>/health</code> endpoint to confirm the server is running</li>
+</ul>
+<h3 id="signature-validation-failing"><a class="header" href="#signature-validation-failing">Signature validation failing</a></h3>
+<ul>
+<li>Ensure the secret in your route config exactly matches the secret configured in the webhook source</li>
+<li>For GitHub, the secret is HMAC-based — check <code>X-Hub-Signature-256</code></li>
+<li>For GitLab, the secret is a plain token match — check <code>X-Gitlab-Token</code></li>
+<li>Check gateway logs for <code>Invalid signature</code> warnings</li>
+</ul>
+<h3 id="event-being-ignored"><a class="header" href="#event-being-ignored">Event being ignored</a></h3>
+<ul>
+<li>Check that the event type is in your route’s <code>events</code> list</li>
+<li>GitHub events use values like <code>pull_request</code>, <code>push</code>, <code>issues</code> (the <code>X-GitHub-Event</code> header value)</li>
+<li>GitLab events use values like <code>merge_request</code>, <code>push</code> (the <code>X-GitLab-Event</code> header value)</li>
+<li>If <code>events</code> is empty or not set, all events are accepted</li>
+</ul>
+<h3 id="agent-not-responding"><a class="header" href="#agent-not-responding">Agent not responding</a></h3>
+<ul>
+<li>Run the gateway in foreground to see logs: <code>hermes gateway run</code></li>
+<li>Check that the prompt template is rendering correctly</li>
+<li>Verify the delivery target is configured and connected</li>
+</ul>
+<h3 id="duplicate-responses"><a class="header" href="#duplicate-responses">Duplicate responses</a></h3>
+<ul>
+<li>The idempotency cache should prevent this — check that the webhook source is sending a delivery ID header (<code>X-GitHub-Delivery</code> or <code>X-Request-ID</code>)</li>
+<li>Delivery IDs are cached for 1 hour</li>
+</ul>
+<h3 id="gh-cli-errors-github-comment-delivery"><a class="header" href="#gh-cli-errors-github-comment-delivery"><code>gh</code> CLI errors (GitHub comment delivery)</a></h3>
+<ul>
+<li>Run <code>gh auth login</code> on the gateway host</li>
+<li>Ensure the authenticated GitHub user has write access to the repository</li>
+<li>Check that <code>gh</code> is installed and on the PATH</li>
+</ul>
+<hr>
+<h2 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>WEBHOOK_ENABLED</code></td><td>Enable the webhook platform adapter</td><td><code>false</code></td></tr>
+<tr><td><code>WEBHOOK_PORT</code></td><td>HTTP server port for receiving webhooks</td><td><code>8644</code></td></tr>
+<tr><td><code>WEBHOOK_SECRET</code></td><td>Global HMAC secret (used as fallback when routes don’t specify their own)</td><td><em>(none)</em></td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/messaging/telegram.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/wecom.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/messaging/telegram.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/wecom.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

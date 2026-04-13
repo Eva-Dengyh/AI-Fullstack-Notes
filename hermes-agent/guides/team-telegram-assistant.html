@@ -1,0 +1,590 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tutorial: Team Telegram Assistant - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/guides/team-telegram-assistant.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-4-title-tutorial-team-telegram-assistant-description-step-by-step-guide-to-setting-up-a-telegram-bot-that-your-whole-team-can-use-for-code-help-research-system-admin-and-more"><a class="header" href="#sidebar_position-4-title-tutorial-team-telegram-assistant-description-step-by-step-guide-to-setting-up-a-telegram-bot-that-your-whole-team-can-use-for-code-help-research-system-admin-and-more">sidebar_position: 4
+title: “Tutorial: Team Telegram Assistant”
+description: “Step-by-step guide to setting up a Telegram bot that your whole team can use for code help, research, system admin, and more”</a></h2>
+<h1 id="set-up-a-team-telegram-assistant"><a class="header" href="#set-up-a-team-telegram-assistant">Set Up a Team Telegram Assistant</a></h1>
+<p>This tutorial walks you through setting up a Telegram bot powered by Hermes Agent that multiple team members can use. By the end, your team will have a shared AI assistant they can message for help with code, research, system administration, and anything else — secured with per-user authorization.</p>
+<h2 id="what-were-building"><a class="header" href="#what-were-building">What We’re Building</a></h2>
+<p>A Telegram bot that:</p>
+<ul>
+<li><strong>Any authorized team member</strong> can DM for help — code reviews, research, shell commands, debugging</li>
+<li><strong>Runs on your server</strong> with full tool access — terminal, file editing, web search, code execution</li>
+<li><strong>Per-user sessions</strong> — each person gets their own conversation context</li>
+<li><strong>Secure by default</strong> — only approved users can interact, with two authorization methods</li>
+<li><strong>Scheduled tasks</strong> — daily standups, health checks, and reminders delivered to a team channel</li>
+</ul>
+<hr>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>Before starting, make sure you have:</p>
+<ul>
+<li><strong>Hermes Agent installed</strong> on a server or VPS (not your laptop — the bot needs to stay running). Follow the <a href="/docs/getting-started/installation">installation guide</a> if you haven’t yet.</li>
+<li><strong>A Telegram account</strong> for yourself (the bot owner)</li>
+<li><strong>An LLM provider configured</strong> — at minimum, an API key for OpenAI, Anthropic, or another supported provider in <code>~/.hermes/.env</code></li>
+</ul>
+<dl>
+<dt id="tip-a-5month-vps-is-plenty-for-running-the-gateway-hermes-itself-is-lightweight--the-llm-api-calls-are-what-cost-money-and-those-happen-remotely"><a class="header" href="#tip-a-5month-vps-is-plenty-for-running-the-gateway-hermes-itself-is-lightweight--the-llm-api-calls-are-what-cost-money-and-those-happen-remotely">:::tip
+A $5/month VPS is plenty for running the gateway. Hermes itself is lightweight — the LLM API calls are what cost money, and those happen remotely.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="step-1-create-a-telegram-bot"><a class="header" href="#step-1-create-a-telegram-bot">Step 1: Create a Telegram Bot</a></h2>
+<p>Every Telegram bot starts with <strong>@BotFather</strong> — Telegram’s official bot for creating bots.</p>
+<ol>
+<li>
+<p><strong>Open Telegram</strong> and search for <code>@BotFather</code>, or go to <a href="https://t.me/BotFather">t.me/BotFather</a></p>
+</li>
+<li>
+<p><strong>Send <code>/newbot</code></strong> — BotFather will ask you two things:</p>
+<ul>
+<li><strong>Display name</strong> — what users see (e.g., <code>Team Hermes Assistant</code>)</li>
+<li><strong>Username</strong> — must end in <code>bot</code> (e.g., <code>myteam_hermes_bot</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Copy the bot token</strong> — BotFather replies with something like:</p>
+<pre><code>Use this token to access the HTTP API:
+7123456789:AAH1bGciOiJSUzI1NiIsInR5cCI6Ikp...
+</code></pre>
+<p>Save this token — you’ll need it in the next step.</p>
+</li>
+<li>
+<p><strong>Set a description</strong> (optional but recommended):</p>
+<pre><code>/setdescription
+</code></pre>
+<p>Choose your bot, then enter something like:</p>
+<pre><code>Team AI assistant powered by Hermes Agent. DM me for help with code, research, debugging, and more.
+</code></pre>
+</li>
+<li>
+<p><strong>Set bot commands</strong> (optional — gives users a command menu):</p>
+<pre><code>/setcommands
+</code></pre>
+<p>Choose your bot, then paste:</p>
+<pre><code>new - Start a fresh conversation
+model - Show or change the AI model
+status - Show session info
+help - Show available commands
+stop - Stop the current task
+</code></pre>
+</li>
+</ol>
+<dl>
+<dt id="warning-keep-your-bot-token-secret-anyone-with-the-token-can-control-the-bot-if-it-leaks-use-revoke-in-botfather-to-generate-a-new-one"><a class="header" href="#warning-keep-your-bot-token-secret-anyone-with-the-token-can-control-the-bot-if-it-leaks-use-revoke-in-botfather-to-generate-a-new-one">:::warning
+Keep your bot token secret. Anyone with the token can control the bot. If it leaks, use <code>/revoke</code> in BotFather to generate a new one.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="step-2-configure-the-gateway"><a class="header" href="#step-2-configure-the-gateway">Step 2: Configure the Gateway</a></h2>
+<p>You have two options: the interactive setup wizard (recommended) or manual configuration.</p>
+<h3 id="option-a-interactive-setup-recommended"><a class="header" href="#option-a-interactive-setup-recommended">Option A: Interactive Setup (Recommended)</a></h3>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>This walks you through everything with arrow-key selection. Pick <strong>Telegram</strong>, paste your bot token, and enter your user ID when prompted.</p>
+<h3 id="option-b-manual-configuration"><a class="header" href="#option-b-manual-configuration">Option B: Manual Configuration</a></h3>
+<p>Add these lines to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash"># Telegram bot token from BotFather
+TELEGRAM_BOT_TOKEN=7123456789:AAH1bGciOiJSUzI1NiIsInR5cCI6Ikp...
+
+# Your Telegram user ID (numeric)
+TELEGRAM_ALLOWED_USERS=123456789
+</code></pre>
+<h3 id="finding-your-user-id"><a class="header" href="#finding-your-user-id">Finding Your User ID</a></h3>
+<p>Your Telegram user ID is a numeric value (not your username). To find it:</p>
+<ol>
+<li>Message <a href="https://t.me/userinfobot">@userinfobot</a> on Telegram</li>
+<li>It instantly replies with your numeric user ID</li>
+<li>Copy that number into <code>TELEGRAM_ALLOWED_USERS</code></li>
+</ol>
+<dl>
+<dt id="info-telegram-user-ids-are-permanent-numbers-like-123456789-theyre-different-from-your-username-which-can-change-always-use-the-numeric-id-for-allowlists"><a class="header" href="#info-telegram-user-ids-are-permanent-numbers-like-123456789-theyre-different-from-your-username-which-can-change-always-use-the-numeric-id-for-allowlists">:::info
+Telegram user IDs are permanent numbers like <code>123456789</code>. They’re different from your <code>@username</code>, which can change. Always use the numeric ID for allowlists.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="step-3-start-the-gateway"><a class="header" href="#step-3-start-the-gateway">Step 3: Start the Gateway</a></h2>
+<h3 id="quick-test"><a class="header" href="#quick-test">Quick Test</a></h3>
+<p>Run the gateway in the foreground first to make sure everything works:</p>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<p>You should see output like:</p>
+<pre><code>[Gateway] Starting Hermes Gateway...
+[Gateway] Telegram adapter connected
+[Gateway] Cron scheduler started (tick every 60s)
+</code></pre>
+<p>Open Telegram, find your bot, and send it a message. If it replies, you’re in business. Press <code>Ctrl+C</code> to stop.</p>
+<h3 id="production-install-as-a-service"><a class="header" href="#production-install-as-a-service">Production: Install as a Service</a></h3>
+<p>For a persistent deployment that survives reboots:</p>
+<pre><code class="language-bash">hermes gateway install
+sudo hermes gateway install --system   # Linux only: boot-time system service
+</code></pre>
+<p>This creates a background service: a user-level <strong>systemd</strong> service on Linux by default, a <strong>launchd</strong> service on macOS, or a boot-time Linux system service if you pass <code>--system</code>.</p>
+<pre><code class="language-bash"># Linux — manage the default user service
+hermes gateway start
+hermes gateway stop
+hermes gateway status
+
+# View live logs
+journalctl --user -u hermes-gateway -f
+
+# Keep running after SSH logout
+sudo loginctl enable-linger $USER
+
+# Linux servers — explicit system-service commands
+sudo hermes gateway start --system
+sudo hermes gateway status --system
+journalctl -u hermes-gateway -f
+</code></pre>
+<pre><code class="language-bash"># macOS — manage the service
+hermes gateway start
+hermes gateway stop
+tail -f ~/.hermes/logs/gateway.log
+</code></pre>
+<dl>
+<dt id="tip-macos-path-the-launchd-plist-captures-your-shell-path-at-install-time-so-gateway-subprocesses-can-find-tools-like-nodejs-and-ffmpeg-if-you-install-new-tools-later-re-run-hermes-gateway-install-to-update-the-plist"><a class="header" href="#tip-macos-path-the-launchd-plist-captures-your-shell-path-at-install-time-so-gateway-subprocesses-can-find-tools-like-nodejs-and-ffmpeg-if-you-install-new-tools-later-re-run-hermes-gateway-install-to-update-the-plist">:::tip macOS PATH
+The launchd plist captures your shell PATH at install time so gateway subprocesses can find tools like Node.js and ffmpeg. If you install new tools later, re-run <code>hermes gateway install</code> to update the plist.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="verify-its-running"><a class="header" href="#verify-its-running">Verify It’s Running</a></h3>
+<pre><code class="language-bash">hermes gateway status
+</code></pre>
+<p>Then send a test message to your bot on Telegram. You should get a response within a few seconds.</p>
+<hr>
+<h2 id="step-4-set-up-team-access"><a class="header" href="#step-4-set-up-team-access">Step 4: Set Up Team Access</a></h2>
+<p>Now let’s give your teammates access. There are two approaches.</p>
+<h3 id="approach-a-static-allowlist"><a class="header" href="#approach-a-static-allowlist">Approach A: Static Allowlist</a></h3>
+<p>Collect each team member’s Telegram user ID (have them message <a href="https://t.me/userinfobot">@userinfobot</a>) and add them as a comma-separated list:</p>
+<pre><code class="language-bash"># In ~/.hermes/.env
+TELEGRAM_ALLOWED_USERS=123456789,987654321,555555555
+</code></pre>
+<p>Restart the gateway after changes:</p>
+<pre><code class="language-bash">hermes gateway stop &amp;&amp; hermes gateway start
+</code></pre>
+<h3 id="approach-b-dm-pairing-recommended-for-teams"><a class="header" href="#approach-b-dm-pairing-recommended-for-teams">Approach B: DM Pairing (Recommended for Teams)</a></h3>
+<p>DM pairing is more flexible — you don’t need to collect user IDs upfront. Here’s how it works:</p>
+<ol>
+<li>
+<p><strong>Teammate DMs the bot</strong> — since they’re not on the allowlist, the bot replies with a one-time pairing code:</p>
+<pre><code>🔐 Pairing code: XKGH5N7P
+Send this code to the bot owner for approval.
+</code></pre>
+</li>
+<li>
+<p><strong>Teammate sends you the code</strong> (via any channel — Slack, email, in person)</p>
+</li>
+<li>
+<p><strong>You approve it</strong> on the server:</p>
+<pre><code class="language-bash">hermes pairing approve telegram XKGH5N7P
+</code></pre>
+</li>
+<li>
+<p><strong>They’re in</strong> — the bot immediately starts responding to their messages</p>
+</li>
+</ol>
+<p><strong>Managing paired users:</strong></p>
+<pre><code class="language-bash"># See all pending and approved users
+hermes pairing list
+
+# Revoke someone's access
+hermes pairing revoke telegram 987654321
+
+# Clear expired pending codes
+hermes pairing clear-pending
+</code></pre>
+<dl>
+<dt id="tip-dm-pairing-is-ideal-for-teams-because-you-dont-need-to-restart-the-gateway-when-adding-new-users-approvals-take-effect-immediately"><a class="header" href="#tip-dm-pairing-is-ideal-for-teams-because-you-dont-need-to-restart-the-gateway-when-adding-new-users-approvals-take-effect-immediately">:::tip
+DM pairing is ideal for teams because you don’t need to restart the gateway when adding new users. Approvals take effect immediately.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h3>
+<ul>
+<li><strong>Never set <code>GATEWAY_ALLOW_ALL_USERS=true</code></strong> on a bot with terminal access — anyone who finds your bot could run commands on your server</li>
+<li>Pairing codes expire after <strong>1 hour</strong> and use cryptographic randomness</li>
+<li>Rate limiting prevents brute-force attacks: 1 request per user per 10 minutes, max 3 pending codes per platform</li>
+<li>After 5 failed approval attempts, the platform enters a 1-hour lockout</li>
+<li>All pairing data is stored with <code>chmod 0600</code> permissions</li>
+</ul>
+<hr>
+<h2 id="step-5-configure-the-bot"><a class="header" href="#step-5-configure-the-bot">Step 5: Configure the Bot</a></h2>
+<h3 id="set-a-home-channel"><a class="header" href="#set-a-home-channel">Set a Home Channel</a></h3>
+<p>A <strong>home channel</strong> is where the bot delivers cron job results and proactive messages. Without one, scheduled tasks have nowhere to send output.</p>
+<p><strong>Option 1:</strong> Use the <code>/sethome</code> command in any Telegram group or chat where the bot is a member.</p>
+<p><strong>Option 2:</strong> Set it manually in <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">TELEGRAM_HOME_CHANNEL=-1001234567890
+TELEGRAM_HOME_CHANNEL_NAME="Team Updates"
+</code></pre>
+<p>To find a channel ID, add <a href="https://t.me/userinfobot">@userinfobot</a> to the group — it will report the group’s chat ID.</p>
+<h3 id="configure-tool-progress-display"><a class="header" href="#configure-tool-progress-display">Configure Tool Progress Display</a></h3>
+<p>Control how much detail the bot shows when using tools. In <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">display:
+  tool_progress: new    # off | new | all | verbose
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>What You See</th></tr>
+</thead>
+<tbody>
+<tr><td><code>off</code></td><td>Clean responses only — no tool activity</td></tr>
+<tr><td><code>new</code></td><td>Brief status for each new tool call (recommended for messaging)</td></tr>
+<tr><td><code>all</code></td><td>Every tool call with details</td></tr>
+<tr><td><code>verbose</code></td><td>Full tool output including command results</td></tr>
+</tbody>
+</table>
+</div>
+<p>Users can also change this per-session with the <code>/verbose</code> command in chat.</p>
+<h3 id="set-up-a-personality-with-soulmd"><a class="header" href="#set-up-a-personality-with-soulmd">Set Up a Personality with SOUL.md</a></h3>
+<p>Customize how the bot communicates by editing <code>~/.hermes/SOUL.md</code>:</p>
+<p>For a full guide, see <a href="/docs/guides/use-soul-with-hermes">Use SOUL.md with Hermes</a>.</p>
+<pre><code class="language-markdown"># Soul
+You are a helpful team assistant. Be concise and technical.
+Use code blocks for any code. Skip pleasantries — the team
+values directness. When debugging, always ask for error logs
+before guessing at solutions.
+</code></pre>
+<h3 id="add-project-context"><a class="header" href="#add-project-context">Add Project Context</a></h3>
+<p>If your team works on specific projects, create context files so the bot knows your stack:</p>
+<pre><code class="language-markdown">&lt;!-- ~/.hermes/AGENTS.md --&gt;
+# Team Context
+- We use Python 3.12 with FastAPI and SQLAlchemy
+- Frontend is React with TypeScript
+- CI/CD runs on GitHub Actions
+- Production deploys to AWS ECS
+- Always suggest writing tests for new code
+</code></pre>
+<dl>
+<dt id="info-context-files-are-injected-into-every-sessions-system-prompt-keep-them-concise--every-character-counts-against-your-token-budget"><a class="header" href="#info-context-files-are-injected-into-every-sessions-system-prompt-keep-them-concise--every-character-counts-against-your-token-budget">:::info
+Context files are injected into every session’s system prompt. Keep them concise — every character counts against your token budget.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="step-6-set-up-scheduled-tasks"><a class="header" href="#step-6-set-up-scheduled-tasks">Step 6: Set Up Scheduled Tasks</a></h2>
+<p>With the gateway running, you can schedule recurring tasks that deliver results to your team channel.</p>
+<h3 id="daily-standup-summary"><a class="header" href="#daily-standup-summary">Daily Standup Summary</a></h3>
+<p>Message the bot on Telegram:</p>
+<pre><code>Every weekday at 9am, check the GitHub repository at
+github.com/myorg/myproject for:
+1. Pull requests opened/merged in the last 24 hours
+2. Issues created or closed
+3. Any CI/CD failures on the main branch
+Format as a brief standup-style summary.
+</code></pre>
+<p>The agent creates a cron job automatically and delivers results to the chat where you asked (or the home channel).</p>
+<h3 id="server-health-check"><a class="header" href="#server-health-check">Server Health Check</a></h3>
+<pre><code>Every 6 hours, check disk usage with 'df -h', memory with 'free -h',
+and Docker container status with 'docker ps'. Report anything unusual —
+partitions above 80%, containers that have restarted, or high memory usage.
+</code></pre>
+<h3 id="managing-scheduled-tasks"><a class="header" href="#managing-scheduled-tasks">Managing Scheduled Tasks</a></h3>
+<pre><code class="language-bash"># From the CLI
+hermes cron list          # View all scheduled jobs
+hermes cron status        # Check if scheduler is running
+
+# From Telegram chat
+/cron list                # View jobs
+/cron remove &lt;job_id&gt;     # Remove a job
+</code></pre>
+<dl>
+<dt id="warning-cron-job-prompts-run-in-completely-fresh-sessions-with-no-memory-of-prior-conversations-make-sure-each-prompt-contains-all-the-context-the-agent-needs--file-paths-urls-server-addresses-and-clear-instructions"><a class="header" href="#warning-cron-job-prompts-run-in-completely-fresh-sessions-with-no-memory-of-prior-conversations-make-sure-each-prompt-contains-all-the-context-the-agent-needs--file-paths-urls-server-addresses-and-clear-instructions">:::warning
+Cron job prompts run in completely fresh sessions with no memory of prior conversations. Make sure each prompt contains <strong>all</strong> the context the agent needs — file paths, URLs, server addresses, and clear instructions.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="production-tips"><a class="header" href="#production-tips">Production Tips</a></h2>
+<h3 id="use-docker-for-safety"><a class="header" href="#use-docker-for-safety">Use Docker for Safety</a></h3>
+<p>On a shared team bot, use Docker as the terminal backend so agent commands run in a container instead of on your host:</p>
+<pre><code class="language-bash"># In ~/.hermes/.env
+TERMINAL_BACKEND=docker
+TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
+</code></pre>
+<p>Or in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  container_cpu: 1
+  container_memory: 5120
+  container_persistent: true
+</code></pre>
+<p>This way, even if someone asks the bot to run something destructive, your host system is protected.</p>
+<h3 id="monitor-the-gateway"><a class="header" href="#monitor-the-gateway">Monitor the Gateway</a></h3>
+<pre><code class="language-bash"># Check if the gateway is running
+hermes gateway status
+
+# Watch live logs (Linux)
+journalctl --user -u hermes-gateway -f
+
+# Watch live logs (macOS)
+tail -f ~/.hermes/logs/gateway.log
+</code></pre>
+<h3 id="keep-hermes-updated"><a class="header" href="#keep-hermes-updated">Keep Hermes Updated</a></h3>
+<p>From Telegram, send <code>/update</code> to the bot — it will pull the latest version and restart. Or from the server:</p>
+<pre><code class="language-bash">hermes update
+hermes gateway stop &amp;&amp; hermes gateway start
+</code></pre>
+<h3 id="log-locations"><a class="header" href="#log-locations">Log Locations</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>What</th><th>Location</th></tr>
+</thead>
+<tbody>
+<tr><td>Gateway logs</td><td><code>journalctl --user -u hermes-gateway</code> (Linux) or <code>~/.hermes/logs/gateway.log</code> (macOS)</td></tr>
+<tr><td>Cron job output</td><td><code>~/.hermes/cron/output/{job_id}/{timestamp}.md</code></td></tr>
+<tr><td>Cron job definitions</td><td><code>~/.hermes/cron/jobs.json</code></td></tr>
+<tr><td>Pairing data</td><td><code>~/.hermes/pairing/</code></td></tr>
+<tr><td>Session history</td><td><code>~/.hermes/sessions/</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="going-further"><a class="header" href="#going-further">Going Further</a></h2>
+<p>You’ve got a working team Telegram assistant. Here are some next steps:</p>
+<ul>
+<li><strong><a href="/docs/user-guide/security">Security Guide</a></strong> — deep dive into authorization, container isolation, and command approval</li>
+<li><strong><a href="/docs/user-guide/messaging">Messaging Gateway</a></strong> — full reference for gateway architecture, session management, and chat commands</li>
+<li><strong><a href="/docs/user-guide/messaging/telegram">Telegram Setup</a></strong> — platform-specific details including voice messages and TTS</li>
+<li><strong><a href="/docs/user-guide/features/cron">Scheduled Tasks</a></strong> — advanced cron scheduling with delivery options and cron expressions</li>
+<li><strong><a href="/docs/user-guide/features/context-files">Context Files</a></strong> — AGENTS.md, SOUL.md, and .cursorrules for project knowledge</li>
+<li><strong><a href="/docs/user-guide/features/personality">Personality</a></strong> — built-in personality presets and custom persona definitions</li>
+<li><strong>Add more platforms</strong> — the same gateway can simultaneously run <a href="/docs/user-guide/messaging/discord">Discord</a>, <a href="/docs/user-guide/messaging/slack">Slack</a>, and <a href="/docs/user-guide/messaging/whatsapp">WhatsApp</a></li>
+</ul>
+<hr>
+<p><em>Questions or issues? Open an issue on GitHub — contributions are welcome.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/guides/python-library.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/guides/tips.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/guides/python-library.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/guides/tips.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

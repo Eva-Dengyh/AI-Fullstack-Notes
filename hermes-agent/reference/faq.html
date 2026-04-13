@@ -1,0 +1,834 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FAQ &amp; Troubleshooting - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/reference/faq.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-3-title-faq--troubleshooting-description-frequently-asked-questions-and-solutions-to-common-issues-with-hermes-agent"><a class="header" href="#sidebar_position-3-title-faq--troubleshooting-description-frequently-asked-questions-and-solutions-to-common-issues-with-hermes-agent">sidebar_position: 3
+title: “FAQ &amp; Troubleshooting”
+description: “Frequently asked questions and solutions to common issues with Hermes Agent”</a></h2>
+<h1 id="faq--troubleshooting"><a class="header" href="#faq--troubleshooting">FAQ &amp; Troubleshooting</a></h1>
+<p>Quick answers and fixes for the most common questions and issues.</p>
+<hr>
+<h2 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h2>
+<h3 id="what-llm-providers-work-with-hermes"><a class="header" href="#what-llm-providers-work-with-hermes">What LLM providers work with Hermes?</a></h3>
+<p>Hermes Agent works with any OpenAI-compatible API. Supported providers include:</p>
+<ul>
+<li><strong><a href="https://openrouter.ai/">OpenRouter</a></strong> — access hundreds of models through one API key (recommended for flexibility)</li>
+<li><strong>Nous Portal</strong> — Nous Research’s own inference endpoint</li>
+<li><strong>OpenAI</strong> — GPT-4o, o1, o3, etc.</li>
+<li><strong>Anthropic</strong> — Claude models (via OpenRouter or compatible proxy)</li>
+<li><strong>Google</strong> — Gemini models (via OpenRouter or compatible proxy)</li>
+<li><strong>z.ai / ZhipuAI</strong> — GLM models</li>
+<li><strong>Kimi / Moonshot AI</strong> — Kimi models</li>
+<li><strong>MiniMax</strong> — global and China endpoints</li>
+<li><strong>Local models</strong> — via <a href="https://ollama.com/">Ollama</a>, <a href="https://docs.vllm.ai/">vLLM</a>, <a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>, <a href="https://github.com/sgl-project/sglang">SGLang</a>, or any OpenAI-compatible server</li>
+</ul>
+<p>Set your provider with <code>hermes model</code> or by editing <code>~/.hermes/.env</code>. See the <a href="./environment-variables.html">Environment Variables</a> reference for all provider keys.</p>
+<h3 id="does-it-work-on-windows"><a class="header" href="#does-it-work-on-windows">Does it work on Windows?</a></h3>
+<p><strong>Not natively.</strong> Hermes Agent requires a Unix-like environment. On Windows, install <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL2</a> and run Hermes from inside it. The standard install command works perfectly in WSL2:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<h3 id="does-it-work-on-android--termux"><a class="header" href="#does-it-work-on-android--termux">Does it work on Android / Termux?</a></h3>
+<p>Yes — Hermes now has a tested Termux install path for Android phones.</p>
+<p>Quick install:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<p>For the fully explicit manual steps, supported extras, and current limitations, see the <a href="../getting-started/termux.html">Termux guide</a>.</p>
+<p>Important caveat: the full <code>.[all]</code> extra is not currently available on Android because the <code>voice</code> extra depends on <code>faster-whisper</code> → <code>ctranslate2</code>, and <code>ctranslate2</code> does not publish Android wheels. Use the tested <code>.[termux]</code> extra instead.</p>
+<h3 id="is-my-data-sent-anywhere"><a class="header" href="#is-my-data-sent-anywhere">Is my data sent anywhere?</a></h3>
+<p>API calls go <strong>only to the LLM provider you configure</strong> (e.g., OpenRouter, your local Ollama instance). Hermes Agent does not collect telemetry, usage data, or analytics. Your conversations, memory, and skills are stored locally in <code>~/.hermes/</code>.</p>
+<h3 id="can-i-use-it-offline--with-local-models"><a class="header" href="#can-i-use-it-offline--with-local-models">Can I use it offline / with local models?</a></h3>
+<p>Yes. Run <code>hermes model</code>, select <strong>Custom endpoint</strong>, and enter your server’s URL:</p>
+<pre><code class="language-bash">hermes model
+# Select: Custom endpoint (enter URL manually)
+# API base URL: http://localhost:11434/v1
+# API key: ollama
+# Model name: qwen3.5:27b
+# Context length: 32768   ← set this to match your server's actual context window
+</code></pre>
+<p>Or configure it directly in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">model:
+  default: qwen3.5:27b
+  provider: custom
+  base_url: http://localhost:11434/v1
+</code></pre>
+<p>Hermes persists the endpoint, provider, and base URL in <code>config.yaml</code> so it survives restarts. If your local server has exactly one model loaded, <code>/model custom</code> auto-detects it. You can also set <code>provider: custom</code> in config.yaml — it’s a first-class provider, not an alias for anything else.</p>
+<dl>
+<dt id="this-works-with-ollama-vllm-llamacpp-server-sglang-localai-and-others-see-the-configuration-guide-for-details"><a class="header" href="#this-works-with-ollama-vllm-llamacpp-server-sglang-localai-and-others-see-the-configuration-guide-for-details">This works with Ollama, vLLM, llama.cpp server, SGLang, LocalAI, and others. See the <a href="../user-guide/configuration.html">Configuration guide</a> for details.</a></dt>
+<dd>
+<p>::tip Ollama users
+If you set a custom <code>num_ctx</code> in Ollama (e.g., <code>ollama run --num_ctx 16384</code>), make sure to set the matching context length in Hermes — Ollama’s <code>/api/show</code> reports the model’s <em>maximum</em> context, not the effective <code>num_ctx</code> you configured.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip Timeouts with local models
+Hermes auto-detects local endpoints and relaxes streaming timeouts (read timeout raised from 120s to 1800s, stale stream detection disabled). If you still hit timeouts on very large contexts, set <code>HERMES_STREAM_READ_TIMEOUT=1800</code> in your <code>.env</code>. See the <a href="../guides/local-llm-on-mac.html#timeouts">Local LLM guide</a> for details.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="how-much-does-it-cost"><a class="header" href="#how-much-does-it-cost">How much does it cost?</a></h3>
+<p>Hermes Agent itself is <strong>free and open-source</strong> (MIT license). You pay only for the LLM API usage from your chosen provider. Local models are completely free to run.</p>
+<h3 id="can-multiple-people-use-one-instance"><a class="header" href="#can-multiple-people-use-one-instance">Can multiple people use one instance?</a></h3>
+<p>Yes. The <a href="../user-guide/messaging/index.html">messaging gateway</a> lets multiple users interact with the same Hermes Agent instance via Telegram, Discord, Slack, WhatsApp, or Home Assistant. Access is controlled through allowlists (specific user IDs) and DM pairing (first user to message claims access).</p>
+<h3 id="whats-the-difference-between-memory-and-skills"><a class="header" href="#whats-the-difference-between-memory-and-skills">What’s the difference between memory and skills?</a></h3>
+<ul>
+<li><strong>Memory</strong> stores <strong>facts</strong> — things the agent knows about you, your projects, and preferences. Memories are retrieved automatically based on relevance.</li>
+<li><strong>Skills</strong> store <strong>procedures</strong> — step-by-step instructions for how to do things. Skills are recalled when the agent encounters a similar task.</li>
+</ul>
+<p>Both persist across sessions. See <a href="../user-guide/features/memory.html">Memory</a> and <a href="../user-guide/features/skills.html">Skills</a> for details.</p>
+<h3 id="can-i-use-it-in-my-own-python-project"><a class="header" href="#can-i-use-it-in-my-own-python-project">Can I use it in my own Python project?</a></h3>
+<p>Yes. Import the <code>AIAgent</code> class and use Hermes programmatically:</p>
+<pre><code class="language-python">from run_agent import AIAgent
+
+agent = AIAgent(model="openrouter/nous/hermes-3-llama-3.1-70b")
+response = agent.chat("Explain quantum computing briefly")
+</code></pre>
+<p>See the <a href="../user-guide/features/code-execution.html">Python Library guide</a> for full API usage.</p>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="installation-issues"><a class="header" href="#installation-issues">Installation Issues</a></h3>
+<h4 id="hermes-command-not-found-after-installation"><a class="header" href="#hermes-command-not-found-after-installation"><code>hermes: command not found</code> after installation</a></h4>
+<p><strong>Cause:</strong> Your shell hasn’t reloaded the updated PATH.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Reload your shell profile
+source ~/.bashrc    # bash
+source ~/.zshrc     # zsh
+
+# Or start a new terminal session
+</code></pre>
+<p>If it still doesn’t work, verify the install location:</p>
+<pre><code class="language-bash">which hermes
+ls ~/.local/bin/hermes
+</code></pre>
+<dl>
+<dt id="tip-the-installer-adds-localbin-to-your-path-if-you-use-a-non-standard-shell-config-add-export-pathhomelocalbinpath-manually"><a class="header" href="#tip-the-installer-adds-localbin-to-your-path-if-you-use-a-non-standard-shell-config-add-export-pathhomelocalbinpath-manually">:::tip
+The installer adds <code>~/.local/bin</code> to your PATH. If you use a non-standard shell config, add <code>export PATH="$HOME/.local/bin:$PATH"</code> manually.</a></dt>
+<dd>::</dd>
+</dl>
+<h4 id="python-version-too-old"><a class="header" href="#python-version-too-old">Python version too old</a></h4>
+<p><strong>Cause:</strong> Hermes requires Python 3.11 or newer.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash">python3 --version   # Check current version
+
+# Install a newer Python
+sudo apt install python3.12   # Ubuntu/Debian
+brew install python@3.12      # macOS
+</code></pre>
+<p>The installer handles this automatically — if you see this error during manual installation, upgrade Python first.</p>
+<h4 id="uv-command-not-found"><a class="header" href="#uv-command-not-found"><code>uv: command not found</code></a></h4>
+<p><strong>Cause:</strong> The <code>uv</code> package manager isn’t installed or not in PATH.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash">curl -LsSf https://astral.sh/uv/install.sh | sh
+source ~/.bashrc
+</code></pre>
+<h4 id="permission-denied-errors-during-install"><a class="header" href="#permission-denied-errors-during-install">Permission denied errors during install</a></h4>
+<p><strong>Cause:</strong> Insufficient permissions to write to the install directory.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Don't use sudo with the installer — it installs to ~/.local/bin
+# If you previously installed with sudo, clean up:
+sudo rm /usr/local/bin/hermes
+# Then re-run the standard installer
+curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<hr>
+<h3 id="provider--model-issues"><a class="header" href="#provider--model-issues">Provider &amp; Model Issues</a></h3>
+<h4 id="api-key-not-working"><a class="header" href="#api-key-not-working">API key not working</a></h4>
+<p><strong>Cause:</strong> Key is missing, expired, incorrectly set, or for the wrong provider.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Check your configuration
+hermes config show
+
+# Re-configure your provider
+hermes model
+
+# Or set directly
+hermes config set OPENROUTER_API_KEY sk-or-v1-xxxxxxxxxxxx
+</code></pre>
+<dl>
+<dt id="warning-make-sure-the-key-matches-the-provider-an-openai-key-wont-work-with-openrouter-and-vice-versa-check-hermesenv-for-conflicting-entries"><a class="header" href="#warning-make-sure-the-key-matches-the-provider-an-openai-key-wont-work-with-openrouter-and-vice-versa-check-hermesenv-for-conflicting-entries">:::warning
+Make sure the key matches the provider. An OpenAI key won’t work with OpenRouter and vice versa. Check <code>~/.hermes/.env</code> for conflicting entries.</a></dt>
+<dd>::</dd>
+</dl>
+<h4 id="model-not-available--model-not-found"><a class="header" href="#model-not-available--model-not-found">Model not available / model not found</a></h4>
+<p><strong>Cause:</strong> The model identifier is incorrect or not available on your provider.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># List available models for your provider
+hermes model
+
+# Set a valid model
+hermes config set HERMES_MODEL openrouter/nous/hermes-3-llama-3.1-70b
+
+# Or specify per-session
+hermes chat --model openrouter/meta-llama/llama-3.1-70b-instruct
+</code></pre>
+<h4 id="rate-limiting-429-errors"><a class="header" href="#rate-limiting-429-errors">Rate limiting (429 errors)</a></h4>
+<p><strong>Cause:</strong> You’ve exceeded your provider’s rate limits.</p>
+<p><strong>Solution:</strong> Wait a moment and retry. For sustained usage, consider:</p>
+<ul>
+<li>Upgrading your provider plan</li>
+<li>Switching to a different model or provider</li>
+<li>Using <code>hermes chat --provider &lt;alternative&gt;</code> to route to a different backend</li>
+</ul>
+<h4 id="context-length-exceeded"><a class="header" href="#context-length-exceeded">Context length exceeded</a></h4>
+<p><strong>Cause:</strong> The conversation has grown too long for the model’s context window, or Hermes detected the wrong context length for your model.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Compress the current session
+/compress
+
+# Or start a fresh session
+hermes chat
+
+# Use a model with a larger context window
+hermes chat --model openrouter/google/gemini-3-flash-preview
+</code></pre>
+<p>If this happens on the first long conversation, Hermes may have the wrong context length for your model. Check what it detected:</p>
+<p>Look at the CLI startup line — it shows the detected context length (e.g., <code>📊 Context limit: 128000 tokens</code>). You can also check with <code>/usage</code> during a session.</p>
+<p>To fix context detection, set it explicitly:</p>
+<pre><code class="language-yaml"># In ~/.hermes/config.yaml
+model:
+  default: your-model-name
+  context_length: 131072  # your model's actual context window
+</code></pre>
+<p>Or for custom endpoints, add it per-model:</p>
+<pre><code class="language-yaml">custom_providers:
+  - name: "My Server"
+    base_url: "http://localhost:11434/v1"
+    models:
+      qwen3.5:27b:
+        context_length: 32768
+</code></pre>
+<p>See <a href="../integrations/providers.html#context-length-detection">Context Length Detection</a> for how auto-detection works and all override options.</p>
+<hr>
+<h3 id="terminal-issues"><a class="header" href="#terminal-issues">Terminal Issues</a></h3>
+<h4 id="command-blocked-as-dangerous"><a class="header" href="#command-blocked-as-dangerous">Command blocked as dangerous</a></h4>
+<p><strong>Cause:</strong> Hermes detected a potentially destructive command (e.g., <code>rm -rf</code>, <code>DROP TABLE</code>). This is a safety feature.</p>
+<p><strong>Solution:</strong> When prompted, review the command and type <code>y</code> to approve it. You can also:</p>
+<ul>
+<li>Ask the agent to use a safer alternative</li>
+<li>See the full list of dangerous patterns in the <a href="../user-guide/security.html">Security docs</a></li>
+</ul>
+<dl>
+<dt id="tip-this-is-working-as-intended--hermes-never-silently-runs-destructive-commands-the-approval-prompt-shows-you-exactly-what-will-execute"><a class="header" href="#tip-this-is-working-as-intended--hermes-never-silently-runs-destructive-commands-the-approval-prompt-shows-you-exactly-what-will-execute">:::tip
+This is working as intended — Hermes never silently runs destructive commands. The approval prompt shows you exactly what will execute.</a></dt>
+<dd>::</dd>
+</dl>
+<h4 id="sudo-not-working-via-messaging-gateway"><a class="header" href="#sudo-not-working-via-messaging-gateway"><code>sudo</code> not working via messaging gateway</a></h4>
+<p><strong>Cause:</strong> The messaging gateway runs without an interactive terminal, so <code>sudo</code> cannot prompt for a password.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Avoid <code>sudo</code> in messaging — ask the agent to find alternatives</li>
+<li>If you must use <code>sudo</code>, configure passwordless sudo for specific commands in <code>/etc/sudoers</code></li>
+<li>Or switch to the terminal interface for administrative tasks: <code>hermes chat</code></li>
+</ul>
+<h4 id="docker-backend-not-connecting"><a class="header" href="#docker-backend-not-connecting">Docker backend not connecting</a></h4>
+<p><strong>Cause:</strong> Docker daemon isn’t running or the user lacks permissions.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Check Docker is running
+docker info
+
+# Add your user to the docker group
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Verify
+docker run hello-world
+</code></pre>
+<hr>
+<h3 id="messaging-issues"><a class="header" href="#messaging-issues">Messaging Issues</a></h3>
+<h4 id="bot-not-responding-to-messages"><a class="header" href="#bot-not-responding-to-messages">Bot not responding to messages</a></h4>
+<p><strong>Cause:</strong> The bot isn’t running, isn’t authorized, or your user isn’t in the allowlist.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Check if the gateway is running
+hermes gateway status
+
+# Start the gateway
+hermes gateway start
+
+# Check logs for errors
+cat ~/.hermes/logs/gateway.log | tail -50
+</code></pre>
+<h4 id="messages-not-delivering"><a class="header" href="#messages-not-delivering">Messages not delivering</a></h4>
+<p><strong>Cause:</strong> Network issues, bot token expired, or platform webhook misconfiguration.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Verify your bot token is valid with <code>hermes gateway setup</code></li>
+<li>Check gateway logs: <code>cat ~/.hermes/logs/gateway.log | tail -50</code></li>
+<li>For webhook-based platforms (Slack, WhatsApp), ensure your server is publicly accessible</li>
+</ul>
+<h4 id="allowlist-confusion--who-can-talk-to-the-bot"><a class="header" href="#allowlist-confusion--who-can-talk-to-the-bot">Allowlist confusion — who can talk to the bot?</a></h4>
+<p><strong>Cause:</strong> Authorization mode determines who gets access.</p>
+<p><strong>Solution:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>How it works</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Allowlist</strong></td><td>Only user IDs listed in config can interact</td></tr>
+<tr><td><strong>DM pairing</strong></td><td>First user to message in DM claims exclusive access</td></tr>
+<tr><td><strong>Open</strong></td><td>Anyone can interact (not recommended for production)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Configure in <code>~/.hermes/config.yaml</code> under your gateway’s settings. See the <a href="../user-guide/messaging/index.html">Messaging docs</a>.</p>
+<h4 id="gateway-wont-start"><a class="header" href="#gateway-wont-start">Gateway won’t start</a></h4>
+<p><strong>Cause:</strong> Missing dependencies, port conflicts, or misconfigured tokens.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Install messaging dependencies
+pip install "hermes-agent[telegram]"   # or [discord], [slack], [whatsapp]
+
+# Check for port conflicts
+lsof -i :8080
+
+# Verify configuration
+hermes config show
+</code></pre>
+<h4 id="wsl-gateway-keeps-disconnecting-or-hermes-gateway-start-fails"><a class="header" href="#wsl-gateway-keeps-disconnecting-or-hermes-gateway-start-fails">WSL: Gateway keeps disconnecting or <code>hermes gateway start</code> fails</a></h4>
+<p><strong>Cause:</strong> WSL’s systemd support is unreliable. Many WSL2 installations don’t have systemd enabled, and even when enabled, services may not survive WSL restarts or Windows idle shutdowns.</p>
+<p><strong>Solution:</strong> Use foreground mode instead of the systemd service:</p>
+<pre><code class="language-bash"># Option 1: Direct foreground (simplest)
+hermes gateway run
+
+# Option 2: Persistent via tmux (survives terminal close)
+tmux new -s hermes 'hermes gateway run'
+# Reattach later: tmux attach -t hermes
+
+# Option 3: Background via nohup
+nohup hermes gateway run &gt; ~/.hermes/logs/gateway.log 2&gt;&amp;1 &amp;
+</code></pre>
+<p>If you want to try systemd anyway, make sure it’s enabled:</p>
+<ol>
+<li>Open <code>/etc/wsl.conf</code> (create it if it doesn’t exist)</li>
+<li>Add:
+<pre><code class="language-ini">[boot]
+systemd=true
+</code></pre>
+</li>
+<li>From PowerShell: <code>wsl --shutdown</code></li>
+<li>Reopen your WSL terminal</li>
+<li>Verify: <code>systemctl is-system-running</code> should say “running” or “degraded”</li>
+</ol>
+<p>:::tip Auto-start on Windows boot
+For reliable auto-start, use Windows Task Scheduler to launch WSL + the gateway on login:</p>
+<ol>
+<li>Create a task that runs <code>wsl -d Ubuntu -- bash -lc 'hermes gateway run'</code></li>
+<li>Set it to trigger on user logon
+:::</li>
+</ol>
+<h4 id="macos-nodejs--ffmpeg--other-tools-not-found-by-gateway"><a class="header" href="#macos-nodejs--ffmpeg--other-tools-not-found-by-gateway">macOS: Node.js / ffmpeg / other tools not found by gateway</a></h4>
+<p><strong>Cause:</strong> launchd services inherit a minimal PATH (<code>/usr/bin:/bin:/usr/sbin:/sbin</code>) that doesn’t include Homebrew, nvm, cargo, or other user-installed tool directories. This commonly breaks the WhatsApp bridge (<code>node not found</code>) or voice transcription (<code>ffmpeg not found</code>).</p>
+<p><strong>Solution:</strong> The gateway captures your shell PATH when you run <code>hermes gateway install</code>. If you installed tools after setting up the gateway, re-run the install to capture the updated PATH:</p>
+<pre><code class="language-bash">hermes gateway install    # Re-snapshots your current PATH
+hermes gateway start      # Detects the updated plist and reloads
+</code></pre>
+<p>You can verify the plist has the correct PATH:</p>
+<pre><code class="language-bash">/usr/libexec/PlistBuddy -c "Print :EnvironmentVariables:PATH" \
+  ~/Library/LaunchAgents/ai.hermes.gateway.plist
+</code></pre>
+<hr>
+<h3 id="performance-issues"><a class="header" href="#performance-issues">Performance Issues</a></h3>
+<h4 id="slow-responses"><a class="header" href="#slow-responses">Slow responses</a></h4>
+<p><strong>Cause:</strong> Large model, distant API server, or heavy system prompt with many tools.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Try a faster/smaller model: <code>hermes chat --model openrouter/meta-llama/llama-3.1-8b-instruct</code></li>
+<li>Reduce active toolsets: <code>hermes chat -t "terminal"</code></li>
+<li>Check your network latency to the provider</li>
+<li>For local models, ensure you have enough GPU VRAM</li>
+</ul>
+<h4 id="high-token-usage"><a class="header" href="#high-token-usage">High token usage</a></h4>
+<p><strong>Cause:</strong> Long conversations, verbose system prompts, or many tool calls accumulating context.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Compress the conversation to reduce tokens
+/compress
+
+# Check session token usage
+/usage
+</code></pre>
+<dl>
+<dt id="tip-use-compress-regularly-during-long-sessions-it-summarizes-the-conversation-history-and-reduces-token-usage-significantly-while-preserving-context"><a class="header" href="#tip-use-compress-regularly-during-long-sessions-it-summarizes-the-conversation-history-and-reduces-token-usage-significantly-while-preserving-context">:::tip
+Use <code>/compress</code> regularly during long sessions. It summarizes the conversation history and reduces token usage significantly while preserving context.</a></dt>
+<dd>::</dd>
+</dl>
+<h4 id="session-getting-too-long"><a class="header" href="#session-getting-too-long">Session getting too long</a></h4>
+<p><strong>Cause:</strong> Extended conversations accumulate messages and tool outputs, approaching context limits.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Compress current session (preserves key context)
+/compress
+
+# Start a new session with a reference to the old one
+hermes chat
+
+# Resume a specific session later if needed
+hermes chat --continue
+</code></pre>
+<hr>
+<h3 id="mcp-issues"><a class="header" href="#mcp-issues">MCP Issues</a></h3>
+<h4 id="mcp-server-not-connecting"><a class="header" href="#mcp-server-not-connecting">MCP server not connecting</a></h4>
+<p><strong>Cause:</strong> Server binary not found, wrong command path, or missing runtime.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Ensure MCP dependencies are installed (already included in standard install)
+cd ~/.hermes/hermes-agent &amp;&amp; uv pip install -e ".[mcp]"
+
+# For npm-based servers, ensure Node.js is available
+node --version
+npx --version
+
+# Test the server manually
+npx -y @modelcontextprotocol/server-filesystem /tmp
+</code></pre>
+<p>Verify your <code>~/.hermes/config.yaml</code> MCP configuration:</p>
+<pre><code class="language-yaml">mcp_servers:
+  filesystem:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/docs"]
+</code></pre>
+<h4 id="tools-not-showing-up-from-mcp-server"><a class="header" href="#tools-not-showing-up-from-mcp-server">Tools not showing up from MCP server</a></h4>
+<p><strong>Cause:</strong> Server started but tool discovery failed, tools were filtered out by config, or the server does not support the MCP capability you expected.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Check gateway/agent logs for MCP connection errors</li>
+<li>Ensure the server responds to the <code>tools/list</code> RPC method</li>
+<li>Review any <code>tools.include</code>, <code>tools.exclude</code>, <code>tools.resources</code>, <code>tools.prompts</code>, or <code>enabled</code> settings under that server</li>
+<li>Remember that resource/prompt utility tools are only registered when the session actually supports those capabilities</li>
+<li>Use <code>/reload-mcp</code> after changing config</li>
+</ul>
+<pre><code class="language-bash"># Verify MCP servers are configured
+hermes config show | grep -A 12 mcp_servers
+
+# Restart Hermes or reload MCP after config changes
+hermes chat
+</code></pre>
+<p>See also:</p>
+<ul>
+<li><a href="/docs/user-guide/features/mcp">MCP (Model Context Protocol)</a></li>
+<li><a href="/docs/guides/use-mcp-with-hermes">Use MCP with Hermes</a></li>
+<li><a href="/docs/reference/mcp-config-reference">MCP Config Reference</a></li>
+</ul>
+<h4 id="mcp-timeout-errors"><a class="header" href="#mcp-timeout-errors">MCP timeout errors</a></h4>
+<p><strong>Cause:</strong> The MCP server is taking too long to respond, or it crashed during execution.</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Increase the timeout in your MCP server config if supported</li>
+<li>Check if the MCP server process is still running</li>
+<li>For remote HTTP MCP servers, check network connectivity</li>
+</ul>
+<dl>
+<dt id="warning-if-an-mcp-server-crashes-mid-request-hermes-will-report-a-timeout-check-the-servers-own-logs-not-just-hermes-logs-to-diagnose-the-root-cause"><a class="header" href="#warning-if-an-mcp-server-crashes-mid-request-hermes-will-report-a-timeout-check-the-servers-own-logs-not-just-hermes-logs-to-diagnose-the-root-cause">:::warning
+If an MCP server crashes mid-request, Hermes will report a timeout. Check the server’s own logs (not just Hermes logs) to diagnose the root cause.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="profiles"><a class="header" href="#profiles">Profiles</a></h2>
+<h3 id="how-do-profiles-differ-from-just-setting-hermes_home"><a class="header" href="#how-do-profiles-differ-from-just-setting-hermes_home">How do profiles differ from just setting HERMES_HOME?</a></h3>
+<p>Profiles are a managed layer on top of <code>HERMES_HOME</code>. You <em>could</em> manually set <code>HERMES_HOME=/some/path</code> before every command, but profiles handle all the plumbing for you: creating the directory structure, generating shell aliases (<code>hermes-work</code>), tracking the active profile in <code>~/.hermes/active_profile</code>, and syncing skill updates across all profiles automatically. They also integrate with tab completion so you don’t have to remember paths.</p>
+<h3 id="can-two-profiles-share-the-same-bot-token"><a class="header" href="#can-two-profiles-share-the-same-bot-token">Can two profiles share the same bot token?</a></h3>
+<p>No. Each messaging platform (Telegram, Discord, etc.) requires exclusive access to a bot token. If two profiles try to use the same token simultaneously, the second gateway will fail to connect. Create a separate bot per profile — for Telegram, talk to <a href="https://t.me/BotFather">@BotFather</a> to make additional bots.</p>
+<h3 id="do-profiles-share-memory-or-sessions"><a class="header" href="#do-profiles-share-memory-or-sessions">Do profiles share memory or sessions?</a></h3>
+<p>No. Each profile has its own memory store, session database, and skills directory. They are completely isolated. If you want to start a new profile with existing memories and sessions, use <code>hermes profile create newname --clone-all</code> to copy everything from the current profile.</p>
+<h3 id="what-happens-when-i-run-hermes-update"><a class="header" href="#what-happens-when-i-run-hermes-update">What happens when I run <code>hermes update</code>?</a></h3>
+<p><code>hermes update</code> pulls the latest code and reinstalls dependencies <strong>once</strong> (not per-profile). It then syncs updated skills to all profiles automatically. You only need to run <code>hermes update</code> once — it covers every profile on the machine.</p>
+<h3 id="can-i-move-a-profile-to-a-different-machine"><a class="header" href="#can-i-move-a-profile-to-a-different-machine">Can I move a profile to a different machine?</a></h3>
+<p>Yes. Export the profile to a portable archive and import it on the other machine:</p>
+<pre><code class="language-bash"># On the source machine
+hermes profile export work ./work-backup.tar.gz
+
+# Copy the file to the target machine, then:
+hermes profile import ./work-backup.tar.gz work
+</code></pre>
+<p>The imported profile will have all config, memories, sessions, and skills from the export. You may need to update paths or re-authenticate with providers if the new machine has a different setup.</p>
+<h3 id="how-many-profiles-can-i-run"><a class="header" href="#how-many-profiles-can-i-run">How many profiles can I run?</a></h3>
+<p>There is no hard limit. Each profile is just a directory under <code>~/.hermes/profiles/</code>. The practical limit depends on your disk space and how many concurrent gateways your system can handle (each gateway is a lightweight Python process). Running dozens of profiles is fine; each idle profile uses no resources.</p>
+<hr>
+<h2 id="workflows--patterns"><a class="header" href="#workflows--patterns">Workflows &amp; Patterns</a></h2>
+<h3 id="using-different-models-for-different-tasks-multi-model-workflows"><a class="header" href="#using-different-models-for-different-tasks-multi-model-workflows">Using different models for different tasks (multi-model workflows)</a></h3>
+<p><strong>Scenario:</strong> You use GPT-5.4 as your daily driver, but Gemini or Grok writes better social media content. Manually switching models every time is tedious.</p>
+<p><strong>Solution: Delegation config.</strong> Hermes can route subagents to a different model automatically. Set this in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">delegation:
+  model: "google/gemini-3-flash-preview"   # subagents use this model
+  provider: "openrouter"                    # provider for subagents
+</code></pre>
+<p>Now when you tell Hermes “write me a Twitter thread about X” and it spawns a <code>delegate_task</code> subagent, that subagent runs on Gemini instead of your main model. Your primary conversation stays on GPT-5.4.</p>
+<p>You can also be explicit in your prompt: <em>“Delegate a task to write social media posts about our product launch. Use your subagent for the actual writing.”</em> The agent will use <code>delegate_task</code>, which automatically picks up the delegation config.</p>
+<p>For one-off model switches without delegation, use <code>/model</code> in the CLI:</p>
+<pre><code class="language-bash">/model google/gemini-3-flash-preview    # switch for this session
+# ... write your content ...
+/model openai/gpt-5.4                   # switch back
+</code></pre>
+<p>See <a href="../user-guide/features/delegation.html">Subagent Delegation</a> for more on how delegation works.</p>
+<h3 id="running-multiple-agents-on-one-whatsapp-number-per-chat-binding"><a class="header" href="#running-multiple-agents-on-one-whatsapp-number-per-chat-binding">Running multiple agents on one WhatsApp number (per-chat binding)</a></h3>
+<p><strong>Scenario:</strong> In OpenClaw, you had multiple independent agents bound to specific WhatsApp chats — one for a family shopping list group, another for your private chat. Can Hermes do this?</p>
+<p><strong>Current limitation:</strong> Hermes profiles each require their own WhatsApp number/session. You cannot bind multiple profiles to different chats on the same WhatsApp number — the WhatsApp bridge (Baileys) uses one authenticated session per number.</p>
+<p><strong>Workarounds:</strong></p>
+<ol>
+<li>
+<p><strong>Use a single profile with personality switching.</strong> Create different <code>AGENTS.md</code> context files or use the <code>/personality</code> command to change behavior per chat. The agent sees which chat it’s in and can adapt.</p>
+</li>
+<li>
+<p><strong>Use cron jobs for specialized tasks.</strong> For a shopping list tracker, set up a cron job that monitors a specific chat and manages the list — no separate agent needed.</p>
+</li>
+<li>
+<p><strong>Use separate numbers.</strong> If you need truly independent agents, pair each profile with its own WhatsApp number. Virtual numbers from services like Google Voice work for this.</p>
+</li>
+<li>
+<p><strong>Use Telegram or Discord instead.</strong> These platforms support per-chat binding more naturally — each Telegram group or Discord channel gets its own session, and you can run multiple bot tokens (one per profile) on the same account.</p>
+</li>
+</ol>
+<p>See <a href="../user-guide/profiles.html">Profiles</a> and <a href="../user-guide/messaging/whatsapp.html">WhatsApp setup</a> for more details.</p>
+<h3 id="controlling-what-shows-up-in-telegram-hiding-logs-and-reasoning"><a class="header" href="#controlling-what-shows-up-in-telegram-hiding-logs-and-reasoning">Controlling what shows up in Telegram (hiding logs and reasoning)</a></h3>
+<p><strong>Scenario:</strong> You see gateway exec logs, Hermes reasoning, and tool call details in Telegram instead of just the final output.</p>
+<p><strong>Solution:</strong> The <code>display.tool_progress</code> setting in <code>config.yaml</code> controls how much tool activity is shown:</p>
+<pre><code class="language-yaml">display:
+  tool_progress: "off"   # options: off, new, all, verbose
+</code></pre>
+<ul>
+<li><strong><code>off</code></strong> — Only the final response. No tool calls, no reasoning, no logs.</li>
+<li><strong><code>new</code></strong> — Shows new tool calls as they happen (brief one-liners).</li>
+<li><strong><code>all</code></strong> — Shows all tool activity including results.</li>
+<li><strong><code>verbose</code></strong> — Full detail including tool arguments and outputs.</li>
+</ul>
+<p>For messaging platforms, <code>off</code> or <code>new</code> is usually what you want. After editing <code>config.yaml</code>, restart the gateway for changes to take effect.</p>
+<p>You can also toggle this per-session with the <code>/verbose</code> command (if enabled):</p>
+<pre><code class="language-yaml">display:
+  tool_progress_command: true   # enables /verbose in the gateway
+</code></pre>
+<h3 id="managing-skills-on-telegram-slash-command-limit"><a class="header" href="#managing-skills-on-telegram-slash-command-limit">Managing skills on Telegram (slash command limit)</a></h3>
+<p><strong>Scenario:</strong> Telegram has a 100 slash command limit, and your skills are pushing past it. You want to disable skills you don’t need on Telegram, but <code>hermes skills config</code> settings don’t seem to take effect.</p>
+<p><strong>Solution:</strong> Use <code>hermes skills config</code> to disable skills per-platform. This writes to <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">skills:
+  disabled: []                    # globally disabled skills
+  platform_disabled:
+    telegram: [skill-a, skill-b]  # disabled only on telegram
+</code></pre>
+<dl>
+<dt id="after-changing-this-restart-the-gateway-hermes-gateway-restart-or-kill-and-relaunch-the-telegram-bot-command-menu-rebuilds-on-startup"><a class="header" href="#after-changing-this-restart-the-gateway-hermes-gateway-restart-or-kill-and-relaunch-the-telegram-bot-command-menu-rebuilds-on-startup">After changing this, <strong>restart the gateway</strong> (<code>hermes gateway restart</code> or kill and relaunch). The Telegram bot command menu rebuilds on startup.</a></dt>
+<dd>
+<p>::tip
+Skills with very long descriptions are truncated to 40 characters in the Telegram menu to stay within payload size limits. If skills aren’t appearing, it may be a total payload size issue rather than the 100 command count limit — disabling unused skills helps with both.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="shared-thread-sessions-multiple-users-one-conversation"><a class="header" href="#shared-thread-sessions-multiple-users-one-conversation">Shared thread sessions (multiple users, one conversation)</a></h3>
+<p><strong>Scenario:</strong> You have a Telegram or Discord thread where multiple people mention the bot. You want all mentions in that thread to be part of one shared conversation, not separate per-user sessions.</p>
+<p><strong>Current behavior:</strong> Hermes creates sessions keyed by user ID on most platforms, so each person gets their own conversation context. This is by design for privacy and context isolation.</p>
+<p><strong>Workarounds:</strong></p>
+<ol>
+<li>
+<p><strong>Use Slack.</strong> Slack sessions are keyed by thread, not by user. Multiple users in the same thread share one conversation — exactly the behavior you’re describing. This is the most natural fit.</p>
+</li>
+<li>
+<p><strong>Use a group chat with a single user.</strong> If one person is the designated “operator” who relays questions, the session stays unified. Others can read along.</p>
+</li>
+<li>
+<p><strong>Use a Discord channel.</strong> Discord sessions are keyed by channel, so all users in the same channel share context. Use a dedicated channel for the shared conversation.</p>
+</li>
+</ol>
+<h3 id="exporting-hermes-to-another-machine"><a class="header" href="#exporting-hermes-to-another-machine">Exporting Hermes to another machine</a></h3>
+<p><strong>Scenario:</strong> You’ve built up skills, cron jobs, and memories on one machine and want to move everything to a new dedicated Linux box.</p>
+<p><strong>Solution:</strong></p>
+<ol>
+<li>
+<p>Install Hermes Agent on the new machine:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+</li>
+<li>
+<p>Copy your entire <code>~/.hermes/</code> directory <strong>except</strong> the <code>hermes-agent</code> subdirectory (that’s the code repo — the new install has its own):</p>
+<pre><code class="language-bash"># On the source machine
+rsync -av --exclude='hermes-agent' ~/.hermes/ newmachine:~/.hermes/
+</code></pre>
+<p>Or use profile export/import:</p>
+<pre><code class="language-bash"># On source machine
+hermes profile export default ./hermes-backup.tar.gz
+
+# On target machine
+hermes profile import ./hermes-backup.tar.gz default
+</code></pre>
+</li>
+<li>
+<p>On the new machine, run <code>hermes setup</code> to verify API keys and provider config are working. Re-authenticate any messaging platforms (especially WhatsApp, which uses QR pairing).</p>
+</li>
+</ol>
+<p>The <code>~/.hermes/</code> directory contains everything: <code>config.yaml</code>, <code>.env</code>, <code>SOUL.md</code>, <code>memories/</code>, <code>skills/</code>, <code>state.db</code> (sessions), <code>cron/</code>, and any custom plugins. The code itself lives in <code>~/.hermes/hermes-agent/</code> and is installed fresh.</p>
+<h3 id="permission-denied-when-reloading-shell-after-install"><a class="header" href="#permission-denied-when-reloading-shell-after-install">Permission denied when reloading shell after install</a></h3>
+<p><strong>Scenario:</strong> After running the Hermes installer, <code>source ~/.zshrc</code> gives a permission denied error.</p>
+<p><strong>Cause:</strong> This usually happens when <code>~/.zshrc</code> (or <code>~/.bashrc</code>) has incorrect file permissions, or when the installer couldn’t write to it cleanly. It’s not a Hermes-specific issue — it’s a shell config permissions problem.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Check permissions
+ls -la ~/.zshrc
+
+# Fix if needed (should be -rw-r--r-- or 644)
+chmod 644 ~/.zshrc
+
+# Then reload
+source ~/.zshrc
+
+# Or just open a new terminal window — it picks up PATH changes automatically
+</code></pre>
+<p>If the installer added the PATH line but permissions are wrong, you can add it manually:</p>
+<pre><code class="language-bash">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc
+</code></pre>
+<h3 id="error-400-on-first-agent-run"><a class="header" href="#error-400-on-first-agent-run">Error 400 on first agent run</a></h3>
+<p><strong>Scenario:</strong> Setup completes fine, but the first chat attempt fails with HTTP 400.</p>
+<p><strong>Cause:</strong> Usually a model name mismatch — the configured model doesn’t exist on your provider, or the API key doesn’t have access to it.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Check what model and provider are configured
+hermes config show | head -20
+
+# Re-run model selection
+hermes model
+
+# Or test with a known-good model
+hermes chat -q "hello" --model anthropic/claude-sonnet-4.6
+</code></pre>
+<p>If using OpenRouter, make sure your API key has credits. A 400 from OpenRouter often means the model requires a paid plan or the model ID has a typo.</p>
+<hr>
+<h2 id="still-stuck"><a class="header" href="#still-stuck">Still Stuck?</a></h2>
+<p>If your issue isn’t covered here:</p>
+<ol>
+<li><strong>Search existing issues:</strong> <a href="https://github.com/NousResearch/hermes-agent/issues">GitHub Issues</a></li>
+<li><strong>Ask the community:</strong> <a href="https://discord.gg/nousresearch">Nous Research Discord</a></li>
+<li><strong>File a bug report:</strong> Include your OS, Python version (<code>python3 --version</code>), Hermes version (<code>hermes --version</code>), and the full error message</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/reference/environment-variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/reference/mcp-config-reference.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/reference/environment-variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/reference/mcp-config-reference.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Security - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/security.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-8-title-security-description-security-model-dangerous-command-approval-user-authorization-container-isolation-and-production-deployment-best-practices"><a class="header" href="#sidebar_position-8-title-security-description-security-model-dangerous-command-approval-user-authorization-container-isolation-and-production-deployment-best-practices">sidebar_position: 8
+title: “Security”
+description: “Security model, dangerous command approval, user authorization, container isolation, and production deployment best practices”</a></h2>
+<h1 id="security"><a class="header" href="#security">Security</a></h1>
+<p>Hermes Agent is designed with a defense-in-depth security model. This page covers every security boundary — from command approval to container isolation to user authorization on messaging platforms.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The security model has seven layers:</p>
+<ol>
+<li><strong>User authorization</strong> — who can talk to the agent (allowlists, DM pairing)</li>
+<li><strong>Dangerous command approval</strong> — human-in-the-loop for destructive operations</li>
+<li><strong>Container isolation</strong> — Docker/Singularity/Modal sandboxing with hardened settings</li>
+<li><strong>MCP credential filtering</strong> — environment variable isolation for MCP subprocesses</li>
+<li><strong>Context file scanning</strong> — prompt injection detection in project files</li>
+<li><strong>Cross-session isolation</strong> — sessions cannot access each other’s data or state; cron job storage paths are hardened against path traversal attacks</li>
+<li><strong>Input sanitization</strong> — working directory parameters in terminal tool backends are validated against an allowlist to prevent shell injection</li>
+</ol>
+<h2 id="dangerous-command-approval"><a class="header" href="#dangerous-command-approval">Dangerous Command Approval</a></h2>
+<p>Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it.</p>
+<h3 id="approval-modes"><a class="header" href="#approval-modes">Approval Modes</a></h3>
+<p>The approval system supports three modes, configured via <code>approvals.mode</code> in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">approvals:
+  mode: manual    # manual | smart | off
+  timeout: 60     # seconds to wait for user response (default: 60)
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>manual</strong> (default)</td><td>Always prompt the user for approval on dangerous commands</td></tr>
+<tr><td><strong>smart</strong></td><td>Use an auxiliary LLM to assess risk. Low-risk commands (e.g., <code>python -c "print('hello')"</code>) are auto-approved. Genuinely dangerous commands are auto-denied. Uncertain cases escalate to a manual prompt.</td></tr>
+<tr><td><strong>off</strong></td><td>Disable all approval checks — equivalent to running with <code>--yolo</code>. All commands execute without prompts.</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="warning-setting-approvalsmode-off-disables-all-safety-prompts-use-only-in-trusted-environments-cicd-containers-etc"><a class="header" href="#warning-setting-approvalsmode-off-disables-all-safety-prompts-use-only-in-trusted-environments-cicd-containers-etc">:::warning
+Setting <code>approvals.mode: off</code> disables all safety prompts. Use only in trusted environments (CI/CD, containers, etc.).</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="yolo-mode"><a class="header" href="#yolo-mode">YOLO Mode</a></h3>
+<p>YOLO mode bypasses <strong>all</strong> dangerous command approval prompts for the current session. It can be activated three ways:</p>
+<ol>
+<li><strong>CLI flag</strong>: Start a session with <code>hermes --yolo</code> or <code>hermes chat --yolo</code></li>
+<li><strong>Slash command</strong>: Type <code>/yolo</code> during a session to toggle it on/off</li>
+<li><strong>Environment variable</strong>: Set <code>HERMES_YOLO_MODE=1</code></li>
+</ol>
+<p>The <code>/yolo</code> command is a <strong>toggle</strong> — each use flips the mode on or off:</p>
+<pre><code>&gt; /yolo
+  ⚡ YOLO mode ON — all commands auto-approved. Use with caution.
+
+&gt; /yolo
+  ⚠ YOLO mode OFF — dangerous commands will require approval.
+</code></pre>
+<dl>
+<dt id="yolo-mode-is-available-in-both-cli-and-gateway-sessions-internally-it-sets-the-hermes_yolo_mode-environment-variable-which-is-checked-before-every-command-execution"><a class="header" href="#yolo-mode-is-available-in-both-cli-and-gateway-sessions-internally-it-sets-the-hermes_yolo_mode-environment-variable-which-is-checked-before-every-command-execution">YOLO mode is available in both CLI and gateway sessions. Internally, it sets the <code>HERMES_YOLO_MODE</code> environment variable which is checked before every command execution.</a></dt>
+<dd>
+<p>::danger
+YOLO mode disables <strong>all</strong> dangerous command safety checks for the session. Use only when you fully trust the commands being generated (e.g., well-tested automation scripts in disposable environments).</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="approval-timeout"><a class="header" href="#approval-timeout">Approval Timeout</a></h3>
+<p>When a dangerous command prompt appears, the user has a configurable amount of time to respond. If no response is given within the timeout, the command is <strong>denied</strong> by default (fail-closed).</p>
+<p>Configure the timeout in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">approvals:
+  timeout: 60  # seconds (default: 60)
+</code></pre>
+<h3 id="what-triggers-approval"><a class="header" href="#what-triggers-approval">What Triggers Approval</a></h3>
+<p>The following patterns trigger approval prompts (defined in <code>tools/approval.py</code>):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Pattern</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>rm -r</code> / <code>rm --recursive</code></td><td>Recursive delete</td></tr>
+<tr><td><code>rm ... /</code></td><td>Delete in root path</td></tr>
+<tr><td><code>chmod 777/666</code> / <code>o+w</code> / <code>a+w</code></td><td>World/other-writable permissions</td></tr>
+<tr><td><code>chmod --recursive</code> with unsafe perms</td><td>Recursive world/other-writable (long flag)</td></tr>
+<tr><td><code>chown -R root</code> / <code>chown --recursive root</code></td><td>Recursive chown to root</td></tr>
+<tr><td><code>mkfs</code></td><td>Format filesystem</td></tr>
+<tr><td><code>dd if=</code></td><td>Disk copy</td></tr>
+<tr><td><code>&gt; /dev/sd</code></td><td>Write to block device</td></tr>
+<tr><td><code>DROP TABLE/DATABASE</code></td><td>SQL DROP</td></tr>
+<tr><td><code>DELETE FROM</code> (without WHERE)</td><td>SQL DELETE without WHERE</td></tr>
+<tr><td><code>TRUNCATE TABLE</code></td><td>SQL TRUNCATE</td></tr>
+<tr><td><code>&gt; /etc/</code></td><td>Overwrite system config</td></tr>
+<tr><td><code>systemctl stop/disable/mask</code></td><td>Stop/disable system services</td></tr>
+<tr><td><code>kill -9 -1</code></td><td>Kill all processes</td></tr>
+<tr><td><code>pkill -9</code></td><td>Force kill processes</td></tr>
+<tr><td>Fork bomb patterns</td><td>Fork bombs</td></tr>
+<tr><td><code>bash -c</code> / <code>sh -c</code> / <code>zsh -c</code> / <code>ksh -c</code></td><td>Shell command execution via <code>-c</code> flag (including combined flags like <code>-lc</code>)</td></tr>
+<tr><td><code>python -e</code> / <code>perl -e</code> / <code>ruby -e</code> / <code>node -c</code></td><td>Script execution via <code>-e</code>/<code>-c</code> flag</td></tr>
+<tr><td><code>curl ... | sh</code> / <code>wget ... | sh</code></td><td>Pipe remote content to shell</td></tr>
+<tr><td><code>bash &lt;(curl ...)</code> / <code>sh &lt;(wget ...)</code></td><td>Execute remote script via process substitution</td></tr>
+<tr><td><code>tee</code> to <code>/etc/</code>, <code>~/.ssh/</code>, <code>~/.hermes/.env</code></td><td>Overwrite sensitive file via tee</td></tr>
+<tr><td><code>&gt;</code> / <code>&gt;&gt;</code> to <code>/etc/</code>, <code>~/.ssh/</code>, <code>~/.hermes/.env</code></td><td>Overwrite sensitive file via redirection</td></tr>
+<tr><td><code>xargs rm</code></td><td>xargs with rm</td></tr>
+<tr><td><code>find -exec rm</code> / <code>find -delete</code></td><td>Find with destructive actions</td></tr>
+<tr><td><code>cp</code>/<code>mv</code>/<code>install</code> to <code>/etc/</code></td><td>Copy/move file into system config</td></tr>
+<tr><td><code>sed -i</code> / <code>sed --in-place</code> on <code>/etc/</code></td><td>In-place edit of system config</td></tr>
+<tr><td><code>pkill</code>/<code>killall</code> hermes/gateway</td><td>Self-termination prevention</td></tr>
+<tr><td><code>gateway run</code> with <code>&amp;</code>/<code>disown</code>/<code>nohup</code>/<code>setsid</code></td><td>Prevents starting gateway outside service manager</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="info-container-bypass-when-running-in-docker-singularity-modal-or-daytona-backends-dangerous-command-checks-are-skipped-because-the-container-itself-is-the-security-boundary-destructive-commands-inside-a-container-cant-harm-the-host"><a class="header" href="#info-container-bypass-when-running-in-docker-singularity-modal-or-daytona-backends-dangerous-command-checks-are-skipped-because-the-container-itself-is-the-security-boundary-destructive-commands-inside-a-container-cant-harm-the-host">:::info
+<strong>Container bypass</strong>: When running in <code>docker</code>, <code>singularity</code>, <code>modal</code>, or <code>daytona</code> backends, dangerous command checks are <strong>skipped</strong> because the container itself is the security boundary. Destructive commands inside a container can’t harm the host.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="approval-flow-cli"><a class="header" href="#approval-flow-cli">Approval Flow (CLI)</a></h3>
+<p>In the interactive CLI, dangerous commands show an inline approval prompt:</p>
+<pre><code>  ⚠️  DANGEROUS COMMAND: recursive delete
+      rm -rf /tmp/old-project
+
+      [o]nce  |  [s]ession  |  [a]lways  |  [d]eny
+
+      Choice [o/s/a/D]:
+</code></pre>
+<p>The four options:</p>
+<ul>
+<li><strong>once</strong> — allow this single execution</li>
+<li><strong>session</strong> — allow this pattern for the rest of the session</li>
+<li><strong>always</strong> — add to permanent allowlist (saved to <code>config.yaml</code>)</li>
+<li><strong>deny</strong> (default) — block the command</li>
+</ul>
+<h3 id="approval-flow-gatewaymessaging"><a class="header" href="#approval-flow-gatewaymessaging">Approval Flow (Gateway/Messaging)</a></h3>
+<p>On messaging platforms, the agent sends the dangerous command details to the chat and waits for the user to reply:</p>
+<ul>
+<li>Reply <strong>yes</strong>, <strong>y</strong>, <strong>approve</strong>, <strong>ok</strong>, or <strong>go</strong> to approve</li>
+<li>Reply <strong>no</strong>, <strong>n</strong>, <strong>deny</strong>, or <strong>cancel</strong> to deny</li>
+</ul>
+<p>The <code>HERMES_EXEC_ASK=1</code> environment variable is automatically set when running the gateway.</p>
+<h3 id="permanent-allowlist"><a class="header" href="#permanent-allowlist">Permanent Allowlist</a></h3>
+<p>Commands approved with “always” are saved to <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml"># Permanently allowed dangerous command patterns
+command_allowlist:
+  - rm
+  - systemctl
+</code></pre>
+<dl>
+<dt id="these-patterns-are-loaded-at-startup-and-silently-approved-in-all-future-sessions"><a class="header" href="#these-patterns-are-loaded-at-startup-and-silently-approved-in-all-future-sessions">These patterns are loaded at startup and silently approved in all future sessions.</a></dt>
+<dd>
+<p>::tip
+Use <code>hermes config edit</code> to review or remove patterns from your permanent allowlist.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="user-authorization-gateway"><a class="header" href="#user-authorization-gateway">User Authorization (Gateway)</a></h2>
+<p>When running the messaging gateway, Hermes controls who can interact with the bot through a layered authorization system.</p>
+<h3 id="authorization-check-order"><a class="header" href="#authorization-check-order">Authorization Check Order</a></h3>
+<p>The <code>_is_user_authorized()</code> method checks in this order:</p>
+<ol>
+<li><strong>Per-platform allow-all flag</strong> (e.g., <code>DISCORD_ALLOW_ALL_USERS=true</code>)</li>
+<li><strong>DM pairing approved list</strong> (users approved via pairing codes)</li>
+<li><strong>Platform-specific allowlists</strong> (e.g., <code>TELEGRAM_ALLOWED_USERS=12345,67890</code>)</li>
+<li><strong>Global allowlist</strong> (<code>GATEWAY_ALLOWED_USERS=12345,67890</code>)</li>
+<li><strong>Global allow-all</strong> (<code>GATEWAY_ALLOW_ALL_USERS=true</code>)</li>
+<li><strong>Default: deny</strong></li>
+</ol>
+<h3 id="platform-allowlists"><a class="header" href="#platform-allowlists">Platform Allowlists</a></h3>
+<p>Set allowed user IDs as comma-separated values in <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash"># Platform-specific allowlists
+TELEGRAM_ALLOWED_USERS=123456789,987654321
+DISCORD_ALLOWED_USERS=111222333444555666
+WHATSAPP_ALLOWED_USERS=15551234567
+SLACK_ALLOWED_USERS=U01ABC123
+
+# Cross-platform allowlist (checked for all platforms)
+GATEWAY_ALLOWED_USERS=123456789
+
+# Per-platform allow-all (use with caution)
+DISCORD_ALLOW_ALL_USERS=true
+
+# Global allow-all (use with extreme caution)
+GATEWAY_ALLOW_ALL_USERS=true
+</code></pre>
+<p>:::warning
+If <strong>no allowlists are configured</strong> and <code>GATEWAY_ALLOW_ALL_USERS</code> is not set, <strong>all users are denied</strong>. The gateway logs a warning at startup:</p>
+<pre><code>No user allowlists configured. All unauthorized users will be denied.
+Set GATEWAY_ALLOW_ALL_USERS=true in ~/.hermes/.env to allow open access,
+or configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id).
+</code></pre>
+<p>:::</p>
+<h3 id="dm-pairing-system"><a class="header" href="#dm-pairing-system">DM Pairing System</a></h3>
+<p>For more flexible authorization, Hermes includes a code-based pairing system. Instead of requiring user IDs upfront, unknown users receive a one-time pairing code that the bot owner approves via the CLI.</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>An unknown user sends a DM to the bot</li>
+<li>The bot replies with an 8-character pairing code</li>
+<li>The bot owner runs <code>hermes pairing approve &lt;platform&gt; &lt;code&gt;</code> on the CLI</li>
+<li>The user is permanently approved for that platform</li>
+</ol>
+<p>Control how unauthorized direct messages are handled in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">unauthorized_dm_behavior: pair
+
+whatsapp:
+  unauthorized_dm_behavior: ignore
+</code></pre>
+<ul>
+<li><code>pair</code> is the default. Unauthorized DMs get a pairing code reply.</li>
+<li><code>ignore</code> silently drops unauthorized DMs.</li>
+<li>Platform sections override the global default, so you can keep pairing on Telegram while keeping WhatsApp silent.</li>
+</ul>
+<p><strong>Security features</strong> (based on OWASP + NIST SP 800-63-4 guidance):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Details</th></tr>
+</thead>
+<tbody>
+<tr><td>Code format</td><td>8-char from 32-char unambiguous alphabet (no 0/O/1/I)</td></tr>
+<tr><td>Randomness</td><td>Cryptographic (<code>secrets.choice()</code>)</td></tr>
+<tr><td>Code TTL</td><td>1 hour expiry</td></tr>
+<tr><td>Rate limiting</td><td>1 request per user per 10 minutes</td></tr>
+<tr><td>Pending limit</td><td>Max 3 pending codes per platform</td></tr>
+<tr><td>Lockout</td><td>5 failed approval attempts → 1-hour lockout</td></tr>
+<tr><td>File security</td><td><code>chmod 0600</code> on all pairing data files</td></tr>
+<tr><td>Logging</td><td>Codes are never logged to stdout</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Pairing CLI commands:</strong></p>
+<pre><code class="language-bash"># List pending and approved users
+hermes pairing list
+
+# Approve a pairing code
+hermes pairing approve telegram ABC12DEF
+
+# Revoke a user's access
+hermes pairing revoke telegram 123456789
+
+# Clear all pending codes
+hermes pairing clear-pending
+</code></pre>
+<p><strong>Storage:</strong> Pairing data is stored in <code>~/.hermes/pairing/</code> with per-platform JSON files:</p>
+<ul>
+<li><code>{platform}-pending.json</code> — pending pairing requests</li>
+<li><code>{platform}-approved.json</code> — approved users</li>
+<li><code>_rate_limits.json</code> — rate limit and lockout tracking</li>
+</ul>
+<h2 id="container-isolation"><a class="header" href="#container-isolation">Container Isolation</a></h2>
+<p>When using the <code>docker</code> terminal backend, Hermes applies strict security hardening to every container.</p>
+<h3 id="docker-security-flags"><a class="header" href="#docker-security-flags">Docker Security Flags</a></h3>
+<p>Every container runs with these flags (defined in <code>tools/environments/docker.py</code>):</p>
+<pre><code class="language-python">_SECURITY_ARGS = [
+    "--cap-drop", "ALL",                          # Drop ALL Linux capabilities
+    "--cap-add", "DAC_OVERRIDE",                  # Root can write to bind-mounted dirs
+    "--cap-add", "CHOWN",                         # Package managers need file ownership
+    "--cap-add", "FOWNER",                        # Package managers need file ownership
+    "--security-opt", "no-new-privileges",         # Block privilege escalation
+    "--pids-limit", "256",                         # Limit process count
+    "--tmpfs", "/tmp:rw,nosuid,size=512m",         # Size-limited /tmp
+    "--tmpfs", "/var/tmp:rw,noexec,nosuid,size=256m",  # No-exec /var/tmp
+    "--tmpfs", "/run:rw,noexec,nosuid,size=64m",   # No-exec /run
+]
+</code></pre>
+<h3 id="resource-limits"><a class="header" href="#resource-limits">Resource Limits</a></h3>
+<p>Container resources are configurable in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
+  docker_forward_env: []  # Explicit allowlist only; empty keeps secrets out of the container
+  container_cpu: 1        # CPU cores
+  container_memory: 5120  # MB (default 5GB)
+  container_disk: 51200   # MB (default 50GB, requires overlay2 on XFS)
+  container_persistent: true  # Persist filesystem across sessions
+</code></pre>
+<h3 id="filesystem-persistence"><a class="header" href="#filesystem-persistence">Filesystem Persistence</a></h3>
+<ul>
+<li><strong>Persistent mode</strong> (<code>container_persistent: true</code>): Bind-mounts <code>/workspace</code> and <code>/root</code> from <code>~/.hermes/sandboxes/docker/&lt;task_id&gt;/</code></li>
+<li><strong>Ephemeral mode</strong> (<code>container_persistent: false</code>): Uses tmpfs for workspace — everything is lost on cleanup</li>
+</ul>
+<dl>
+<dt id="tip-for-production-gateway-deployments-use-docker-modal-or-daytona-backend-to-isolate-agent-commands-from-your-host-system-this-eliminates-the-need-for-dangerous-command-approval-entirely"><a class="header" href="#tip-for-production-gateway-deployments-use-docker-modal-or-daytona-backend-to-isolate-agent-commands-from-your-host-system-this-eliminates-the-need-for-dangerous-command-approval-entirely">:::tip
+For production gateway deployments, use <code>docker</code>, <code>modal</code>, or <code>daytona</code> backend to isolate agent commands from your host system. This eliminates the need for dangerous command approval entirely.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::warning
+If you add names to <code>terminal.docker_forward_env</code>, those variables are intentionally injected into the container for terminal commands. This is useful for task-specific credentials like <code>GITHUB_TOKEN</code>, but it also means code running in the container can read and exfiltrate them.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="terminal-backend-security-comparison"><a class="header" href="#terminal-backend-security-comparison">Terminal Backend Security Comparison</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Backend</th><th>Isolation</th><th>Dangerous Cmd Check</th><th>Best For</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>local</strong></td><td>None — runs on host</td><td>✅ Yes</td><td>Development, trusted users</td></tr>
+<tr><td><strong>ssh</strong></td><td>Remote machine</td><td>✅ Yes</td><td>Running on a separate server</td></tr>
+<tr><td><strong>docker</strong></td><td>Container</td><td>❌ Skipped (container is boundary)</td><td>Production gateway</td></tr>
+<tr><td><strong>singularity</strong></td><td>Container</td><td>❌ Skipped</td><td>HPC environments</td></tr>
+<tr><td><strong>modal</strong></td><td>Cloud sandbox</td><td>❌ Skipped</td><td>Scalable cloud isolation</td></tr>
+<tr><td><strong>daytona</strong></td><td>Cloud sandbox</td><td>❌ Skipped</td><td>Persistent cloud workspaces</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="environment-variable-passthrough"><a class="header" href="#environment-variable-passthrough">Environment Variable Passthrough</a></h2>
+<p>Both <code>execute_code</code> and <code>terminal</code> strip sensitive environment variables from child processes to prevent credential exfiltration by LLM-generated code. However, skills that declare <code>required_environment_variables</code> legitimately need access to those vars.</p>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<p>Two mechanisms allow specific variables through the sandbox filters:</p>
+<p><strong>1. Skill-scoped passthrough (automatic)</strong></p>
+<p>When a skill is loaded (via <code>skill_view</code> or the <code>/skill</code> command) and declares <code>required_environment_variables</code>, any of those vars that are actually set in the environment are automatically registered as passthrough. Missing vars (still in setup-needed state) are <strong>not</strong> registered.</p>
+<pre><code class="language-yaml"># In a skill's SKILL.md frontmatter
+required_environment_variables:
+  - name: TENOR_API_KEY
+    prompt: Tenor API key
+    help: Get a key from https://developers.google.com/tenor
+</code></pre>
+<dl>
+<dt id="after-loading-this-skill-tenor_api_key-passes-through-to-execute_code-terminal-local-and-remote-backends-docker-modal--no-manual-configuration-needed"><a class="header" href="#after-loading-this-skill-tenor_api_key-passes-through-to-execute_code-terminal-local-and-remote-backends-docker-modal--no-manual-configuration-needed">After loading this skill, <code>TENOR_API_KEY</code> passes through to <code>execute_code</code>, <code>terminal</code> (local), <strong>and remote backends (Docker, Modal)</strong> — no manual configuration needed.</a></dt>
+<dd>
+<p>::info Docker &amp; Modal
+Prior to v0.5.1, Docker’s <code>forward_env</code> was a separate system from the skill passthrough. They are now merged — skill-declared env vars are automatically forwarded into Docker containers and Modal sandboxes without needing to add them to <code>docker_forward_env</code> manually.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<p><strong>2. Config-based passthrough (manual)</strong></p>
+<p>For env vars not declared by any skill, add them to <code>terminal.env_passthrough</code> in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  env_passthrough:
+    - MY_CUSTOM_KEY
+    - ANOTHER_TOKEN
+</code></pre>
+<h3 id="credential-file-passthrough"><a class="header" href="#credential-file-passthrough">Credential File Passthrough (OAuth tokens, etc.)</a></h3>
+<p>Some skills need <strong>files</strong> (not just env vars) in the sandbox — for example, Google Workspace stores OAuth tokens as <code>google_token.json</code> under the active profile’s <code>HERMES_HOME</code>. Skills declare these in frontmatter:</p>
+<pre><code class="language-yaml">required_credential_files:
+  - path: google_token.json
+    description: Google OAuth2 token (created by setup script)
+  - path: google_client_secret.json
+    description: Google OAuth2 client credentials
+</code></pre>
+<p>When loaded, Hermes checks if these files exist in the active profile’s <code>HERMES_HOME</code> and registers them for mounting:</p>
+<ul>
+<li><strong>Docker</strong>: Read-only bind mounts (<code>-v host:container:ro</code>)</li>
+<li><strong>Modal</strong>: Mounted at sandbox creation + synced before each command (handles mid-session OAuth setup)</li>
+<li><strong>Local</strong>: No action needed (files already accessible)</li>
+</ul>
+<p>You can also list credential files manually in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  credential_files:
+    - google_token.json
+    - my_custom_oauth_token.json
+</code></pre>
+<p>Paths are relative to <code>~/.hermes/</code>. Files are mounted to <code>/root/.hermes/</code> inside the container.</p>
+<h3 id="what-each-sandbox-filters"><a class="header" href="#what-each-sandbox-filters">What Each Sandbox Filters</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Sandbox</th><th>Default Filter</th><th>Passthrough Override</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>execute_code</strong></td><td>Blocks vars containing <code>KEY</code>, <code>TOKEN</code>, <code>SECRET</code>, <code>PASSWORD</code>, <code>CREDENTIAL</code>, <code>PASSWD</code>, <code>AUTH</code> in name; only allows safe-prefix vars through</td><td>✅ Passthrough vars bypass both checks</td></tr>
+<tr><td><strong>terminal</strong> (local)</td><td>Blocks explicit Hermes infrastructure vars (provider keys, gateway tokens, tool API keys)</td><td>✅ Passthrough vars bypass the blocklist</td></tr>
+<tr><td><strong>terminal</strong> (Docker)</td><td>No host env vars by default</td><td>✅ Passthrough vars + <code>docker_forward_env</code> forwarded via <code>-e</code></td></tr>
+<tr><td><strong>terminal</strong> (Modal)</td><td>No host env/files by default</td><td>✅ Credential files mounted; env passthrough via sync</td></tr>
+<tr><td><strong>MCP</strong></td><td>Blocks everything except safe system vars + explicitly configured <code>env</code></td><td>❌ Not affected by passthrough (use MCP <code>env</code> config instead)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h3>
+<ul>
+<li>The passthrough only affects vars you or your skills explicitly declare — the default security posture is unchanged for arbitrary LLM-generated code</li>
+<li>Credential files are mounted <strong>read-only</strong> into Docker containers</li>
+<li>Skills Guard scans skill content for suspicious env access patterns before installation</li>
+<li>Missing/unset vars are never registered (you can’t leak what doesn’t exist)</li>
+<li>Hermes infrastructure secrets (provider API keys, gateway tokens) should never be added to <code>env_passthrough</code> — they have dedicated mechanisms</li>
+</ul>
+<h2 id="mcp-credential-handling"><a class="header" href="#mcp-credential-handling">MCP Credential Handling</a></h2>
+<p>MCP (Model Context Protocol) server subprocesses receive a <strong>filtered environment</strong> to prevent accidental credential leakage.</p>
+<h3 id="safe-environment-variables"><a class="header" href="#safe-environment-variables">Safe Environment Variables</a></h3>
+<p>Only these variables are passed through from the host to MCP stdio subprocesses:</p>
+<pre><code>PATH, HOME, USER, LANG, LC_ALL, TERM, SHELL, TMPDIR
+</code></pre>
+<p>Plus any <code>XDG_*</code> variables. All other environment variables (API keys, tokens, secrets) are <strong>stripped</strong>.</p>
+<p>Variables explicitly defined in the MCP server’s <code>env</code> config are passed through:</p>
+<pre><code class="language-yaml">mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "ghp_..."  # Only this is passed
+</code></pre>
+<h3 id="credential-redaction"><a class="header" href="#credential-redaction">Credential Redaction</a></h3>
+<p>Error messages from MCP tools are sanitized before being returned to the LLM. The following patterns are replaced with <code>[REDACTED]</code>:</p>
+<ul>
+<li>GitHub PATs (<code>ghp_...</code>)</li>
+<li>OpenAI-style keys (<code>sk-...</code>)</li>
+<li>Bearer tokens</li>
+<li><code>token=</code>, <code>key=</code>, <code>API_KEY=</code>, <code>password=</code>, <code>secret=</code> parameters</li>
+</ul>
+<h3 id="website-access-policy"><a class="header" href="#website-access-policy">Website Access Policy</a></h3>
+<p>You can restrict which websites the agent can access through its web and browser tools. This is useful for preventing the agent from accessing internal services, admin panels, or other sensitive URLs.</p>
+<pre><code class="language-yaml"># In ~/.hermes/config.yaml
+security:
+  website_blocklist:
+    enabled: true
+    domains:
+      - "*.internal.company.com"
+      - "admin.example.com"
+    shared_files:
+      - "/etc/hermes/blocked-sites.txt"
+</code></pre>
+<p>When a blocked URL is requested, the tool returns an error explaining the domain is blocked by policy. The blocklist is enforced across <code>web_search</code>, <code>web_extract</code>, <code>browser_navigate</code>, and all URL-capable tools.</p>
+<p>See <a href="/docs/user-guide/configuration#website-blocklist">Website Blocklist</a> in the configuration guide for full details.</p>
+<h3 id="ssrf-protection"><a class="header" href="#ssrf-protection">SSRF Protection</a></h3>
+<p>All URL-capable tools (web search, web extract, vision, browser) validate URLs before fetching them to prevent Server-Side Request Forgery (SSRF) attacks. Blocked addresses include:</p>
+<ul>
+<li><strong>Private networks</strong> (RFC 1918): <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code></li>
+<li><strong>Loopback</strong>: <code>127.0.0.0/8</code>, <code>::1</code></li>
+<li><strong>Link-local</strong>: <code>169.254.0.0/16</code> (includes cloud metadata at <code>169.254.169.254</code>)</li>
+<li><strong>CGNAT / shared address space</strong> (RFC 6598): <code>100.64.0.0/10</code> (Tailscale, WireGuard VPNs)</li>
+<li><strong>Cloud metadata hostnames</strong>: <code>metadata.google.internal</code>, <code>metadata.goog</code></li>
+<li><strong>Reserved, multicast, and unspecified addresses</strong></li>
+</ul>
+<p>SSRF protection is always active and cannot be disabled. DNS failures are treated as blocked (fail-closed). Redirect chains are re-validated at each hop to prevent redirect-based bypasses.</p>
+<h3 id="tirith-pre-exec-security-scanning"><a class="header" href="#tirith-pre-exec-security-scanning">Tirith Pre-Exec Security Scanning</a></h3>
+<p>Hermes integrates <a href="https://github.com/sheeki03/tirith">tirith</a> for content-level command scanning before execution. Tirith detects threats that pattern matching alone misses:</p>
+<ul>
+<li>Homograph URL spoofing (internationalized domain attacks)</li>
+<li>Pipe-to-interpreter patterns (<code>curl | bash</code>, <code>wget | sh</code>)</li>
+<li>Terminal injection attacks</li>
+</ul>
+<p>Tirith auto-installs from GitHub releases on first use with SHA-256 checksum verification (and cosign provenance verification if cosign is available).</p>
+<pre><code class="language-yaml"># In ~/.hermes/config.yaml
+security:
+  tirith_enabled: true       # Enable/disable tirith scanning (default: true)
+  tirith_path: "tirith"      # Path to tirith binary (default: PATH lookup)
+  tirith_timeout: 5          # Subprocess timeout in seconds
+  tirith_fail_open: true     # Allow execution when tirith is unavailable (default: true)
+</code></pre>
+<p>When <code>tirith_fail_open</code> is <code>true</code> (default), commands proceed if tirith is not installed or times out. Set to <code>false</code> in high-security environments to block commands when tirith is unavailable.</p>
+<p>Tirith’s verdict integrates with the approval flow: safe commands pass through, while both suspicious and blocked commands trigger user approval with the full tirith findings (severity, title, description, safer alternatives). Users can approve or deny — the default choice is deny to keep unattended scenarios secure.</p>
+<h3 id="context-file-injection-protection"><a class="header" href="#context-file-injection-protection">Context File Injection Protection</a></h3>
+<p>Context files (AGENTS.md, .cursorrules, SOUL.md) are scanned for prompt injection before being included in the system prompt. The scanner checks for:</p>
+<ul>
+<li>Instructions to ignore/disregard prior instructions</li>
+<li>Hidden HTML comments with suspicious keywords</li>
+<li>Attempts to read secrets (<code>.env</code>, <code>credentials</code>, <code>.netrc</code>)</li>
+<li>Credential exfiltration via <code>curl</code></li>
+<li>Invisible Unicode characters (zero-width spaces, bidirectional overrides)</li>
+</ul>
+<p>Blocked files show a warning:</p>
+<pre><code>[BLOCKED: AGENTS.md contained potential prompt injection (prompt_injection). Content not loaded.]
+</code></pre>
+<h2 id="best-practices-for-production-deployment"><a class="header" href="#best-practices-for-production-deployment">Best Practices for Production Deployment</a></h2>
+<h3 id="gateway-deployment-checklist"><a class="header" href="#gateway-deployment-checklist">Gateway Deployment Checklist</a></h3>
+<ol>
+<li><strong>Set explicit allowlists</strong> — never use <code>GATEWAY_ALLOW_ALL_USERS=true</code> in production</li>
+<li><strong>Use container backend</strong> — set <code>terminal.backend: docker</code> in config.yaml</li>
+<li><strong>Restrict resource limits</strong> — set appropriate CPU, memory, and disk limits</li>
+<li><strong>Store secrets securely</strong> — keep API keys in <code>~/.hermes/.env</code> with proper file permissions</li>
+<li><strong>Enable DM pairing</strong> — use pairing codes instead of hardcoding user IDs when possible</li>
+<li><strong>Review command allowlist</strong> — periodically audit <code>command_allowlist</code> in config.yaml</li>
+<li><strong>Set <code>MESSAGING_CWD</code></strong> — don’t let the agent operate from sensitive directories</li>
+<li><strong>Run as non-root</strong> — never run the gateway as root</li>
+<li><strong>Monitor logs</strong> — check <code>~/.hermes/logs/</code> for unauthorized access attempts</li>
+<li><strong>Keep updated</strong> — run <code>hermes update</code> regularly for security patches</li>
+</ol>
+<h3 id="securing-api-keys"><a class="header" href="#securing-api-keys">Securing API Keys</a></h3>
+<pre><code class="language-bash"># Set proper permissions on the .env file
+chmod 600 ~/.hermes/.env
+
+# Keep separate keys for different services
+# Never commit .env files to version control
+</code></pre>
+<h3 id="network-isolation"><a class="header" href="#network-isolation">Network Isolation</a></h3>
+<p>For maximum security, run the gateway on a separate machine or VM:</p>
+<pre><code class="language-yaml">terminal:
+  backend: ssh
+  ssh_host: "agent-worker.local"
+  ssh_user: "hermes"
+  ssh_key: "~/.ssh/hermes_agent_key"
+</code></pre>
+<p>This keeps the gateway’s messaging connections separate from the agent’s command execution.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/user-guide/sessions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/user-guide/profiles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/user-guide/sessions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/user-guide/profiles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Mattermost - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/messaging/mattermost.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-8-title-mattermost-description-set-up-hermes-agent-as-a-mattermost-bot"><a class="header" href="#sidebar_position-8-title-mattermost-description-set-up-hermes-agent-as-a-mattermost-bot">sidebar_position: 8
+title: “Mattermost”
+description: “Set up Hermes Agent as a Mattermost bot”</a></h2>
+<h1 id="mattermost-setup"><a class="header" href="#mattermost-setup">Mattermost Setup</a></h1>
+<p>Hermes Agent integrates with Mattermost as a bot, letting you chat with your AI assistant through direct messages or team channels. Mattermost is a self-hosted, open-source Slack alternative — you run it on your own infrastructure, keeping full control of your data. The bot connects via Mattermost’s REST API (v4) and WebSocket for real-time events, processes messages through the Hermes Agent pipeline (including tool use, memory, and reasoning), and responds in real time. It supports text, file attachments, images, and slash commands.</p>
+<p>No external Mattermost library is required — the adapter uses <code>aiohttp</code>, which is already a Hermes dependency.</p>
+<p>Before setup, here’s the part most people want to know: how Hermes behaves once it’s in your Mattermost instance.</p>
+<h2 id="how-hermes-behaves"><a class="header" href="#how-hermes-behaves">How Hermes Behaves</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Context</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>DMs</strong></td><td>Hermes responds to every message. No <code>@mention</code> needed. Each DM has its own session.</td></tr>
+<tr><td><strong>Public/private channels</strong></td><td>Hermes responds when you <code>@mention</code> it. Without a mention, Hermes ignores the message.</td></tr>
+<tr><td><strong>Threads</strong></td><td>If <code>MATTERMOST_REPLY_MODE=thread</code>, Hermes replies in a thread under your message. Thread context stays isolated from the parent channel.</td></tr>
+<tr><td><strong>Shared channels with multiple users</strong></td><td>By default, Hermes isolates session history per user inside the channel. Two people talking in the same channel do not share one transcript unless you explicitly disable that.</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-if-you-want-hermes-to-reply-as-threaded-conversations-nested-under-your-original-message-set-mattermost_reply_modethread-the-default-is-off-which-sends-flat-messages-in-the-channel"><a class="header" href="#tip-if-you-want-hermes-to-reply-as-threaded-conversations-nested-under-your-original-message-set-mattermost_reply_modethread-the-default-is-off-which-sends-flat-messages-in-the-channel">:::tip
+If you want Hermes to reply as threaded conversations (nested under your original message), set <code>MATTERMOST_REPLY_MODE=thread</code>. The default is <code>off</code>, which sends flat messages in the channel.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="session-model-in-mattermost"><a class="header" href="#session-model-in-mattermost">Session Model in Mattermost</a></h3>
+<p>By default:</p>
+<ul>
+<li>each DM gets its own session</li>
+<li>each thread gets its own session namespace</li>
+<li>each user in a shared channel gets their own session inside that channel</li>
+</ul>
+<p>This is controlled by <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">group_sessions_per_user: true
+</code></pre>
+<p>Set it to <code>false</code> only if you explicitly want one shared conversation for the entire channel:</p>
+<pre><code class="language-yaml">group_sessions_per_user: false
+</code></pre>
+<p>Shared sessions can be useful for a collaborative channel, but they also mean:</p>
+<ul>
+<li>users share context growth and token costs</li>
+<li>one person’s long tool-heavy task can bloat everyone else’s context</li>
+<li>one person’s in-flight run can interrupt another person’s follow-up in the same channel</li>
+</ul>
+<p>This guide walks you through the full setup process — from creating your bot on Mattermost to sending your first message.</p>
+<h2 id="step-1-enable-bot-accounts"><a class="header" href="#step-1-enable-bot-accounts">Step 1: Enable Bot Accounts</a></h2>
+<p>Bot accounts must be enabled on your Mattermost server before you can create one.</p>
+<ol>
+<li>Log in to Mattermost as a <strong>System Admin</strong>.</li>
+<li>Go to <strong>System Console</strong> → <strong>Integrations</strong> → <strong>Bot Accounts</strong>.</li>
+<li>Set <strong>Enable Bot Account Creation</strong> to <strong>true</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<dl>
+<dt id="info-if-you-dont-have-system-admin-access-ask-your-mattermost-administrator-to-enable-bot-accounts-and-create-one-for-you"><a class="header" href="#info-if-you-dont-have-system-admin-access-ask-your-mattermost-administrator-to-enable-bot-accounts-and-create-one-for-you">:::info
+If you don’t have System Admin access, ask your Mattermost administrator to enable bot accounts and create one for you.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="step-2-create-a-bot-account"><a class="header" href="#step-2-create-a-bot-account">Step 2: Create a Bot Account</a></h2>
+<ol>
+<li>In Mattermost, click the <strong>☰</strong> menu (top-left) → <strong>Integrations</strong> → <strong>Bot Accounts</strong>.</li>
+<li>Click <strong>Add Bot Account</strong>.</li>
+<li>Fill in the details:
+<ul>
+<li><strong>Username</strong>: e.g., <code>hermes</code></li>
+<li><strong>Display Name</strong>: e.g., <code>Hermes Agent</code></li>
+<li><strong>Description</strong>: optional</li>
+<li><strong>Role</strong>: <code>Member</code> is sufficient</li>
+</ul>
+</li>
+<li>Click <strong>Create Bot Account</strong>.</li>
+<li>Mattermost will display the <strong>bot token</strong>. <strong>Copy it immediately.</strong></li>
+</ol>
+<dl>
+<dt id="warningtoken-shown-only-once-the-bot-token-is-only-displayed-once-when-you-create-the-bot-account-if-you-lose-it-youll-need-to-regenerate-it-from-the-bot-account-settings-never-share-your-token-publicly-or-commit-it-to-git--anyone-with-this-token-has-full-control-of-the-bot"><a class="header" href="#warningtoken-shown-only-once-the-bot-token-is-only-displayed-once-when-you-create-the-bot-account-if-you-lose-it-youll-need-to-regenerate-it-from-the-bot-account-settings-never-share-your-token-publicly-or-commit-it-to-git--anyone-with-this-token-has-full-control-of-the-bot">:::warning[Token shown only once]
+The bot token is only displayed once when you create the bot account. If you lose it, you’ll need to regenerate it from the bot account settings. Never share your token publicly or commit it to Git — anyone with this token has full control of the bot.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dt id="store-the-token-somewhere-safe-a-password-manager-for-example-youll-need-it-in-step-5"><a class="header" href="#store-the-token-somewhere-safe-a-password-manager-for-example-youll-need-it-in-step-5">Store the token somewhere safe (a password manager, for example). You’ll need it in Step 5.</a></dt>
+<dd>
+<p>::tip
+You can also use a <strong>personal access token</strong> instead of a bot account. Go to <strong>Profile</strong> → <strong>Security</strong> → <strong>Personal Access Tokens</strong> → <strong>Create Token</strong>. This is useful if you want Hermes to post as your own user rather than a separate bot user.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="step-3-add-the-bot-to-channels"><a class="header" href="#step-3-add-the-bot-to-channels">Step 3: Add the Bot to Channels</a></h2>
+<p>The bot needs to be a member of any channel where you want it to respond:</p>
+<ol>
+<li>Open the channel where you want the bot.</li>
+<li>Click the channel name → <strong>Add Members</strong>.</li>
+<li>Search for your bot username (e.g., <code>hermes</code>) and add it.</li>
+</ol>
+<p>For DMs, simply open a direct message with the bot — it will be able to respond immediately.</p>
+<h2 id="step-4-find-your-mattermost-user-id"><a class="header" href="#step-4-find-your-mattermost-user-id">Step 4: Find Your Mattermost User ID</a></h2>
+<p>Hermes Agent uses your Mattermost User ID to control who can interact with the bot. To find it:</p>
+<ol>
+<li>Click your <strong>avatar</strong> (top-left corner) → <strong>Profile</strong>.</li>
+<li>Your User ID is displayed in the profile dialog — click it to copy.</li>
+</ol>
+<dl>
+<dt id="your-user-id-is-a-26-character-alphanumeric-string-like-3uo8dkh1p7g1mfk49ear5fzs5c"><a class="header" href="#your-user-id-is-a-26-character-alphanumeric-string-like-3uo8dkh1p7g1mfk49ear5fzs5c">Your User ID is a 26-character alphanumeric string like <code>3uo8dkh1p7g1mfk49ear5fzs5c</code>.</a></dt>
+<dd>
+<p>::warning
+Your User ID is <strong>not</strong> your username. The username is what appears after <code>@</code> (e.g., <code>@alice</code>). The User ID is a long alphanumeric identifier that Mattermost uses internally.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<p><strong>Alternative</strong>: You can also get your User ID via the API:</p>
+<pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://your-mattermost-server/api/v4/users/me | jq .id
+</code></pre>
+<dl>
+<dt id="tip-to-get-a-channel-id-click-the-channel-name--view-info-the-channel-id-is-shown-in-the-info-panel-youll-need-this-if-you-want-to-set-a-home-channel-manually"><a class="header" href="#tip-to-get-a-channel-id-click-the-channel-name--view-info-the-channel-id-is-shown-in-the-info-panel-youll-need-this-if-you-want-to-set-a-home-channel-manually">:::tip
+To get a <strong>Channel ID</strong>: click the channel name → <strong>View Info</strong>. The Channel ID is shown in the info panel. You’ll need this if you want to set a home channel manually.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="step-5-configure-hermes-agent"><a class="header" href="#step-5-configure-hermes-agent">Step 5: Configure Hermes Agent</a></h2>
+<h3 id="option-a-interactive-setup-recommended"><a class="header" href="#option-a-interactive-setup-recommended">Option A: Interactive Setup (Recommended)</a></h3>
+<p>Run the guided setup command:</p>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>Select <strong>Mattermost</strong> when prompted, then paste your server URL, bot token, and user ID when asked.</p>
+<h3 id="option-b-manual-configuration"><a class="header" href="#option-b-manual-configuration">Option B: Manual Configuration</a></h3>
+<p>Add the following to your <code>~/.hermes/.env</code> file:</p>
+<pre><code class="language-bash"># Required
+MATTERMOST_URL=https://mm.example.com
+MATTERMOST_TOKEN=***
+MATTERMOST_ALLOWED_USERS=3uo8dkh1p7g1mfk49ear5fzs5c
+
+# Multiple allowed users (comma-separated)
+# MATTERMOST_ALLOWED_USERS=3uo8dkh1p7g1mfk49ear5fzs5c,8fk2jd9s0a7bncm1xqw4tp6r3e
+
+# Optional: reply mode (thread or off, default: off)
+# MATTERMOST_REPLY_MODE=thread
+
+# Optional: respond without @mention (default: true = require mention)
+# MATTERMOST_REQUIRE_MENTION=false
+
+# Optional: channels where bot responds without @mention (comma-separated channel IDs)
+# MATTERMOST_FREE_RESPONSE_CHANNELS=channel_id_1,channel_id_2
+</code></pre>
+<p>Optional behavior settings in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">group_sessions_per_user: true
+</code></pre>
+<ul>
+<li><code>group_sessions_per_user: true</code> keeps each participant’s context isolated inside shared channels and threads</li>
+</ul>
+<h3 id="start-the-gateway"><a class="header" href="#start-the-gateway">Start the Gateway</a></h3>
+<p>Once configured, start the Mattermost gateway:</p>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<dl>
+<dt id="the-bot-should-connect-to-your-mattermost-server-within-a-few-seconds-send-it-a-message--either-a-dm-or-in-a-channel-where-its-been-added--to-test"><a class="header" href="#the-bot-should-connect-to-your-mattermost-server-within-a-few-seconds-send-it-a-message--either-a-dm-or-in-a-channel-where-its-been-added--to-test">The bot should connect to your Mattermost server within a few seconds. Send it a message — either a DM or in a channel where it’s been added — to test.</a></dt>
+<dd>
+<p>::tip
+You can run <code>hermes gateway</code> in the background or as a systemd service for persistent operation. See the deployment docs for details.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="home-channel"><a class="header" href="#home-channel">Home Channel</a></h2>
+<p>You can designate a “home channel” where the bot sends proactive messages (such as cron job output, reminders, and notifications). There are two ways to set it:</p>
+<h3 id="using-the-slash-command"><a class="header" href="#using-the-slash-command">Using the Slash Command</a></h3>
+<p>Type <code>/sethome</code> in any Mattermost channel where the bot is present. That channel becomes the home channel.</p>
+<h3 id="manual-configuration"><a class="header" href="#manual-configuration">Manual Configuration</a></h3>
+<p>Add this to your <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">MATTERMOST_HOME_CHANNEL=abc123def456ghi789jkl012mn
+</code></pre>
+<p>Replace the ID with the actual channel ID (click the channel name → View Info → copy the ID).</p>
+<h2 id="reply-mode"><a class="header" href="#reply-mode">Reply Mode</a></h2>
+<p>The <code>MATTERMOST_REPLY_MODE</code> setting controls how Hermes posts responses:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>off</code> (default)</td><td>Hermes posts flat messages in the channel, like a normal user.</td></tr>
+<tr><td><code>thread</code></td><td>Hermes replies in a thread under your original message. Keeps channels clean when there’s lots of back-and-forth.</td></tr>
+</tbody>
+</table>
+</div>
+<p>Set it in your <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">MATTERMOST_REPLY_MODE=thread
+</code></pre>
+<h2 id="mention-behavior"><a class="header" href="#mention-behavior">Mention Behavior</a></h2>
+<p>By default, the bot only responds in channels when <code>@mentioned</code>. You can change this:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>MATTERMOST_REQUIRE_MENTION</code></td><td><code>true</code></td><td>Set to <code>false</code> to respond to all messages in channels (DMs always work).</td></tr>
+<tr><td><code>MATTERMOST_FREE_RESPONSE_CHANNELS</code></td><td><em>(none)</em></td><td>Comma-separated channel IDs where the bot responds without <code>@mention</code>, even when require_mention is true.</td></tr>
+</tbody>
+</table>
+</div>
+<p>To find a channel ID in Mattermost: open the channel, click the channel name header, and look for the ID in the URL or channel details.</p>
+<p>When the bot is <code>@mentioned</code>, the mention is automatically stripped from the message before processing.</p>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<h3 id="bot-is-not-responding-to-messages"><a class="header" href="#bot-is-not-responding-to-messages">Bot is not responding to messages</a></h3>
+<p><strong>Cause</strong>: The bot is not a member of the channel, or <code>MATTERMOST_ALLOWED_USERS</code> doesn’t include your User ID.</p>
+<p><strong>Fix</strong>: Add the bot to the channel (channel name → Add Members → search for the bot). Verify your User ID is in <code>MATTERMOST_ALLOWED_USERS</code>. Restart the gateway.</p>
+<h3 id="403-forbidden-errors"><a class="header" href="#403-forbidden-errors">403 Forbidden errors</a></h3>
+<p><strong>Cause</strong>: The bot token is invalid, or the bot doesn’t have permission to post in the channel.</p>
+<p><strong>Fix</strong>: Check that <code>MATTERMOST_TOKEN</code> in your <code>.env</code> file is correct. Make sure the bot account hasn’t been deactivated. Verify the bot has been added to the channel. If using a personal access token, ensure your account has the required permissions.</p>
+<h3 id="websocket-disconnects--reconnection-loops"><a class="header" href="#websocket-disconnects--reconnection-loops">WebSocket disconnects / reconnection loops</a></h3>
+<p><strong>Cause</strong>: Network instability, Mattermost server restarts, or firewall/proxy issues with WebSocket connections.</p>
+<p><strong>Fix</strong>: The adapter automatically reconnects with exponential backoff (2s → 60s). Check your server’s WebSocket configuration — reverse proxies (nginx, Apache) need WebSocket upgrade headers configured. Verify no firewall is blocking WebSocket connections on your Mattermost server.</p>
+<p>For nginx, ensure your config includes:</p>
+<pre><code class="language-nginx">location /api/v4/websocket {
+    proxy_pass http://mattermost-backend;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_read_timeout 600s;
+}
+</code></pre>
+<h3 id="failed-to-authenticate-on-startup"><a class="header" href="#failed-to-authenticate-on-startup">“Failed to authenticate” on startup</a></h3>
+<p><strong>Cause</strong>: The token or server URL is incorrect.</p>
+<p><strong>Fix</strong>: Verify <code>MATTERMOST_URL</code> points to your Mattermost server (include <code>https://</code>, no trailing slash). Check that <code>MATTERMOST_TOKEN</code> is valid — try it with curl:</p>
+<pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_TOKEN" \
+  https://your-server/api/v4/users/me
+</code></pre>
+<p>If this returns your bot’s user info, the token is valid. If it returns an error, regenerate the token.</p>
+<h3 id="bot-is-offline"><a class="header" href="#bot-is-offline">Bot is offline</a></h3>
+<p><strong>Cause</strong>: The Hermes gateway isn’t running, or it failed to connect.</p>
+<p><strong>Fix</strong>: Check that <code>hermes gateway</code> is running. Look at the terminal output for error messages. Common issues: wrong URL, expired token, Mattermost server unreachable.</p>
+<h3 id="user-not-allowed--bot-ignores-you"><a class="header" href="#user-not-allowed--bot-ignores-you">“User not allowed” / Bot ignores you</a></h3>
+<p><strong>Cause</strong>: Your User ID isn’t in <code>MATTERMOST_ALLOWED_USERS</code>.</p>
+<p><strong>Fix</strong>: Add your User ID to <code>MATTERMOST_ALLOWED_USERS</code> in <code>~/.hermes/.env</code> and restart the gateway. Remember: the User ID is a 26-character alphanumeric string, not your <code>@username</code>.</p>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<dl>
+<dt id="warning-always-set-mattermost_allowed_users-to-restrict-who-can-interact-with-the-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure-only-add-user-ids-of-people-you-trust--authorized-users-have-full-access-to-the-agents-capabilities-including-tool-use-and-system-access"><a class="header" href="#warning-always-set-mattermost_allowed_users-to-restrict-who-can-interact-with-the-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure-only-add-user-ids-of-people-you-trust--authorized-users-have-full-access-to-the-agents-capabilities-including-tool-use-and-system-access">:::warning
+Always set <code>MATTERMOST_ALLOWED_USERS</code> to restrict who can interact with the bot. Without it, the gateway denies all users by default as a safety measure. Only add User IDs of people you trust — authorized users have full access to the agent’s capabilities, including tool use and system access.</a></dt>
+<dd>::</dd>
+</dl>
+<p>For more information on securing your Hermes Agent deployment, see the <a href="../security.html">Security Guide</a>.</p>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li><strong>Self-hosted friendly</strong>: Works with any self-hosted Mattermost instance. No Mattermost Cloud account or subscription required.</li>
+<li><strong>No extra dependencies</strong>: The adapter uses <code>aiohttp</code> for HTTP and WebSocket, which is already included with Hermes Agent.</li>
+<li><strong>Team Edition compatible</strong>: Works with both Mattermost Team Edition (free) and Enterprise Edition.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/messaging/matrix.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/open-webui.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/messaging/matrix.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/open-webui.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

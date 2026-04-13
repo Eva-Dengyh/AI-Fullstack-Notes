@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Installation - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/getting-started/installation.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-2-title-installation-description-install-hermes-agent-on-linux-macos-wsl2-or-android-via-termux"><a class="header" href="#sidebar_position-2-title-installation-description-install-hermes-agent-on-linux-macos-wsl2-or-android-via-termux">sidebar_position: 2
+title: “Installation”
+description: “Install Hermes Agent on Linux, macOS, WSL2, or Android via Termux”</a></h2>
+<h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Get Hermes Agent up and running in under two minutes with the one-line installer, or follow the manual steps for full control.</p>
+<h2 id="quick-install"><a class="header" href="#quick-install">Quick Install</a></h2>
+<h3 id="linux--macos--wsl2"><a class="header" href="#linux--macos--wsl2">Linux / macOS / WSL2</a></h3>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<h3 id="android--termux"><a class="header" href="#android--termux">Android / Termux</a></h3>
+<p>Hermes now ships a Termux-aware installer path too:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+</code></pre>
+<p>The installer detects Termux automatically and switches to a tested Android flow:</p>
+<ul>
+<li>uses Termux <code>pkg</code> for system dependencies (<code>git</code>, <code>python</code>, <code>nodejs</code>, <code>ripgrep</code>, <code>ffmpeg</code>, build tools)</li>
+<li>creates the virtualenv with <code>python -m venv</code></li>
+<li>exports <code>ANDROID_API_LEVEL</code> automatically for Android wheel builds</li>
+<li>installs a curated <code>.[termux]</code> extra with <code>pip</code></li>
+<li>skips the untested browser / WhatsApp bootstrap by default</li>
+</ul>
+<dl>
+<dt id="if-you-want-the-fully-explicit-path-follow-the-dedicated-termux-guide"><a class="header" href="#if-you-want-the-fully-explicit-path-follow-the-dedicated-termux-guide">If you want the fully explicit path, follow the dedicated <a href="./termux.html">Termux guide</a>.</a></dt>
+<dd>
+<p>::warning Windows
+Native Windows is <strong>not supported</strong>. Please install <a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL2</a> and run Hermes Agent from there. The install command above works inside WSL2.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="what-the-installer-does"><a class="header" href="#what-the-installer-does">What the Installer Does</a></h3>
+<p>The installer handles everything automatically — all dependencies (Python, Node.js, ripgrep, ffmpeg), the repo clone, virtual environment, global <code>hermes</code> command setup, and LLM provider configuration. By the end, you’re ready to chat.</p>
+<h3 id="after-installation"><a class="header" href="#after-installation">After Installation</a></h3>
+<p>Reload your shell and start chatting:</p>
+<pre><code class="language-bash">source ~/.bashrc   # or: source ~/.zshrc
+hermes             # Start chatting!
+</code></pre>
+<p>To reconfigure individual settings later, use the dedicated commands:</p>
+<pre><code class="language-bash">hermes model          # Choose your LLM provider and model
+hermes tools          # Configure which tools are enabled
+hermes gateway setup  # Set up messaging platforms
+hermes config set     # Set individual config values
+hermes setup          # Or run the full setup wizard to configure everything at once
+</code></pre>
+<hr>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>The only prerequisite is <strong>Git</strong>. The installer automatically handles everything else:</p>
+<ul>
+<li><strong>uv</strong> (fast Python package manager)</li>
+<li><strong>Python 3.11</strong> (via uv, no sudo needed)</li>
+<li><strong>Node.js v22</strong> (for browser automation and WhatsApp bridge)</li>
+<li><strong>ripgrep</strong> (fast file search)</li>
+<li><strong>ffmpeg</strong> (audio format conversion for TTS)</li>
+</ul>
+<dl>
+<dt id="info-you-do-not-need-to-install-python-nodejs-ripgrep-or-ffmpeg-manually-the-installer-detects-whats-missing-and-installs-it-for-you-just-make-sure-git-is-available-git---version"><a class="header" href="#info-you-do-not-need-to-install-python-nodejs-ripgrep-or-ffmpeg-manually-the-installer-detects-whats-missing-and-installs-it-for-you-just-make-sure-git-is-available-git---version">:::info
+You do <strong>not</strong> need to install Python, Node.js, ripgrep, or ffmpeg manually. The installer detects what’s missing and installs it for you. Just make sure <code>git</code> is available (<code>git --version</code>).</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip Nix users
+If you use Nix (on NixOS, macOS, or Linux), there’s a dedicated setup path with a Nix flake, declarative NixOS module, and optional container mode. See the <strong><a href="./nix-setup.html">Nix &amp; NixOS Setup</a></strong> guide.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<hr>
+<h2 id="manual-installation"><a class="header" href="#manual-installation">Manual Installation</a></h2>
+<p>If you prefer full control over the installation process, follow these steps.</p>
+<h3 id="step-1-clone-the-repository"><a class="header" href="#step-1-clone-the-repository">Step 1: Clone the Repository</a></h3>
+<p>Clone with <code>--recurse-submodules</code> to pull the required submodules:</p>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git
+cd hermes-agent
+</code></pre>
+<p>If you already cloned without <code>--recurse-submodules</code>:</p>
+<pre><code class="language-bash">git submodule update --init --recursive
+</code></pre>
+<h3 id="step-2-install-uv--create-virtual-environment"><a class="header" href="#step-2-install-uv--create-virtual-environment">Step 2: Install uv &amp; Create Virtual Environment</a></h3>
+<pre><code class="language-bash"># Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create venv with Python 3.11 (uv downloads it if not present — no sudo needed)
+uv venv venv --python 3.11
+</code></pre>
+<dl>
+<dt id="tip-you-do-not-need-to-activate-the-venv-to-use-hermes-the-entry-point-has-a-hardcoded-shebang-pointing-to-the-venv-python-so-it-works-globally-once-symlinked"><a class="header" href="#tip-you-do-not-need-to-activate-the-venv-to-use-hermes-the-entry-point-has-a-hardcoded-shebang-pointing-to-the-venv-python-so-it-works-globally-once-symlinked">:::tip
+You do <strong>not</strong> need to activate the venv to use <code>hermes</code>. The entry point has a hardcoded shebang pointing to the venv Python, so it works globally once symlinked.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="step-3-install-python-dependencies"><a class="header" href="#step-3-install-python-dependencies">Step 3: Install Python Dependencies</a></h3>
+<pre><code class="language-bash"># Tell uv which venv to install into
+export VIRTUAL_ENV="$(pwd)/venv"
+
+# Install with all extras
+uv pip install -e ".[all]"
+</code></pre>
+<p>If you only want the core agent (no Telegram/Discord/cron support):</p>
+<pre><code class="language-bash">uv pip install -e "."
+</code></pre>
+<details>
+<summary><strong>Optional extras breakdown</strong></summary>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Extra</th><th>What it adds</th><th>Install command</th></tr>
+</thead>
+<tbody>
+<tr><td><code>all</code></td><td>Everything below</td><td><code>uv pip install -e ".[all]"</code></td></tr>
+<tr><td><code>messaging</code></td><td>Telegram &amp; Discord gateway</td><td><code>uv pip install -e ".[messaging]"</code></td></tr>
+<tr><td><code>cron</code></td><td>Cron expression parsing for scheduled tasks</td><td><code>uv pip install -e ".[cron]"</code></td></tr>
+<tr><td><code>cli</code></td><td>Terminal menu UI for setup wizard</td><td><code>uv pip install -e ".[cli]"</code></td></tr>
+<tr><td><code>modal</code></td><td>Modal cloud execution backend</td><td><code>uv pip install -e ".[modal]"</code></td></tr>
+<tr><td><code>tts-premium</code></td><td>ElevenLabs premium voices</td><td><code>uv pip install -e ".[tts-premium]"</code></td></tr>
+<tr><td><code>voice</code></td><td>CLI microphone input + audio playback</td><td><code>uv pip install -e ".[voice]"</code></td></tr>
+<tr><td><code>pty</code></td><td>PTY terminal support</td><td><code>uv pip install -e ".[pty]"</code></td></tr>
+<tr><td><code>termux</code></td><td>Tested Android / Termux bundle (<code>cron</code>, <code>cli</code>, <code>pty</code>, <code>mcp</code>, <code>honcho</code>, <code>acp</code>)</td><td><code>python -m pip install -e ".[termux]" -c constraints-termux.txt</code></td></tr>
+<tr><td><code>honcho</code></td><td>AI-native memory (Honcho integration)</td><td><code>uv pip install -e ".[honcho]"</code></td></tr>
+<tr><td><code>mcp</code></td><td>Model Context Protocol support</td><td><code>uv pip install -e ".[mcp]"</code></td></tr>
+<tr><td><code>homeassistant</code></td><td>Home Assistant integration</td><td><code>uv pip install -e ".[homeassistant]"</code></td></tr>
+<tr><td><code>acp</code></td><td>ACP editor integration support</td><td><code>uv pip install -e ".[acp]"</code></td></tr>
+<tr><td><code>slack</code></td><td>Slack messaging</td><td><code>uv pip install -e ".[slack]"</code></td></tr>
+<tr><td><code>dev</code></td><td>pytest &amp; test utilities</td><td><code>uv pip install -e ".[dev]"</code></td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="you-can-combine-extras-uv-pip-install--e-messagingcron"><a class="header" href="#you-can-combine-extras-uv-pip-install--e-messagingcron">You can combine extras: <code>uv pip install -e ".[messaging,cron]"</code></a></dt>
+<dd>
+<p>::tip Termux users
+<code>.[all]</code> is not currently available on Android because the <code>voice</code> extra pulls <code>faster-whisper</code>, which depends on <code>ctranslate2</code> wheels that are not published for Android. Use <code>.[termux]</code> for the tested mobile install path, then add individual extras only as needed.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+</details>
+<h3 id="step-4-install-optional-submodules-if-needed"><a class="header" href="#step-4-install-optional-submodules-if-needed">Step 4: Install Optional Submodules (if needed)</a></h3>
+<pre><code class="language-bash"># RL training backend (optional)
+uv pip install -e "./tinker-atropos"
+</code></pre>
+<p>Both are optional — if you skip them, the corresponding toolsets simply won’t be available.</p>
+<h3 id="step-5-install-nodejs-dependencies-optional"><a class="header" href="#step-5-install-nodejs-dependencies-optional">Step 5: Install Node.js Dependencies (Optional)</a></h3>
+<p>Only needed for <strong>browser automation</strong> (Browserbase-powered) and <strong>WhatsApp bridge</strong>:</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+<h3 id="step-6-create-the-configuration-directory"><a class="header" href="#step-6-create-the-configuration-directory">Step 6: Create the Configuration Directory</a></h3>
+<pre><code class="language-bash"># Create the directory structure
+mkdir -p ~/.hermes/{cron,sessions,logs,memories,skills,pairing,hooks,image_cache,audio_cache,whatsapp/session}
+
+# Copy the example config file
+cp cli-config.yaml.example ~/.hermes/config.yaml
+
+# Create an empty .env file for API keys
+touch ~/.hermes/.env
+</code></pre>
+<h3 id="step-7-add-your-api-keys"><a class="header" href="#step-7-add-your-api-keys">Step 7: Add Your API Keys</a></h3>
+<p>Open <code>~/.hermes/.env</code> and add at minimum an LLM provider key:</p>
+<pre><code class="language-bash"># Required — at least one LLM provider:
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
+
+# Optional — enable additional tools:
+FIRECRAWL_API_KEY=fc-your-key          # Web search &amp; scraping (or self-host, see docs)
+FAL_KEY=your-fal-key                   # Image generation (FLUX)
+</code></pre>
+<p>Or set them via the CLI:</p>
+<pre><code class="language-bash">hermes config set OPENROUTER_API_KEY sk-or-v1-your-key-here
+</code></pre>
+<h3 id="step-8-add-hermes-to-your-path"><a class="header" href="#step-8-add-hermes-to-your-path">Step 8: Add <code>hermes</code> to Your PATH</a></h3>
+<pre><code class="language-bash">mkdir -p ~/.local/bin
+ln -sf "$(pwd)/venv/bin/hermes" ~/.local/bin/hermes
+</code></pre>
+<p>If <code>~/.local/bin</code> isn’t on your PATH, add it to your shell config:</p>
+<pre><code class="language-bash"># Bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
+
+# Zsh
+echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc
+
+# Fish
+fish_add_path $HOME/.local/bin
+</code></pre>
+<h3 id="step-9-configure-your-provider"><a class="header" href="#step-9-configure-your-provider">Step 9: Configure Your Provider</a></h3>
+<pre><code class="language-bash">hermes model       # Select your LLM provider and model
+</code></pre>
+<h3 id="step-10-verify-the-installation"><a class="header" href="#step-10-verify-the-installation">Step 10: Verify the Installation</a></h3>
+<pre><code class="language-bash">hermes version    # Check that the command is available
+hermes doctor     # Run diagnostics to verify everything is working
+hermes status     # Check your configuration
+hermes chat -q "Hello! What tools do you have available?"
+</code></pre>
+<hr>
+<h2 id="quick-reference-manual-install-condensed"><a class="header" href="#quick-reference-manual-install-condensed">Quick-Reference: Manual Install (Condensed)</a></h2>
+<p>For those who just want the commands:</p>
+<pre><code class="language-bash"># Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone &amp; enter
+git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git
+cd hermes-agent
+
+# Create venv with Python 3.11
+uv venv venv --python 3.11
+export VIRTUAL_ENV="$(pwd)/venv"
+
+# Install everything
+uv pip install -e ".[all]"
+uv pip install -e "./tinker-atropos"
+npm install  # optional, for browser tools and WhatsApp
+
+# Configure
+mkdir -p ~/.hermes/{cron,sessions,logs,memories,skills,pairing,hooks,image_cache,audio_cache,whatsapp/session}
+cp cli-config.yaml.example ~/.hermes/config.yaml
+touch ~/.hermes/.env
+echo 'OPENROUTER_API_KEY=sk-or-v1-your-key' &gt;&gt; ~/.hermes/.env
+
+# Make hermes available globally
+mkdir -p ~/.local/bin
+ln -sf "$(pwd)/venv/bin/hermes" ~/.local/bin/hermes
+
+# Verify
+hermes doctor
+hermes
+</code></pre>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Problem</th><th>Solution</th></tr>
+</thead>
+<tbody>
+<tr><td><code>hermes: command not found</code></td><td>Reload your shell (<code>source ~/.bashrc</code>) or check PATH</td></tr>
+<tr><td><code>API key not set</code></td><td>Run <code>hermes model</code> to configure your provider, or <code>hermes config set OPENROUTER_API_KEY your_key</code></td></tr>
+<tr><td>Missing config after update</td><td>Run <code>hermes config check</code> then <code>hermes config migrate</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>For more diagnostics, run <code>hermes doctor</code> — it will tell you exactly what’s missing and how to fix it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/getting-started/quickstart.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/getting-started/quickstart.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

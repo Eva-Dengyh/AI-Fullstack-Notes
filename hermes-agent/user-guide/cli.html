@@ -1,0 +1,563 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CLI Interface - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/cli.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-1-title-cli-interface-description-master-the-hermes-agent-terminal-interface--commands-keybindings-personalities-and-more"><a class="header" href="#sidebar_position-1-title-cli-interface-description-master-the-hermes-agent-terminal-interface--commands-keybindings-personalities-and-more">sidebar_position: 1
+title: “CLI Interface”
+description: “Master the Hermes Agent terminal interface — commands, keybindings, personalities, and more”</a></h2>
+<h1 id="cli-interface"><a class="header" href="#cli-interface">CLI Interface</a></h1>
+<p>Hermes Agent’s CLI is a full terminal user interface (TUI) — not a web UI. It features multiline editing, slash-command autocomplete, conversation history, interrupt-and-redirect, and streaming tool output. Built for people who live in the terminal.</p>
+<h2 id="running-the-cli"><a class="header" href="#running-the-cli">Running the CLI</a></h2>
+<pre><code class="language-bash"># Start an interactive session (default)
+hermes
+
+# Single query mode (non-interactive)
+hermes chat -q "Hello"
+
+# With a specific model
+hermes chat --model "anthropic/claude-sonnet-4"
+
+# With a specific provider
+hermes chat --provider nous        # Use Nous Portal
+hermes chat --provider openrouter  # Force OpenRouter
+
+# With specific toolsets
+hermes chat --toolsets "web,terminal,skills"
+
+# Start with one or more skills preloaded
+hermes -s hermes-agent-dev,github-auth
+hermes chat -s github-pr-workflow -q "open a draft PR"
+
+# Resume previous sessions
+hermes --continue             # Resume the most recent CLI session (-c)
+hermes --resume &lt;session_id&gt;  # Resume a specific session by ID (-r)
+
+# Verbose mode (debug output)
+hermes chat --verbose
+
+# Isolated git worktree (for running multiple agents in parallel)
+hermes -w                         # Interactive mode in worktree
+hermes -w -q "Fix issue #123"     # Single query in worktree
+</code></pre>
+<h2 id="interface-layout"><a class="header" href="#interface-layout">Interface Layout</a></h2>
+<img classname="docs-terminal-figure" src="/img/docs/cli-layout.svg" alt="Stylized preview of the Hermes CLI layout showing the banner, conversation area, and fixed input prompt." />
+<p classname="docs-figure-caption">The Hermes CLI banner, conversation stream, and fixed input prompt rendered as a stable docs figure instead of fragile text art.</p>
+
+<p>The welcome banner shows your model, terminal backend, working directory, available tools, and installed skills at a glance.</p>
+<h3 id="status-bar"><a class="header" href="#status-bar">Status Bar</a></h3>
+<p>A persistent status bar sits above the input area, updating in real time:</p>
+<pre><code> ⚕ claude-sonnet-4-20250514 │ 12.4K/200K │ [██████░░░░] 6% │ $0.06 │ 15m
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Element</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Model name</td><td>Current model (truncated if longer than 26 chars)</td></tr>
+<tr><td>Token count</td><td>Context tokens used / max context window</td></tr>
+<tr><td>Context bar</td><td>Visual fill indicator with color-coded thresholds</td></tr>
+<tr><td>Cost</td><td>Estimated session cost (or <code>n/a</code> for unknown/zero-priced models)</td></tr>
+<tr><td>Duration</td><td>Elapsed session time</td></tr>
+</tbody>
+</table>
+</div>
+<p>The bar adapts to terminal width — full layout at ≥ 76 columns, compact at 52–75, minimal (model + duration only) below 52.</p>
+<p><strong>Context color coding:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Color</th><th>Threshold</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td>Green</td><td>&lt; 50%</td><td>Plenty of room</td></tr>
+<tr><td>Yellow</td><td>50–80%</td><td>Getting full</td></tr>
+<tr><td>Orange</td><td>80–95%</td><td>Approaching limit</td></tr>
+<tr><td>Red</td><td>≥ 95%</td><td>Near overflow — consider <code>/compress</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Use <code>/usage</code> for a detailed breakdown including per-category costs (input vs output tokens).</p>
+<h3 id="session-resume-display"><a class="header" href="#session-resume-display">Session Resume Display</a></h3>
+<p>When resuming a previous session (<code>hermes -c</code> or <code>hermes --resume &lt;id&gt;</code>), a “Previous Conversation” panel appears between the banner and the input prompt, showing a compact recap of the conversation history. See <a href="sessions.html#conversation-recap-on-resume">Sessions — Conversation Recap on Resume</a> for details and configuration.</p>
+<h2 id="keybindings"><a class="header" href="#keybindings">Keybindings</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Action</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Enter</code></td><td>Send message</td></tr>
+<tr><td><code>Alt+Enter</code> or <code>Ctrl+J</code></td><td>New line (multi-line input)</td></tr>
+<tr><td><code>Alt+V</code></td><td>Paste an image from the clipboard when supported by the terminal</td></tr>
+<tr><td><code>Ctrl+V</code></td><td>Paste text and opportunistically attach clipboard images</td></tr>
+<tr><td><code>Ctrl+B</code></td><td>Start/stop voice recording when voice mode is enabled (<code>voice.record_key</code>, default: <code>ctrl+b</code>)</td></tr>
+<tr><td><code>Ctrl+C</code></td><td>Interrupt agent (double-press within 2s to force exit)</td></tr>
+<tr><td><code>Ctrl+D</code></td><td>Exit</td></tr>
+<tr><td><code>Ctrl+Z</code></td><td>Suspend Hermes to background (Unix only). Run <code>fg</code> in the shell to resume.</td></tr>
+<tr><td><code>Tab</code></td><td>Accept auto-suggestion (ghost text) or autocomplete slash commands</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="slash-commands"><a class="header" href="#slash-commands">Slash Commands</a></h2>
+<p>Type <code>/</code> to see the autocomplete dropdown. Hermes supports a large set of CLI slash commands, dynamic skill commands, and user-defined quick commands.</p>
+<p>Common examples:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/help</code></td><td>Show command help</td></tr>
+<tr><td><code>/model</code></td><td>Show or change the current model</td></tr>
+<tr><td><code>/tools</code></td><td>List currently available tools</td></tr>
+<tr><td><code>/skills browse</code></td><td>Browse the skills hub and official optional skills</td></tr>
+<tr><td><code>/background &lt;prompt&gt;</code></td><td>Run a prompt in a separate background session</td></tr>
+<tr><td><code>/skin</code></td><td>Show or switch the active CLI skin</td></tr>
+<tr><td><code>/voice on</code></td><td>Enable CLI voice mode (press <code>Ctrl+B</code> to record)</td></tr>
+<tr><td><code>/voice tts</code></td><td>Toggle spoken playback for Hermes replies</td></tr>
+<tr><td><code>/reasoning high</code></td><td>Increase reasoning effort</td></tr>
+<tr><td><code>/title My Session</code></td><td>Name the current session</td></tr>
+</tbody>
+</table>
+</div>
+<p>For the full built-in CLI and messaging lists, see <a href="../reference/slash-commands.html">Slash Commands Reference</a>.</p>
+<dl>
+<dt id="for-setup-providers-silence-tuning-and-messagingdiscord-voice-usage-see-voice-mode"><a class="header" href="#for-setup-providers-silence-tuning-and-messagingdiscord-voice-usage-see-voice-mode">For setup, providers, silence tuning, and messaging/Discord voice usage, see <a href="features/voice-mode.html">Voice Mode</a>.</a></dt>
+<dd>
+<p>::tip
+Commands are case-insensitive — <code>/HELP</code> works the same as <code>/help</code>. Installed skills also become slash commands automatically.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="quick-commands"><a class="header" href="#quick-commands">Quick Commands</a></h2>
+<p>You can define custom commands that run shell commands instantly without invoking the LLM. These work in both the CLI and messaging platforms (Telegram, Discord, etc.).</p>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+quick_commands:
+  status:
+    type: exec
+    command: systemctl status hermes-agent
+  gpu:
+    type: exec
+    command: nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader
+</code></pre>
+<p>Then type <code>/status</code> or <code>/gpu</code> in any chat. See the <a href="/docs/user-guide/configuration#quick-commands">Configuration guide</a> for more examples.</p>
+<h2 id="preloading-skills-at-launch"><a class="header" href="#preloading-skills-at-launch">Preloading Skills at Launch</a></h2>
+<p>If you already know which skills you want active for the session, pass them at launch time:</p>
+<pre><code class="language-bash">hermes -s hermes-agent-dev,github-auth
+hermes chat -s github-pr-workflow -s github-auth
+</code></pre>
+<p>Hermes loads each named skill into the session prompt before the first turn. The same flag works in interactive mode and single-query mode.</p>
+<h2 id="skill-slash-commands"><a class="header" href="#skill-slash-commands">Skill Slash Commands</a></h2>
+<p>Every installed skill in <code>~/.hermes/skills/</code> is automatically registered as a slash command. The skill name becomes the command:</p>
+<pre><code>/gif-search funny cats
+/axolotl help me fine-tune Llama 3 on my dataset
+/github-pr-workflow create a PR for the auth refactor
+
+# Just the skill name loads it and lets the agent ask what you need:
+/excalidraw
+</code></pre>
+<h2 id="personalities"><a class="header" href="#personalities">Personalities</a></h2>
+<p>Set a predefined personality to change the agent’s tone:</p>
+<pre><code>/personality pirate
+/personality kawaii
+/personality concise
+</code></pre>
+<p>Built-in personalities include: <code>helpful</code>, <code>concise</code>, <code>technical</code>, <code>creative</code>, <code>teacher</code>, <code>kawaii</code>, <code>catgirl</code>, <code>pirate</code>, <code>shakespeare</code>, <code>surfer</code>, <code>noir</code>, <code>uwu</code>, <code>philosopher</code>, <code>hype</code>.</p>
+<p>You can also define custom personalities in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">personalities:
+  helpful: "You are a helpful, friendly AI assistant."
+  kawaii: "You are a kawaii assistant! Use cute expressions..."
+  pirate: "Arrr! Ye be talkin' to Captain Hermes..."
+  # Add your own!
+</code></pre>
+<h2 id="multi-line-input"><a class="header" href="#multi-line-input">Multi-line Input</a></h2>
+<p>There are two ways to enter multi-line messages:</p>
+<ol>
+<li><strong><code>Alt+Enter</code> or <code>Ctrl+J</code></strong> — inserts a new line</li>
+<li><strong>Backslash continuation</strong> — end a line with <code>\</code> to continue:</li>
+</ol>
+<pre><code>❯ Write a function that:\
+  1. Takes a list of numbers\
+  2. Returns the sum
+</code></pre>
+<dl>
+<dt id="info-pasting-multi-line-text-is-supported--use-altenter-or-ctrlj-to-insert-newlines-or-simply-paste-content-directly"><a class="header" href="#info-pasting-multi-line-text-is-supported--use-altenter-or-ctrlj-to-insert-newlines-or-simply-paste-content-directly">:::info
+Pasting multi-line text is supported — use <code>Alt+Enter</code> or <code>Ctrl+J</code> to insert newlines, or simply paste content directly.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="interrupting-the-agent"><a class="header" href="#interrupting-the-agent">Interrupting the Agent</a></h2>
+<p>You can interrupt the agent at any point:</p>
+<ul>
+<li><strong>Type a new message + Enter</strong> while the agent is working — it interrupts and processes your new instructions</li>
+<li><strong><code>Ctrl+C</code></strong> — interrupt the current operation (press twice within 2s to force exit)</li>
+<li>In-progress terminal commands are killed immediately (SIGTERM, then SIGKILL after 1s)</li>
+<li>Multiple messages typed during interrupt are combined into one prompt</li>
+</ul>
+<h3 id="busy-input-mode"><a class="header" href="#busy-input-mode">Busy Input Mode</a></h3>
+<p>The <code>display.busy_input_mode</code> config key controls what happens when you press Enter while the agent is working:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"interrupt"</code> (default)</td><td>Your message interrupts the current operation and is processed immediately</td></tr>
+<tr><td><code>"queue"</code></td><td>Your message is silently queued and sent as the next turn after the agent finishes</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+display:
+  busy_input_mode: "queue"   # or "interrupt" (default)
+</code></pre>
+<p>Queue mode is useful when you want to prepare follow-up messages without accidentally canceling in-flight work. Unknown values fall back to <code>"interrupt"</code>.</p>
+<h3 id="suspending-to-background"><a class="header" href="#suspending-to-background">Suspending to Background</a></h3>
+<p>On Unix systems, press <strong><code>Ctrl+Z</code></strong> to suspend Hermes to the background — just like any terminal process. The shell prints a confirmation:</p>
+<pre><code>Hermes Agent has been suspended. Run `fg` to bring Hermes Agent back.
+</code></pre>
+<p>Type <code>fg</code> in your shell to resume the session exactly where you left off. This is not supported on Windows.</p>
+<h2 id="tool-progress-display"><a class="header" href="#tool-progress-display">Tool Progress Display</a></h2>
+<p>The CLI shows animated feedback as the agent works:</p>
+<p><strong>Thinking animation</strong> (during API calls):</p>
+<pre><code>  ◜ (｡•́︿•̀｡) pondering... (1.2s)
+  ◠ (⊙_⊙) contemplating... (2.4s)
+  ✧٩(ˊᗜˋ*)و✧ got it! (3.1s)
+</code></pre>
+<p><strong>Tool execution feed:</strong></p>
+<pre><code>  ┊ 💻 terminal `ls -la` (0.3s)
+  ┊ 🔍 web_search (1.2s)
+  ┊ 📄 web_extract (2.1s)
+</code></pre>
+<p>Cycle through display modes with <code>/verbose</code>: <code>off → new → all → verbose</code>. This command can also be enabled for messaging platforms — see <a href="/docs/user-guide/configuration#display-settings">configuration</a>.</p>
+<h3 id="tool-preview-length"><a class="header" href="#tool-preview-length">Tool Preview Length</a></h3>
+<p>The <code>display.tool_preview_length</code> config key controls the maximum number of characters shown in tool call preview lines (e.g. file paths, terminal commands). The default is <code>0</code>, which means no limit — full paths and commands are shown.</p>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+display:
+  tool_preview_length: 80   # Truncate tool previews to 80 chars (0 = no limit)
+</code></pre>
+<p>This is useful on narrow terminals or when tool arguments contain very long file paths.</p>
+<h2 id="session-management"><a class="header" href="#session-management">Session Management</a></h2>
+<h3 id="resuming-sessions"><a class="header" href="#resuming-sessions">Resuming Sessions</a></h3>
+<p>When you exit a CLI session, a resume command is printed:</p>
+<pre><code>Resume this session with:
+  hermes --resume 20260225_143052_a1b2c3
+
+Session:        20260225_143052_a1b2c3
+Duration:       12m 34s
+Messages:       28 (5 user, 18 tool calls)
+</code></pre>
+<p>Resume options:</p>
+<pre><code class="language-bash">hermes --continue                          # Resume the most recent CLI session
+hermes -c                                  # Short form
+hermes -c "my project"                     # Resume a named session (latest in lineage)
+hermes --resume 20260225_143052_a1b2c3     # Resume a specific session by ID
+hermes --resume "refactoring auth"         # Resume by title
+hermes -r 20260225_143052_a1b2c3           # Short form
+</code></pre>
+<p>Resuming restores the full conversation history from SQLite. The agent sees all previous messages, tool calls, and responses — just as if you never left.</p>
+<p>Use <code>/title My Session Name</code> inside a chat to name the current session, or <code>hermes sessions rename &lt;id&gt; &lt;title&gt;</code> from the command line. Use <code>hermes sessions list</code> to browse past sessions.</p>
+<h3 id="session-storage"><a class="header" href="#session-storage">Session Storage</a></h3>
+<p>CLI sessions are stored in Hermes’s SQLite state database under <code>~/.hermes/state.db</code>. The database keeps:</p>
+<ul>
+<li>session metadata (ID, title, timestamps, token counters)</li>
+<li>message history</li>
+<li>lineage across compressed/resumed sessions</li>
+<li>full-text search indexes used by <code>session_search</code></li>
+</ul>
+<p>Some messaging adapters also keep per-platform transcript files alongside the database, but the CLI itself resumes from the SQLite session store.</p>
+<h3 id="context-compression"><a class="header" href="#context-compression">Context Compression</a></h3>
+<p>Long conversations are automatically summarized when approaching context limits:</p>
+<pre><code class="language-yaml"># In ~/.hermes/config.yaml
+compression:
+  enabled: true
+  threshold: 0.50    # Compress at 50% of context limit by default
+  summary_model: "google/gemini-3-flash-preview"  # Model used for summarization
+</code></pre>
+<p>When compression triggers, middle turns are summarized while the first 3 and last 4 turns are always preserved.</p>
+<h2 id="background-sessions"><a class="header" href="#background-sessions">Background Sessions</a></h2>
+<p>Run a prompt in a separate background session while continuing to use the CLI for other work:</p>
+<pre><code>/background Analyze the logs in /var/log and summarize any errors from today
+</code></pre>
+<p>Hermes immediately confirms the task and gives you back the prompt:</p>
+<pre><code>🔄 Background task #1 started: "Analyze the logs in /var/log and summarize..."
+   Task ID: bg_143022_a1b2c3
+</code></pre>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h3>
+<p>Each <code>/background</code> prompt spawns a <strong>completely separate agent session</strong> in a daemon thread:</p>
+<ul>
+<li><strong>Isolated conversation</strong> — the background agent has no knowledge of your current session’s history. It receives only the prompt you provide.</li>
+<li><strong>Same configuration</strong> — the background agent inherits your model, provider, toolsets, reasoning settings, and fallback model from the current session.</li>
+<li><strong>Non-blocking</strong> — your foreground session stays fully interactive. You can chat, run commands, or even start more background tasks.</li>
+<li><strong>Multiple tasks</strong> — you can run several background tasks simultaneously. Each gets a numbered ID.</li>
+</ul>
+<h3 id="results"><a class="header" href="#results">Results</a></h3>
+<p>When a background task finishes, the result appears as a panel in your terminal:</p>
+<pre><code>╭─ ⚕ Hermes (background #1) ──────────────────────────────────╮
+│ Found 3 errors in syslog from today:                         │
+│ 1. OOM killer invoked at 03:22 — killed process nginx        │
+│ 2. Disk I/O error on /dev/sda1 at 07:15                      │
+│ 3. Failed SSH login attempts from 192.168.1.50 at 14:30      │
+╰──────────────────────────────────────────────────────────────╯
+</code></pre>
+<p>If the task fails, you’ll see an error notification instead. If <code>display.bell_on_complete</code> is enabled in your config, the terminal bell rings when the task finishes.</p>
+<h3 id="use-cases"><a class="header" href="#use-cases">Use Cases</a></h3>
+<ul>
+<li><strong>Long-running research</strong> — “/background research the latest developments in quantum error correction” while you work on code</li>
+<li><strong>File processing</strong> — “/background analyze all Python files in this repo and list any security issues” while you continue a conversation</li>
+<li><strong>Parallel investigations</strong> — start multiple background tasks to explore different angles simultaneously</li>
+</ul>
+<dl>
+<dt id="info-background-sessions-do-not-appear-in-your-main-conversation-history-they-are-standalone-sessions-with-their-own-task-id-eg-bg_143022_a1b2c3"><a class="header" href="#info-background-sessions-do-not-appear-in-your-main-conversation-history-they-are-standalone-sessions-with-their-own-task-id-eg-bg_143022_a1b2c3">:::info
+Background sessions do not appear in your main conversation history. They are standalone sessions with their own task ID (e.g., <code>bg_143022_a1b2c3</code>).</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="quiet-mode"><a class="header" href="#quiet-mode">Quiet Mode</a></h2>
+<p>By default, the CLI runs in quiet mode which:</p>
+<ul>
+<li>Suppresses verbose logging from tools</li>
+<li>Enables kawaii-style animated feedback</li>
+<li>Keeps output clean and user-friendly</li>
+</ul>
+<p>For debug output:</p>
+<pre><code class="language-bash">hermes chat --verbose
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/user-guide/docker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/user-guide/sessions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/user-guide/docker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/user-guide/sessions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

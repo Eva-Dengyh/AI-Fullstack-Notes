@@ -1,0 +1,1116 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>AI Providers - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/integrations/providers.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="title-ai-providers-sidebar_label-ai-providers-sidebar_position-1"><a class="header" href="#title-ai-providers-sidebar_label-ai-providers-sidebar_position-1">title: “AI Providers”
+sidebar_label: “AI Providers”
+sidebar_position: 1</a></h2>
+<h1 id="ai-providers"><a class="header" href="#ai-providers">AI Providers</a></h1>
+<p>This page covers setting up inference providers for Hermes Agent — from cloud APIs like OpenRouter and Anthropic, to self-hosted endpoints like Ollama and vLLM, to advanced routing and fallback configurations. You need at least one provider configured to use Hermes.</p>
+<h2 id="inference-providers"><a class="header" href="#inference-providers">Inference Providers</a></h2>
+<p>You need at least one way to connect to an LLM. Use <code>hermes model</code> to switch providers and models interactively, or configure directly:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Provider</th><th>Setup</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Nous Portal</strong></td><td><code>hermes model</code> (OAuth, subscription-based)</td></tr>
+<tr><td><strong>OpenAI Codex</strong></td><td><code>hermes model</code> (ChatGPT OAuth, uses Codex models)</td></tr>
+<tr><td><strong>GitHub Copilot</strong></td><td><code>hermes model</code> (OAuth device code flow, <code>COPILOT_GITHUB_TOKEN</code>, <code>GH_TOKEN</code>, or <code>gh auth token</code>)</td></tr>
+<tr><td><strong>GitHub Copilot ACP</strong></td><td><code>hermes model</code> (spawns local <code>copilot --acp --stdio</code>)</td></tr>
+<tr><td><strong>Anthropic</strong></td><td><code>hermes model</code> (Claude Pro/Max via Claude Code auth, Anthropic API key, or manual setup-token)</td></tr>
+<tr><td><strong>OpenRouter</strong></td><td><code>OPENROUTER_API_KEY</code> in <code>~/.hermes/.env</code></td></tr>
+<tr><td><strong>AI Gateway</strong></td><td><code>AI_GATEWAY_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>ai-gateway</code>)</td></tr>
+<tr><td><strong>z.ai / GLM</strong></td><td><code>GLM_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>zai</code>)</td></tr>
+<tr><td><strong>Kimi / Moonshot</strong></td><td><code>KIMI_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>kimi-coding</code>)</td></tr>
+<tr><td><strong>MiniMax</strong></td><td><code>MINIMAX_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>minimax</code>)</td></tr>
+<tr><td><strong>MiniMax China</strong></td><td><code>MINIMAX_CN_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>minimax-cn</code>)</td></tr>
+<tr><td><strong>Alibaba Cloud</strong></td><td><code>DASHSCOPE_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>alibaba</code>, aliases: <code>dashscope</code>, <code>qwen</code>)</td></tr>
+<tr><td><strong>Kilo Code</strong></td><td><code>KILOCODE_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>kilocode</code>)</td></tr>
+<tr><td><strong>Xiaomi MiMo</strong></td><td><code>XIAOMI_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>xiaomi</code>, aliases: <code>mimo</code>, <code>xiaomi-mimo</code>)</td></tr>
+<tr><td><strong>OpenCode Zen</strong></td><td><code>OPENCODE_ZEN_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>opencode-zen</code>)</td></tr>
+<tr><td><strong>OpenCode Go</strong></td><td><code>OPENCODE_GO_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>opencode-go</code>)</td></tr>
+<tr><td><strong>DeepSeek</strong></td><td><code>DEEPSEEK_API_KEY</code> in <code>~/.hermes/.env</code> (provider: <code>deepseek</code>)</td></tr>
+<tr><td><strong>Hugging Face</strong></td><td><code>HF_TOKEN</code> in <code>~/.hermes/.env</code> (provider: <code>huggingface</code>, aliases: <code>hf</code>)</td></tr>
+<tr><td><strong>Google / Gemini</strong></td><td><code>GOOGLE_API_KEY</code> (or <code>GEMINI_API_KEY</code>) in <code>~/.hermes/.env</code> (provider: <code>gemini</code>)</td></tr>
+<tr><td><strong>Custom Endpoint</strong></td><td><code>hermes model</code> → choose “Custom endpoint” (saved in <code>config.yaml</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-model-key-alias-in-the-model-config-section-you-can-use-either-default-or-model-as-the-key-name-for-your-model-id-both-model--default-my-model--and-model--model-my-model--work-identically"><a class="header" href="#tip-model-key-alias-in-the-model-config-section-you-can-use-either-default-or-model-as-the-key-name-for-your-model-id-both-model--default-my-model--and-model--model-my-model--work-identically">:::tip Model key alias
+In the <code>model:</code> config section, you can use either <code>default:</code> or <code>model:</code> as the key name for your model ID. Both <code>model: { default: my-model }</code> and <code>model: { model: my-model }</code> work identically.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::info Codex Note
+The OpenAI Codex provider authenticates via device code (open a URL, enter a code). Hermes stores the resulting credentials in its own auth store under <code>~/.hermes/auth.json</code> and can import existing Codex CLI credentials from <code>~/.codex/auth.json</code> when present. No Codex CLI installation is required.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::warning
+Even when using Nous Portal, Codex, or a custom endpoint, some tools (vision, web summarization, MoA) use a separate “auxiliary” model — by default Gemini Flash via OpenRouter. An <code>OPENROUTER_API_KEY</code> enables these tools automatically. You can also configure which model and provider these tools use — see <a href="/docs/user-guide/configuration#auxiliary-models">Auxiliary Models</a>.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="anthropic-native"><a class="header" href="#anthropic-native">Anthropic (Native)</a></h3>
+<p>Use Claude models directly through the Anthropic API — no OpenRouter proxy needed. Supports three auth methods:</p>
+<pre><code class="language-bash"># With an API key (pay-per-token)
+export ANTHROPIC_API_KEY=***
+hermes chat --provider anthropic --model claude-sonnet-4-6
+
+# Preferred: authenticate through `hermes model`
+# Hermes will use Claude Code's credential store directly when available
+hermes model
+
+# Manual override with a setup-token (fallback / legacy)
+export ANTHROPIC_TOKEN=***  # setup-token or manual OAuth token
+hermes chat --provider anthropic
+
+# Auto-detect Claude Code credentials (if you already use Claude Code)
+hermes chat --provider anthropic  # reads Claude Code credential files automatically
+</code></pre>
+<p>When you choose Anthropic OAuth through <code>hermes model</code>, Hermes prefers Claude Code’s own credential store over copying the token into <code>~/.hermes/.env</code>. That keeps refreshable Claude credentials refreshable.</p>
+<p>Or set it permanently:</p>
+<pre><code class="language-yaml">model:
+  provider: "anthropic"
+  default: "claude-sonnet-4-6"
+</code></pre>
+<dl>
+<dt id="tip-aliases---provider-claude-and---provider-claude-code-also-work-as-shorthand-for---provider-anthropic"><a class="header" href="#tip-aliases---provider-claude-and---provider-claude-code-also-work-as-shorthand-for---provider-anthropic">:::tip Aliases
+<code>--provider claude</code> and <code>--provider claude-code</code> also work as shorthand for <code>--provider anthropic</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="github-copilot"><a class="header" href="#github-copilot">GitHub Copilot</a></h3>
+<p>Hermes supports GitHub Copilot as a first-class provider with two modes:</p>
+<p><strong><code>copilot</code> — Direct Copilot API</strong> (recommended). Uses your GitHub Copilot subscription to access GPT-5.x, Claude, Gemini, and other models through the Copilot API.</p>
+<pre><code class="language-bash">hermes chat --provider copilot --model gpt-5.4
+</code></pre>
+<p><strong>Authentication options</strong> (checked in this order):</p>
+<ol>
+<li><code>COPILOT_GITHUB_TOKEN</code> environment variable</li>
+<li><code>GH_TOKEN</code> environment variable</li>
+<li><code>GITHUB_TOKEN</code> environment variable</li>
+<li><code>gh auth token</code> CLI fallback</li>
+</ol>
+<dl>
+<dt id="if-no-token-is-found-hermes-model-offers-an-oauth-device-code-login--the-same-flow-used-by-the-copilot-cli-and-opencode"><a class="header" href="#if-no-token-is-found-hermes-model-offers-an-oauth-device-code-login--the-same-flow-used-by-the-copilot-cli-and-opencode">If no token is found, <code>hermes model</code> offers an <strong>OAuth device code login</strong> — the same flow used by the Copilot CLI and opencode.</a></dt>
+<dd>
+<p>::warning Token types
+The Copilot API does <strong>not</strong> support classic Personal Access Tokens (<code>ghp_*</code>). Supported token types:</p>
+</dd>
+</dl>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Prefix</th><th>How to get</th></tr>
+</thead>
+<tbody>
+<tr><td>OAuth token</td><td><code>gho_</code></td><td><code>hermes model</code> → GitHub Copilot → Login with GitHub</td></tr>
+<tr><td>Fine-grained PAT</td><td><code>github_pat_</code></td><td>GitHub Settings → Developer settings → Fine-grained tokens (needs <strong>Copilot Requests</strong> permission)</td></tr>
+<tr><td>GitHub App token</td><td><code>ghu_</code></td><td>Via GitHub App installation</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="if-your-gh-auth-token-returns-a-ghp_-token-use-hermes-model-to-authenticate-via-oauth-instead"><a class="header" href="#if-your-gh-auth-token-returns-a-ghp_-token-use-hermes-model-to-authenticate-via-oauth-instead">If your <code>gh auth token</code> returns a <code>ghp_*</code> token, use <code>hermes model</code> to authenticate via OAuth instead.</a></dt>
+<dd>::</dd>
+</dl>
+<p><strong>API routing</strong>: GPT-5+ models (except <code>gpt-5-mini</code>) automatically use the Responses API. All other models (GPT-4o, Claude, Gemini, etc.) use Chat Completions. Models are auto-detected from the live Copilot catalog.</p>
+<p><strong><code>copilot-acp</code> — Copilot ACP agent backend</strong>. Spawns the local Copilot CLI as a subprocess:</p>
+<pre><code class="language-bash">hermes chat --provider copilot-acp --model copilot-acp
+# Requires the GitHub Copilot CLI in PATH and an existing `copilot login` session
+</code></pre>
+<p><strong>Permanent config:</strong></p>
+<pre><code class="language-yaml">model:
+  provider: "copilot"
+  default: "gpt-5.4"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Environment variable</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>COPILOT_GITHUB_TOKEN</code></td><td>GitHub token for Copilot API (first priority)</td></tr>
+<tr><td><code>HERMES_COPILOT_ACP_COMMAND</code></td><td>Override the Copilot CLI binary path (default: <code>copilot</code>)</td></tr>
+<tr><td><code>HERMES_COPILOT_ACP_ARGS</code></td><td>Override ACP args (default: <code>--acp --stdio</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="first-class-chinese-ai-providers"><a class="header" href="#first-class-chinese-ai-providers">First-Class Chinese AI Providers</a></h3>
+<p>These providers have built-in support with dedicated provider IDs. Set the API key and use <code>--provider</code> to select:</p>
+<pre><code class="language-bash"># z.ai / ZhipuAI GLM
+hermes chat --provider zai --model glm-5
+# Requires: GLM_API_KEY in ~/.hermes/.env
+
+# Kimi / Moonshot AI
+hermes chat --provider kimi-coding --model kimi-for-coding
+# Requires: KIMI_API_KEY in ~/.hermes/.env
+
+# MiniMax (global endpoint)
+hermes chat --provider minimax --model MiniMax-M2.7
+# Requires: MINIMAX_API_KEY in ~/.hermes/.env
+
+# MiniMax (China endpoint)
+hermes chat --provider minimax-cn --model MiniMax-M2.7
+# Requires: MINIMAX_CN_API_KEY in ~/.hermes/.env
+
+# Alibaba Cloud / DashScope (Qwen models)
+hermes chat --provider alibaba --model qwen3.5-plus
+# Requires: DASHSCOPE_API_KEY in ~/.hermes/.env
+
+# Xiaomi MiMo
+hermes chat --provider xiaomi --model mimo-v2-pro
+# Requires: XIAOMI_API_KEY in ~/.hermes/.env
+</code></pre>
+<p>Or set the provider permanently in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">model:
+  provider: "zai"       # or: kimi-coding, minimax, minimax-cn, alibaba, xiaomi
+  default: "glm-5"
+</code></pre>
+<dl>
+<dt id="base-urls-can-be-overridden-with-glm_base_url-kimi_base_url-minimax_base_url-minimax_cn_base_url-dashscope_base_url-or-xiaomi_base_url-environment-variables"><a class="header" href="#base-urls-can-be-overridden-with-glm_base_url-kimi_base_url-minimax_base_url-minimax_cn_base_url-dashscope_base_url-or-xiaomi_base_url-environment-variables">Base URLs can be overridden with <code>GLM_BASE_URL</code>, <code>KIMI_BASE_URL</code>, <code>MINIMAX_BASE_URL</code>, <code>MINIMAX_CN_BASE_URL</code>, <code>DASHSCOPE_BASE_URL</code>, or <code>XIAOMI_BASE_URL</code> environment variables.</a></dt>
+<dd>
+<p>::note Z.AI Endpoint Auto-Detection
+When using the Z.AI / GLM provider, Hermes automatically probes multiple endpoints (global, China, coding variants) to find one that accepts your API key. You don’t need to set <code>GLM_BASE_URL</code> manually — the working endpoint is detected and cached automatically.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="xai-grok-prompt-caching"><a class="header" href="#xai-grok-prompt-caching">xAI (Grok) Prompt Caching</a></h3>
+<p>When using xAI as a provider (any base URL containing <code>x.ai</code>), Hermes automatically enables prompt caching by sending the <code>x-grok-conv-id</code> header with every API request. This routes requests to the same server within a conversation session, allowing xAI’s infrastructure to reuse cached system prompts and conversation history.</p>
+<p>No configuration is needed — caching activates automatically when an xAI endpoint is detected and a session ID is available. This reduces latency and cost for multi-turn conversations.</p>
+<h3 id="hugging-face-inference-providers"><a class="header" href="#hugging-face-inference-providers">Hugging Face Inference Providers</a></h3>
+<p><a href="https://huggingface.co/docs/inference-providers">Hugging Face Inference Providers</a> routes to 20+ open models through a unified OpenAI-compatible endpoint (<code>router.huggingface.co/v1</code>). Requests are automatically routed to the fastest available backend (Groq, Together, SambaNova, etc.) with automatic failover.</p>
+<pre><code class="language-bash"># Use any available model
+hermes chat --provider huggingface --model Qwen/Qwen3-235B-A22B-Thinking-2507
+# Requires: HF_TOKEN in ~/.hermes/.env
+
+# Short alias
+hermes chat --provider hf --model deepseek-ai/DeepSeek-V3.2
+</code></pre>
+<p>Or set it permanently in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">model:
+  provider: "huggingface"
+  default: "Qwen/Qwen3-235B-A22B-Thinking-2507"
+</code></pre>
+<p>Get your token at <a href="https://huggingface.co/settings/tokens">huggingface.co/settings/tokens</a> — make sure to enable the “Make calls to Inference Providers” permission. Free tier included ($0.10/month credit, no markup on provider rates).</p>
+<p>You can append routing suffixes to model names: <code>:fastest</code> (default), <code>:cheapest</code>, or <code>:provider_name</code> to force a specific backend.</p>
+<p>The base URL can be overridden with <code>HF_BASE_URL</code>.</p>
+<h2 id="custom--self-hosted-llm-providers"><a class="header" href="#custom--self-hosted-llm-providers">Custom &amp; Self-Hosted LLM Providers</a></h2>
+<p>Hermes Agent works with <strong>any OpenAI-compatible API endpoint</strong>. If a server implements <code>/v1/chat/completions</code>, you can point Hermes at it. This means you can use local models, GPU inference servers, multi-provider routers, or any third-party API.</p>
+<h3 id="general-setup"><a class="header" href="#general-setup">General Setup</a></h3>
+<p>Three ways to configure a custom endpoint:</p>
+<p><strong>Interactive setup (recommended):</strong></p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter: API base URL, API key, Model name
+</code></pre>
+<p><strong>Manual config (<code>config.yaml</code>):</strong></p>
+<pre><code class="language-yaml"># In ~/.hermes/config.yaml
+model:
+  default: your-model-name
+  provider: custom
+  base_url: http://localhost:8000/v1
+  api_key: your-key-or-leave-empty-for-local
+</code></pre>
+<dl>
+<dt id="warning-legacy-env-vars-openai_base_url-and-llm_model-in-env-are-removed-neither-is-read-by-any-part-of-hermes--configyaml-is-the-single-source-of-truth-for-model-and-endpoint-configuration-if-you-have-stale-entries-in-your-env-they-are-automatically-cleared-on-the-next-hermes-setup-or-config-migration-use-hermes-model-or-edit-configyaml-directly"><a class="header" href="#warning-legacy-env-vars-openai_base_url-and-llm_model-in-env-are-removed-neither-is-read-by-any-part-of-hermes--configyaml-is-the-single-source-of-truth-for-model-and-endpoint-configuration-if-you-have-stale-entries-in-your-env-they-are-automatically-cleared-on-the-next-hermes-setup-or-config-migration-use-hermes-model-or-edit-configyaml-directly">:::warning Legacy env vars
+<code>OPENAI_BASE_URL</code> and <code>LLM_MODEL</code> in <code>.env</code> are <strong>removed</strong>. Neither is read by any part of Hermes — <code>config.yaml</code> is the single source of truth for model and endpoint configuration. If you have stale entries in your <code>.env</code>, they are automatically cleared on the next <code>hermes setup</code> or config migration. Use <code>hermes model</code> or edit <code>config.yaml</code> directly.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Both approaches persist to <code>config.yaml</code>, which is the source of truth for model, provider, and base URL.</p>
+<h3 id="switching-models-with-model"><a class="header" href="#switching-models-with-model">Switching Models with <code>/model</code></a></h3>
+<p>Once a custom endpoint is configured, you can switch models mid-session:</p>
+<pre><code>/model custom:qwen-2.5          # Switch to a model on your custom endpoint
+/model custom                    # Auto-detect the model from the endpoint
+/model openrouter:claude-sonnet-4 # Switch back to a cloud provider
+</code></pre>
+<p>If you have <strong>named custom providers</strong> configured (see below), use the triple syntax:</p>
+<pre><code>/model custom:local:qwen-2.5    # Use the "local" custom provider with model qwen-2.5
+/model custom:work:llama3       # Use the "work" custom provider with llama3
+</code></pre>
+<dl>
+<dt id="when-switching-providers-hermes-persists-the-base-url-and-provider-to-config-so-the-change-survives-restarts-when-switching-away-from-a-custom-endpoint-to-a-built-in-provider-the-stale-base-url-is-automatically-cleared"><a class="header" href="#when-switching-providers-hermes-persists-the-base-url-and-provider-to-config-so-the-change-survives-restarts-when-switching-away-from-a-custom-endpoint-to-a-built-in-provider-the-stale-base-url-is-automatically-cleared">When switching providers, Hermes persists the base URL and provider to config so the change survives restarts. When switching away from a custom endpoint to a built-in provider, the stale base URL is automatically cleared.</a></dt>
+<dd>
+<p>::tip
+<code>/model custom</code> (bare, no model name) queries your endpoint’s <code>/models</code> API and auto-selects the model if exactly one is loaded. Useful for local servers running a single model.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<p>Everything below follows this same pattern — just change the URL, key, and model name.</p>
+<hr>
+<h3 id="ollama--local-models-zero-config"><a class="header" href="#ollama--local-models-zero-config">Ollama — Local Models, Zero Config</a></h3>
+<p><a href="https://ollama.com/">Ollama</a> runs open-weight models locally with one command. Best for: quick local experimentation, privacy-sensitive work, offline use. Supports tool calling via the OpenAI-compatible API.</p>
+<pre><code class="language-bash"># Install and run a model
+ollama pull qwen2.5-coder:32b
+ollama serve   # Starts on port 11434
+</code></pre>
+<p>Then configure Hermes:</p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter URL: http://localhost:11434/v1
+# Skip API key (Ollama doesn't need one)
+# Enter model name (e.g. qwen2.5-coder:32b)
+</code></pre>
+<p>Or configure <code>config.yaml</code> directly:</p>
+<pre><code class="language-yaml">model:
+  default: qwen2.5-coder:32b
+  provider: custom
+  base_url: http://localhost:11434/v1
+  context_length: 32768   # See warning below
+</code></pre>
+<p>:::caution Ollama defaults to very low context lengths
+Ollama does <strong>not</strong> use your model’s full context window by default. Depending on your VRAM, the default is:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Available VRAM</th><th>Default context</th></tr>
+</thead>
+<tbody>
+<tr><td>Less than 24 GB</td><td><strong>4,096 tokens</strong></td></tr>
+<tr><td>24–48 GB</td><td>32,768 tokens</td></tr>
+<tr><td>48+ GB</td><td>256,000 tokens</td></tr>
+</tbody>
+</table>
+</div>
+<p>For agent use with tools, <strong>you need at least 16k–32k context</strong>. At 4k, the system prompt + tool schemas alone can fill the window, leaving no room for conversation.</p>
+<p><strong>How to increase it</strong> (pick one):</p>
+<pre><code class="language-bash"># Option 1: Set server-wide via environment variable (recommended)
+OLLAMA_CONTEXT_LENGTH=32768 ollama serve
+
+# Option 2: For systemd-managed Ollama
+sudo systemctl edit ollama.service
+# Add: Environment="OLLAMA_CONTEXT_LENGTH=32768"
+# Then: sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart ollama
+
+# Option 3: Bake it into a custom model (persistent per-model)
+echo -e "FROM qwen2.5-coder:32b\nPARAMETER num_ctx 32768" &gt; Modelfile
+ollama create qwen2.5-coder-32k -f Modelfile
+</code></pre>
+<dl>
+<dt id="you-cannot-set-context-length-through-the-openai-compatible-api-v1chatcompletions-it-must-be-configured-server-side-or-via-a-modelfile-this-is-the-1-source-of-confusion-when-integrating-ollama-with-tools-like-hermes"><a class="header" href="#you-cannot-set-context-length-through-the-openai-compatible-api-v1chatcompletions-it-must-be-configured-server-side-or-via-a-modelfile-this-is-the-1-source-of-confusion-when-integrating-ollama-with-tools-like-hermes"><strong>You cannot set context length through the OpenAI-compatible API</strong> (<code>/v1/chat/completions</code>). It must be configured server-side or via a Modelfile. This is the #1 source of confusion when integrating Ollama with tools like Hermes.</a></dt>
+<dd>::</dd>
+</dl>
+<p><strong>Verify your context is set correctly:</strong></p>
+<pre><code class="language-bash">ollama ps
+# Look at the CONTEXT column — it should show your configured value
+</code></pre>
+<dl>
+<dt id="tip-list-available-models-with-ollama-list-pull-any-model-from-the-ollama-library-with-ollama-pull-model-ollama-handles-gpu-offloading-automatically--no-configuration-needed-for-most-setups"><a class="header" href="#tip-list-available-models-with-ollama-list-pull-any-model-from-the-ollama-library-with-ollama-pull-model-ollama-handles-gpu-offloading-automatically--no-configuration-needed-for-most-setups">:::tip
+List available models with <code>ollama list</code>. Pull any model from the <a href="https://ollama.com/library">Ollama library</a> with <code>ollama pull &lt;model&gt;</code>. Ollama handles GPU offloading automatically — no configuration needed for most setups.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h3 id="vllm--high-performance-gpu-inference"><a class="header" href="#vllm--high-performance-gpu-inference">vLLM — High-Performance GPU Inference</a></h3>
+<p><a href="https://docs.vllm.ai/">vLLM</a> is the standard for production LLM serving. Best for: maximum throughput on GPU hardware, serving large models, continuous batching.</p>
+<pre><code class="language-bash">pip install vllm
+vllm serve meta-llama/Llama-3.1-70B-Instruct \
+  --port 8000 \
+  --max-model-len 65536 \
+  --tensor-parallel-size 2 \
+  --enable-auto-tool-choice \
+  --tool-call-parser hermes
+</code></pre>
+<p>Then configure Hermes:</p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter URL: http://localhost:8000/v1
+# Skip API key (or enter one if you configured vLLM with --api-key)
+# Enter model name: meta-llama/Llama-3.1-70B-Instruct
+</code></pre>
+<p><strong>Context length:</strong> vLLM reads the model’s <code>max_position_embeddings</code> by default. If that exceeds your GPU memory, it errors and asks you to set <code>--max-model-len</code> lower. You can also use <code>--max-model-len auto</code> to automatically find the maximum that fits. Set <code>--gpu-memory-utilization 0.95</code> (default 0.9) to squeeze more context into VRAM.</p>
+<p><strong>Tool calling requires explicit flags:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--enable-auto-tool-choice</code></td><td>Required for <code>tool_choice: "auto"</code> (the default in Hermes)</td></tr>
+<tr><td><code>--tool-call-parser &lt;name&gt;</code></td><td>Parser for the model’s tool call format</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="supported-parsers-hermes-qwen-25-hermes-23-llama3_json-llama-3x-mistral-deepseek_v3-deepseek_v31-xlam-pythonic-without-these-flags-tool-calls-wont-work--the-model-will-output-tool-calls-as-text"><a class="header" href="#supported-parsers-hermes-qwen-25-hermes-23-llama3_json-llama-3x-mistral-deepseek_v3-deepseek_v31-xlam-pythonic-without-these-flags-tool-calls-wont-work--the-model-will-output-tool-calls-as-text">Supported parsers: <code>hermes</code> (Qwen 2.5, Hermes 2/3), <code>llama3_json</code> (Llama 3.x), <code>mistral</code>, <code>deepseek_v3</code>, <code>deepseek_v31</code>, <code>xlam</code>, <code>pythonic</code>. Without these flags, tool calls won’t work — the model will output tool calls as text.</a></dt>
+<dd>
+<p>::tip
+vLLM supports human-readable sizes: <code>--max-model-len 64k</code> (lowercase k = 1000, uppercase K = 1024).</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<hr>
+<h3 id="sglang--fast-serving-with-radixattention"><a class="header" href="#sglang--fast-serving-with-radixattention">SGLang — Fast Serving with RadixAttention</a></h3>
+<p><a href="https://github.com/sgl-project/sglang">SGLang</a> is an alternative to vLLM with RadixAttention for KV cache reuse. Best for: multi-turn conversations (prefix caching), constrained decoding, structured output.</p>
+<pre><code class="language-bash">pip install "sglang[all]"
+python -m sglang.launch_server \
+  --model meta-llama/Llama-3.1-70B-Instruct \
+  --port 30000 \
+  --context-length 65536 \
+  --tp 2 \
+  --tool-call-parser qwen
+</code></pre>
+<p>Then configure Hermes:</p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter URL: http://localhost:30000/v1
+# Enter model name: meta-llama/Llama-3.1-70B-Instruct
+</code></pre>
+<p><strong>Context length:</strong> SGLang reads from the model’s config by default. Use <code>--context-length</code> to override. If you need to exceed the model’s declared maximum, set <code>SGLANG_ALLOW_OVERWRITE_LONGER_CONTEXT_LEN=1</code>.</p>
+<dl>
+<dt id="tool-calling-use---tool-call-parser-with-the-appropriate-parser-for-your-model-family-qwen-qwen-25-llama3-llama4-deepseekv3-mistral-glm-without-this-flag-tool-calls-come-back-as-plain-text"><a class="header" href="#tool-calling-use---tool-call-parser-with-the-appropriate-parser-for-your-model-family-qwen-qwen-25-llama3-llama4-deepseekv3-mistral-glm-without-this-flag-tool-calls-come-back-as-plain-text"><strong>Tool calling:</strong> Use <code>--tool-call-parser</code> with the appropriate parser for your model family: <code>qwen</code> (Qwen 2.5), <code>llama3</code>, <code>llama4</code>, <code>deepseekv3</code>, <code>mistral</code>, <code>glm</code>. Without this flag, tool calls come back as plain text.</a></dt>
+<dd>
+<p>::caution SGLang defaults to 128 max output tokens
+If responses seem truncated, add <code>max_tokens</code> to your requests or set <code>--default-max-tokens</code> on the server. SGLang’s default is only 128 tokens per response if not specified in the request.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<hr>
+<h3 id="llamacpp--llama-server--cpu--metal-inference"><a class="header" href="#llamacpp--llama-server--cpu--metal-inference">llama.cpp / llama-server — CPU &amp; Metal Inference</a></h3>
+<p><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> runs quantized models on CPU, Apple Silicon (Metal), and consumer GPUs. Best for: running models without a datacenter GPU, Mac users, edge deployment.</p>
+<pre><code class="language-bash"># Build and start llama-server
+cmake -B build &amp;&amp; cmake --build build --config Release
+./build/bin/llama-server \
+  --jinja -fa \
+  -c 32768 \
+  -ngl 99 \
+  -m models/qwen2.5-coder-32b-instruct-Q4_K_M.gguf \
+  --port 8080 --host 0.0.0.0
+</code></pre>
+<p><strong>Context length (<code>-c</code>):</strong> Recent builds default to <code>0</code> which reads the model’s training context from the GGUF metadata. For models with 128k+ training context, this can OOM trying to allocate the full KV cache. Set <code>-c</code> explicitly to what you need (32k–64k is a good range for agent use). If using parallel slots (<code>-np</code>), the total context is divided among slots — with <code>-c 32768 -np 4</code>, each slot only gets 8k.</p>
+<p>Then configure Hermes to point at it:</p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter URL: http://localhost:8080/v1
+# Skip API key (local servers don't need one)
+# Enter model name — or leave blank to auto-detect if only one model is loaded
+</code></pre>
+<dl>
+<dt id="this-saves-the-endpoint-to-configyaml-so-it-persists-across-sessions"><a class="header" href="#this-saves-the-endpoint-to-configyaml-so-it-persists-across-sessions">This saves the endpoint to <code>config.yaml</code> so it persists across sessions.</a></dt>
+<dd>
+<p>::caution <code>--jinja</code> is required for tool calling
+Without <code>--jinja</code>, llama-server ignores the <code>tools</code> parameter entirely. The model will try to call tools by writing JSON in its response text, but Hermes won’t recognize it as a tool call — you’ll see raw JSON like <code>{"name": "web_search", ...}</code> printed as a message instead of an actual search.</p>
+</dd>
+</dl>
+<p>Native tool calling support (best performance): Llama 3.x, Qwen 2.5 (including Coder), Hermes 2/3, Mistral, DeepSeek, Functionary. All other models use a generic handler that works but may be less efficient. See the <a href="https://github.com/ggml-org/llama.cpp/blob/master/docs/function-calling.md">llama.cpp function calling docs</a> for the full list.</p>
+<dl>
+<dt id="you-can-verify-tool-support-is-active-by-checking-httplocalhost8080props--the-chat_template-field-should-be-present"><a class="header" href="#you-can-verify-tool-support-is-active-by-checking-httplocalhost8080props--the-chat_template-field-should-be-present">You can verify tool support is active by checking <code>http://localhost:8080/props</code> — the <code>chat_template</code> field should be present.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip
+Download GGUF models from <a href="https://huggingface.co/models?library=gguf">Hugging Face</a>. Q4_K_M quantization offers the best balance of quality vs. memory usage.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<hr>
+<h3 id="lm-studio--desktop-app-with-local-models"><a class="header" href="#lm-studio--desktop-app-with-local-models">LM Studio — Desktop App with Local Models</a></h3>
+<p><a href="https://lmstudio.ai/">LM Studio</a> is a desktop app for running local models with a GUI. Best for: users who prefer a visual interface, quick model testing, developers on macOS/Windows/Linux.</p>
+<p>Start the server from the LM Studio app (Developer tab → Start Server), or use the CLI:</p>
+<pre><code class="language-bash">lms server start                        # Starts on port 1234
+lms load qwen2.5-coder --context-length 32768
+</code></pre>
+<p>Then configure Hermes:</p>
+<pre><code class="language-bash">hermes model
+# Select "Custom endpoint (self-hosted / VLLM / etc.)"
+# Enter URL: http://localhost:1234/v1
+# Skip API key (LM Studio doesn't require one)
+# Enter model name
+</code></pre>
+<p>:::caution Context length often defaults to 2048
+LM Studio reads context length from the model’s metadata, but many GGUF models report low defaults (2048 or 4096). <strong>Always set context length explicitly</strong> in the LM Studio model settings:</p>
+<ol>
+<li>Click the gear icon next to the model picker</li>
+<li>Set “Context Length” to at least 16384 (preferably 32768)</li>
+<li>Reload the model for the change to take effect</li>
+</ol>
+<p>Alternatively, use the CLI: <code>lms load model-name --context-length 32768</code></p>
+<dl>
+<dt id="to-set-persistent-per-model-defaults-my-models-tab--gear-icon-on-the-model--set-context-size"><a class="header" href="#to-set-persistent-per-model-defaults-my-models-tab--gear-icon-on-the-model--set-context-size">To set persistent per-model defaults: My Models tab → gear icon on the model → set context size.</a></dt>
+<dd>::</dd>
+</dl>
+<p><strong>Tool calling:</strong> Supported since LM Studio 0.3.6. Models with native tool-calling training (Qwen 2.5, Llama 3.x, Mistral, Hermes) are auto-detected and shown with a tool badge. Other models use a generic fallback that may be less reliable.</p>
+<hr>
+<h3 id="wsl2-networking-windows-users"><a class="header" href="#wsl2-networking-windows-users">WSL2 Networking (Windows Users)</a></h3>
+<dl>
+<dt id="since-hermes-agent-requires-a-unix-environment-windows-users-run-it-inside-wsl2-if-your-model-server-ollama-lm-studio-etc-runs-on-the-windows-host-you-need-to-bridge-the-network-gap--wsl2-uses-a-virtual-network-adapter-with-its-own-subnet-so-localhost-inside-wsl2-refers-to-the-linux-vm-not-the-windows-host"><a class="header" href="#since-hermes-agent-requires-a-unix-environment-windows-users-run-it-inside-wsl2-if-your-model-server-ollama-lm-studio-etc-runs-on-the-windows-host-you-need-to-bridge-the-network-gap--wsl2-uses-a-virtual-network-adapter-with-its-own-subnet-so-localhost-inside-wsl2-refers-to-the-linux-vm-not-the-windows-host">Since Hermes Agent requires a Unix environment, Windows users run it inside WSL2. If your model server (Ollama, LM Studio, etc.) runs on the <strong>Windows host</strong>, you need to bridge the network gap — WSL2 uses a virtual network adapter with its own subnet, so <code>localhost</code> inside WSL2 refers to the Linux VM, <strong>not</strong> the Windows host.</a></dt>
+<dd>
+<p>::tip Both in WSL2? No problem.
+If your model server also runs inside WSL2 (common for vLLM, SGLang, and llama-server), <code>localhost</code> works as expected — they share the same network namespace. Skip this section.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h4 id="option-1-mirrored-networking-mode-recommended"><a class="header" href="#option-1-mirrored-networking-mode-recommended">Option 1: Mirrored Networking Mode (Recommended)</a></h4>
+<p>Available on <strong>Windows 11 22H2+</strong>, mirrored mode makes <code>localhost</code> work bidirectionally between Windows and WSL2 — the simplest fix.</p>
+<ol>
+<li>
+<p>Create or edit <code>%USERPROFILE%\.wslconfig</code> (e.g., <code>C:\Users\YourName\.wslconfig</code>):</p>
+<pre><code class="language-ini">[wsl2]
+networkingMode=mirrored
+</code></pre>
+</li>
+<li>
+<p>Restart WSL from PowerShell:</p>
+<pre><code class="language-powershell">wsl --shutdown
+</code></pre>
+</li>
+<li>
+<p>Reopen your WSL2 terminal. <code>localhost</code> now reaches Windows services:</p>
+<pre><code class="language-bash">curl http://localhost:11434/v1/models   # Ollama on Windows — works
+</code></pre>
+</li>
+</ol>
+<p>:::note Hyper-V Firewall
+On some Windows 11 builds, the Hyper-V firewall blocks mirrored connections by default. If <code>localhost</code> still doesn’t work after enabling mirrored mode, run this in an <strong>Admin PowerShell</strong>:</p>
+<pre><code class="language-powershell">Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow
+</code></pre>
+<p>:::</p>
+<h4 id="option-2-use-the-windows-host-ip-windows-10--older-builds"><a class="header" href="#option-2-use-the-windows-host-ip-windows-10--older-builds">Option 2: Use the Windows Host IP (Windows 10 / older builds)</a></h4>
+<p>If you can’t use mirrored mode, find the Windows host IP from inside WSL2 and use that instead of <code>localhost</code>:</p>
+<pre><code class="language-bash"># Get the Windows host IP (the default gateway of WSL2's virtual network)
+ip route show | grep -i default | awk '{ print $3 }'
+# Example output: 172.29.192.1
+</code></pre>
+<p>Use that IP in your Hermes config:</p>
+<pre><code class="language-yaml">model:
+  default: qwen2.5-coder:32b
+  provider: custom
+  base_url: http://172.29.192.1:11434/v1   # Windows host IP, not localhost
+</code></pre>
+<p>:::tip Dynamic helper
+The host IP can change on WSL2 restart. You can grab it dynamically in your shell:</p>
+<pre><code class="language-bash">export WSL_HOST=$(ip route show | grep -i default | awk '{ print $3 }')
+echo "Windows host at: $WSL_HOST"
+curl http://$WSL_HOST:11434/v1/models   # Test Ollama
+</code></pre>
+<p>Or use your machine’s mDNS name (requires <code>libnss-mdns</code> in WSL2):</p>
+<pre><code class="language-bash">sudo apt install libnss-mdns
+curl http://$(hostname).local:11434/v1/models
+</code></pre>
+<p>:::</p>
+<h4 id="server-bind-address-required-for-nat-mode"><a class="header" href="#server-bind-address-required-for-nat-mode">Server Bind Address (Required for NAT Mode)</a></h4>
+<p>If you’re using <strong>Option 2</strong> (NAT mode with the host IP), the model server on Windows must accept connections from outside <code>127.0.0.1</code>. By default, most servers only listen on localhost — WSL2 connections in NAT mode come from a different virtual subnet and will be refused. In mirrored mode, <code>localhost</code> maps directly so the default <code>127.0.0.1</code> binding works fine.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Server</th><th>Default bind</th><th>How to fix</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Ollama</strong></td><td><code>127.0.0.1</code></td><td>Set <code>OLLAMA_HOST=0.0.0.0</code> environment variable before starting Ollama (System Settings → Environment Variables on Windows, or edit the Ollama service)</td></tr>
+<tr><td><strong>LM Studio</strong></td><td><code>127.0.0.1</code></td><td>Enable <strong>“Serve on Network”</strong> in the Developer tab → Server settings</td></tr>
+<tr><td><strong>llama-server</strong></td><td><code>127.0.0.1</code></td><td>Add <code>--host 0.0.0.0</code> to the startup command</td></tr>
+<tr><td><strong>vLLM</strong></td><td><code>0.0.0.0</code></td><td>Already binds to all interfaces by default</td></tr>
+<tr><td><strong>SGLang</strong></td><td><code>127.0.0.1</code></td><td>Add <code>--host 0.0.0.0</code> to the startup command</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Ollama on Windows (detailed):</strong> Ollama runs as a Windows service. To set <code>OLLAMA_HOST</code>:</p>
+<ol>
+<li>Open <strong>System Properties</strong> → <strong>Environment Variables</strong></li>
+<li>Add a new <strong>System variable</strong>: <code>OLLAMA_HOST</code> = <code>0.0.0.0</code></li>
+<li>Restart the Ollama service (or reboot)</li>
+</ol>
+<h4 id="windows-firewall"><a class="header" href="#windows-firewall">Windows Firewall</a></h4>
+<p>Windows Firewall treats WSL2 as a separate network (in both NAT and mirrored mode). If connections still fail after the steps above, add a firewall rule for your model server’s port:</p>
+<pre><code class="language-powershell"># Run in Admin PowerShell — replace PORT with your server's port
+New-NetFirewallRule -DisplayName "Allow WSL2 to Model Server" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 11434
+</code></pre>
+<p>Common ports: Ollama <code>11434</code>, vLLM <code>8000</code>, SGLang <code>30000</code>, llama-server <code>8080</code>, LM Studio <code>1234</code>.</p>
+<h4 id="quick-verification"><a class="header" href="#quick-verification">Quick Verification</a></h4>
+<p>From inside WSL2, test that you can reach your model server:</p>
+<pre><code class="language-bash"># Replace URL with your server's address and port
+curl http://localhost:11434/v1/models          # Mirrored mode
+curl http://172.29.192.1:11434/v1/models       # NAT mode (use your actual host IP)
+</code></pre>
+<p>If you get a JSON response listing your models, you’re good. Use that same URL as the <code>base_url</code> in your Hermes config.</p>
+<hr>
+<h3 id="troubleshooting-local-models"><a class="header" href="#troubleshooting-local-models">Troubleshooting Local Models</a></h3>
+<p>These issues affect <strong>all</strong> local inference servers when used with Hermes.</p>
+<h4 id="connection-refused-from-wsl2-to-a-windows-hosted-model-server"><a class="header" href="#connection-refused-from-wsl2-to-a-windows-hosted-model-server">“Connection refused” from WSL2 to a Windows-hosted model server</a></h4>
+<p>If you’re running Hermes inside WSL2 and your model server on the Windows host, <code>http://localhost:&lt;port&gt;</code> won’t work in WSL2’s default NAT networking mode. See <a href="#wsl2-networking-windows-users">WSL2 Networking</a> above for the fix.</p>
+<h4 id="tool-calls-appear-as-text-instead-of-executing"><a class="header" href="#tool-calls-appear-as-text-instead-of-executing">Tool calls appear as text instead of executing</a></h4>
+<p>The model outputs something like <code>{"name": "web_search", "arguments": {...}}</code> as a message instead of actually calling the tool.</p>
+<p><strong>Cause:</strong> Your server doesn’t have tool calling enabled, or the model doesn’t support it through the server’s tool calling implementation.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Server</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>llama.cpp</strong></td><td>Add <code>--jinja</code> to the startup command</td></tr>
+<tr><td><strong>vLLM</strong></td><td>Add <code>--enable-auto-tool-choice --tool-call-parser hermes</code></td></tr>
+<tr><td><strong>SGLang</strong></td><td>Add <code>--tool-call-parser qwen</code> (or appropriate parser)</td></tr>
+<tr><td><strong>Ollama</strong></td><td>Tool calling is enabled by default — make sure your model supports it (check with <code>ollama show model-name</code>)</td></tr>
+<tr><td><strong>LM Studio</strong></td><td>Update to 0.3.6+ and use a model with native tool support</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="model-seems-to-forget-context-or-give-incoherent-responses"><a class="header" href="#model-seems-to-forget-context-or-give-incoherent-responses">Model seems to forget context or give incoherent responses</a></h4>
+<p><strong>Cause:</strong> Context window is too small. When the conversation exceeds the context limit, most servers silently drop older messages. Hermes’s system prompt + tool schemas alone can use 4k–8k tokens.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check what Hermes thinks the context is
+# Look at startup line: "Context limit: X tokens"
+
+# Check your server's actual context
+# Ollama: ollama ps (CONTEXT column)
+# llama.cpp: curl http://localhost:8080/props | jq '.default_generation_settings.n_ctx'
+# vLLM: check --max-model-len in startup args
+</code></pre>
+<p><strong>Fix:</strong> Set context to at least <strong>32,768 tokens</strong> for agent use. See each server’s section above for the specific flag.</p>
+<h4 id="context-limit-2048-tokens-at-startup"><a class="header" href="#context-limit-2048-tokens-at-startup">“Context limit: 2048 tokens” at startup</a></h4>
+<p>Hermes auto-detects context length from your server’s <code>/v1/models</code> endpoint. If the server reports a low value (or doesn’t report one at all), Hermes uses the model’s declared limit which may be wrong.</p>
+<p><strong>Fix:</strong> Set it explicitly in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">model:
+  default: your-model
+  provider: custom
+  base_url: http://localhost:11434/v1
+  context_length: 32768
+</code></pre>
+<h4 id="responses-get-cut-off-mid-sentence"><a class="header" href="#responses-get-cut-off-mid-sentence">Responses get cut off mid-sentence</a></h4>
+<p><strong>Possible causes:</strong></p>
+<ol>
+<li><strong>Low output cap (<code>max_tokens</code>) on the server</strong> — SGLang defaults to 128 tokens per response. Set <code>--default-max-tokens</code> on the server or configure Hermes with <code>model.max_tokens</code> in config.yaml. Note: <code>max_tokens</code> controls response length only — it is unrelated to how long your conversation history can be (that is <code>context_length</code>).</li>
+<li><strong>Context exhaustion</strong> — The model filled its context window. Increase <code>model.context_length</code> or enable <a href="/docs/user-guide/configuration#context-compression">context compression</a> in Hermes.</li>
+</ol>
+<hr>
+<h3 id="litellm-proxy--multi-provider-gateway"><a class="header" href="#litellm-proxy--multi-provider-gateway">LiteLLM Proxy — Multi-Provider Gateway</a></h3>
+<p><a href="https://docs.litellm.ai/">LiteLLM</a> is an OpenAI-compatible proxy that unifies 100+ LLM providers behind a single API. Best for: switching between providers without config changes, load balancing, fallback chains, budget controls.</p>
+<pre><code class="language-bash"># Install and start
+pip install "litellm[proxy]"
+litellm --model anthropic/claude-sonnet-4 --port 4000
+
+# Or with a config file for multiple models:
+litellm --config litellm_config.yaml --port 4000
+</code></pre>
+<p>Then configure Hermes with <code>hermes model</code> → Custom endpoint → <code>http://localhost:4000/v1</code>.</p>
+<p>Example <code>litellm_config.yaml</code> with fallback:</p>
+<pre><code class="language-yaml">model_list:
+  - model_name: "best"
+    litellm_params:
+      model: anthropic/claude-sonnet-4
+      api_key: sk-ant-...
+  - model_name: "best"
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: sk-...
+router_settings:
+  routing_strategy: "latency-based-routing"
+</code></pre>
+<hr>
+<h3 id="clawrouter--cost-optimized-routing"><a class="header" href="#clawrouter--cost-optimized-routing">ClawRouter — Cost-Optimized Routing</a></h3>
+<p><a href="https://github.com/BlockRunAI/ClawRouter">ClawRouter</a> by BlockRunAI is a local routing proxy that auto-selects models based on query complexity. It classifies requests across 14 dimensions and routes to the cheapest model that can handle the task. Payment is via USDC cryptocurrency (no API keys).</p>
+<pre><code class="language-bash"># Install and start
+npx @blockrun/clawrouter    # Starts on port 8402
+</code></pre>
+<p>Then configure Hermes with <code>hermes model</code> → Custom endpoint → <code>http://localhost:8402/v1</code> → model name <code>blockrun/auto</code>.</p>
+<p>Routing profiles:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Profile</th><th>Strategy</th><th>Savings</th></tr>
+</thead>
+<tbody>
+<tr><td><code>blockrun/auto</code></td><td>Balanced quality/cost</td><td>74-100%</td></tr>
+<tr><td><code>blockrun/eco</code></td><td>Cheapest possible</td><td>95-100%</td></tr>
+<tr><td><code>blockrun/premium</code></td><td>Best quality models</td><td>0%</td></tr>
+<tr><td><code>blockrun/free</code></td><td>Free models only</td><td>100%</td></tr>
+<tr><td><code>blockrun/agentic</code></td><td>Optimized for tool use</td><td>varies</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="note-clawrouter-requires-a-usdc-funded-wallet-on-base-or-solana-for-payment-all-requests-route-through-blockruns-backend-api-run-npx-blockrunclawrouter-doctor-to-check-wallet-status"><a class="header" href="#note-clawrouter-requires-a-usdc-funded-wallet-on-base-or-solana-for-payment-all-requests-route-through-blockruns-backend-api-run-npx-blockrunclawrouter-doctor-to-check-wallet-status">:::note
+ClawRouter requires a USDC-funded wallet on Base or Solana for payment. All requests route through BlockRun’s backend API. Run <code>npx @blockrun/clawrouter doctor</code> to check wallet status.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h3 id="other-compatible-providers"><a class="header" href="#other-compatible-providers">Other Compatible Providers</a></h3>
+<p>Any service with an OpenAI-compatible API works. Some popular options:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Provider</th><th>Base URL</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://together.ai">Together AI</a></td><td><code>https://api.together.xyz/v1</code></td><td>Cloud-hosted open models</td></tr>
+<tr><td><a href="https://groq.com">Groq</a></td><td><code>https://api.groq.com/openai/v1</code></td><td>Ultra-fast inference</td></tr>
+<tr><td><a href="https://deepseek.com">DeepSeek</a></td><td><code>https://api.deepseek.com/v1</code></td><td>DeepSeek models</td></tr>
+<tr><td><a href="https://fireworks.ai">Fireworks AI</a></td><td><code>https://api.fireworks.ai/inference/v1</code></td><td>Fast open model hosting</td></tr>
+<tr><td><a href="https://cerebras.ai">Cerebras</a></td><td><code>https://api.cerebras.ai/v1</code></td><td>Wafer-scale chip inference</td></tr>
+<tr><td><a href="https://mistral.ai">Mistral AI</a></td><td><code>https://api.mistral.ai/v1</code></td><td>Mistral models</td></tr>
+<tr><td><a href="https://openai.com">OpenAI</a></td><td><code>https://api.openai.com/v1</code></td><td>Direct OpenAI access</td></tr>
+<tr><td><a href="https://azure.microsoft.com">Azure OpenAI</a></td><td><code>https://YOUR.openai.azure.com/</code></td><td>Enterprise OpenAI</td></tr>
+<tr><td><a href="https://localai.io">LocalAI</a></td><td><code>http://localhost:8080/v1</code></td><td>Self-hosted, multi-model</td></tr>
+<tr><td><a href="https://jan.ai">Jan</a></td><td><code>http://localhost:1337/v1</code></td><td>Desktop app with local models</td></tr>
+</tbody>
+</table>
+</div>
+<p>Configure any of these with <code>hermes model</code> → Custom endpoint, or in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">model:
+  default: meta-llama/Llama-3.1-70B-Instruct-Turbo
+  provider: custom
+  base_url: https://api.together.xyz/v1
+  api_key: your-together-key
+</code></pre>
+<hr>
+<h3 id="context-length-detection"><a class="header" href="#context-length-detection">Context Length Detection</a></h3>
+<p>:::note Two settings, easy to confuse
+<strong><code>context_length</code></strong> is the <strong>total context window</strong> — the combined budget for input <em>and</em> output tokens (e.g. 200,000 for Claude Opus 4.6). Hermes uses this to decide when to compress history and to validate API requests.</p>
+<p><strong><code>model.max_tokens</code></strong> is the <strong>output cap</strong> — the maximum number of tokens the model may generate in a <em>single response</em>. It has nothing to do with how long your conversation history can be. The industry-standard name <code>max_tokens</code> is a common source of confusion; Anthropic’s native API has since renamed it <code>max_output_tokens</code> for clarity.</p>
+<dl>
+<dt id="set-context_length-when-auto-detection-gets-the-window-size-wrong-set-modelmax_tokens-only-when-you-need-to-limit-how-long-individual-responses-can-be"><a class="header" href="#set-context_length-when-auto-detection-gets-the-window-size-wrong-set-modelmax_tokens-only-when-you-need-to-limit-how-long-individual-responses-can-be">Set <code>context_length</code> when auto-detection gets the window size wrong.
+Set <code>model.max_tokens</code> only when you need to limit how long individual responses can be.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Hermes uses a multi-source resolution chain to detect the correct context window for your model and provider:</p>
+<ol>
+<li><strong>Config override</strong> — <code>model.context_length</code> in config.yaml (highest priority)</li>
+<li><strong>Custom provider per-model</strong> — <code>custom_providers[].models.&lt;id&gt;.context_length</code></li>
+<li><strong>Persistent cache</strong> — previously discovered values (survives restarts)</li>
+<li><strong>Endpoint <code>/models</code></strong> — queries your server’s API (local/custom endpoints)</li>
+<li><strong>Anthropic <code>/v1/models</code></strong> — queries Anthropic’s API for <code>max_input_tokens</code> (API-key users only)</li>
+<li><strong>OpenRouter API</strong> — live model metadata from OpenRouter</li>
+<li><strong>Nous Portal</strong> — suffix-matches Nous model IDs against OpenRouter metadata</li>
+<li><strong><a href="https://models.dev">models.dev</a></strong> — community-maintained registry with provider-specific context lengths for 3800+ models across 100+ providers</li>
+<li><strong>Fallback defaults</strong> — broad model family patterns (128K default)</li>
+</ol>
+<p>For most setups this works out of the box. The system is provider-aware — the same model can have different context limits depending on who serves it (e.g., <code>claude-opus-4.6</code> is 1M on Anthropic direct but 128K on GitHub Copilot).</p>
+<p>To set the context length explicitly, add <code>context_length</code> to your model config:</p>
+<pre><code class="language-yaml">model:
+  default: "qwen3.5:9b"
+  base_url: "http://localhost:8080/v1"
+  context_length: 131072  # tokens
+</code></pre>
+<p>For custom endpoints, you can also set context length per model:</p>
+<pre><code class="language-yaml">custom_providers:
+  - name: "My Local LLM"
+    base_url: "http://localhost:11434/v1"
+    models:
+      qwen3.5:27b:
+        context_length: 32768
+      deepseek-r1:70b:
+        context_length: 65536
+</code></pre>
+<dl>
+<dt id="hermes-model-will-prompt-for-context-length-when-configuring-a-custom-endpoint-leave-it-blank-for-auto-detection"><a class="header" href="#hermes-model-will-prompt-for-context-length-when-configuring-a-custom-endpoint-leave-it-blank-for-auto-detection"><code>hermes model</code> will prompt for context length when configuring a custom endpoint. Leave it blank for auto-detection.</a></dt>
+<dd>
+<p>::tip When to set this manually</p>
+</dd>
+</dl>
+<ul>
+<li>You’re using Ollama with a custom <code>num_ctx</code> that’s lower than the model’s maximum</li>
+<li>You want to limit context below the model’s maximum (e.g., 8k on a 128k model to save VRAM)</li>
+<li>You’re running behind a proxy that doesn’t expose <code>/v1/models</code>
+:::</li>
+</ul>
+<hr>
+<h3 id="named-custom-providers"><a class="header" href="#named-custom-providers">Named Custom Providers</a></h3>
+<p>If you work with multiple custom endpoints (e.g., a local dev server and a remote GPU server), you can define them as named custom providers in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">custom_providers:
+  - name: local
+    base_url: http://localhost:8080/v1
+    # api_key omitted — Hermes uses "no-key-required" for keyless local servers
+  - name: work
+    base_url: https://gpu-server.internal.corp/v1
+    api_key: corp-api-key
+    api_mode: chat_completions   # optional, auto-detected from URL
+  - name: anthropic-proxy
+    base_url: https://proxy.example.com/anthropic
+    api_key: proxy-key
+    api_mode: anthropic_messages  # for Anthropic-compatible proxies
+</code></pre>
+<p>Switch between them mid-session with the triple syntax:</p>
+<pre><code>/model custom:local:qwen-2.5       # Use the "local" endpoint with qwen-2.5
+/model custom:work:llama3-70b      # Use the "work" endpoint with llama3-70b
+/model custom:anthropic-proxy:claude-sonnet-4  # Use the proxy
+</code></pre>
+<p>You can also select named custom providers from the interactive <code>hermes model</code> menu.</p>
+<hr>
+<h3 id="choosing-the-right-setup"><a class="header" href="#choosing-the-right-setup">Choosing the Right Setup</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Use Case</th><th>Recommended</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Just want it to work</strong></td><td>OpenRouter (default) or Nous Portal</td></tr>
+<tr><td><strong>Local models, easy setup</strong></td><td>Ollama</td></tr>
+<tr><td><strong>Production GPU serving</strong></td><td>vLLM or SGLang</td></tr>
+<tr><td><strong>Mac / no GPU</strong></td><td>Ollama or llama.cpp</td></tr>
+<tr><td><strong>Multi-provider routing</strong></td><td>LiteLLM Proxy or OpenRouter</td></tr>
+<tr><td><strong>Cost optimization</strong></td><td>ClawRouter or OpenRouter with <code>sort: "price"</code></td></tr>
+<tr><td><strong>Maximum privacy</strong></td><td>Ollama, vLLM, or llama.cpp (fully local)</td></tr>
+<tr><td><strong>Enterprise / Azure</strong></td><td>Azure OpenAI with custom endpoint</td></tr>
+<tr><td><strong>Chinese AI models</strong></td><td>z.ai (GLM), Kimi/Moonshot, MiniMax, or Xiaomi MiMo (first-class providers)</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-you-can-switch-between-providers-at-any-time-with-hermes-model--no-restart-required-your-conversation-history-memory-and-skills-carry-over-regardless-of-which-provider-you-use"><a class="header" href="#tip-you-can-switch-between-providers-at-any-time-with-hermes-model--no-restart-required-your-conversation-history-memory-and-skills-carry-over-regardless-of-which-provider-you-use">:::tip
+You can switch between providers at any time with <code>hermes model</code> — no restart required. Your conversation history, memory, and skills carry over regardless of which provider you use.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="optional-api-keys"><a class="header" href="#optional-api-keys">Optional API Keys</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Provider</th><th>Env Variable</th></tr>
+</thead>
+<tbody>
+<tr><td>Web scraping</td><td><a href="https://firecrawl.dev/">Firecrawl</a></td><td><code>FIRECRAWL_API_KEY</code>, <code>FIRECRAWL_API_URL</code></td></tr>
+<tr><td>Browser automation</td><td><a href="https://browserbase.com/">Browserbase</a></td><td><code>BROWSERBASE_API_KEY</code>, <code>BROWSERBASE_PROJECT_ID</code></td></tr>
+<tr><td>Image generation</td><td><a href="https://fal.ai/">FAL</a></td><td><code>FAL_KEY</code></td></tr>
+<tr><td>Premium TTS voices</td><td><a href="https://elevenlabs.io/">ElevenLabs</a></td><td><code>ELEVENLABS_API_KEY</code></td></tr>
+<tr><td>OpenAI TTS + voice transcription</td><td><a href="https://platform.openai.com/api-keys">OpenAI</a></td><td><code>VOICE_TOOLS_OPENAI_KEY</code></td></tr>
+<tr><td>Mistral TTS + voice transcription</td><td><a href="https://console.mistral.ai/">Mistral</a></td><td><code>MISTRAL_API_KEY</code></td></tr>
+<tr><td>RL Training</td><td><a href="https://tinker-console.thinkingmachines.ai/">Tinker</a> + <a href="https://wandb.ai/">WandB</a></td><td><code>TINKER_API_KEY</code>, <code>WANDB_API_KEY</code></td></tr>
+<tr><td>Cross-session user modeling</td><td><a href="https://honcho.dev/">Honcho</a></td><td><code>HONCHO_API_KEY</code></td></tr>
+<tr><td>Semantic long-term memory</td><td><a href="https://supermemory.ai">Supermemory</a></td><td><code>SUPERMEMORY_API_KEY</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="self-hosting-firecrawl"><a class="header" href="#self-hosting-firecrawl">Self-Hosting Firecrawl</a></h3>
+<p>By default, Hermes uses the <a href="https://firecrawl.dev/">Firecrawl cloud API</a> for web search and scraping. If you prefer to run Firecrawl locally, you can point Hermes at a self-hosted instance instead. See Firecrawl’s <a href="https://github.com/firecrawl/firecrawl/blob/main/SELF_HOST.md">SELF_HOST.md</a> for complete setup instructions.</p>
+<p><strong>What you get:</strong> No API key required, no rate limits, no per-page costs, full data sovereignty.</p>
+<p><strong>What you lose:</strong> The cloud version uses Firecrawl’s proprietary “Fire-engine” for advanced anti-bot bypassing (Cloudflare, CAPTCHAs, IP rotation). Self-hosted uses basic fetch + Playwright, so some protected sites may fail. Search uses DuckDuckGo instead of Google.</p>
+<p><strong>Setup:</strong></p>
+<ol>
+<li>
+<p>Clone and start the Firecrawl Docker stack (5 containers: API, Playwright, Redis, RabbitMQ, PostgreSQL — requires ~4-8 GB RAM):</p>
+<pre><code class="language-bash">git clone https://github.com/firecrawl/firecrawl
+cd firecrawl
+# In .env, set: USE_DB_AUTHENTICATION=false, HOST=0.0.0.0, PORT=3002
+docker compose up -d
+</code></pre>
+</li>
+<li>
+<p>Point Hermes at your instance (no API key needed):</p>
+<pre><code class="language-bash">hermes config set FIRECRAWL_API_URL http://localhost:3002
+</code></pre>
+</li>
+</ol>
+<p>You can also set both <code>FIRECRAWL_API_KEY</code> and <code>FIRECRAWL_API_URL</code> if your self-hosted instance has authentication enabled.</p>
+<h2 id="openrouter-provider-routing"><a class="header" href="#openrouter-provider-routing">OpenRouter Provider Routing</a></h2>
+<p>When using OpenRouter, you can control how requests are routed across providers. Add a <code>provider_routing</code> section to <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">provider_routing:
+  sort: "throughput"          # "price" (default), "throughput", or "latency"
+  # only: ["anthropic"]      # Only use these providers
+  # ignore: ["deepinfra"]    # Skip these providers
+  # order: ["anthropic", "google"]  # Try providers in this order
+  # require_parameters: true  # Only use providers that support all request params
+  # data_collection: "deny"   # Exclude providers that may store/train on data
+</code></pre>
+<p><strong>Shortcuts:</strong> Append <code>:nitro</code> to any model name for throughput sorting (e.g., <code>anthropic/claude-sonnet-4:nitro</code>), or <code>:floor</code> for price sorting.</p>
+<h2 id="fallback-model"><a class="header" href="#fallback-model">Fallback Model</a></h2>
+<p>Configure a backup provider:model that Hermes switches to automatically when your primary model fails (rate limits, server errors, auth failures):</p>
+<pre><code class="language-yaml">fallback_model:
+  provider: openrouter                    # required
+  model: anthropic/claude-sonnet-4        # required
+  # base_url: http://localhost:8000/v1    # optional, for custom endpoints
+  # api_key_env: MY_CUSTOM_KEY           # optional, env var name for custom endpoint API key
+</code></pre>
+<p>When activated, the fallback swaps the model and provider mid-session without losing your conversation. It fires <strong>at most once</strong> per session.</p>
+<dl>
+<dt id="supported-providers-openrouter-nous-openai-codex-copilot-copilot-acp-anthropic-huggingface-zai-kimi-coding-minimax-minimax-cn-deepseek-ai-gateway-opencode-zen-opencode-go-kilocode-xiaomi-alibaba-custom"><a class="header" href="#supported-providers-openrouter-nous-openai-codex-copilot-copilot-acp-anthropic-huggingface-zai-kimi-coding-minimax-minimax-cn-deepseek-ai-gateway-opencode-zen-opencode-go-kilocode-xiaomi-alibaba-custom">Supported providers: <code>openrouter</code>, <code>nous</code>, <code>openai-codex</code>, <code>copilot</code>, <code>copilot-acp</code>, <code>anthropic</code>, <code>huggingface</code>, <code>zai</code>, <code>kimi-coding</code>, <code>minimax</code>, <code>minimax-cn</code>, <code>deepseek</code>, <code>ai-gateway</code>, <code>opencode-zen</code>, <code>opencode-go</code>, <code>kilocode</code>, <code>xiaomi</code>, <code>alibaba</code>, <code>custom</code>.</a></dt>
+<dd>
+<p>::tip
+Fallback is configured exclusively through <code>config.yaml</code> — there are no environment variables for it. For full details on when it triggers, supported providers, and how it interacts with auxiliary tasks and delegation, see <a href="/docs/user-guide/features/fallback-providers">Fallback Providers</a>.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="smart-model-routing"><a class="header" href="#smart-model-routing">Smart Model Routing</a></h2>
+<p>Optional cheap-vs-strong routing lets Hermes keep your main model for complex work while sending very short/simple turns to a cheaper model.</p>
+<pre><code class="language-yaml">smart_model_routing:
+  enabled: true
+  max_simple_chars: 160
+  max_simple_words: 28
+  cheap_model:
+    provider: openrouter
+    model: google/gemini-2.5-flash
+    # base_url: http://localhost:8000/v1  # optional custom endpoint
+    # api_key_env: MY_CUSTOM_KEY          # optional env var name for that endpoint's API key
+</code></pre>
+<p>How it works:</p>
+<ul>
+<li>If a turn is short, single-line, and does not look code/tool/debug heavy, Hermes may route it to <code>cheap_model</code></li>
+<li>If the turn looks complex, Hermes stays on your primary model/provider</li>
+<li>If the cheap route cannot be resolved cleanly, Hermes falls back to the primary model automatically</li>
+</ul>
+<p>This is intentionally conservative. It is meant for quick, low-stakes turns like:</p>
+<ul>
+<li>short factual questions</li>
+<li>quick rewrites</li>
+<li>lightweight summaries</li>
+</ul>
+<p>It will avoid routing prompts that look like:</p>
+<ul>
+<li>coding/debugging work</li>
+<li>tool-heavy requests</li>
+<li>long or multi-line analysis asks</li>
+</ul>
+<p>Use this when you want lower latency or cost without fully changing your default model.</p>
+<hr>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="/docs/user-guide/configuration">Configuration</a> — General configuration (directory structure, config precedence, terminal backends, memory, compression, and more)</li>
+<li><a href="/docs/reference/environment-variables">Environment Variables</a> — Complete reference of all environment variables</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/integrations/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../tutorials/mdbook-github-pages-tutorial.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/integrations/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../tutorials/mdbook-github-pages-tutorial.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

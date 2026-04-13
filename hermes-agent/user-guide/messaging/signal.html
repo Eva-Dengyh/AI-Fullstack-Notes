@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Signal - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/messaging/signal.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-6-title-signal-description-set-up-hermes-agent-as-a-signal-messenger-bot-via-signal-cli-daemon"><a class="header" href="#sidebar_position-6-title-signal-description-set-up-hermes-agent-as-a-signal-messenger-bot-via-signal-cli-daemon">sidebar_position: 6
+title: “Signal”
+description: “Set up Hermes Agent as a Signal messenger bot via signal-cli daemon”</a></h2>
+<h1 id="signal-setup"><a class="header" href="#signal-setup">Signal Setup</a></h1>
+<p>Hermes connects to Signal through the <a href="https://github.com/AsamK/signal-cli">signal-cli</a> daemon running in HTTP mode. The adapter streams messages in real-time via SSE (Server-Sent Events) and sends responses via JSON-RPC.</p>
+<dl>
+<dt id="signal-is-the-most-privacy-focused-mainstream-messenger--end-to-end-encrypted-by-default-open-source-protocol-minimal-metadata-collection-this-makes-it-ideal-for-security-sensitive-agent-workflows"><a class="header" href="#signal-is-the-most-privacy-focused-mainstream-messenger--end-to-end-encrypted-by-default-open-source-protocol-minimal-metadata-collection-this-makes-it-ideal-for-security-sensitive-agent-workflows">Signal is the most privacy-focused mainstream messenger — end-to-end encrypted by default, open-source protocol, minimal metadata collection. This makes it ideal for security-sensitive agent workflows.</a></dt>
+<dd>
+<p>::info No New Python Dependencies
+The Signal adapter uses <code>httpx</code> (already a core Hermes dependency) for all communication. No additional Python packages are required. You just need signal-cli installed externally.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<hr>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li><strong>signal-cli</strong> — Java-based Signal client (<a href="https://github.com/AsamK/signal-cli">GitHub</a>)</li>
+<li><strong>Java 17+</strong> runtime — required by signal-cli</li>
+<li><strong>A phone number</strong> with Signal installed (for linking as a secondary device)</li>
+</ul>
+<h3 id="installing-signal-cli"><a class="header" href="#installing-signal-cli">Installing signal-cli</a></h3>
+<pre><code class="language-bash"># macOS
+brew install signal-cli
+
+# Linux (download latest release)
+VERSION=$(curl -Ls -o /dev/null -w %{url_effective} \
+  https://github.com/AsamK/signal-cli/releases/latest | sed 's/^.*\/v//')
+curl -L -O "https://github.com/AsamK/signal-cli/releases/download/v${VERSION}/signal-cli-${VERSION}.tar.gz"
+sudo tar xf "signal-cli-${VERSION}.tar.gz" -C /opt
+sudo ln -sf "/opt/signal-cli-${VERSION}/bin/signal-cli" /usr/local/bin/
+</code></pre>
+<dl>
+<dt id="caution-signal-cli-is-not-in-apt-or-snap-repositories-the-linux-install-above-downloads-directly-from-github-releases"><a class="header" href="#caution-signal-cli-is-not-in-apt-or-snap-repositories-the-linux-install-above-downloads-directly-from-github-releases">:::caution
+signal-cli is <strong>not</strong> in apt or snap repositories. The Linux install above downloads directly from <a href="https://github.com/AsamK/signal-cli/releases">GitHub releases</a>.</a></dt>
+<dd>::</dd>
+</dl>
+<hr>
+<h2 id="step-1-link-your-signal-account"><a class="header" href="#step-1-link-your-signal-account">Step 1: Link Your Signal Account</a></h2>
+<p>Signal-cli works as a <strong>linked device</strong> — like WhatsApp Web, but for Signal. Your phone stays the primary device.</p>
+<pre><code class="language-bash"># Generate a linking URI (displays a QR code or link)
+signal-cli link -n "HermesAgent"
+</code></pre>
+<ol>
+<li>Open <strong>Signal</strong> on your phone</li>
+<li>Go to <strong>Settings → Linked Devices</strong></li>
+<li>Tap <strong>Link New Device</strong></li>
+<li>Scan the QR code or enter the URI</li>
+</ol>
+<hr>
+<h2 id="step-2-start-the-signal-cli-daemon"><a class="header" href="#step-2-start-the-signal-cli-daemon">Step 2: Start the signal-cli Daemon</a></h2>
+<pre><code class="language-bash"># Replace +1234567890 with your Signal phone number (E.164 format)
+signal-cli --account +1234567890 daemon --http 127.0.0.1:8080
+</code></pre>
+<dl>
+<dt id="tip-keep-this-running-in-the-background-you-can-use-systemd-tmux-screen-or-run-it-as-a-service"><a class="header" href="#tip-keep-this-running-in-the-background-you-can-use-systemd-tmux-screen-or-run-it-as-a-service">:::tip
+Keep this running in the background. You can use <code>systemd</code>, <code>tmux</code>, <code>screen</code>, or run it as a service.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Verify it’s running:</p>
+<pre><code class="language-bash">curl http://127.0.0.1:8080/api/v1/check
+# Should return: {"versions":{"signal-cli":...}}
+</code></pre>
+<hr>
+<h2 id="step-3-configure-hermes"><a class="header" href="#step-3-configure-hermes">Step 3: Configure Hermes</a></h2>
+<p>The easiest way:</p>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>Select <strong>Signal</strong> from the platform menu. The wizard will:</p>
+<ol>
+<li>Check if signal-cli is installed</li>
+<li>Prompt for the HTTP URL (default: <code>http://127.0.0.1:8080</code>)</li>
+<li>Test connectivity to the daemon</li>
+<li>Ask for your account phone number</li>
+<li>Configure allowed users and access policies</li>
+</ol>
+<h3 id="manual-configuration"><a class="header" href="#manual-configuration">Manual Configuration</a></h3>
+<p>Add to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash"># Required
+SIGNAL_HTTP_URL=http://127.0.0.1:8080
+SIGNAL_ACCOUNT=+1234567890
+
+# Security (recommended)
+SIGNAL_ALLOWED_USERS=+1234567890,+0987654321    # Comma-separated E.164 numbers or UUIDs
+
+# Optional
+SIGNAL_GROUP_ALLOWED_USERS=groupId1,groupId2     # Enable groups (omit to disable, * for all)
+SIGNAL_HOME_CHANNEL=+1234567890                  # Default delivery target for cron jobs
+</code></pre>
+<p>Then start the gateway:</p>
+<pre><code class="language-bash">hermes gateway              # Foreground
+hermes gateway install      # Install as a user service
+sudo hermes gateway install --system   # Linux only: boot-time system service
+</code></pre>
+<hr>
+<h2 id="access-control"><a class="header" href="#access-control">Access Control</a></h2>
+<h3 id="dm-access"><a class="header" href="#dm-access">DM Access</a></h3>
+<p>DM access follows the same pattern as all other Hermes platforms:</p>
+<ol>
+<li><strong><code>SIGNAL_ALLOWED_USERS</code> set</strong> → only those users can message</li>
+<li><strong>No allowlist set</strong> → unknown users get a DM pairing code (approve via <code>hermes pairing approve signal CODE</code>)</li>
+<li><strong><code>SIGNAL_ALLOW_ALL_USERS=true</code></strong> → anyone can message (use with caution)</li>
+</ol>
+<h3 id="group-access"><a class="header" href="#group-access">Group Access</a></h3>
+<p>Group access is controlled by the <code>SIGNAL_GROUP_ALLOWED_USERS</code> env var:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Configuration</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td>Not set (default)</td><td>All group messages are ignored. The bot only responds to DMs.</td></tr>
+<tr><td>Set with group IDs</td><td>Only listed groups are monitored (e.g., <code>groupId1,groupId2</code>).</td></tr>
+<tr><td>Set to <code>*</code></td><td>The bot responds in any group it’s a member of.</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<h3 id="attachments"><a class="header" href="#attachments">Attachments</a></h3>
+<p>The adapter supports sending and receiving media in both directions.</p>
+<p><strong>Incoming</strong> (user → agent):</p>
+<ul>
+<li><strong>Images</strong> — PNG, JPEG, GIF, WebP (auto-detected via magic bytes)</li>
+<li><strong>Audio</strong> — MP3, OGG, WAV, M4A (voice messages transcribed if Whisper is configured)</li>
+<li><strong>Documents</strong> — PDF, ZIP, and other file types</li>
+</ul>
+<p><strong>Outgoing</strong> (agent → user):</p>
+<p>The agent can send media files via <code>MEDIA:</code> tags in responses. The following delivery methods are supported:</p>
+<ul>
+<li><strong>Images</strong> — <code>send_image_file</code> sends PNG, JPEG, GIF, WebP as native Signal attachments</li>
+<li><strong>Voice</strong> — <code>send_voice</code> sends audio files (OGG, MP3, WAV, M4A, AAC) as attachments</li>
+<li><strong>Video</strong> — <code>send_video</code> sends MP4 video files</li>
+<li><strong>Documents</strong> — <code>send_document</code> sends any file type (PDF, ZIP, etc.)</li>
+</ul>
+<p>All outgoing media goes through Signal’s standard attachment API. Unlike some platforms, Signal does not distinguish between voice messages and file attachments at the protocol level.</p>
+<p>Attachment size limit: <strong>100 MB</strong> (both directions).</p>
+<h3 id="typing-indicators"><a class="header" href="#typing-indicators">Typing Indicators</a></h3>
+<p>The bot sends typing indicators while processing messages, refreshing every 8 seconds.</p>
+<h3 id="phone-number-redaction"><a class="header" href="#phone-number-redaction">Phone Number Redaction</a></h3>
+<p>All phone numbers are automatically redacted in logs:</p>
+<ul>
+<li><code>+15551234567</code> → <code>+155****4567</code></li>
+<li>This applies to both Hermes gateway logs and the global redaction system</li>
+</ul>
+<h3 id="note-to-self-single-number-setup"><a class="header" href="#note-to-self-single-number-setup">Note to Self (Single-Number Setup)</a></h3>
+<p>If you run signal-cli as a <strong>linked secondary device</strong> on your own phone number (rather than a separate bot number), you can interact with Hermes through Signal’s “Note to Self” feature.</p>
+<p>Just send a message to yourself from your phone — signal-cli picks it up and Hermes responds in the same conversation.</p>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>“Note to Self” messages arrive as <code>syncMessage.sentMessage</code> envelopes</li>
+<li>The adapter detects when these are addressed to the bot’s own account and processes them as regular inbound messages</li>
+<li>Echo-back protection (sent-timestamp tracking) prevents infinite loops — the bot’s own replies are filtered out automatically</li>
+</ul>
+<p><strong>No extra configuration needed.</strong> This works automatically as long as <code>SIGNAL_ACCOUNT</code> matches your phone number.</p>
+<h3 id="health-monitoring"><a class="header" href="#health-monitoring">Health Monitoring</a></h3>
+<p>The adapter monitors the SSE connection and automatically reconnects if:</p>
+<ul>
+<li>The connection drops (with exponential backoff: 2s → 60s)</li>
+<li>No activity is detected for 120 seconds (pings signal-cli to verify)</li>
+</ul>
+<hr>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Problem</th><th>Solution</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>“Cannot reach signal-cli”</strong> during setup</td><td>Ensure signal-cli daemon is running: <code>signal-cli --account +YOUR_NUMBER daemon --http 127.0.0.1:8080</code></td></tr>
+<tr><td><strong>Messages not received</strong></td><td>Check that <code>SIGNAL_ALLOWED_USERS</code> includes the sender’s number in E.164 format (with <code>+</code> prefix)</td></tr>
+<tr><td><strong>“signal-cli not found on PATH”</strong></td><td>Install signal-cli and ensure it’s in your PATH, or use Docker</td></tr>
+<tr><td><strong>Connection keeps dropping</strong></td><td>Check signal-cli logs for errors. Ensure Java 17+ is installed.</td></tr>
+<tr><td><strong>Group messages ignored</strong></td><td>Configure <code>SIGNAL_GROUP_ALLOWED_USERS</code> with specific group IDs, or <code>*</code> to allow all groups.</td></tr>
+<tr><td><strong>Bot responds to no one</strong></td><td>Configure <code>SIGNAL_ALLOWED_USERS</code>, use DM pairing, or explicitly allow all users through gateway policy if you want broader access.</td></tr>
+<tr><td><strong>Duplicate messages</strong></td><td>Ensure only one signal-cli instance is listening on your phone number</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<dl>
+<dt id="warning-always-configure-access-controls-the-bot-has-terminal-access-by-default-without-signal_allowed_users-or-dm-pairing-the-gateway-denies-all-incoming-messages-as-a-safety-measure"><a class="header" href="#warning-always-configure-access-controls-the-bot-has-terminal-access-by-default-without-signal_allowed_users-or-dm-pairing-the-gateway-denies-all-incoming-messages-as-a-safety-measure">:::warning
+<strong>Always configure access controls.</strong> The bot has terminal access by default. Without <code>SIGNAL_ALLOWED_USERS</code> or DM pairing, the gateway denies all incoming messages as a safety measure.</a></dt>
+<dd>::</dd>
+</dl>
+<ul>
+<li>Phone numbers are redacted in all log output</li>
+<li>Use DM pairing or explicit allowlists for safe onboarding of new users</li>
+<li>Keep groups disabled unless you specifically need group support, or allowlist only the groups you trust</li>
+<li>Signal’s end-to-end encryption protects message content in transit</li>
+<li>The signal-cli session data in <code>~/.local/share/signal-cli/</code> contains account credentials — protect it like a password</li>
+</ul>
+<hr>
+<h2 id="environment-variables-reference"><a class="header" href="#environment-variables-reference">Environment Variables Reference</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Required</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>SIGNAL_HTTP_URL</code></td><td>Yes</td><td>—</td><td>signal-cli HTTP endpoint</td></tr>
+<tr><td><code>SIGNAL_ACCOUNT</code></td><td>Yes</td><td>—</td><td>Bot phone number (E.164)</td></tr>
+<tr><td><code>SIGNAL_ALLOWED_USERS</code></td><td>No</td><td>—</td><td>Comma-separated phone numbers/UUIDs</td></tr>
+<tr><td><code>SIGNAL_GROUP_ALLOWED_USERS</code></td><td>No</td><td>—</td><td>Group IDs to monitor, or <code>*</code> for all (omit to disable groups)</td></tr>
+<tr><td><code>SIGNAL_ALLOW_ALL_USERS</code></td><td>No</td><td><code>false</code></td><td>Allow any user to interact (skip allowlist)</td></tr>
+<tr><td><code>SIGNAL_HOME_CHANNEL</code></td><td>No</td><td>—</td><td>Default delivery target for cron jobs</td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/messaging/open-webui.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/slack.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/messaging/open-webui.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/slack.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

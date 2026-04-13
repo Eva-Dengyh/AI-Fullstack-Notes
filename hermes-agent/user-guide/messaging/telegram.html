@@ -1,0 +1,751 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Telegram - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/messaging/telegram.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-1-title-telegram-description-set-up-hermes-agent-as-a-telegram-bot"><a class="header" href="#sidebar_position-1-title-telegram-description-set-up-hermes-agent-as-a-telegram-bot">sidebar_position: 1
+title: “Telegram”
+description: “Set up Hermes Agent as a Telegram bot”</a></h2>
+<h1 id="telegram-setup"><a class="header" href="#telegram-setup">Telegram Setup</a></h1>
+<p>Hermes Agent integrates with Telegram as a full-featured conversational bot. Once connected, you can chat with your agent from any device, send voice memos that get auto-transcribed, receive scheduled task results, and use the agent in group chats. The integration is built on <a href="https://python-telegram-bot.org/">python-telegram-bot</a> and supports text, voice, images, and file attachments.</p>
+<h2 id="step-1-create-a-bot-via-botfather"><a class="header" href="#step-1-create-a-bot-via-botfather">Step 1: Create a Bot via BotFather</a></h2>
+<p>Every Telegram bot requires an API token issued by <a href="https://t.me/BotFather">@BotFather</a>, Telegram’s official bot management tool.</p>
+<ol>
+<li>Open Telegram and search for <strong>@BotFather</strong>, or visit <a href="https://t.me/BotFather">t.me/BotFather</a></li>
+<li>Send <code>/newbot</code></li>
+<li>Choose a <strong>display name</strong> (e.g., “Hermes Agent”) — this can be anything</li>
+<li>Choose a <strong>username</strong> — this must be unique and end in <code>bot</code> (e.g., <code>my_hermes_bot</code>)</li>
+<li>BotFather replies with your <strong>API token</strong>. It looks like this:</li>
+</ol>
+<pre><code>123456789:ABCdefGHIjklMNOpqrSTUvwxYZ
+</code></pre>
+<dl>
+<dt id="warning-keep-your-bot-token-secret-anyone-with-this-token-can-control-your-bot-if-it-leaks-revoke-it-immediately-via-revoke-in-botfather"><a class="header" href="#warning-keep-your-bot-token-secret-anyone-with-this-token-can-control-your-bot-if-it-leaks-revoke-it-immediately-via-revoke-in-botfather">:::warning
+Keep your bot token secret. Anyone with this token can control your bot. If it leaks, revoke it immediately via <code>/revoke</code> in BotFather.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="step-2-customize-your-bot-optional"><a class="header" href="#step-2-customize-your-bot-optional">Step 2: Customize Your Bot (Optional)</a></h2>
+<p>These BotFather commands improve the user experience. Message @BotFather and use:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/setdescription</code></td><td>The “What can this bot do?” text shown before a user starts chatting</td></tr>
+<tr><td><code>/setabouttext</code></td><td>Short text on the bot’s profile page</td></tr>
+<tr><td><code>/setuserpic</code></td><td>Upload an avatar for your bot</td></tr>
+<tr><td><code>/setcommands</code></td><td>Define the command menu (the <code>/</code> button in chat)</td></tr>
+<tr><td><code>/setprivacy</code></td><td>Control whether the bot sees all group messages (see Step 3)</td></tr>
+</tbody>
+</table>
+</div>
+<p>:::tip
+For <code>/setcommands</code>, a useful starting set:</p>
+<pre><code>help - Show help information
+new - Start a new conversation
+sethome - Set this chat as the home channel
+</code></pre>
+<p>:::</p>
+<h2 id="step-3-privacy-mode-critical-for-groups"><a class="header" href="#step-3-privacy-mode-critical-for-groups">Step 3: Privacy Mode (Critical for Groups)</a></h2>
+<p>Telegram bots have a <strong>privacy mode</strong> that is <strong>enabled by default</strong>. This is the single most common source of confusion when using bots in groups.</p>
+<p><strong>With privacy mode ON</strong>, your bot can only see:</p>
+<ul>
+<li>Messages that start with a <code>/</code> command</li>
+<li>Replies directly to the bot’s own messages</li>
+<li>Service messages (member joins/leaves, pinned messages, etc.)</li>
+<li>Messages in channels where the bot is an admin</li>
+</ul>
+<p><strong>With privacy mode OFF</strong>, the bot receives every message in the group.</p>
+<h3 id="how-to-disable-privacy-mode"><a class="header" href="#how-to-disable-privacy-mode">How to disable privacy mode</a></h3>
+<ol>
+<li>Message <strong>@BotFather</strong></li>
+<li>Send <code>/mybots</code></li>
+<li>Select your bot</li>
+<li>Go to <strong>Bot Settings → Group Privacy → Turn off</strong></li>
+</ol>
+<dl>
+<dt id="warning-you-must-remove-and-re-add-the-bot-to-any-group-after-changing-the-privacy-setting-telegram-caches-the-privacy-state-when-a-bot-joins-a-group-and-it-will-not-update-until-the-bot-is-removed-and-re-added"><a class="header" href="#warning-you-must-remove-and-re-add-the-bot-to-any-group-after-changing-the-privacy-setting-telegram-caches-the-privacy-state-when-a-bot-joins-a-group-and-it-will-not-update-until-the-bot-is-removed-and-re-added">:::warning
+<strong>You must remove and re-add the bot to any group</strong> after changing the privacy setting. Telegram caches the privacy state when a bot joins a group, and it will not update until the bot is removed and re-added.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip
+An alternative to disabling privacy mode: promote the bot to <strong>group admin</strong>. Admin bots always receive all messages regardless of the privacy setting, and this avoids needing to toggle the global privacy mode.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="step-4-find-your-user-id"><a class="header" href="#step-4-find-your-user-id">Step 4: Find Your User ID</a></h2>
+<p>Hermes Agent uses numeric Telegram user IDs to control access. Your user ID is <strong>not</strong> your username — it’s a number like <code>123456789</code>.</p>
+<p><strong>Method 1 (recommended):</strong> Message <a href="https://t.me/userinfobot">@userinfobot</a> — it instantly replies with your user ID.</p>
+<p><strong>Method 2:</strong> Message <a href="https://t.me/get_id_bot">@get_id_bot</a> — another reliable option.</p>
+<p>Save this number; you’ll need it for the next step.</p>
+<h2 id="step-5-configure-hermes"><a class="header" href="#step-5-configure-hermes">Step 5: Configure Hermes</a></h2>
+<h3 id="option-a-interactive-setup-recommended"><a class="header" href="#option-a-interactive-setup-recommended">Option A: Interactive Setup (Recommended)</a></h3>
+<pre><code class="language-bash">hermes gateway setup
+</code></pre>
+<p>Select <strong>Telegram</strong> when prompted. The wizard asks for your bot token and allowed user IDs, then writes the configuration for you.</p>
+<h3 id="option-b-manual-configuration"><a class="header" href="#option-b-manual-configuration">Option B: Manual Configuration</a></h3>
+<p>Add the following to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrSTUvwxYZ
+TELEGRAM_ALLOWED_USERS=123456789    # Comma-separated for multiple users
+</code></pre>
+<h3 id="start-the-gateway"><a class="header" href="#start-the-gateway">Start the Gateway</a></h3>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<p>The bot should come online within seconds. Send it a message on Telegram to verify.</p>
+<h2 id="webhook-mode"><a class="header" href="#webhook-mode">Webhook Mode</a></h2>
+<p>By default, Hermes connects to Telegram using <strong>long polling</strong> — the gateway makes outbound requests to Telegram’s servers to fetch new updates. This works well for local and always-on deployments.</p>
+<p>For <strong>cloud deployments</strong> (Fly.io, Railway, Render, etc.), <strong>webhook mode</strong> is more cost-effective. These platforms can auto-wake suspended machines on inbound HTTP traffic, but not on outbound connections. Since polling is outbound, a polling bot can never sleep. Webhook mode flips the direction — Telegram pushes updates to your bot’s HTTPS URL, enabling sleep-when-idle deployments.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>Polling (default)</th><th>Webhook</th></tr>
+</thead>
+<tbody>
+<tr><td>Direction</td><td>Gateway → Telegram (outbound)</td><td>Telegram → Gateway (inbound)</td></tr>
+<tr><td>Best for</td><td>Local, always-on servers</td><td>Cloud platforms with auto-wake</td></tr>
+<tr><td>Setup</td><td>No extra config</td><td>Set <code>TELEGRAM_WEBHOOK_URL</code></td></tr>
+<tr><td>Idle cost</td><td>Machine must stay running</td><td>Machine can sleep between messages</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="configuration"><a class="header" href="#configuration">Configuration</a></h3>
+<p>Add the following to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">TELEGRAM_WEBHOOK_URL=https://my-app.fly.dev/telegram
+# TELEGRAM_WEBHOOK_PORT=8443        # optional, default 8443
+# TELEGRAM_WEBHOOK_SECRET=mysecret  # optional, recommended
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TELEGRAM_WEBHOOK_URL</code></td><td>Yes</td><td>Public HTTPS URL where Telegram will send updates. The URL path is auto-extracted (e.g., <code>/telegram</code> from the example above).</td></tr>
+<tr><td><code>TELEGRAM_WEBHOOK_PORT</code></td><td>No</td><td>Local port the webhook server listens on (default: <code>8443</code>).</td></tr>
+<tr><td><code>TELEGRAM_WEBHOOK_SECRET</code></td><td>No</td><td>Secret token for verifying that updates actually come from Telegram. <strong>Strongly recommended</strong> for production deployments.</td></tr>
+</tbody>
+</table>
+</div>
+<p>When <code>TELEGRAM_WEBHOOK_URL</code> is set, the gateway starts an HTTP webhook server instead of polling. When unset, polling mode is used — no behavior change from previous versions.</p>
+<h3 id="cloud-deployment-example-flyio"><a class="header" href="#cloud-deployment-example-flyio">Cloud deployment example (Fly.io)</a></h3>
+<ol>
+<li>Add the env vars to your Fly.io app secrets:</li>
+</ol>
+<pre><code class="language-bash">fly secrets set TELEGRAM_WEBHOOK_URL=https://my-app.fly.dev/telegram
+fly secrets set TELEGRAM_WEBHOOK_SECRET=$(openssl rand -hex 32)
+</code></pre>
+<ol start="2">
+<li>Expose the webhook port in your <code>fly.toml</code>:</li>
+</ol>
+<pre><code class="language-toml">[[services]]
+  internal_port = 8443
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+</code></pre>
+<ol start="3">
+<li>Deploy:</li>
+</ol>
+<pre><code class="language-bash">fly deploy
+</code></pre>
+<p>The gateway log should show: <code>[telegram] Connected to Telegram (webhook mode)</code>.</p>
+<h2 id="home-channel"><a class="header" href="#home-channel">Home Channel</a></h2>
+<p>Use the <code>/sethome</code> command in any Telegram chat (DM or group) to designate it as the <strong>home channel</strong>. Scheduled tasks (cron jobs) deliver their results to this channel.</p>
+<p>You can also set it manually in <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">TELEGRAM_HOME_CHANNEL=-1001234567890
+TELEGRAM_HOME_CHANNEL_NAME="My Notes"
+</code></pre>
+<dl>
+<dt id="tip-group-chat-ids-are-negative-numbers-eg--1001234567890-your-personal-dm-chat-id-is-the-same-as-your-user-id"><a class="header" href="#tip-group-chat-ids-are-negative-numbers-eg--1001234567890-your-personal-dm-chat-id-is-the-same-as-your-user-id">:::tip
+Group chat IDs are negative numbers (e.g., <code>-1001234567890</code>). Your personal DM chat ID is the same as your user ID.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="voice-messages"><a class="header" href="#voice-messages">Voice Messages</a></h2>
+<h3 id="incoming-voice-speech-to-text"><a class="header" href="#incoming-voice-speech-to-text">Incoming Voice (Speech-to-Text)</a></h3>
+<p>Voice messages you send on Telegram are automatically transcribed by Hermes’s configured STT provider and injected as text into the conversation.</p>
+<ul>
+<li><code>local</code> uses <code>faster-whisper</code> on the machine running Hermes — no API key required</li>
+<li><code>groq</code> uses Groq Whisper and requires <code>GROQ_API_KEY</code></li>
+<li><code>openai</code> uses OpenAI Whisper and requires <code>VOICE_TOOLS_OPENAI_KEY</code></li>
+</ul>
+<h3 id="outgoing-voice-text-to-speech"><a class="header" href="#outgoing-voice-text-to-speech">Outgoing Voice (Text-to-Speech)</a></h3>
+<p>When the agent generates audio via TTS, it’s delivered as native Telegram <strong>voice bubbles</strong> — the round, inline-playable kind.</p>
+<ul>
+<li><strong>OpenAI and ElevenLabs</strong> produce Opus natively — no extra setup needed</li>
+<li><strong>Edge TTS</strong> (the default free provider) outputs MP3 and requires <strong>ffmpeg</strong> to convert to Opus:</li>
+</ul>
+<pre><code class="language-bash"># Ubuntu/Debian
+sudo apt install ffmpeg
+
+# macOS
+brew install ffmpeg
+</code></pre>
+<p>Without ffmpeg, Edge TTS audio is sent as a regular audio file (still playable, but uses the rectangular player instead of a voice bubble).</p>
+<p>Configure the TTS provider in your <code>config.yaml</code> under the <code>tts.provider</code> key.</p>
+<h2 id="group-chat-usage"><a class="header" href="#group-chat-usage">Group Chat Usage</a></h2>
+<p>Hermes Agent works in Telegram group chats with a few considerations:</p>
+<ul>
+<li><strong>Privacy mode</strong> determines what messages the bot can see (see <a href="#step-3-privacy-mode-critical-for-groups">Step 3</a>)</li>
+<li><code>TELEGRAM_ALLOWED_USERS</code> still applies — only authorized users can trigger the bot, even in groups</li>
+<li>You can keep the bot from responding to ordinary group chatter with <code>telegram.require_mention: true</code></li>
+<li>With <code>telegram.require_mention: true</code>, group messages are accepted when they are:
+<ul>
+<li>slash commands</li>
+<li>replies to one of the bot’s messages</li>
+<li><code>@botusername</code> mentions</li>
+<li>matches for one of your configured regex wake words in <code>telegram.mention_patterns</code></li>
+</ul>
+</li>
+<li>If <code>telegram.require_mention</code> is left unset or false, Hermes keeps the previous open-group behavior and responds to normal group messages it can see</li>
+</ul>
+<h3 id="example-group-trigger-configuration"><a class="header" href="#example-group-trigger-configuration">Example group trigger configuration</a></h3>
+<p>Add this to <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">telegram:
+  require_mention: true
+  mention_patterns:
+    - "^\\s*chompy\\b"
+</code></pre>
+<p>This example allows all the usual direct triggers plus messages that begin with <code>chompy</code>, even if they do not use an <code>@mention</code>.</p>
+<h3 id="notes-on-mention_patterns"><a class="header" href="#notes-on-mention_patterns">Notes on <code>mention_patterns</code></a></h3>
+<ul>
+<li>Patterns use Python regular expressions</li>
+<li>Matching is case-insensitive</li>
+<li>Patterns are checked against both text messages and media captions</li>
+<li>Invalid regex patterns are ignored with a warning in the gateway logs rather than crashing the bot</li>
+<li>If you want a pattern to match only at the start of a message, anchor it with <code>^</code></li>
+</ul>
+<h2 id="private-chat-topics-bot-api-94"><a class="header" href="#private-chat-topics-bot-api-94">Private Chat Topics (Bot API 9.4)</a></h2>
+<p>Telegram Bot API 9.4 (February 2026) introduced <strong>Private Chat Topics</strong> — bots can create forum-style topic threads directly in 1-on-1 DM chats, no supergroup needed. This lets you run multiple isolated workspaces within your existing DM with Hermes.</p>
+<h3 id="use-case"><a class="header" href="#use-case">Use case</a></h3>
+<p>If you work on several long-running projects, topics keep their context separate:</p>
+<ul>
+<li><strong>Topic “Website”</strong> — work on your production web service</li>
+<li><strong>Topic “Research”</strong> — literature review and paper exploration</li>
+<li><strong>Topic “General”</strong> — miscellaneous tasks and quick questions</li>
+</ul>
+<p>Each topic gets its own conversation session, history, and context — completely isolated from the others.</p>
+<h3 id="configuration-1"><a class="header" href="#configuration-1">Configuration</a></h3>
+<p>Add topics under <code>platforms.telegram.extra.dm_topics</code> in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">platforms:
+  telegram:
+    extra:
+      dm_topics:
+      - chat_id: 123456789        # Your Telegram user ID
+        topics:
+        - name: General
+          icon_color: 7322096
+        - name: Website
+          icon_color: 9367192
+        - name: Research
+          icon_color: 16766590
+          skill: arxiv              # Auto-load a skill in this topic
+</code></pre>
+<p><strong>Fields:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Yes</td><td>Topic display name</td></tr>
+<tr><td><code>icon_color</code></td><td>No</td><td>Telegram icon color code (integer)</td></tr>
+<tr><td><code>icon_custom_emoji_id</code></td><td>No</td><td>Custom emoji ID for the topic icon</td></tr>
+<tr><td><code>skill</code></td><td>No</td><td>Skill to auto-load on new sessions in this topic</td></tr>
+<tr><td><code>thread_id</code></td><td>No</td><td>Auto-populated after topic creation — don’t set manually</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h3>
+<ol>
+<li>On gateway startup, Hermes calls <code>createForumTopic</code> for each topic that doesn’t have a <code>thread_id</code> yet</li>
+<li>The <code>thread_id</code> is saved back to <code>config.yaml</code> automatically — subsequent restarts skip the API call</li>
+<li>Each topic maps to an isolated session key: <code>agent:main:telegram:dm:{chat_id}:{thread_id}</code></li>
+<li>Messages in each topic have their own conversation history, memory flush, and context window</li>
+</ol>
+<h3 id="skill-binding"><a class="header" href="#skill-binding">Skill binding</a></h3>
+<p>Topics with a <code>skill</code> field automatically load that skill when a new session starts in the topic. This works exactly like typing <code>/skill-name</code> at the start of a conversation — the skill content is injected into the first message, and subsequent messages see it in the conversation history.</p>
+<dl>
+<dt id="for-example-a-topic-with-skill-arxiv-will-have-the-arxiv-skill-pre-loaded-whenever-its-session-resets-due-to-idle-timeout-daily-reset-or-manual-reset"><a class="header" href="#for-example-a-topic-with-skill-arxiv-will-have-the-arxiv-skill-pre-loaded-whenever-its-session-resets-due-to-idle-timeout-daily-reset-or-manual-reset">For example, a topic with <code>skill: arxiv</code> will have the arxiv skill pre-loaded whenever its session resets (due to idle timeout, daily reset, or manual <code>/reset</code>).</a></dt>
+<dd>
+<p>::tip
+Topics created outside of the config (e.g., by manually calling the Telegram API) are discovered automatically when a <code>forum_topic_created</code> service message arrives. You can also add topics to the config while the gateway is running — they’ll be picked up on the next cache miss.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="group-forum-topic-skill-binding"><a class="header" href="#group-forum-topic-skill-binding">Group Forum Topic Skill Binding</a></h2>
+<p>Supergroups with <strong>Topics mode</strong> enabled (also called “forum topics”) already get session isolation per topic — each <code>thread_id</code> maps to its own conversation. But you may want to <strong>auto-load a skill</strong> when messages arrive in a specific group topic, just like DM topic skill binding works.</p>
+<h3 id="use-case-1"><a class="header" href="#use-case-1">Use case</a></h3>
+<p>A team supergroup with forum topics for different workstreams:</p>
+<ul>
+<li><strong>Engineering</strong> topic → auto-loads the <code>software-development</code> skill</li>
+<li><strong>Research</strong> topic → auto-loads the <code>arxiv</code> skill</li>
+<li><strong>General</strong> topic → no skill, general-purpose assistant</li>
+</ul>
+<h3 id="configuration-2"><a class="header" href="#configuration-2">Configuration</a></h3>
+<p>Add topic bindings under <code>platforms.telegram.extra.group_topics</code> in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">platforms:
+  telegram:
+    extra:
+      group_topics:
+      - chat_id: -1001234567890       # Supergroup ID
+        topics:
+        - name: Engineering
+          thread_id: 5
+          skill: software-development
+        - name: Research
+          thread_id: 12
+          skill: arxiv
+        - name: General
+          thread_id: 1
+          # No skill — general purpose
+</code></pre>
+<p><strong>Fields:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>chat_id</code></td><td>Yes</td><td>The supergroup’s numeric ID (negative number starting with <code>-100</code>)</td></tr>
+<tr><td><code>name</code></td><td>No</td><td>Human-readable label for the topic (informational only)</td></tr>
+<tr><td><code>thread_id</code></td><td>Yes</td><td>Telegram forum topic ID — visible in <code>t.me/c/&lt;group_id&gt;/&lt;thread_id&gt;</code> links</td></tr>
+<tr><td><code>skill</code></td><td>No</td><td>Skill to auto-load on new sessions in this topic</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="how-it-works-1"><a class="header" href="#how-it-works-1">How it works</a></h3>
+<ol>
+<li>When a message arrives in a mapped group topic, Hermes looks up the <code>chat_id</code> and <code>thread_id</code> in <code>group_topics</code> config</li>
+<li>If a matching entry has a <code>skill</code> field, that skill is auto-loaded for the session — identical to DM topic skill binding</li>
+<li>Topics without a <code>skill</code> key get session isolation only (existing behavior, unchanged)</li>
+<li>Unmapped <code>thread_id</code> values or <code>chat_id</code> values fall through silently — no error, no skill</li>
+</ol>
+<h3 id="differences-from-dm-topics"><a class="header" href="#differences-from-dm-topics">Differences from DM Topics</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>DM Topics</th><th>Group Topics</th></tr>
+</thead>
+<tbody>
+<tr><td>Config key</td><td><code>extra.dm_topics</code></td><td><code>extra.group_topics</code></td></tr>
+<tr><td>Topic creation</td><td>Hermes creates topics via API if <code>thread_id</code> is missing</td><td>Admin creates topics in Telegram UI</td></tr>
+<tr><td><code>thread_id</code></td><td>Auto-populated after creation</td><td>Must be set manually</td></tr>
+<tr><td><code>icon_color</code> / <code>icon_custom_emoji_id</code></td><td>Supported</td><td>Not applicable (admin controls appearance)</td></tr>
+<tr><td>Skill binding</td><td>✓</td><td>✓</td></tr>
+<tr><td>Session isolation</td><td>✓</td><td>✓ (already built-in for forum topics)</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-to-find-a-topics-thread_id-open-the-topic-in-telegram-web-or-desktop-and-look-at-the-url-httpstmec12345678905--the-last-number-5-is-the-thread_id-the-chat_id-for-supergroups-is-the-group-id-prefixed-with--100-eg-group-1234567890-becomes--1001234567890"><a class="header" href="#tip-to-find-a-topics-thread_id-open-the-topic-in-telegram-web-or-desktop-and-look-at-the-url-httpstmec12345678905--the-last-number-5-is-the-thread_id-the-chat_id-for-supergroups-is-the-group-id-prefixed-with--100-eg-group-1234567890-becomes--1001234567890">:::tip
+To find a topic’s <code>thread_id</code>, open the topic in Telegram Web or Desktop and look at the URL: <code>https://t.me/c/1234567890/5</code> — the last number (<code>5</code>) is the <code>thread_id</code>. The <code>chat_id</code> for supergroups is the group ID prefixed with <code>-100</code> (e.g., group <code>1234567890</code> becomes <code>-1001234567890</code>).</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="recent-bot-api-features"><a class="header" href="#recent-bot-api-features">Recent Bot API Features</a></h2>
+<ul>
+<li><strong>Bot API 9.4 (Feb 2026):</strong> Private Chat Topics — bots can create forum topics in 1-on-1 DM chats via <code>createForumTopic</code>. See <a href="#private-chat-topics-bot-api-94">Private Chat Topics</a> above.</li>
+<li><strong>Privacy policy:</strong> Telegram now requires bots to have a privacy policy. Set one via BotFather with <code>/setprivacy_policy</code>, or Telegram may auto-generate a placeholder. This is particularly important if your bot is public-facing.</li>
+<li><strong>Message streaming:</strong> Bot API 9.x added support for streaming long responses, which can improve perceived latency for lengthy agent replies.</li>
+</ul>
+<h2 id="interactive-model-picker"><a class="header" href="#interactive-model-picker">Interactive Model Picker</a></h2>
+<p>When you send <code>/model</code> with no arguments in a Telegram chat, Hermes shows an interactive inline keyboard for switching models:</p>
+<ol>
+<li><strong>Provider selection</strong> — buttons showing each available provider with model counts (e.g., “OpenAI (15)”, “✓ Anthropic (12)” for the current provider).</li>
+<li><strong>Model selection</strong> — paginated model list with <strong>Prev</strong>/<strong>Next</strong> navigation, a <strong>Back</strong> button to return to providers, and <strong>Cancel</strong>.</li>
+</ol>
+<dl>
+<dt id="the-current-model-and-provider-are-displayed-at-the-top-all-navigation-happens-by-editing-the-same-message-in-place-no-chat-clutter"><a class="header" href="#the-current-model-and-provider-are-displayed-at-the-top-all-navigation-happens-by-editing-the-same-message-in-place-no-chat-clutter">The current model and provider are displayed at the top. All navigation happens by editing the same message in-place (no chat clutter).</a></dt>
+<dd>
+<p>::tip
+If you know the exact model name, type <code>/model &lt;name&gt;</code> directly to skip the picker. You can also type <code>/model &lt;name&gt; --global</code> to persist the change across sessions.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="webhook-mode-1"><a class="header" href="#webhook-mode-1">Webhook Mode</a></h2>
+<p>By default, the Telegram adapter connects via <strong>long polling</strong> — the gateway makes outbound connections to Telegram’s servers. This works everywhere but keeps a persistent connection open.</p>
+<p><strong>Webhook mode</strong> is an alternative where Telegram pushes updates to your server over HTTPS. This is ideal for <strong>serverless and cloud deployments</strong> (Fly.io, Railway, etc.) where inbound HTTP can wake a suspended machine.</p>
+<h3 id="configuration-3"><a class="header" href="#configuration-3">Configuration</a></h3>
+<p>Set the <code>TELEGRAM_WEBHOOK_URL</code> environment variable to enable webhook mode:</p>
+<pre><code class="language-bash"># Required — your public HTTPS endpoint
+TELEGRAM_WEBHOOK_URL=https://app.fly.dev/telegram
+
+# Optional — local listen port (default: 8443)
+TELEGRAM_WEBHOOK_PORT=8443
+
+# Optional — secret token for update verification (auto-generated if not set)
+TELEGRAM_WEBHOOK_SECRET=my-secret-token
+</code></pre>
+<p>Or in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">telegram:
+  webhook_mode: true
+</code></pre>
+<dl>
+<dt id="when-telegram_webhook_url-is-set-the-gateway-starts-an-http-server-listening-on-0000port-and-registers-the-webhook-url-with-telegram-the-url-path-is-extracted-from-the-webhook-url-defaults-to-telegram"><a class="header" href="#when-telegram_webhook_url-is-set-the-gateway-starts-an-http-server-listening-on-0000port-and-registers-the-webhook-url-with-telegram-the-url-path-is-extracted-from-the-webhook-url-defaults-to-telegram">When <code>TELEGRAM_WEBHOOK_URL</code> is set, the gateway starts an HTTP server listening on <code>0.0.0.0:&lt;port&gt;</code> and registers the webhook URL with Telegram. The URL path is extracted from the webhook URL (defaults to <code>/telegram</code>).</a></dt>
+<dd>
+<p>::warning
+Telegram requires a <strong>valid TLS certificate</strong> on the webhook endpoint. Self-signed certificates will be rejected. Use a reverse proxy (nginx, Caddy) or a platform that provides TLS termination (Fly.io, Railway, Cloudflare Tunnel).</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="dns-over-https-fallback-ips"><a class="header" href="#dns-over-https-fallback-ips">DNS-over-HTTPS Fallback IPs</a></h2>
+<p>In some restricted networks, <code>api.telegram.org</code> may resolve to an IP that is unreachable. The Telegram adapter includes a <strong>fallback IP</strong> mechanism that transparently retries connections against alternative IPs while preserving the correct TLS hostname and SNI.</p>
+<h3 id="how-it-works-2"><a class="header" href="#how-it-works-2">How it works</a></h3>
+<ol>
+<li>If <code>TELEGRAM_FALLBACK_IPS</code> is set, those IPs are used directly.</li>
+<li>Otherwise, the adapter automatically queries <strong>Google DNS</strong> and <strong>Cloudflare DNS</strong> via DNS-over-HTTPS (DoH) to discover alternative IPs for <code>api.telegram.org</code>.</li>
+<li>IPs returned by DoH that differ from the system DNS result are used as fallbacks.</li>
+<li>If DoH is also blocked, a hardcoded seed IP (<code>149.154.167.220</code>) is used as a last resort.</li>
+<li>Once a fallback IP succeeds, it becomes “sticky” — subsequent requests use it directly without retrying the primary path first.</li>
+</ol>
+<h3 id="configuration-4"><a class="header" href="#configuration-4">Configuration</a></h3>
+<pre><code class="language-bash"># Explicit fallback IPs (comma-separated)
+TELEGRAM_FALLBACK_IPS=149.154.167.220,149.154.167.221
+</code></pre>
+<p>Or in <code>~/.hermes/config.yaml</code>:</p>
+<pre><code class="language-yaml">platforms:
+  telegram:
+    extra:
+      fallback_ips:
+        - "149.154.167.220"
+</code></pre>
+<dl>
+<dt id="tip-you-usually-dont-need-to-configure-this-manually-the-auto-discovery-via-doh-handles-most-restricted-network-scenarios-the-telegram_fallback_ips-env-var-is-only-needed-if-doh-is-also-blocked-on-your-network"><a class="header" href="#tip-you-usually-dont-need-to-configure-this-manually-the-auto-discovery-via-doh-handles-most-restricted-network-scenarios-the-telegram_fallback_ips-env-var-is-only-needed-if-doh-is-also-blocked-on-your-network">:::tip
+You usually don’t need to configure this manually. The auto-discovery via DoH handles most restricted-network scenarios. The <code>TELEGRAM_FALLBACK_IPS</code> env var is only needed if DoH is also blocked on your network.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="proxy-support"><a class="header" href="#proxy-support">Proxy Support</a></h2>
+<p>If your network requires an HTTP proxy to reach the internet (common in corporate environments), the Telegram adapter automatically reads standard proxy environment variables and routes all connections through the proxy.</p>
+<h3 id="supported-variables"><a class="header" href="#supported-variables">Supported variables</a></h3>
+<p>The adapter checks these environment variables in order, using the first one that is set:</p>
+<ol>
+<li><code>HTTPS_PROXY</code></li>
+<li><code>HTTP_PROXY</code></li>
+<li><code>ALL_PROXY</code></li>
+<li><code>https_proxy</code> / <code>http_proxy</code> / <code>all_proxy</code> (lowercase variants)</li>
+</ol>
+<h3 id="configuration-5"><a class="header" href="#configuration-5">Configuration</a></h3>
+<p>Set the proxy in your environment before starting the gateway:</p>
+<pre><code class="language-bash">export HTTPS_PROXY=http://proxy.example.com:8080
+hermes gateway
+</code></pre>
+<p>Or add it to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash">HTTPS_PROXY=http://proxy.example.com:8080
+</code></pre>
+<dl>
+<dt id="the-proxy-applies-to-both-the-primary-transport-and-all-fallback-ip-transports-no-additional-hermes-configuration-is-needed--if-the-environment-variable-is-set-its-used-automatically"><a class="header" href="#the-proxy-applies-to-both-the-primary-transport-and-all-fallback-ip-transports-no-additional-hermes-configuration-is-needed--if-the-environment-variable-is-set-its-used-automatically">The proxy applies to both the primary transport and all fallback IP transports. No additional Hermes configuration is needed — if the environment variable is set, it’s used automatically.</a></dt>
+<dd>
+<p>::note
+This covers the custom fallback transport layer that Hermes uses for Telegram connections. The standard <code>httpx</code> client used elsewhere already respects proxy env vars natively.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="message-reactions"><a class="header" href="#message-reactions">Message Reactions</a></h2>
+<p>The bot can add emoji reactions to messages as visual processing feedback:</p>
+<ul>
+<li>👀 when the bot starts processing your message</li>
+<li>✅ when the response is delivered successfully</li>
+<li>❌ if an error occurs during processing</li>
+</ul>
+<p>Reactions are <strong>disabled by default</strong>. Enable them in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">telegram:
+  reactions: true
+</code></pre>
+<p>Or via environment variable:</p>
+<pre><code class="language-bash">TELEGRAM_REACTIONS=true
+</code></pre>
+<dl>
+<dt id="note-unlike-discord-where-reactions-are-additive-telegrams-bot-api-replaces-all-bot-reactions-in-a-single-call-the-transition-from--to--happens-atomically--you-wont-see-both-at-once"><a class="header" href="#note-unlike-discord-where-reactions-are-additive-telegrams-bot-api-replaces-all-bot-reactions-in-a-single-call-the-transition-from--to--happens-atomically--you-wont-see-both-at-once">:::note
+Unlike Discord (where reactions are additive), Telegram’s Bot API replaces all bot reactions in a single call. The transition from 👀 to ✅/❌ happens atomically — you won’t see both at once.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::tip
+If the bot doesn’t have permission to add reactions in a group, the reaction calls fail silently and message processing continues normally.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Problem</th><th>Solution</th></tr>
+</thead>
+<tbody>
+<tr><td>Bot not responding at all</td><td>Verify <code>TELEGRAM_BOT_TOKEN</code> is correct. Check <code>hermes gateway</code> logs for errors.</td></tr>
+<tr><td>Bot responds with “unauthorized”</td><td>Your user ID is not in <code>TELEGRAM_ALLOWED_USERS</code>. Double-check with @userinfobot.</td></tr>
+<tr><td>Bot ignores group messages</td><td>Privacy mode is likely on. Disable it (Step 3) or make the bot a group admin. <strong>Remember to remove and re-add the bot after changing privacy.</strong></td></tr>
+<tr><td>Voice messages not transcribed</td><td>Verify STT is available: install <code>faster-whisper</code> for local transcription, or set <code>GROQ_API_KEY</code> / <code>VOICE_TOOLS_OPENAI_KEY</code> in <code>~/.hermes/.env</code>.</td></tr>
+<tr><td>Voice replies are files, not bubbles</td><td>Install <code>ffmpeg</code> (needed for Edge TTS Opus conversion).</td></tr>
+<tr><td>Bot token revoked/invalid</td><td>Generate a new token via <code>/revoke</code> then <code>/newbot</code> or <code>/token</code> in BotFather. Update your <code>.env</code> file.</td></tr>
+<tr><td>Webhook not receiving updates</td><td>Verify <code>TELEGRAM_WEBHOOK_URL</code> is publicly reachable (test with <code>curl</code>). Ensure your platform/reverse proxy routes inbound HTTPS traffic from the URL’s port to the local listen port configured by <code>TELEGRAM_WEBHOOK_PORT</code> (they do not need to be the same number). Ensure SSL/TLS is active — Telegram only sends to HTTPS URLs. Check firewall rules.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="exec-approval"><a class="header" href="#exec-approval">Exec Approval</a></h2>
+<p>When the agent tries to run a potentially dangerous command, it asks you for approval in the chat:</p>
+<blockquote>
+<p>⚠️ This command is potentially dangerous (recursive delete). Reply “yes” to approve.</p>
+</blockquote>
+<p>Reply “yes”/“y” to approve or “no”/“n” to deny.</p>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<dl>
+<dt id="warning-always-set-telegram_allowed_users-to-restrict-who-can-interact-with-your-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure"><a class="header" href="#warning-always-set-telegram_allowed_users-to-restrict-who-can-interact-with-your-bot-without-it-the-gateway-denies-all-users-by-default-as-a-safety-measure">:::warning
+Always set <code>TELEGRAM_ALLOWED_USERS</code> to restrict who can interact with your bot. Without it, the gateway denies all users by default as a safety measure.</a></dt>
+<dd>::</dd>
+</dl>
+<p>Never share your bot token publicly. If compromised, revoke it immediately via BotFather’s <code>/revoke</code> command.</p>
+<p>For more details, see the <a href="/user-guide/security">Security documentation</a>. You can also use <a href="/user-guide/messaging#dm-pairing-alternative-to-allowlists">DM pairing</a> for a more dynamic approach to user authorization.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/messaging/sms.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/webhooks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/messaging/sms.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/messaging/webhooks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

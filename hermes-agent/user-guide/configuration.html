@@ -1,0 +1,1349 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Configuration - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/configuration.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-2-title-configuration-description-configure-hermes-agent--configyaml-providers-models-api-keys-and-more"><a class="header" href="#sidebar_position-2-title-configuration-description-configure-hermes-agent--configyaml-providers-models-api-keys-and-more">sidebar_position: 2
+title: “Configuration”
+description: “Configure Hermes Agent — config.yaml, providers, models, API keys, and more”</a></h2>
+<h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+<p>All settings are stored in the <code>~/.hermes/</code> directory for easy access.</p>
+<h2 id="directory-structure"><a class="header" href="#directory-structure">Directory Structure</a></h2>
+<pre><code class="language-text">~/.hermes/
+├── config.yaml     # Settings (model, terminal, TTS, compression, etc.)
+├── .env            # API keys and secrets
+├── auth.json       # OAuth provider credentials (Nous Portal, etc.)
+├── SOUL.md         # Primary agent identity (slot #1 in system prompt)
+├── memories/       # Persistent memory (MEMORY.md, USER.md)
+├── skills/         # Agent-created skills (managed via skill_manage tool)
+├── cron/           # Scheduled jobs
+├── sessions/       # Gateway sessions
+└── logs/           # Logs (errors.log, gateway.log — secrets auto-redacted)
+</code></pre>
+<h2 id="managing-configuration"><a class="header" href="#managing-configuration">Managing Configuration</a></h2>
+<pre><code class="language-bash">hermes config              # View current configuration
+hermes config edit         # Open config.yaml in your editor
+hermes config set KEY VAL  # Set a specific value
+hermes config check        # Check for missing options (after updates)
+hermes config migrate      # Interactively add missing options
+
+# Examples:
+hermes config set model anthropic/claude-opus-4
+hermes config set terminal.backend docker
+hermes config set OPENROUTER_API_KEY sk-or-...  # Saves to .env
+</code></pre>
+<dl>
+<dt id="tip-the-hermes-config-set-command-automatically-routes-values-to-the-right-file--api-keys-are-saved-to-env-everything-else-to-configyaml"><a class="header" href="#tip-the-hermes-config-set-command-automatically-routes-values-to-the-right-file--api-keys-are-saved-to-env-everything-else-to-configyaml">:::tip
+The <code>hermes config set</code> command automatically routes values to the right file — API keys are saved to <code>.env</code>, everything else to <code>config.yaml</code>.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="configuration-precedence"><a class="header" href="#configuration-precedence">Configuration Precedence</a></h2>
+<p>Settings are resolved in this order (highest priority first):</p>
+<ol>
+<li><strong>CLI arguments</strong> — e.g., <code>hermes chat --model anthropic/claude-sonnet-4</code> (per-invocation override)</li>
+<li><strong><code>~/.hermes/config.yaml</code></strong> — the primary config file for all non-secret settings</li>
+<li><strong><code>~/.hermes/.env</code></strong> — fallback for env vars; <strong>required</strong> for secrets (API keys, tokens, passwords)</li>
+<li><strong>Built-in defaults</strong> — hardcoded safe defaults when nothing else is set</li>
+</ol>
+<dl>
+<dt id="info-rule-of-thumb-secrets-api-keys-bot-tokens-passwords-go-in-env-everything-else-model-terminal-backend-compression-settings-memory-limits-toolsets-goes-in-configyaml-when-both-are-set-configyaml-wins-for-non-secret-settings"><a class="header" href="#info-rule-of-thumb-secrets-api-keys-bot-tokens-passwords-go-in-env-everything-else-model-terminal-backend-compression-settings-memory-limits-toolsets-goes-in-configyaml-when-both-are-set-configyaml-wins-for-non-secret-settings">:::info Rule of Thumb
+Secrets (API keys, bot tokens, passwords) go in <code>.env</code>. Everything else (model, terminal backend, compression settings, memory limits, toolsets) goes in <code>config.yaml</code>. When both are set, <code>config.yaml</code> wins for non-secret settings.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="environment-variable-substitution"><a class="header" href="#environment-variable-substitution">Environment Variable Substitution</a></h2>
+<p>You can reference environment variables in <code>config.yaml</code> using <code>${VAR_NAME}</code> syntax:</p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    api_key: ${GOOGLE_API_KEY}
+    base_url: ${CUSTOM_VISION_URL}
+
+delegation:
+  api_key: ${DELEGATION_KEY}
+</code></pre>
+<p>Multiple references in a single value work: <code>url: "${HOST}:${PORT}"</code>. If a referenced variable is not set, the placeholder is kept verbatim (<code>${UNDEFINED_VAR}</code> stays as-is). Only the <code>${VAR}</code> syntax is supported — bare <code>$VAR</code> is not expanded.</p>
+<p>For AI provider setup (OpenRouter, Anthropic, Copilot, custom endpoints, self-hosted LLMs, fallback models, etc.), see <a href="/docs/integrations/providers">AI Providers</a>.</p>
+<h2 id="terminal-backend-configuration"><a class="header" href="#terminal-backend-configuration">Terminal Backend Configuration</a></h2>
+<p>Hermes supports six terminal backends. Each determines where the agent’s shell commands actually execute — your local machine, a Docker container, a remote server via SSH, a Modal cloud sandbox, a Daytona workspace, or a Singularity/Apptainer container.</p>
+<pre><code class="language-yaml">terminal:
+  backend: local    # local | docker | ssh | modal | daytona | singularity
+  cwd: "."          # Working directory ("." = current dir for local, "/root" for containers)
+  timeout: 180      # Per-command timeout in seconds
+  env_passthrough: []  # Env var names to forward to sandboxed execution (terminal + execute_code)
+  singularity_image: "docker://nikolaik/python-nodejs:python3.11-nodejs20"  # Container image for Singularity backend
+  modal_image: "nikolaik/python-nodejs:python3.11-nodejs20"                 # Container image for Modal backend
+  daytona_image: "nikolaik/python-nodejs:python3.11-nodejs20"               # Container image for Daytona backend
+</code></pre>
+<p>For cloud sandboxes such as Modal and Daytona, <code>container_persistent: true</code> means Hermes will try to preserve filesystem state across sandbox recreation. It does not promise that the same live sandbox, PID space, or background processes will still be running later.</p>
+<h3 id="backend-overview"><a class="header" href="#backend-overview">Backend Overview</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Backend</th><th>Where commands run</th><th>Isolation</th><th>Best for</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>local</strong></td><td>Your machine directly</td><td>None</td><td>Development, personal use</td></tr>
+<tr><td><strong>docker</strong></td><td>Docker container</td><td>Full (namespaces, cap-drop)</td><td>Safe sandboxing, CI/CD</td></tr>
+<tr><td><strong>ssh</strong></td><td>Remote server via SSH</td><td>Network boundary</td><td>Remote dev, powerful hardware</td></tr>
+<tr><td><strong>modal</strong></td><td>Modal cloud sandbox</td><td>Full (cloud VM)</td><td>Ephemeral cloud compute, evals</td></tr>
+<tr><td><strong>daytona</strong></td><td>Daytona workspace</td><td>Full (cloud container)</td><td>Managed cloud dev environments</td></tr>
+<tr><td><strong>singularity</strong></td><td>Singularity/Apptainer container</td><td>Namespaces (–containall)</td><td>HPC clusters, shared machines</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="local-backend"><a class="header" href="#local-backend">Local Backend</a></h3>
+<p>The default. Commands run directly on your machine with no isolation. No special setup required.</p>
+<pre><code class="language-yaml">terminal:
+  backend: local
+</code></pre>
+<dl>
+<dt id="warning-the-agent-has-the-same-filesystem-access-as-your-user-account-use-hermes-tools-to-disable-tools-you-dont-want-or-switch-to-docker-for-sandboxing"><a class="header" href="#warning-the-agent-has-the-same-filesystem-access-as-your-user-account-use-hermes-tools-to-disable-tools-you-dont-want-or-switch-to-docker-for-sandboxing">:::warning
+The agent has the same filesystem access as your user account. Use <code>hermes tools</code> to disable tools you don’t want, or switch to Docker for sandboxing.</a></dt>
+<dd>::</dd>
+</dl>
+<h3 id="docker-backend"><a class="header" href="#docker-backend">Docker Backend</a></h3>
+<p>Runs commands inside a Docker container with security hardening (all capabilities dropped, no privilege escalation, PID limits).</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
+  docker_mount_cwd_to_workspace: false  # Mount launch dir into /workspace
+  docker_forward_env:              # Env vars to forward into container
+    - "GITHUB_TOKEN"
+  docker_volumes:                  # Host directory mounts
+    - "/home/user/projects:/workspace/projects"
+    - "/home/user/data:/data:ro"   # :ro for read-only
+
+  # Resource limits
+  container_cpu: 1                 # CPU cores (0 = unlimited)
+  container_memory: 5120           # MB (0 = unlimited)
+  container_disk: 51200            # MB (requires overlay2 on XFS+pquota)
+  container_persistent: true       # Persist /workspace and /root across sessions
+</code></pre>
+<p><strong>Requirements:</strong> Docker Desktop or Docker Engine installed and running. Hermes probes <code>$PATH</code> plus common macOS install locations (<code>/usr/local/bin/docker</code>, <code>/opt/homebrew/bin/docker</code>, Docker Desktop app bundle).</p>
+<p><strong>Container lifecycle:</strong> Each session starts a long-lived container (<code>docker run -d ... sleep 2h</code>). Commands run via <code>docker exec</code> with a login shell. On cleanup, the container is stopped and removed.</p>
+<p><strong>Security hardening:</strong></p>
+<ul>
+<li><code>--cap-drop ALL</code> with only <code>DAC_OVERRIDE</code>, <code>CHOWN</code>, <code>FOWNER</code> added back</li>
+<li><code>--security-opt no-new-privileges</code></li>
+<li><code>--pids-limit 256</code></li>
+<li>Size-limited tmpfs for <code>/tmp</code> (512MB), <code>/var/tmp</code> (256MB), <code>/run</code> (64MB)</li>
+</ul>
+<p><strong>Credential forwarding:</strong> Env vars listed in <code>docker_forward_env</code> are resolved from your shell environment first, then <code>~/.hermes/.env</code>. Skills can also declare <code>required_environment_variables</code> which are merged automatically.</p>
+<h3 id="ssh-backend"><a class="header" href="#ssh-backend">SSH Backend</a></h3>
+<p>Runs commands on a remote server over SSH. Uses ControlMaster for connection reuse (5-minute idle keepalive). Persistent shell is enabled by default — state (cwd, env vars) survives across commands.</p>
+<pre><code class="language-yaml">terminal:
+  backend: ssh
+  persistent_shell: true           # Keep a long-lived bash session (default: true)
+</code></pre>
+<p><strong>Required environment variables:</strong></p>
+<pre><code class="language-bash">TERMINAL_SSH_HOST=my-server.example.com
+TERMINAL_SSH_USER=ubuntu
+</code></pre>
+<p><strong>Optional:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TERMINAL_SSH_PORT</code></td><td><code>22</code></td><td>SSH port</td></tr>
+<tr><td><code>TERMINAL_SSH_KEY</code></td><td>(system default)</td><td>Path to SSH private key</td></tr>
+<tr><td><code>TERMINAL_SSH_PERSISTENT</code></td><td><code>true</code></td><td>Enable persistent shell</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>How it works:</strong> Connects at init time with <code>BatchMode=yes</code> and <code>StrictHostKeyChecking=accept-new</code>. Persistent shell keeps a single <code>bash -l</code> process alive on the remote host, communicating via temporary files. Commands that need <code>stdin_data</code> or <code>sudo</code> automatically fall back to one-shot mode.</p>
+<h3 id="modal-backend"><a class="header" href="#modal-backend">Modal Backend</a></h3>
+<p>Runs commands in a <a href="https://modal.com">Modal</a> cloud sandbox. Each task gets an isolated VM with configurable CPU, memory, and disk. Filesystem can be snapshot/restored across sessions.</p>
+<pre><code class="language-yaml">terminal:
+  backend: modal
+  container_cpu: 1                 # CPU cores
+  container_memory: 5120           # MB (5GB)
+  container_disk: 51200            # MB (50GB)
+  container_persistent: true       # Snapshot/restore filesystem
+</code></pre>
+<p><strong>Required:</strong> Either <code>MODAL_TOKEN_ID</code> + <code>MODAL_TOKEN_SECRET</code> environment variables, or a <code>~/.modal.toml</code> config file.</p>
+<p><strong>Persistence:</strong> When enabled, the sandbox filesystem is snapshotted on cleanup and restored on next session. Snapshots are tracked in <code>~/.hermes/modal_snapshots.json</code>. This preserves filesystem state, not live processes, PID space, or background jobs.</p>
+<p><strong>Credential files:</strong> Automatically mounted from <code>~/.hermes/</code> (OAuth tokens, etc.) and synced before each command.</p>
+<h3 id="daytona-backend"><a class="header" href="#daytona-backend">Daytona Backend</a></h3>
+<p>Runs commands in a <a href="https://daytona.io">Daytona</a> managed workspace. Supports stop/resume for persistence.</p>
+<pre><code class="language-yaml">terminal:
+  backend: daytona
+  container_cpu: 1                 # CPU cores
+  container_memory: 5120           # MB → converted to GiB
+  container_disk: 10240            # MB → converted to GiB (max 10 GiB)
+  container_persistent: true       # Stop/resume instead of delete
+</code></pre>
+<p><strong>Required:</strong> <code>DAYTONA_API_KEY</code> environment variable.</p>
+<p><strong>Persistence:</strong> When enabled, sandboxes are stopped (not deleted) on cleanup and resumed on next session. Sandbox names follow the pattern <code>hermes-{task_id}</code>.</p>
+<p><strong>Disk limit:</strong> Daytona enforces a 10 GiB maximum. Requests above this are capped with a warning.</p>
+<h3 id="singularityapptainer-backend"><a class="header" href="#singularityapptainer-backend">Singularity/Apptainer Backend</a></h3>
+<p>Runs commands in a <a href="https://apptainer.org">Singularity/Apptainer</a> container. Designed for HPC clusters and shared machines where Docker isn’t available.</p>
+<pre><code class="language-yaml">terminal:
+  backend: singularity
+  singularity_image: "docker://nikolaik/python-nodejs:python3.11-nodejs20"
+  container_cpu: 1                 # CPU cores
+  container_memory: 5120           # MB
+  container_persistent: true       # Writable overlay persists across sessions
+</code></pre>
+<p><strong>Requirements:</strong> <code>apptainer</code> or <code>singularity</code> binary in <code>$PATH</code>.</p>
+<p><strong>Image handling:</strong> Docker URLs (<code>docker://...</code>) are automatically converted to SIF files and cached. Existing <code>.sif</code> files are used directly.</p>
+<p><strong>Scratch directory:</strong> Resolved in order: <code>TERMINAL_SCRATCH_DIR</code> → <code>TERMINAL_SANDBOX_DIR/singularity</code> → <code>/scratch/$USER/hermes-agent</code> (HPC convention) → <code>~/.hermes/sandboxes/singularity</code>.</p>
+<p><strong>Isolation:</strong> Uses <code>--containall --no-home</code> for full namespace isolation without mounting the host home directory.</p>
+<h3 id="common-terminal-backend-issues"><a class="header" href="#common-terminal-backend-issues">Common Terminal Backend Issues</a></h3>
+<p>If terminal commands fail immediately or the terminal tool is reported as disabled:</p>
+<ul>
+<li><strong>Local</strong> — No special requirements. The safest default when getting started.</li>
+<li><strong>Docker</strong> — Run <code>docker version</code> to verify Docker is working. If it fails, fix Docker or <code>hermes config set terminal.backend local</code>.</li>
+<li><strong>SSH</strong> — Both <code>TERMINAL_SSH_HOST</code> and <code>TERMINAL_SSH_USER</code> must be set. Hermes logs a clear error if either is missing.</li>
+<li><strong>Modal</strong> — Needs <code>MODAL_TOKEN_ID</code> env var or <code>~/.modal.toml</code>. Run <code>hermes doctor</code> to check.</li>
+<li><strong>Daytona</strong> — Needs <code>DAYTONA_API_KEY</code>. The Daytona SDK handles server URL configuration.</li>
+<li><strong>Singularity</strong> — Needs <code>apptainer</code> or <code>singularity</code> in <code>$PATH</code>. Common on HPC clusters.</li>
+</ul>
+<p>When in doubt, set <code>terminal.backend</code> back to <code>local</code> and verify that commands run there first.</p>
+<h3 id="docker-volume-mounts"><a class="header" href="#docker-volume-mounts">Docker Volume Mounts</a></h3>
+<p>When using the Docker backend, <code>docker_volumes</code> lets you share host directories with the container. Each entry uses standard Docker <code>-v</code> syntax: <code>host_path:container_path[:options]</code>.</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  docker_volumes:
+    - "/home/user/projects:/workspace/projects"   # Read-write (default)
+    - "/home/user/datasets:/data:ro"              # Read-only
+    - "/home/user/outputs:/outputs"               # Agent writes, you read
+</code></pre>
+<p>This is useful for:</p>
+<ul>
+<li><strong>Providing files</strong> to the agent (datasets, configs, reference code)</li>
+<li><strong>Receiving files</strong> from the agent (generated code, reports, exports)</li>
+<li><strong>Shared workspaces</strong> where both you and the agent access the same files</li>
+</ul>
+<p>Can also be set via environment variable: <code>TERMINAL_DOCKER_VOLUMES='["/host:/container"]'</code> (JSON array).</p>
+<h3 id="docker-credential-forwarding"><a class="header" href="#docker-credential-forwarding">Docker Credential Forwarding</a></h3>
+<p>By default, Docker terminal sessions do not inherit arbitrary host credentials. If you need a specific token inside the container, add it to <code>terminal.docker_forward_env</code>.</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  docker_forward_env:
+    - "GITHUB_TOKEN"
+    - "NPM_TOKEN"
+</code></pre>
+<dl>
+<dt id="hermes-resolves-each-listed-variable-from-your-current-shell-first-then-falls-back-to-hermesenv-if-it-was-saved-with-hermes-config-set"><a class="header" href="#hermes-resolves-each-listed-variable-from-your-current-shell-first-then-falls-back-to-hermesenv-if-it-was-saved-with-hermes-config-set">Hermes resolves each listed variable from your current shell first, then falls back to <code>~/.hermes/.env</code> if it was saved with <code>hermes config set</code>.</a></dt>
+<dd>
+<p>::warning
+Anything listed in <code>docker_forward_env</code> becomes visible to commands run inside the container. Only forward credentials you are comfortable exposing to the terminal session.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="optional-mount-the-launch-directory-into-workspace"><a class="header" href="#optional-mount-the-launch-directory-into-workspace">Optional: Mount the Launch Directory into <code>/workspace</code></a></h3>
+<p>Docker sandboxes stay isolated by default. Hermes does <strong>not</strong> pass your current host working directory into the container unless you explicitly opt in.</p>
+<p>Enable it in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">terminal:
+  backend: docker
+  docker_mount_cwd_to_workspace: true
+</code></pre>
+<p>When enabled:</p>
+<ul>
+<li>if you launch Hermes from <code>~/projects/my-app</code>, that host directory is bind-mounted to <code>/workspace</code></li>
+<li>the Docker backend starts in <code>/workspace</code></li>
+<li>file tools and terminal commands both see the same mounted project</li>
+</ul>
+<p>When disabled, <code>/workspace</code> stays sandbox-owned unless you explicitly mount something via <code>docker_volumes</code>.</p>
+<p>Security tradeoff:</p>
+<ul>
+<li><code>false</code> preserves the sandbox boundary</li>
+<li><code>true</code> gives the sandbox direct access to the directory you launched Hermes from</li>
+</ul>
+<p>Use the opt-in only when you intentionally want the container to work on live host files.</p>
+<h3 id="persistent-shell"><a class="header" href="#persistent-shell">Persistent Shell</a></h3>
+<p>By default, each terminal command runs in its own subprocess — working directory, environment variables, and shell variables reset between commands. When <strong>persistent shell</strong> is enabled, a single long-lived bash process is kept alive across <code>execute()</code> calls so that state survives between commands.</p>
+<p>This is most useful for the <strong>SSH backend</strong>, where it also eliminates per-command connection overhead. Persistent shell is <strong>enabled by default for SSH</strong> and disabled for the local backend.</p>
+<pre><code class="language-yaml">terminal:
+  persistent_shell: true   # default — enables persistent shell for SSH
+</code></pre>
+<p>To disable:</p>
+<pre><code class="language-bash">hermes config set terminal.persistent_shell false
+</code></pre>
+<p><strong>What persists across commands:</strong></p>
+<ul>
+<li>Working directory (<code>cd /tmp</code> sticks for the next command)</li>
+<li>Exported environment variables (<code>export FOO=bar</code>)</li>
+<li>Shell variables (<code>MY_VAR=hello</code>)</li>
+</ul>
+<p><strong>Precedence:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Level</th><th>Variable</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>Config</td><td><code>terminal.persistent_shell</code></td><td><code>true</code></td></tr>
+<tr><td>SSH override</td><td><code>TERMINAL_SSH_PERSISTENT</code></td><td>follows config</td></tr>
+<tr><td>Local override</td><td><code>TERMINAL_LOCAL_PERSISTENT</code></td><td><code>false</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Per-backend environment variables take highest precedence. If you want persistent shell on the local backend too:</p>
+<pre><code class="language-bash">export TERMINAL_LOCAL_PERSISTENT=true
+</code></pre>
+<dl>
+<dt id="note-commands-that-require-stdin_data-or-sudo-automatically-fall-back-to-one-shot-mode-since-the-persistent-shells-stdin-is-already-occupied-by-the-ipc-protocol"><a class="header" href="#note-commands-that-require-stdin_data-or-sudo-automatically-fall-back-to-one-shot-mode-since-the-persistent-shells-stdin-is-already-occupied-by-the-ipc-protocol">:::note
+Commands that require <code>stdin_data</code> or sudo automatically fall back to one-shot mode, since the persistent shell’s stdin is already occupied by the IPC protocol.</a></dt>
+<dd>::</dd>
+</dl>
+<p>See <a href="features/code-execution.html">Code Execution</a> and the <a href="features/tools.html">Terminal section of the README</a> for details on each backend.</p>
+<h2 id="skill-settings"><a class="header" href="#skill-settings">Skill Settings</a></h2>
+<p>Skills can declare their own configuration settings via their SKILL.md frontmatter. These are non-secret values (paths, preferences, domain settings) stored under the <code>skills.config</code> namespace in <code>config.yaml</code>.</p>
+<pre><code class="language-yaml">skills:
+  config:
+    wiki:
+      path: ~/wiki          # Used by the llm-wiki skill
+</code></pre>
+<p><strong>How skill settings work:</strong></p>
+<ul>
+<li><code>hermes config migrate</code> scans all enabled skills, finds unconfigured settings, and offers to prompt you</li>
+<li><code>hermes config show</code> displays all skill settings under “Skill Settings” with the skill they belong to</li>
+<li>When a skill loads, its resolved config values are injected into the skill context automatically</li>
+</ul>
+<p><strong>Setting values manually:</strong></p>
+<pre><code class="language-bash">hermes config set skills.config.wiki.path ~/my-research-wiki
+</code></pre>
+<p>For details on declaring config settings in your own skills, see <a href="/docs/developer-guide/creating-skills#config-settings-configyaml">Creating Skills — Config Settings</a>.</p>
+<h2 id="memory-configuration"><a class="header" href="#memory-configuration">Memory Configuration</a></h2>
+<pre><code class="language-yaml">memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 2200   # ~800 tokens
+  user_char_limit: 1375     # ~500 tokens
+</code></pre>
+<h2 id="file-read-safety"><a class="header" href="#file-read-safety">File Read Safety</a></h2>
+<p>Controls how much content a single <code>read_file</code> call can return. Reads that exceed the limit are rejected with an error telling the agent to use <code>offset</code> and <code>limit</code> for a smaller range. This prevents a single read of a minified JS bundle or large data file from flooding the context window.</p>
+<pre><code class="language-yaml">file_read_max_chars: 100000  # default — ~25-35K tokens
+</code></pre>
+<p>Raise it if you’re on a model with a large context window and frequently read big files. Lower it for small-context models to keep reads efficient:</p>
+<pre><code class="language-yaml"># Large context model (200K+)
+file_read_max_chars: 200000
+
+# Small local model (16K context)
+file_read_max_chars: 30000
+</code></pre>
+<p>The agent also deduplicates file reads automatically — if the same file region is read twice and the file hasn’t changed, a lightweight stub is returned instead of re-sending the content. This resets on context compression so the agent can re-read files after their content is summarized away.</p>
+<h2 id="git-worktree-isolation"><a class="header" href="#git-worktree-isolation">Git Worktree Isolation</a></h2>
+<p>Enable isolated git worktrees for running multiple agents in parallel on the same repo:</p>
+<pre><code class="language-yaml">worktree: true    # Always create a worktree (same as hermes -w)
+# worktree: false # Default — only when -w flag is passed
+</code></pre>
+<p>When enabled, each CLI session creates a fresh worktree under <code>.worktrees/</code> with its own branch. Agents can edit files, commit, push, and create PRs without interfering with each other. Clean worktrees are removed on exit; dirty ones are kept for manual recovery.</p>
+<p>You can also list gitignored files to copy into worktrees via <code>.worktreeinclude</code> in your repo root:</p>
+<pre><code># .worktreeinclude
+.env
+.venv/
+node_modules/
+</code></pre>
+<h2 id="context-compression"><a class="header" href="#context-compression">Context Compression</a></h2>
+<p>Hermes automatically compresses long conversations to stay within your model’s context window. The compression summarizer is a separate LLM call — you can point it at any provider or endpoint.</p>
+<p>All compression settings live in <code>config.yaml</code> (no environment variables).</p>
+<h3 id="full-reference"><a class="header" href="#full-reference">Full reference</a></h3>
+<pre><code class="language-yaml">compression:
+  enabled: true                                     # Toggle compression on/off
+  threshold: 0.50                                   # Compress at this % of context limit
+  target_ratio: 0.20                                # Fraction of threshold to preserve as recent tail
+  protect_last_n: 20                                # Min recent messages to keep uncompressed
+  summary_model: "google/gemini-3-flash-preview"    # Model for summarization
+  summary_provider: "auto"                          # Provider: "auto", "openrouter", "nous", "codex", "main", etc.
+  summary_base_url: null                            # Custom OpenAI-compatible endpoint (overrides provider)
+</code></pre>
+<h3 id="common-setups"><a class="header" href="#common-setups">Common setups</a></h3>
+<p><strong>Default (auto-detect) — no configuration needed:</strong></p>
+<pre><code class="language-yaml">compression:
+  enabled: true
+  threshold: 0.50
+</code></pre>
+<p>Uses the first available provider (OpenRouter → Nous → Codex) with Gemini Flash.</p>
+<p><strong>Force a specific provider</strong> (OAuth or API-key based):</p>
+<pre><code class="language-yaml">compression:
+  summary_provider: nous
+  summary_model: gemini-3-flash
+</code></pre>
+<p>Works with any provider: <code>nous</code>, <code>openrouter</code>, <code>codex</code>, <code>anthropic</code>, <code>main</code>, etc.</p>
+<p><strong>Custom endpoint</strong> (self-hosted, Ollama, zai, DeepSeek, etc.):</p>
+<pre><code class="language-yaml">compression:
+  summary_model: glm-4.7
+  summary_base_url: https://api.z.ai/api/coding/paas/v4
+</code></pre>
+<p>Points at a custom OpenAI-compatible endpoint. Uses <code>OPENAI_API_KEY</code> for auth.</p>
+<h3 id="how-the-three-knobs-interact"><a class="header" href="#how-the-three-knobs-interact">How the three knobs interact</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th><code>summary_provider</code></th><th><code>summary_base_url</code></th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td><code>auto</code> (default)</td><td>not set</td><td>Auto-detect best available provider</td></tr>
+<tr><td><code>nous</code> / <code>openrouter</code> / etc.</td><td>not set</td><td>Force that provider, use its auth</td></tr>
+<tr><td>any</td><td>set</td><td>Use the custom endpoint directly (provider ignored)</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="warning-summary-model-context-length-requirement-the-summary_model-must-have-a-context-window-at-least-as-large-as-your-main-agent-models-the-compressor-sends-the-full-middle-section-of-the-conversation-to-the-summary-model--if-that-models-context-window-is-smaller-than-the-main-models-the-summarization-call-will-fail-with-a-context-length-error-when-this-happens-the-middle-turns-are-dropped-without-a-summary-losing-conversation-context-silently-if-you-override-summary_model-verify-its-context-length-meets-or-exceeds-your-main-models"><a class="header" href="#warning-summary-model-context-length-requirement-the-summary_model-must-have-a-context-window-at-least-as-large-as-your-main-agent-models-the-compressor-sends-the-full-middle-section-of-the-conversation-to-the-summary-model--if-that-models-context-window-is-smaller-than-the-main-models-the-summarization-call-will-fail-with-a-context-length-error-when-this-happens-the-middle-turns-are-dropped-without-a-summary-losing-conversation-context-silently-if-you-override-summary_model-verify-its-context-length-meets-or-exceeds-your-main-models">:::warning Summary model context length requirement
+The <code>summary_model</code> <strong>must</strong> have a context window at least as large as your main agent model’s. The compressor sends the full middle section of the conversation to the summary model — if that model’s context window is smaller than the main model’s, the summarization call will fail with a context length error. When this happens, the middle turns are <strong>dropped without a summary</strong>, losing conversation context silently. If you override <code>summary_model</code>, verify its context length meets or exceeds your main model’s.</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="context-engine"><a class="header" href="#context-engine">Context Engine</a></h2>
+<p>The context engine controls how conversations are managed when approaching the model’s token limit. The built-in <code>compressor</code> engine uses lossy summarization (see <a href="/docs/developer-guide/context-compression-and-caching">Context Compression</a>). Plugin engines can replace it with alternative strategies.</p>
+<pre><code class="language-yaml">context:
+  engine: "compressor"    # default — built-in lossy summarization
+</code></pre>
+<p>To use a plugin engine (e.g., LCM for lossless context management):</p>
+<pre><code class="language-yaml">context:
+  engine: "lcm"          # must match the plugin's name
+</code></pre>
+<p>Plugin engines are <strong>never auto-activated</strong> — you must explicitly set <code>context.engine</code> to the plugin name. Available engines can be browsed and selected via <code>hermes plugins</code> → Provider Plugins → Context Engine.</p>
+<p>See <a href="/docs/user-guide/features/memory-providers">Memory Providers</a> for the analogous single-select system for memory plugins.</p>
+<h2 id="iteration-budget-pressure"><a class="header" href="#iteration-budget-pressure">Iteration Budget Pressure</a></h2>
+<p>When the agent is working on a complex task with many tool calls, it can burn through its iteration budget (default: 90 turns) without realizing it’s running low. Budget pressure automatically warns the model as it approaches the limit:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Threshold</th><th>Level</th><th>What the model sees</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>70%</strong></td><td>Caution</td><td><code>[BUDGET: 63/90. 27 iterations left. Start consolidating.]</code></td></tr>
+<tr><td><strong>90%</strong></td><td>Warning</td><td><code>[BUDGET WARNING: 81/90. Only 9 left. Respond NOW.]</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Warnings are injected into the last tool result’s JSON (as a <code>_budget_warning</code> field) rather than as separate messages — this preserves prompt caching and doesn’t disrupt the conversation structure.</p>
+<pre><code class="language-yaml">agent:
+  max_turns: 90                # Max iterations per conversation turn (default: 90)
+</code></pre>
+<p>Budget pressure is enabled by default. The agent sees warnings naturally as part of tool results, encouraging it to consolidate its work and deliver a response before running out of iterations.</p>
+<h3 id="streaming-timeouts"><a class="header" href="#streaming-timeouts">Streaming Timeouts</a></h3>
+<p>The LLM streaming connection has two timeout layers. Both auto-adjust for local providers (localhost, LAN IPs) — no configuration needed for most setups.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Timeout</th><th>Default</th><th>Local providers</th><th>Env var</th></tr>
+</thead>
+<tbody>
+<tr><td>Socket read timeout</td><td>120s</td><td>Auto-raised to 1800s</td><td><code>HERMES_STREAM_READ_TIMEOUT</code></td></tr>
+<tr><td>Stale stream detection</td><td>180s</td><td>Auto-disabled</td><td><code>HERMES_STREAM_STALE_TIMEOUT</code></td></tr>
+<tr><td>API call (non-streaming)</td><td>1800s</td><td>Unchanged</td><td><code>HERMES_API_TIMEOUT</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The <strong>socket read timeout</strong> controls how long httpx waits for the next chunk of data from the provider. Local LLMs can take minutes for prefill on large contexts before producing the first token, so Hermes raises this to 30 minutes when it detects a local endpoint. If you explicitly set <code>HERMES_STREAM_READ_TIMEOUT</code>, that value is always used regardless of endpoint detection.</p>
+<p>The <strong>stale stream detection</strong> kills connections that receive SSE keep-alive pings but no actual content. This is disabled entirely for local providers since they don’t send keep-alive pings during prefill.</p>
+<h2 id="context-pressure-warnings"><a class="header" href="#context-pressure-warnings">Context Pressure Warnings</a></h2>
+<p>Separate from iteration budget pressure, context pressure tracks how close the conversation is to the <strong>compaction threshold</strong> — the point where context compression fires to summarize older messages. This helps both you and the agent understand when the conversation is getting long.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Progress</th><th>Level</th><th>What happens</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>≥ 60%</strong> to threshold</td><td>Info</td><td>CLI shows a cyan progress bar; gateway sends an informational notice</td></tr>
+<tr><td><strong>≥ 85%</strong> to threshold</td><td>Warning</td><td>CLI shows a bold yellow bar; gateway warns compaction is imminent</td></tr>
+</tbody>
+</table>
+</div>
+<p>In the CLI, context pressure appears as a progress bar in the tool output feed:</p>
+<pre><code>  ◐ context ████████████░░░░░░░░ 62% to compaction  48k threshold (50%) · approaching compaction
+</code></pre>
+<p>On messaging platforms, a plain-text notification is sent:</p>
+<pre><code>◐ Context: ████████████░░░░░░░░ 62% to compaction (threshold: 50% of window).
+</code></pre>
+<p>If auto-compression is disabled, the warning tells you context may be truncated instead.</p>
+<p>Context pressure is automatic — no configuration needed. It fires purely as a user-facing notification and does not modify the message stream or inject anything into the model’s context.</p>
+<h2 id="credential-pool-strategies"><a class="header" href="#credential-pool-strategies">Credential Pool Strategies</a></h2>
+<p>When you have multiple API keys or OAuth tokens for the same provider, configure the rotation strategy:</p>
+<pre><code class="language-yaml">credential_pool_strategies:
+  openrouter: round_robin    # cycle through keys evenly
+  anthropic: least_used      # always pick the least-used key
+</code></pre>
+<p>Options: <code>fill_first</code> (default), <code>round_robin</code>, <code>least_used</code>, <code>random</code>. See <a href="/docs/user-guide/features/credential-pools">Credential Pools</a> for full documentation.</p>
+<h2 id="auxiliary-models"><a class="header" href="#auxiliary-models">Auxiliary Models</a></h2>
+<p>Hermes uses lightweight “auxiliary” models for side tasks like image analysis, web page summarization, and browser screenshot analysis. By default, these use <strong>Gemini Flash</strong> via auto-detection — you don’t need to configure anything.</p>
+<h3 id="the-universal-config-pattern"><a class="header" href="#the-universal-config-pattern">The universal config pattern</a></h3>
+<p>Every model slot in Hermes — auxiliary tasks, compression, fallback — uses the same three knobs:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>What it does</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>provider</code></td><td>Which provider to use for auth and routing</td><td><code>"auto"</code></td></tr>
+<tr><td><code>model</code></td><td>Which model to request</td><td>provider’s default</td></tr>
+<tr><td><code>base_url</code></td><td>Custom OpenAI-compatible endpoint (overrides provider)</td><td>not set</td></tr>
+</tbody>
+</table>
+</div>
+<p>When <code>base_url</code> is set, Hermes ignores the provider and calls that endpoint directly (using <code>api_key</code> or <code>OPENAI_API_KEY</code> for auth). When only <code>provider</code> is set, Hermes uses that provider’s built-in auth and base URL.</p>
+<dl>
+<dt id="available-providers-for-auxiliary-tasks-auto-openrouter-nous-codex-copilot-anthropic-main-zai-kimi-coding-minimax-any-provider-registered-in-the-provider-registry-or-any-named-custom-provider-from-your-custom_providers-list-eg-provider-beans"><a class="header" href="#available-providers-for-auxiliary-tasks-auto-openrouter-nous-codex-copilot-anthropic-main-zai-kimi-coding-minimax-any-provider-registered-in-the-provider-registry-or-any-named-custom-provider-from-your-custom_providers-list-eg-provider-beans">Available providers for auxiliary tasks: <code>auto</code>, <code>openrouter</code>, <code>nous</code>, <code>codex</code>, <code>copilot</code>, <code>anthropic</code>, <code>main</code>, <code>zai</code>, <code>kimi-coding</code>, <code>minimax</code>, any provider registered in the <a href="/docs/reference/environment-variables">provider registry</a>, or any named custom provider from your <code>custom_providers</code> list (e.g. <code>provider: "beans"</code>).</a></dt>
+<dd>
+<p>::warning <code>"main"</code> is for auxiliary tasks only
+The <code>"main"</code> provider option means “use whatever provider my main agent uses” — it’s only valid inside <code>auxiliary:</code>, <code>compression:</code>, and <code>fallback_model:</code> configs. It is <strong>not</strong> a valid value for your top-level <code>model.provider</code> setting. If you use a custom OpenAI-compatible endpoint, set <code>provider: custom</code> in your <code>model:</code> section. See <a href="/docs/integrations/providers">AI Providers</a> for all main model provider options.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="full-auxiliary-config-reference"><a class="header" href="#full-auxiliary-config-reference">Full auxiliary config reference</a></h3>
+<pre><code class="language-yaml">auxiliary:
+  # Image analysis (vision_analyze tool + browser screenshots)
+  vision:
+    provider: "auto"           # "auto", "openrouter", "nous", "codex", "main", etc.
+    model: ""                  # e.g. "openai/gpt-4o", "google/gemini-2.5-flash"
+    base_url: ""               # Custom OpenAI-compatible endpoint (overrides provider)
+    api_key: ""                # API key for base_url (falls back to OPENAI_API_KEY)
+    timeout: 30                # seconds — LLM API call; increase for slow local vision models
+    download_timeout: 30       # seconds — image HTTP download; increase for slow connections
+
+  # Web page summarization + browser page text extraction
+  web_extract:
+    provider: "auto"
+    model: ""                  # e.g. "google/gemini-2.5-flash"
+    base_url: ""
+    api_key: ""
+    timeout: 360               # seconds (6min) — per-attempt LLM summarization
+
+  # Dangerous command approval classifier
+  approval:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30                # seconds
+
+  # Context compression timeout (separate from compression.* config)
+  compression:
+    timeout: 120               # seconds — compression summarizes long conversations, needs more time
+
+  # Session search — summarizes past session matches
+  session_search:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30
+
+  # Skills hub — skill matching and search
+  skills_hub:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30
+
+  # MCP tool dispatch
+  mcp:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30
+
+  # Memory flush — summarizes conversation for persistent memory
+  flush_memories:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30
+</code></pre>
+<dl>
+<dt id="tip-each-auxiliary-task-has-a-configurable-timeout-in-seconds-defaults-vision-30s-web_extract-360s-approval-30s-compression-120s-increase-these-if-you-use-slow-local-models-for-auxiliary-tasks-vision-also-has-a-separate-download_timeout-default-30s-for-the-http-image-download--increase-this-for-slow-connections-or-self-hosted-image-servers"><a class="header" href="#tip-each-auxiliary-task-has-a-configurable-timeout-in-seconds-defaults-vision-30s-web_extract-360s-approval-30s-compression-120s-increase-these-if-you-use-slow-local-models-for-auxiliary-tasks-vision-also-has-a-separate-download_timeout-default-30s-for-the-http-image-download--increase-this-for-slow-connections-or-self-hosted-image-servers">:::tip
+Each auxiliary task has a configurable <code>timeout</code> (in seconds). Defaults: vision 30s, web_extract 360s, approval 30s, compression 120s. Increase these if you use slow local models for auxiliary tasks. Vision also has a separate <code>download_timeout</code> (default 30s) for the HTTP image download — increase this for slow connections or self-hosted image servers.</a></dt>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::info
+Context compression has its own top-level <code>compression:</code> block with <code>summary_provider</code>, <code>summary_model</code>, and <code>summary_base_url</code> — see <a href="#context-compression">Context Compression</a> above. The fallback model uses a <code>fallback_model:</code> block — see <a href="/docs/integrations/providers#fallback-model">Fallback Model</a>. All three follow the same provider/model/base_url pattern.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="changing-the-vision-model"><a class="header" href="#changing-the-vision-model">Changing the Vision Model</a></h3>
+<p>To use GPT-4o instead of Gemini Flash for image analysis:</p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    model: "openai/gpt-4o"
+</code></pre>
+<p>Or via environment variable (in <code>~/.hermes/.env</code>):</p>
+<pre><code class="language-bash">AUXILIARY_VISION_MODEL=openai/gpt-4o
+</code></pre>
+<h3 id="provider-options"><a class="header" href="#provider-options">Provider Options</a></h3>
+<p>These options apply to <strong>auxiliary task configs</strong> (<code>auxiliary:</code>, <code>compression:</code>, <code>fallback_model:</code>), not to your main <code>model.provider</code> setting.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Provider</th><th>Description</th><th>Requirements</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"auto"</code></td><td>Best available (default). Vision tries OpenRouter → Nous → Codex.</td><td>—</td></tr>
+<tr><td><code>"openrouter"</code></td><td>Force OpenRouter — routes to any model (Gemini, GPT-4o, Claude, etc.)</td><td><code>OPENROUTER_API_KEY</code></td></tr>
+<tr><td><code>"nous"</code></td><td>Force Nous Portal</td><td><code>hermes auth</code></td></tr>
+<tr><td><code>"codex"</code></td><td>Force Codex OAuth (ChatGPT account). Supports vision (gpt-5.3-codex).</td><td><code>hermes model</code> → Codex</td></tr>
+<tr><td><code>"main"</code></td><td>Use your active custom/main endpoint. This can come from <code>OPENAI_BASE_URL</code> + <code>OPENAI_API_KEY</code> or from a custom endpoint saved via <code>hermes model</code> / <code>config.yaml</code>. Works with OpenAI, local models, or any OpenAI-compatible API. <strong>Auxiliary tasks only — not valid for <code>model.provider</code>.</strong></td><td>Custom endpoint credentials + base URL</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="common-setups-1"><a class="header" href="#common-setups-1">Common Setups</a></h3>
+<p><strong>Using a direct custom endpoint</strong> (clearer than <code>provider: "main"</code> for local/self-hosted APIs):</p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    base_url: "http://localhost:1234/v1"
+    api_key: "local-key"
+    model: "qwen2.5-vl"
+</code></pre>
+<p><code>base_url</code> takes precedence over <code>provider</code>, so this is the most explicit way to route an auxiliary task to a specific endpoint. For direct endpoint overrides, Hermes uses the configured <code>api_key</code> or falls back to <code>OPENAI_API_KEY</code>; it does not reuse <code>OPENROUTER_API_KEY</code> for that custom endpoint.</p>
+<p><strong>Using OpenAI API key for vision:</strong></p>
+<pre><code class="language-yaml"># In ~/.hermes/.env:
+# OPENAI_BASE_URL=https://api.openai.com/v1
+# OPENAI_API_KEY=sk-...
+
+auxiliary:
+  vision:
+    provider: "main"
+    model: "gpt-4o"       # or "gpt-4o-mini" for cheaper
+</code></pre>
+<p><strong>Using OpenRouter for vision</strong> (route to any model):</p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    provider: "openrouter"
+    model: "openai/gpt-4o"      # or "google/gemini-2.5-flash", etc.
+</code></pre>
+<p><strong>Using Codex OAuth</strong> (ChatGPT Pro/Plus account — no API key needed):</p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    provider: "codex"     # uses your ChatGPT OAuth token
+    # model defaults to gpt-5.3-codex (supports vision)
+</code></pre>
+<p><strong>Using a local/self-hosted model:</strong></p>
+<pre><code class="language-yaml">auxiliary:
+  vision:
+    provider: "main"      # uses your active custom endpoint
+    model: "my-local-model"
+</code></pre>
+<dl>
+<dt id="provider-main-uses-whatever-provider-hermes-uses-for-normal-chat--whether-thats-a-named-custom-provider-eg-beans-a-built-in-provider-like-openrouter-or-a-legacy-openai_base_url-endpoint"><a class="header" href="#provider-main-uses-whatever-provider-hermes-uses-for-normal-chat--whether-thats-a-named-custom-provider-eg-beans-a-built-in-provider-like-openrouter-or-a-legacy-openai_base_url-endpoint"><code>provider: "main"</code> uses whatever provider Hermes uses for normal chat — whether that’s a named custom provider (e.g. <code>beans</code>), a built-in provider like <code>openrouter</code>, or a legacy <code>OPENAI_BASE_URL</code> endpoint.</a></dt>
+<dd>
+<p>::tip
+If you use Codex OAuth as your main model provider, vision works automatically — no extra configuration needed. Codex is included in the auto-detection chain for vision.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+<dd>
+<p>::warning
+<strong>Vision requires a multimodal model.</strong> If you set <code>provider: "main"</code>, make sure your endpoint supports multimodal/vision — otherwise image analysis will fail.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="environment-variables-legacy"><a class="header" href="#environment-variables-legacy">Environment Variables (legacy)</a></h3>
+<p>Auxiliary models can also be configured via environment variables. However, <code>config.yaml</code> is the preferred method — it’s easier to manage and supports all options including <code>base_url</code> and <code>api_key</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Setting</th><th>Environment Variable</th></tr>
+</thead>
+<tbody>
+<tr><td>Vision provider</td><td><code>AUXILIARY_VISION_PROVIDER</code></td></tr>
+<tr><td>Vision model</td><td><code>AUXILIARY_VISION_MODEL</code></td></tr>
+<tr><td>Vision endpoint</td><td><code>AUXILIARY_VISION_BASE_URL</code></td></tr>
+<tr><td>Vision API key</td><td><code>AUXILIARY_VISION_API_KEY</code></td></tr>
+<tr><td>Web extract provider</td><td><code>AUXILIARY_WEB_EXTRACT_PROVIDER</code></td></tr>
+<tr><td>Web extract model</td><td><code>AUXILIARY_WEB_EXTRACT_MODEL</code></td></tr>
+<tr><td>Web extract endpoint</td><td><code>AUXILIARY_WEB_EXTRACT_BASE_URL</code></td></tr>
+<tr><td>Web extract API key</td><td><code>AUXILIARY_WEB_EXTRACT_API_KEY</code></td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="compression-and-fallback-model-settings-are-configyaml-only"><a class="header" href="#compression-and-fallback-model-settings-are-configyaml-only">Compression and fallback model settings are config.yaml-only.</a></dt>
+<dd>
+<p>::tip
+Run <code>hermes config</code> to see your current auxiliary model settings. Overrides only show up when they differ from the defaults.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="reasoning-effort"><a class="header" href="#reasoning-effort">Reasoning Effort</a></h2>
+<p>Control how much “thinking” the model does before responding:</p>
+<pre><code class="language-yaml">agent:
+  reasoning_effort: ""   # empty = medium (default). Options: none, minimal, low, medium, high, xhigh (max)
+</code></pre>
+<p>When unset (default), reasoning effort defaults to “medium” — a balanced level that works well for most tasks. Setting a value overrides it — higher reasoning effort gives better results on complex tasks at the cost of more tokens and latency.</p>
+<p>You can also change the reasoning effort at runtime with the <code>/reasoning</code> command:</p>
+<pre><code>/reasoning           # Show current effort level and display state
+/reasoning high      # Set reasoning effort to high
+/reasoning none      # Disable reasoning
+/reasoning show      # Show model thinking above each response
+/reasoning hide      # Hide model thinking
+</code></pre>
+<h2 id="tool-use-enforcement"><a class="header" href="#tool-use-enforcement">Tool-Use Enforcement</a></h2>
+<p>Some models occasionally describe intended actions as text instead of making tool calls (“I would run the tests…” instead of actually calling the terminal). Tool-use enforcement injects system prompt guidance that steers the model back to actually calling tools.</p>
+<pre><code class="language-yaml">agent:
+  tool_use_enforcement: "auto"   # "auto" | true | false | ["model-substring", ...]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"auto"</code> (default)</td><td>Enabled for models matching: <code>gpt</code>, <code>codex</code>, <code>gemini</code>, <code>gemma</code>, <code>grok</code>. Disabled for all others (Claude, DeepSeek, Qwen, etc.).</td></tr>
+<tr><td><code>true</code></td><td>Always enabled, regardless of model. Useful if you notice your current model describing actions instead of performing them.</td></tr>
+<tr><td><code>false</code></td><td>Always disabled, regardless of model.</td></tr>
+<tr><td><code>["gpt", "codex", "qwen", "llama"]</code></td><td>Enabled only when the model name contains one of the listed substrings (case-insensitive).</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="what-it-injects"><a class="header" href="#what-it-injects">What it injects</a></h3>
+<p>When enabled, three layers of guidance may be added to the system prompt:</p>
+<ol>
+<li>
+<p><strong>General tool-use enforcement</strong> (all matched models) — instructs the model to make tool calls immediately instead of describing intentions, keep working until the task is complete, and never end a turn with a promise of future action.</p>
+</li>
+<li>
+<p><strong>OpenAI execution discipline</strong> (GPT and Codex models only) — additional guidance addressing GPT-specific failure modes: abandoning work on partial results, skipping prerequisite lookups, hallucinating instead of using tools, and declaring “done” without verification.</p>
+</li>
+<li>
+<p><strong>Google operational guidance</strong> (Gemini and Gemma models only) — conciseness, absolute paths, parallel tool calls, and verify-before-edit patterns.</p>
+</li>
+</ol>
+<p>These are transparent to the user and only affect the system prompt. Models that already use tools reliably (like Claude) don’t need this guidance, which is why <code>"auto"</code> excludes them.</p>
+<h3 id="when-to-turn-it-on"><a class="header" href="#when-to-turn-it-on">When to turn it on</a></h3>
+<p>If you’re using a model not in the default auto list and notice it frequently describes what it <em>would</em> do instead of doing it, set <code>tool_use_enforcement: true</code> or add the model substring to the list:</p>
+<pre><code class="language-yaml">agent:
+  tool_use_enforcement: ["gpt", "codex", "gemini", "grok", "my-custom-model"]
+</code></pre>
+<h2 id="tts-configuration"><a class="header" href="#tts-configuration">TTS Configuration</a></h2>
+<pre><code class="language-yaml">tts:
+  provider: "edge"              # "edge" | "elevenlabs" | "openai" | "neutts"
+  edge:
+    voice: "en-US-AriaNeural"   # 322 voices, 74 languages
+  elevenlabs:
+    voice_id: "pNInz6obpgDQGcFmaJgB"
+    model_id: "eleven_multilingual_v2"
+  openai:
+    model: "gpt-4o-mini-tts"
+    voice: "alloy"              # alloy, echo, fable, onyx, nova, shimmer
+    base_url: "https://api.openai.com/v1"  # Override for OpenAI-compatible TTS endpoints
+  neutts:
+    ref_audio: ''
+    ref_text: ''
+    model: neuphonic/neutts-air-q4-gguf
+    device: cpu
+</code></pre>
+<p>This controls both the <code>text_to_speech</code> tool and spoken replies in voice mode (<code>/voice tts</code> in the CLI or messaging gateway).</p>
+<h2 id="display-settings"><a class="header" href="#display-settings">Display Settings</a></h2>
+<pre><code class="language-yaml">display:
+  tool_progress: all      # off | new | all | verbose
+  tool_progress_command: false  # Enable /verbose slash command in messaging gateway
+  tool_progress_overrides: {}  # Per-platform overrides (see below)
+  interim_assistant_messages: true  # Gateway: send natural mid-turn assistant updates as separate messages
+  skin: default           # Built-in or custom CLI skin (see user-guide/features/skins)
+  personality: "kawaii"  # Legacy cosmetic field still surfaced in some summaries
+  compact: false          # Compact output mode (less whitespace)
+  resume_display: full    # full (show previous messages on resume) | minimal (one-liner only)
+  bell_on_complete: false # Play terminal bell when agent finishes (great for long tasks)
+  show_reasoning: false   # Show model reasoning/thinking above each response (toggle with /reasoning show|hide)
+  streaming: false        # Stream tokens to terminal as they arrive (real-time output)
+  show_cost: false        # Show estimated $ cost in the CLI status bar
+  tool_preview_length: 0  # Max chars for tool call previews (0 = no limit, show full paths/commands)
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>What you see</th></tr>
+</thead>
+<tbody>
+<tr><td><code>off</code></td><td>Silent — just the final response</td></tr>
+<tr><td><code>new</code></td><td>Tool indicator only when the tool changes</td></tr>
+<tr><td><code>all</code></td><td>Every tool call with a short preview (default)</td></tr>
+<tr><td><code>verbose</code></td><td>Full args, results, and debug logs</td></tr>
+</tbody>
+</table>
+</div>
+<p>In the CLI, cycle through these modes with <code>/verbose</code>. To use <code>/verbose</code> in messaging platforms (Telegram, Discord, Slack, etc.), set <code>tool_progress_command: true</code> in the <code>display</code> section above. The command will then cycle the mode and save to config.</p>
+<h3 id="per-platform-progress-overrides"><a class="header" href="#per-platform-progress-overrides">Per-platform progress overrides</a></h3>
+<p>Different platforms have different verbosity needs. For example, Signal can’t edit messages, so each progress update becomes a separate message — noisy. Use <code>tool_progress_overrides</code> to set per-platform modes:</p>
+<pre><code class="language-yaml">display:
+  tool_progress: all          # global default
+  tool_progress_overrides:
+    signal: 'off'             # silence progress on Signal
+    telegram: verbose         # detailed progress on Telegram
+    slack: 'off'              # quiet in shared Slack workspace
+</code></pre>
+<p>Platforms without an override fall back to the global <code>tool_progress</code> value. Valid platform keys: <code>telegram</code>, <code>discord</code>, <code>slack</code>, <code>signal</code>, <code>whatsapp</code>, <code>matrix</code>, <code>mattermost</code>, <code>email</code>, <code>sms</code>, <code>homeassistant</code>, <code>dingtalk</code>, <code>feishu</code>, <code>wecom</code>, <code>weixin</code>, <code>bluebubbles</code>.</p>
+<p><code>interim_assistant_messages</code> is gateway-only. When enabled, Hermes sends completed mid-turn assistant updates as separate chat messages. This is independent from <code>tool_progress</code> and does not require gateway streaming.</p>
+<h2 id="privacy"><a class="header" href="#privacy">Privacy</a></h2>
+<pre><code class="language-yaml">privacy:
+  redact_pii: false  # Strip PII from LLM context (gateway only)
+</code></pre>
+<p>When <code>redact_pii</code> is <code>true</code>, the gateway redacts personally identifiable information from the system prompt before sending it to the LLM on supported platforms:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Treatment</th></tr>
+</thead>
+<tbody>
+<tr><td>Phone numbers (user ID on WhatsApp/Signal)</td><td>Hashed to <code>user_&lt;12-char-sha256&gt;</code></td></tr>
+<tr><td>User IDs</td><td>Hashed to <code>user_&lt;12-char-sha256&gt;</code></td></tr>
+<tr><td>Chat IDs</td><td>Numeric portion hashed, platform prefix preserved (<code>telegram:&lt;hash&gt;</code>)</td></tr>
+<tr><td>Home channel IDs</td><td>Numeric portion hashed</td></tr>
+<tr><td>User names / usernames</td><td><strong>Not affected</strong> (user-chosen, publicly visible)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Platform support:</strong> Redaction applies to WhatsApp, Signal, and Telegram. Discord and Slack are excluded because their mention systems (<code>&lt;@user_id&gt;</code>) require the real ID in the LLM context.</p>
+<p>Hashes are deterministic — the same user always maps to the same hash, so the model can still distinguish between users in group chats. Routing and delivery use the original values internally.</p>
+<h2 id="speech-to-text-stt"><a class="header" href="#speech-to-text-stt">Speech-to-Text (STT)</a></h2>
+<pre><code class="language-yaml">stt:
+  provider: "local"            # "local" | "groq" | "openai"
+  local:
+    model: "base"              # tiny, base, small, medium, large-v3
+  openai:
+    model: "whisper-1"         # whisper-1 | gpt-4o-mini-transcribe | gpt-4o-transcribe
+  # model: "whisper-1"         # Legacy fallback key still respected
+</code></pre>
+<p>Provider behavior:</p>
+<ul>
+<li><code>local</code> uses <code>faster-whisper</code> running on your machine. Install it separately with <code>pip install faster-whisper</code>.</li>
+<li><code>groq</code> uses Groq’s Whisper-compatible endpoint and reads <code>GROQ_API_KEY</code>.</li>
+<li><code>openai</code> uses the OpenAI speech API and reads <code>VOICE_TOOLS_OPENAI_KEY</code>.</li>
+</ul>
+<p>If the requested provider is unavailable, Hermes falls back automatically in this order: <code>local</code> → <code>groq</code> → <code>openai</code>.</p>
+<p>Groq and OpenAI model overrides are environment-driven:</p>
+<pre><code class="language-bash">STT_GROQ_MODEL=whisper-large-v3-turbo
+STT_OPENAI_MODEL=whisper-1
+GROQ_BASE_URL=https://api.groq.com/openai/v1
+STT_OPENAI_BASE_URL=https://api.openai.com/v1
+</code></pre>
+<h2 id="voice-mode-cli"><a class="header" href="#voice-mode-cli">Voice Mode (CLI)</a></h2>
+<pre><code class="language-yaml">voice:
+  record_key: "ctrl+b"         # Push-to-talk key inside the CLI
+  max_recording_seconds: 120    # Hard stop for long recordings
+  auto_tts: false               # Enable spoken replies automatically when /voice on
+  silence_threshold: 200        # RMS threshold for speech detection
+  silence_duration: 3.0         # Seconds of silence before auto-stop
+</code></pre>
+<p>Use <code>/voice on</code> in the CLI to enable microphone mode, <code>record_key</code> to start/stop recording, and <code>/voice tts</code> to toggle spoken replies. See <a href="/docs/user-guide/features/voice-mode">Voice Mode</a> for end-to-end setup and platform-specific behavior.</p>
+<h2 id="streaming"><a class="header" href="#streaming">Streaming</a></h2>
+<p>Stream tokens to the terminal or messaging platforms as they arrive, instead of waiting for the full response.</p>
+<h3 id="cli-streaming"><a class="header" href="#cli-streaming">CLI Streaming</a></h3>
+<pre><code class="language-yaml">display:
+  streaming: true         # Stream tokens to terminal in real-time
+  show_reasoning: true    # Also stream reasoning/thinking tokens (optional)
+</code></pre>
+<p>When enabled, responses appear token-by-token inside a streaming box. Tool calls are still captured silently. If the provider doesn’t support streaming, it falls back to the normal display automatically.</p>
+<h3 id="gateway-streaming-telegram-discord-slack"><a class="header" href="#gateway-streaming-telegram-discord-slack">Gateway Streaming (Telegram, Discord, Slack)</a></h3>
+<pre><code class="language-yaml">streaming:
+  enabled: true           # Enable progressive message editing
+  transport: edit         # "edit" (progressive message editing) or "off"
+  edit_interval: 0.3      # Seconds between message edits
+  buffer_threshold: 40    # Characters before forcing an edit flush
+  cursor: " ▉"            # Cursor shown during streaming
+</code></pre>
+<p>When enabled, the bot sends a message on the first token, then progressively edits it as more tokens arrive. Platforms that don’t support message editing (Signal, Email, Home Assistant) are auto-detected on the first attempt — streaming is gracefully disabled for that session with no flood of messages.</p>
+<p>For separate natural mid-turn assistant updates without progressive token editing, set <code>display.interim_assistant_messages: true</code>.</p>
+<dl>
+<dt id="overflow-handling-if-the-streamed-text-exceeds-the-platforms-message-length-limit-4096-chars-the-current-message-is-finalized-and-a-new-one-starts-automatically"><a class="header" href="#overflow-handling-if-the-streamed-text-exceeds-the-platforms-message-length-limit-4096-chars-the-current-message-is-finalized-and-a-new-one-starts-automatically"><strong>Overflow handling:</strong> If the streamed text exceeds the platform’s message length limit (~4096 chars), the current message is finalized and a new one starts automatically.</a></dt>
+<dd>
+<p>::note
+Streaming is disabled by default. Enable it in <code>~/.hermes/config.yaml</code> to try the streaming UX.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="group-chat-session-isolation"><a class="header" href="#group-chat-session-isolation">Group Chat Session Isolation</a></h2>
+<p>Control whether shared chats keep one conversation per room or one conversation per participant:</p>
+<pre><code class="language-yaml">group_sessions_per_user: true  # true = per-user isolation in groups/channels, false = one shared session per chat
+</code></pre>
+<ul>
+<li><code>true</code> is the default and recommended setting. In Discord channels, Telegram groups, Slack channels, and similar shared contexts, each sender gets their own session when the platform provides a user ID.</li>
+<li><code>false</code> reverts to the old shared-room behavior. That can be useful if you explicitly want Hermes to treat a channel like one collaborative conversation, but it also means users share context, token costs, and interrupt state.</li>
+<li>Direct messages are unaffected. Hermes still keys DMs by chat/DM ID as usual.</li>
+<li>Threads stay isolated from their parent channel either way; with <code>true</code>, each participant also gets their own session inside the thread.</li>
+</ul>
+<p>For the behavior details and examples, see <a href="/docs/user-guide/sessions">Sessions</a> and the <a href="/docs/user-guide/messaging/discord">Discord guide</a>.</p>
+<h2 id="unauthorized-dm-behavior"><a class="header" href="#unauthorized-dm-behavior">Unauthorized DM Behavior</a></h2>
+<p>Control what Hermes does when an unknown user sends a direct message:</p>
+<pre><code class="language-yaml">unauthorized_dm_behavior: pair
+
+whatsapp:
+  unauthorized_dm_behavior: ignore
+</code></pre>
+<ul>
+<li><code>pair</code> is the default. Hermes denies access, but replies with a one-time pairing code in DMs.</li>
+<li><code>ignore</code> silently drops unauthorized DMs.</li>
+<li>Platform sections override the global default, so you can keep pairing enabled broadly while making one platform quieter.</li>
+</ul>
+<h2 id="quick-commands"><a class="header" href="#quick-commands">Quick Commands</a></h2>
+<p>Define custom commands that run shell commands without invoking the LLM — zero token usage, instant execution. Especially useful from messaging platforms (Telegram, Discord, etc.) for quick server checks or utility scripts.</p>
+<pre><code class="language-yaml">quick_commands:
+  status:
+    type: exec
+    command: systemctl status hermes-agent
+  disk:
+    type: exec
+    command: df -h /
+  update:
+    type: exec
+    command: cd ~/.hermes/hermes-agent &amp;&amp; git pull &amp;&amp; pip install -e .
+  gpu:
+    type: exec
+    command: nvidia-smi --query-gpu=name,utilization.gpu,memory.used,memory.total --format=csv,noheader
+</code></pre>
+<p>Usage: type <code>/status</code>, <code>/disk</code>, <code>/update</code>, or <code>/gpu</code> in the CLI or any messaging platform. The command runs locally on the host and returns the output directly — no LLM call, no tokens consumed.</p>
+<ul>
+<li><strong>30-second timeout</strong> — long-running commands are killed with an error message</li>
+<li><strong>Priority</strong> — quick commands are checked before skill commands, so you can override skill names</li>
+<li><strong>Autocomplete</strong> — quick commands are resolved at dispatch time and are not shown in the built-in slash-command autocomplete tables</li>
+<li><strong>Type</strong> — only <code>exec</code> is supported (runs a shell command); other types show an error</li>
+<li><strong>Works everywhere</strong> — CLI, Telegram, Discord, Slack, WhatsApp, Signal, Email, Home Assistant</li>
+</ul>
+<h2 id="human-delay"><a class="header" href="#human-delay">Human Delay</a></h2>
+<p>Simulate human-like response pacing in messaging platforms:</p>
+<pre><code class="language-yaml">human_delay:
+  mode: "off"                  # off | natural | custom
+  min_ms: 800                  # Minimum delay (custom mode)
+  max_ms: 2500                 # Maximum delay (custom mode)
+</code></pre>
+<h2 id="code-execution"><a class="header" href="#code-execution">Code Execution</a></h2>
+<p>Configure the sandboxed Python code execution tool:</p>
+<pre><code class="language-yaml">code_execution:
+  timeout: 300                 # Max execution time in seconds
+  max_tool_calls: 50           # Max tool calls within code execution
+</code></pre>
+<h2 id="web-search-backends"><a class="header" href="#web-search-backends">Web Search Backends</a></h2>
+<p>The <code>web_search</code>, <code>web_extract</code>, and <code>web_crawl</code> tools support four backend providers. Configure the backend in <code>config.yaml</code> or via <code>hermes tools</code>:</p>
+<pre><code class="language-yaml">web:
+  backend: firecrawl    # firecrawl | parallel | tavily | exa
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Backend</th><th>Env Var</th><th>Search</th><th>Extract</th><th>Crawl</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Firecrawl</strong> (default)</td><td><code>FIRECRAWL_API_KEY</code></td><td>✔</td><td>✔</td><td>✔</td></tr>
+<tr><td><strong>Parallel</strong></td><td><code>PARALLEL_API_KEY</code></td><td>✔</td><td>✔</td><td>—</td></tr>
+<tr><td><strong>Tavily</strong></td><td><code>TAVILY_API_KEY</code></td><td>✔</td><td>✔</td><td>✔</td></tr>
+<tr><td><strong>Exa</strong></td><td><code>EXA_API_KEY</code></td><td>✔</td><td>✔</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Backend selection:</strong> If <code>web.backend</code> is not set, the backend is auto-detected from available API keys. If only <code>EXA_API_KEY</code> is set, Exa is used. If only <code>TAVILY_API_KEY</code> is set, Tavily is used. If only <code>PARALLEL_API_KEY</code> is set, Parallel is used. Otherwise Firecrawl is the default.</p>
+<p><strong>Self-hosted Firecrawl:</strong> Set <code>FIRECRAWL_API_URL</code> to point at your own instance. When a custom URL is set, the API key becomes optional (set <code>USE_DB_AUTHENTICATION=false</code> on the server to disable auth).</p>
+<p><strong>Parallel search modes:</strong> Set <code>PARALLEL_SEARCH_MODE</code> to control search behavior — <code>fast</code>, <code>one-shot</code>, or <code>agentic</code> (default: <code>agentic</code>).</p>
+<h2 id="browser"><a class="header" href="#browser">Browser</a></h2>
+<p>Configure browser automation behavior:</p>
+<pre><code class="language-yaml">browser:
+  inactivity_timeout: 120        # Seconds before auto-closing idle sessions
+  command_timeout: 30             # Timeout in seconds for browser commands (screenshot, navigate, etc.)
+  record_sessions: false         # Auto-record browser sessions as WebM videos to ~/.hermes/browser_recordings/
+  camofox:
+    managed_persistence: false   # When true, Camofox sessions persist cookies/logins across restarts
+</code></pre>
+<p>The browser toolset supports multiple providers. See the <a href="/docs/user-guide/features/browser">Browser feature page</a> for details on Browserbase, Browser Use, and local Chrome CDP setup.</p>
+<h2 id="timezone"><a class="header" href="#timezone">Timezone</a></h2>
+<p>Override the server-local timezone with an IANA timezone string. Affects timestamps in logs, cron scheduling, and system prompt time injection.</p>
+<pre><code class="language-yaml">timezone: "America/New_York"   # IANA timezone (default: "" = server-local time)
+</code></pre>
+<p>Supported values: any IANA timezone identifier (e.g. <code>America/New_York</code>, <code>Europe/London</code>, <code>Asia/Kolkata</code>, <code>UTC</code>). Leave empty or omit for server-local time.</p>
+<h2 id="discord"><a class="header" href="#discord">Discord</a></h2>
+<p>Configure Discord-specific behavior for the messaging gateway:</p>
+<pre><code class="language-yaml">discord:
+  require_mention: true          # Require @mention to respond in server channels
+  free_response_channels: ""     # Comma-separated channel IDs where bot responds without @mention
+  auto_thread: true              # Auto-create threads on @mention in channels
+</code></pre>
+<ul>
+<li><code>require_mention</code> — when <code>true</code> (default), the bot only responds in server channels when mentioned with <code>@BotName</code>. DMs always work without mention.</li>
+<li><code>free_response_channels</code> — comma-separated list of channel IDs where the bot responds to every message without requiring a mention.</li>
+<li><code>auto_thread</code> — when <code>true</code> (default), mentions in channels automatically create a thread for the conversation, keeping channels clean (similar to Slack threading).</li>
+</ul>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<p>Pre-execution security scanning and secret redaction:</p>
+<pre><code class="language-yaml">security:
+  redact_secrets: true           # Redact API key patterns in tool output and logs
+  tirith_enabled: true           # Enable Tirith security scanning for terminal commands
+  tirith_path: "tirith"          # Path to tirith binary (default: "tirith" in $PATH)
+  tirith_timeout: 5              # Seconds to wait for tirith scan before timing out
+  tirith_fail_open: true         # Allow command execution if tirith is unavailable
+  website_blocklist:             # See Website Blocklist section below
+    enabled: false
+    domains: []
+    shared_files: []
+</code></pre>
+<ul>
+<li><code>redact_secrets</code> — automatically detects and redacts patterns that look like API keys, tokens, and passwords in tool output before it enters the conversation context and logs.</li>
+<li><code>tirith_enabled</code> — when <code>true</code>, terminal commands are scanned by <a href="https://github.com/StackGuardian/tirith">Tirith</a> before execution to detect potentially dangerous operations.</li>
+<li><code>tirith_path</code> — path to the tirith binary. Set this if tirith is installed in a non-standard location.</li>
+<li><code>tirith_timeout</code> — maximum seconds to wait for a tirith scan. Commands proceed if the scan times out.</li>
+<li><code>tirith_fail_open</code> — when <code>true</code> (default), commands are allowed to execute if tirith is unavailable or fails. Set to <code>false</code> to block commands when tirith cannot verify them.</li>
+</ul>
+<h2 id="website-blocklist"><a class="header" href="#website-blocklist">Website Blocklist</a></h2>
+<p>Block specific domains from being accessed by the agent’s web and browser tools:</p>
+<pre><code class="language-yaml">security:
+  website_blocklist:
+    enabled: false               # Enable URL blocking (default: false)
+    domains:                     # List of blocked domain patterns
+      - "*.internal.company.com"
+      - "admin.example.com"
+      - "*.local"
+    shared_files:                # Load additional rules from external files
+      - "/etc/hermes/blocked-sites.txt"
+</code></pre>
+<p>When enabled, any URL matching a blocked domain pattern is rejected before the web or browser tool executes. This applies to <code>web_search</code>, <code>web_extract</code>, <code>browser_navigate</code>, and any tool that accesses URLs.</p>
+<p>Domain rules support:</p>
+<ul>
+<li>Exact domains: <code>admin.example.com</code></li>
+<li>Wildcard subdomains: <code>*.internal.company.com</code> (blocks all subdomains)</li>
+<li>TLD wildcards: <code>*.local</code></li>
+</ul>
+<p>Shared files contain one domain rule per line (blank lines and <code>#</code> comments are ignored). Missing or unreadable files log a warning but don’t disable other web tools.</p>
+<p>The policy is cached for 30 seconds, so config changes take effect quickly without restart.</p>
+<h2 id="smart-approvals"><a class="header" href="#smart-approvals">Smart Approvals</a></h2>
+<p>Control how Hermes handles potentially dangerous commands:</p>
+<pre><code class="language-yaml">approvals:
+  mode: manual   # manual | smart | off
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code>manual</code> (default)</td><td>Prompt the user before executing any flagged command. In the CLI, shows an interactive approval dialog. In messaging, queues a pending approval request.</td></tr>
+<tr><td><code>smart</code></td><td>Use an auxiliary LLM to assess whether a flagged command is actually dangerous. Low-risk commands are auto-approved with session-level persistence. Genuinely risky commands are escalated to the user.</td></tr>
+<tr><td><code>off</code></td><td>Skip all approval checks. Equivalent to <code>HERMES_YOLO_MODE=true</code>. <strong>Use with caution.</strong></td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="smart-mode-is-particularly-useful-for-reducing-approval-fatigue--it-lets-the-agent-work-more-autonomously-on-safe-operations-while-still-catching-genuinely-destructive-commands"><a class="header" href="#smart-mode-is-particularly-useful-for-reducing-approval-fatigue--it-lets-the-agent-work-more-autonomously-on-safe-operations-while-still-catching-genuinely-destructive-commands">Smart mode is particularly useful for reducing approval fatigue — it lets the agent work more autonomously on safe operations while still catching genuinely destructive commands.</a></dt>
+<dd>
+<p>::warning
+Setting <code>approvals.mode: off</code> disables all safety checks for terminal commands. Only use this in trusted, sandboxed environments.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="checkpoints"><a class="header" href="#checkpoints">Checkpoints</a></h2>
+<p>Automatic filesystem snapshots before destructive file operations. See the <a href="/docs/user-guide/checkpoints-and-rollback">Checkpoints &amp; Rollback</a> for details.</p>
+<pre><code class="language-yaml">checkpoints:
+  enabled: true                  # Enable automatic checkpoints (also: hermes --checkpoints)
+  max_snapshots: 50              # Max checkpoints to keep per directory
+</code></pre>
+<h2 id="delegation"><a class="header" href="#delegation">Delegation</a></h2>
+<p>Configure subagent behavior for the delegate tool:</p>
+<pre><code class="language-yaml">delegation:
+  # model: "google/gemini-3-flash-preview"  # Override model (empty = inherit parent)
+  # provider: "openrouter"                  # Override provider (empty = inherit parent)
+  # base_url: "http://localhost:1234/v1"    # Direct OpenAI-compatible endpoint (takes precedence over provider)
+  # api_key: "local-key"                    # API key for base_url (falls back to OPENAI_API_KEY)
+</code></pre>
+<p><strong>Subagent provider:model override:</strong> By default, subagents inherit the parent agent’s provider and model. Set <code>delegation.provider</code> and <code>delegation.model</code> to route subagents to a different provider:model pair — e.g., use a cheap/fast model for narrowly-scoped subtasks while your primary agent runs an expensive reasoning model.</p>
+<p><strong>Direct endpoint override:</strong> If you want the obvious custom-endpoint path, set <code>delegation.base_url</code>, <code>delegation.api_key</code>, and <code>delegation.model</code>. That sends subagents directly to that OpenAI-compatible endpoint and takes precedence over <code>delegation.provider</code>. If <code>delegation.api_key</code> is omitted, Hermes falls back to <code>OPENAI_API_KEY</code> only.</p>
+<p>The delegation provider uses the same credential resolution as CLI/gateway startup. All configured providers are supported: <code>openrouter</code>, <code>nous</code>, <code>copilot</code>, <code>zai</code>, <code>kimi-coding</code>, <code>minimax</code>, <code>minimax-cn</code>. When a provider is set, the system automatically resolves the correct base URL, API key, and API mode — no manual credential wiring needed.</p>
+<p><strong>Precedence:</strong> <code>delegation.base_url</code> in config → <code>delegation.provider</code> in config → parent provider (inherited). <code>delegation.model</code> in config → parent model (inherited). Setting just <code>model</code> without <code>provider</code> changes only the model name while keeping the parent’s credentials (useful for switching models within the same provider like OpenRouter).</p>
+<h2 id="clarify"><a class="header" href="#clarify">Clarify</a></h2>
+<p>Configure the clarification prompt behavior:</p>
+<pre><code class="language-yaml">clarify:
+  timeout: 120                 # Seconds to wait for user clarification response
+</code></pre>
+<h2 id="context-files-soulmd-agentsmd"><a class="header" href="#context-files-soulmd-agentsmd">Context Files (SOUL.md, AGENTS.md)</a></h2>
+<p>Hermes uses two different context scopes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Purpose</th><th>Scope</th></tr>
+</thead>
+<tbody>
+<tr><td><code>SOUL.md</code></td><td><strong>Primary agent identity</strong> — defines who the agent is (slot #1 in the system prompt)</td><td><code>~/.hermes/SOUL.md</code> or <code>$HERMES_HOME/SOUL.md</code></td></tr>
+<tr><td><code>.hermes.md</code> / <code>HERMES.md</code></td><td>Project-specific instructions (highest priority)</td><td>Walks to git root</td></tr>
+<tr><td><code>AGENTS.md</code></td><td>Project-specific instructions, coding conventions</td><td>Recursive directory walk</td></tr>
+<tr><td><code>CLAUDE.md</code></td><td>Claude Code context files (also detected)</td><td>Working directory only</td></tr>
+<tr><td><code>.cursorrules</code></td><td>Cursor IDE rules (also detected)</td><td>Working directory only</td></tr>
+<tr><td><code>.cursor/rules/*.mdc</code></td><td>Cursor rule files (also detected)</td><td>Working directory only</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>SOUL.md</strong> is the agent’s primary identity. It occupies slot #1 in the system prompt, completely replacing the built-in default identity. Edit it to fully customize who the agent is.</li>
+<li>If SOUL.md is missing, empty, or cannot be loaded, Hermes falls back to a built-in default identity.</li>
+<li><strong>Project context files use a priority system</strong> — only ONE type is loaded (first match wins): <code>.hermes.md</code> → <code>AGENTS.md</code> → <code>CLAUDE.md</code> → <code>.cursorrules</code>. SOUL.md is always loaded independently.</li>
+<li><strong>AGENTS.md</strong> is hierarchical: if subdirectories also have AGENTS.md, all are combined.</li>
+<li>Hermes automatically seeds a default <code>SOUL.md</code> if one does not already exist.</li>
+<li>All loaded context files are capped at 20,000 characters with smart truncation.</li>
+</ul>
+<p>See also:</p>
+<ul>
+<li><a href="/docs/user-guide/features/personality">Personality &amp; SOUL.md</a></li>
+<li><a href="/docs/user-guide/features/context-files">Context Files</a></li>
+</ul>
+<h2 id="working-directory"><a class="header" href="#working-directory">Working Directory</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Context</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>CLI (<code>hermes</code>)</strong></td><td>Current directory where you run the command</td></tr>
+<tr><td><strong>Messaging gateway</strong></td><td>Home directory <code>~</code> (override with <code>MESSAGING_CWD</code>)</td></tr>
+<tr><td><strong>Docker / Singularity / Modal / SSH</strong></td><td>User’s home directory inside the container or remote machine</td></tr>
+</tbody>
+</table>
+</div>
+<p>Override the working directory:</p>
+<pre><code class="language-bash"># In ~/.hermes/.env or ~/.hermes/config.yaml:
+MESSAGING_CWD=/home/myuser/projects    # Gateway sessions
+TERMINAL_CWD=/workspace                # All terminal sessions
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/getting-started/termux.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/user-guide/docker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/getting-started/termux.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/user-guide/docker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

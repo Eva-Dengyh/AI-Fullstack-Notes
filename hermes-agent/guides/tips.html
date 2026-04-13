@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tips &amp; Best Practices - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/guides/tips.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-1-title-tips--best-practices-description-practical-advice-to-get-the-most-out-of-hermes-agent--prompt-tips-cli-shortcuts-context-files-memory-cost-optimization-and-security"><a class="header" href="#sidebar_position-1-title-tips--best-practices-description-practical-advice-to-get-the-most-out-of-hermes-agent--prompt-tips-cli-shortcuts-context-files-memory-cost-optimization-and-security">sidebar_position: 1
+title: “Tips &amp; Best Practices”
+description: “Practical advice to get the most out of Hermes Agent — prompt tips, CLI shortcuts, context files, memory, cost optimization, and security”</a></h2>
+<h1 id="tips--best-practices"><a class="header" href="#tips--best-practices">Tips &amp; Best Practices</a></h1>
+<p>A quick-wins collection of practical tips that make you immediately more effective with Hermes Agent. Each section targets a different aspect — scan the headers and jump to what’s relevant.</p>
+<hr>
+<h2 id="getting-the-best-results"><a class="header" href="#getting-the-best-results">Getting the Best Results</a></h2>
+<h3 id="be-specific-about-what-you-want"><a class="header" href="#be-specific-about-what-you-want">Be Specific About What You Want</a></h3>
+<p>Vague prompts produce vague results. Instead of “fix the code,” say “fix the TypeError in <code>api/handlers.py</code> on line 47 — the <code>process_request()</code> function receives <code>None</code> from <code>parse_body()</code>.” The more context you give, the fewer iterations you need.</p>
+<h3 id="provide-context-up-front"><a class="header" href="#provide-context-up-front">Provide Context Up Front</a></h3>
+<p>Front-load your request with the relevant details: file paths, error messages, expected behavior. One well-crafted message beats three rounds of clarification. Paste error tracebacks directly — the agent can parse them.</p>
+<h3 id="use-context-files-for-recurring-instructions"><a class="header" href="#use-context-files-for-recurring-instructions">Use Context Files for Recurring Instructions</a></h3>
+<p>If you find yourself repeating the same instructions (“use tabs not spaces,” “we use pytest,” “the API is at <code>/api/v2</code>”), put them in an <code>AGENTS.md</code> file. The agent reads it automatically every session — zero effort after setup.</p>
+<h3 id="let-the-agent-use-its-tools"><a class="header" href="#let-the-agent-use-its-tools">Let the Agent Use Its Tools</a></h3>
+<p>Don’t try to hand-hold every step. Say “find and fix the failing test” rather than “open <code>tests/test_foo.py</code>, look at line 42, then…” The agent has file search, terminal access, and code execution — let it explore and iterate.</p>
+<h3 id="use-skills-for-complex-workflows"><a class="header" href="#use-skills-for-complex-workflows">Use Skills for Complex Workflows</a></h3>
+<p>Before writing a long prompt explaining how to do something, check if there’s already a skill for it. Type <code>/skills</code> to browse available skills, or just invoke one directly like <code>/axolotl</code> or <code>/github-pr-workflow</code>.</p>
+<h2 id="cli-power-user-tips"><a class="header" href="#cli-power-user-tips">CLI Power User Tips</a></h2>
+<h3 id="multi-line-input"><a class="header" href="#multi-line-input">Multi-Line Input</a></h3>
+<p>Press <strong>Alt+Enter</strong> (or <strong>Ctrl+J</strong>) to insert a newline without sending. This lets you compose multi-line prompts, paste code blocks, or structure complex requests before hitting Enter to send.</p>
+<h3 id="paste-detection"><a class="header" href="#paste-detection">Paste Detection</a></h3>
+<p>The CLI auto-detects multi-line pastes. Just paste a code block or error traceback directly — it won’t send each line as a separate message. The paste is buffered and sent as one message.</p>
+<h3 id="interrupt-and-redirect"><a class="header" href="#interrupt-and-redirect">Interrupt and Redirect</a></h3>
+<p>Press <strong>Ctrl+C</strong> once to interrupt the agent mid-response. You can then type a new message to redirect it. Double-press Ctrl+C within 2 seconds to force exit. This is invaluable when the agent starts going down the wrong path.</p>
+<h3 id="resume-sessions-with--c"><a class="header" href="#resume-sessions-with--c">Resume Sessions with <code>-c</code></a></h3>
+<p>Forgot something from your last session? Run <code>hermes -c</code> to resume exactly where you left off, with full conversation history restored. You can also resume by title: <code>hermes -r "my research project"</code>.</p>
+<h3 id="clipboard-image-paste"><a class="header" href="#clipboard-image-paste">Clipboard Image Paste</a></h3>
+<p>Press <strong>Ctrl+V</strong> to paste an image from your clipboard directly into the chat. The agent uses vision to analyze screenshots, diagrams, error popups, or UI mockups — no need to save to a file first.</p>
+<h3 id="slash-command-autocomplete"><a class="header" href="#slash-command-autocomplete">Slash Command Autocomplete</a></h3>
+<dl>
+<dt id="type--and-press-tab-to-see-all-available-commands-this-includes-built-in-commands-compress-model-title-and-every-installed-skill-you-dont-need-to-memorize-anything--tab-completion-has-you-covered"><a class="header" href="#type--and-press-tab-to-see-all-available-commands-this-includes-built-in-commands-compress-model-title-and-every-installed-skill-you-dont-need-to-memorize-anything--tab-completion-has-you-covered">Type <code>/</code> and press <strong>Tab</strong> to see all available commands. This includes built-in commands (<code>/compress</code>, <code>/model</code>, <code>/title</code>) and every installed skill. You don’t need to memorize anything — Tab completion has you covered.</a></dt>
+<dd>
+<p>::tip
+Use <code>/verbose</code> to cycle through tool output display modes: <strong>off → new → all → verbose</strong>. The “all” mode is great for watching what the agent does; “off” is cleanest for simple Q&amp;A.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="context-files"><a class="header" href="#context-files">Context Files</a></h2>
+<h3 id="agentsmd-your-projects-brain"><a class="header" href="#agentsmd-your-projects-brain">AGENTS.md: Your Project’s Brain</a></h3>
+<p>Create an <code>AGENTS.md</code> in your project root with architecture decisions, coding conventions, and project-specific instructions. This is automatically injected into every session, so the agent always knows your project’s rules.</p>
+<pre><code class="language-markdown"># Project Context
+- This is a FastAPI backend with SQLAlchemy ORM
+- Always use async/await for database operations
+- Tests go in tests/ and use pytest-asyncio
+- Never commit .env files
+</code></pre>
+<h3 id="soulmd-customize-personality"><a class="header" href="#soulmd-customize-personality">SOUL.md: Customize Personality</a></h3>
+<p>Want Hermes to have a stable default voice? Edit <code>~/.hermes/SOUL.md</code> (or <code>$HERMES_HOME/SOUL.md</code> if you use a custom Hermes home). Hermes now seeds a starter SOUL automatically and uses that global file as the instance-wide personality source.</p>
+<p>For a full walkthrough, see <a href="/docs/guides/use-soul-with-hermes">Use SOUL.md with Hermes</a>.</p>
+<pre><code class="language-markdown"># Soul
+You are a senior backend engineer. Be terse and direct.
+Skip explanations unless asked. Prefer one-liners over verbose solutions.
+Always consider error handling and edge cases.
+</code></pre>
+<p>Use <code>SOUL.md</code> for durable personality. Use <code>AGENTS.md</code> for project-specific instructions.</p>
+<h3 id="cursorrules-compatibility"><a class="header" href="#cursorrules-compatibility">.cursorrules Compatibility</a></h3>
+<p>Already have a <code>.cursorrules</code> or <code>.cursor/rules/*.mdc</code> file? Hermes reads those too. No need to duplicate your coding conventions — they’re loaded automatically from the working directory.</p>
+<h3 id="discovery"><a class="header" href="#discovery">Discovery</a></h3>
+<dl>
+<dt id="hermes-loads-the-top-level-agentsmd-from-the-current-working-directory-at-session-start-subdirectory-agentsmd-files-are-discovered-lazily-during-tool-calls-via-subdirectory_hintspy-and-injected-into-tool-results--they-are-not-loaded-upfront-into-the-system-prompt"><a class="header" href="#hermes-loads-the-top-level-agentsmd-from-the-current-working-directory-at-session-start-subdirectory-agentsmd-files-are-discovered-lazily-during-tool-calls-via-subdirectory_hintspy-and-injected-into-tool-results--they-are-not-loaded-upfront-into-the-system-prompt">Hermes loads the top-level <code>AGENTS.md</code> from the current working directory at session start. Subdirectory <code>AGENTS.md</code> files are discovered lazily during tool calls (via <code>subdirectory_hints.py</code>) and injected into tool results — they are not loaded upfront into the system prompt.</a></dt>
+<dd>
+<p>::tip
+Keep context files focused and concise. Every character counts against your token budget since they’re injected into every single message.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="memory--skills"><a class="header" href="#memory--skills">Memory &amp; Skills</a></h2>
+<h3 id="memory-vs-skills-what-goes-where"><a class="header" href="#memory-vs-skills-what-goes-where">Memory vs. Skills: What Goes Where</a></h3>
+<p><strong>Memory</strong> is for facts: your environment, preferences, project locations, and things the agent has learned about you. <strong>Skills</strong> are for procedures: multi-step workflows, tool-specific instructions, and reusable recipes. Use memory for “what,” skills for “how.”</p>
+<h3 id="when-to-create-skills"><a class="header" href="#when-to-create-skills">When to Create Skills</a></h3>
+<p>If you find a task that takes 5+ steps and you’ll do it again, ask the agent to create a skill for it. Say “save what you just did as a skill called <code>deploy-staging</code>.” Next time, just type <code>/deploy-staging</code> and the agent loads the full procedure.</p>
+<h3 id="managing-memory-capacity"><a class="header" href="#managing-memory-capacity">Managing Memory Capacity</a></h3>
+<p>Memory is intentionally bounded (~2,200 chars for MEMORY.md, ~1,375 chars for USER.md). When it fills up, the agent consolidates entries. You can help by saying “clean up your memory” or “replace the old Python 3.9 note — we’re on 3.12 now.”</p>
+<h3 id="let-the-agent-remember"><a class="header" href="#let-the-agent-remember">Let the Agent Remember</a></h3>
+<dl>
+<dt id="after-a-productive-session-say-remember-this-for-next-time-and-the-agent-will-save-the-key-takeaways-you-can-also-be-specific-save-to-memory-that-our-ci-uses-github-actions-with-the-deployyml-workflow"><a class="header" href="#after-a-productive-session-say-remember-this-for-next-time-and-the-agent-will-save-the-key-takeaways-you-can-also-be-specific-save-to-memory-that-our-ci-uses-github-actions-with-the-deployyml-workflow">After a productive session, say “remember this for next time” and the agent will save the key takeaways. You can also be specific: “save to memory that our CI uses GitHub Actions with the <code>deploy.yml</code> workflow.”</a></dt>
+<dd>
+<p>::warning
+Memory is a frozen snapshot — changes made during a session don’t appear in the system prompt until the next session starts. The agent writes to disk immediately, but the prompt cache isn’t invalidated mid-session.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="performance--cost"><a class="header" href="#performance--cost">Performance &amp; Cost</a></h2>
+<h3 id="dont-break-the-prompt-cache"><a class="header" href="#dont-break-the-prompt-cache">Don’t Break the Prompt Cache</a></h3>
+<p>Most LLM providers cache the system prompt prefix. If you keep your system prompt stable (same context files, same memory), subsequent messages in a session get <strong>cache hits</strong> that are significantly cheaper. Avoid changing the model or system prompt mid-session.</p>
+<h3 id="use-compress-before-hitting-limits"><a class="header" href="#use-compress-before-hitting-limits">Use /compress Before Hitting Limits</a></h3>
+<p>Long sessions accumulate tokens. When you notice responses slowing down or getting truncated, run <code>/compress</code>. This summarizes the conversation history, preserving key context while dramatically reducing token count. Use <code>/usage</code> to check where you stand.</p>
+<h3 id="delegate-for-parallel-work"><a class="header" href="#delegate-for-parallel-work">Delegate for Parallel Work</a></h3>
+<p>Need to research three topics at once? Ask the agent to use <code>delegate_task</code> with parallel subtasks. Each subagent runs independently with its own context, and only the final summaries come back — massively reducing your main conversation’s token usage.</p>
+<h3 id="use-execute_code-for-batch-operations"><a class="header" href="#use-execute_code-for-batch-operations">Use execute_code for Batch Operations</a></h3>
+<p>Instead of running terminal commands one at a time, ask the agent to write a script that does everything at once. “Write a Python script to rename all <code>.jpeg</code> files to <code>.jpg</code> and run it” is cheaper and faster than renaming files individually.</p>
+<h3 id="choose-the-right-model"><a class="header" href="#choose-the-right-model">Choose the Right Model</a></h3>
+<dl>
+<dt id="use-model-to-switch-models-mid-session-use-a-frontier-model-claude-sonnetopus-gpt-4o-for-complex-reasoning-and-architecture-decisions-switch-to-a-faster-model-for-simple-tasks-like-formatting-renaming-or-boilerplate-generation"><a class="header" href="#use-model-to-switch-models-mid-session-use-a-frontier-model-claude-sonnetopus-gpt-4o-for-complex-reasoning-and-architecture-decisions-switch-to-a-faster-model-for-simple-tasks-like-formatting-renaming-or-boilerplate-generation">Use <code>/model</code> to switch models mid-session. Use a frontier model (Claude Sonnet/Opus, GPT-4o) for complex reasoning and architecture decisions. Switch to a faster model for simple tasks like formatting, renaming, or boilerplate generation.</a></dt>
+<dd>
+<p>::tip
+Run <code>/usage</code> periodically to see your token consumption. Run <code>/insights</code> for a broader view of usage patterns over the last 30 days.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="messaging-tips"><a class="header" href="#messaging-tips">Messaging Tips</a></h2>
+<h3 id="set-a-home-channel"><a class="header" href="#set-a-home-channel">Set a Home Channel</a></h3>
+<p>Use <code>/sethome</code> in your preferred Telegram or Discord chat to designate it as the home channel. Cron job results and scheduled task outputs are delivered here. Without it, the agent has nowhere to send proactive messages.</p>
+<h3 id="use-title-to-organize-sessions"><a class="header" href="#use-title-to-organize-sessions">Use /title to Organize Sessions</a></h3>
+<p>Name your sessions with <code>/title auth-refactor</code> or <code>/title research-llm-quantization</code>. Named sessions are easy to find with <code>hermes sessions list</code> and resume with <code>hermes -r "auth-refactor"</code>. Unnamed sessions pile up and become impossible to distinguish.</p>
+<h3 id="dm-pairing-for-team-access"><a class="header" href="#dm-pairing-for-team-access">DM Pairing for Team Access</a></h3>
+<p>Instead of manually collecting user IDs for allowlists, enable DM pairing. When a teammate DMs the bot, they get a one-time pairing code. You approve it with <code>hermes pairing approve telegram XKGH5N7P</code> — simple and secure.</p>
+<h3 id="tool-progress-display-modes"><a class="header" href="#tool-progress-display-modes">Tool Progress Display Modes</a></h3>
+<dl>
+<dt id="use-verbose-to-control-how-much-tool-activity-you-see-in-messaging-platforms-less-is-usually-more--keep-it-on-new-to-see-just-new-tool-calls-in-the-cli-all-gives-you-a-satisfying-live-view-of-everything-the-agent-does"><a class="header" href="#use-verbose-to-control-how-much-tool-activity-you-see-in-messaging-platforms-less-is-usually-more--keep-it-on-new-to-see-just-new-tool-calls-in-the-cli-all-gives-you-a-satisfying-live-view-of-everything-the-agent-does">Use <code>/verbose</code> to control how much tool activity you see. In messaging platforms, less is usually more — keep it on “new” to see just new tool calls. In the CLI, “all” gives you a satisfying live view of everything the agent does.</a></dt>
+<dd>
+<p>::tip
+On messaging platforms, sessions auto-reset after idle time (default: 24 hours) or daily at 4 AM. Adjust per-platform in <code>~/.hermes/config.yaml</code> if you need longer sessions.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<h3 id="use-docker-for-untrusted-code"><a class="header" href="#use-docker-for-untrusted-code">Use Docker for Untrusted Code</a></h3>
+<p>When working with untrusted repositories or running unfamiliar code, use Docker or Daytona as your terminal backend. Set <code>TERMINAL_BACKEND=docker</code> in your <code>.env</code>. Destructive commands inside a container can’t harm your host system.</p>
+<pre><code class="language-bash"># In your .env:
+TERMINAL_BACKEND=docker
+TERMINAL_DOCKER_IMAGE=hermes-sandbox:latest
+</code></pre>
+<h3 id="avoid-windows-encoding-pitfalls"><a class="header" href="#avoid-windows-encoding-pitfalls">Avoid Windows Encoding Pitfalls</a></h3>
+<p>On Windows, some default encodings (such as <code>cp125x</code>) cannot represent all Unicode characters, which can cause <code>UnicodeEncodeError</code> when writing files in tests or scripts.</p>
+<ul>
+<li>Prefer opening files with an explicit UTF-8 encoding:</li>
+</ul>
+<pre><code class="language-python">with open("results.txt", "w", encoding="utf-8") as f:
+    f.write("✓ All good\n")
+</code></pre>
+<ul>
+<li>In PowerShell, you can also switch the current session to UTF-8 for console and native command output:</li>
+</ul>
+<pre><code class="language-powershell">$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+</code></pre>
+<p>This keeps PowerShell and child processes on UTF-8 and helps avoid Windows-only failures.</p>
+<h3 id="review-before-choosing-always"><a class="header" href="#review-before-choosing-always">Review Before Choosing “Always”</a></h3>
+<p>When the agent triggers a dangerous command approval (<code>rm -rf</code>, <code>DROP TABLE</code>, etc.), you get four options: <strong>once</strong>, <strong>session</strong>, <strong>always</strong>, <strong>deny</strong>. Think carefully before choosing “always” — it permanently allowlists that pattern. Start with “session” until you’re comfortable.</p>
+<h3 id="command-approval-is-your-safety-net"><a class="header" href="#command-approval-is-your-safety-net">Command Approval Is Your Safety Net</a></h3>
+<dl>
+<dt id="hermes-checks-every-command-against-a-curated-list-of-dangerous-patterns-before-execution-this-includes-recursive-deletes-sql-drops-piping-curl-to-shell-and-more-dont-disable-this-in-production--it-exists-for-good-reasons"><a class="header" href="#hermes-checks-every-command-against-a-curated-list-of-dangerous-patterns-before-execution-this-includes-recursive-deletes-sql-drops-piping-curl-to-shell-and-more-dont-disable-this-in-production--it-exists-for-good-reasons">Hermes checks every command against a curated list of dangerous patterns before execution. This includes recursive deletes, SQL drops, piping curl to shell, and more. Don’t disable this in production — it exists for good reasons.</a></dt>
+<dd>
+<p>::warning
+When running in a container backend (Docker, Singularity, Modal, Daytona), dangerous command checks are <strong>skipped</strong> because the container is the security boundary. Make sure your container images are properly locked down.</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="use-allowlists-for-messaging-bots"><a class="header" href="#use-allowlists-for-messaging-bots">Use Allowlists for Messaging Bots</a></h3>
+<p>Never set <code>GATEWAY_ALLOW_ALL_USERS=true</code> on a bot with terminal access. Always use platform-specific allowlists (<code>TELEGRAM_ALLOWED_USERS</code>, <code>DISCORD_ALLOWED_USERS</code>) or DM pairing to control who can interact with your agent.</p>
+<pre><code class="language-bash"># Recommended: explicit allowlists per platform
+TELEGRAM_ALLOWED_USERS=123456789,987654321
+DISCORD_ALLOWED_USERS=123456789012345678
+
+# Or use cross-platform allowlist
+GATEWAY_ALLOWED_USERS=123456789,987654321
+</code></pre>
+<hr>
+<p><em>Have a tip that should be on this page? Open an issue or PR — community contributions are welcome.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/guides/team-telegram-assistant.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/guides/use-mcp-with-hermes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/guides/team-telegram-assistant.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/guides/use-mcp-with-hermes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

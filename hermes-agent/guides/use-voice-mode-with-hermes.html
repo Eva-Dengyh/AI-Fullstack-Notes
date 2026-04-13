@@ -1,0 +1,592 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Use Voice Mode with Hermes - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/guides/use-voice-mode-with-hermes.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-8-title-use-voice-mode-with-hermes-description-a-practical-guide-to-setting-up-and-using-hermes-voice-mode-across-cli-telegram-discord-and-discord-voice-channels"><a class="header" href="#sidebar_position-8-title-use-voice-mode-with-hermes-description-a-practical-guide-to-setting-up-and-using-hermes-voice-mode-across-cli-telegram-discord-and-discord-voice-channels">sidebar_position: 8
+title: “Use Voice Mode with Hermes”
+description: “A practical guide to setting up and using Hermes voice mode across CLI, Telegram, Discord, and Discord voice channels”</a></h2>
+<h1 id="use-voice-mode-with-hermes"><a class="header" href="#use-voice-mode-with-hermes">Use Voice Mode with Hermes</a></h1>
+<p>This guide is the practical companion to the <a href="/docs/user-guide/features/voice-mode">Voice Mode feature reference</a>.</p>
+<p>If the feature page explains what voice mode can do, this guide shows how to actually use it well.</p>
+<h2 id="what-voice-mode-is-good-for"><a class="header" href="#what-voice-mode-is-good-for">What voice mode is good for</a></h2>
+<p>Voice mode is especially useful when:</p>
+<ul>
+<li>you want a hands-free CLI workflow</li>
+<li>you want spoken responses in Telegram or Discord</li>
+<li>you want Hermes sitting in a Discord voice channel for live conversation</li>
+<li>you want quick idea capture, debugging, or back-and-forth while walking around instead of typing</li>
+</ul>
+<h2 id="choose-your-voice-mode-setup"><a class="header" href="#choose-your-voice-mode-setup">Choose your voice mode setup</a></h2>
+<p>There are really three different voice experiences in Hermes.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Best for</th><th>Platform</th></tr>
+</thead>
+<tbody>
+<tr><td>Interactive microphone loop</td><td>Personal hands-free use while coding or researching</td><td>CLI</td></tr>
+<tr><td>Voice replies in chat</td><td>Spoken responses alongside normal messaging</td><td>Telegram, Discord</td></tr>
+<tr><td>Live voice channel bot</td><td>Group or personal live conversation in a VC</td><td>Discord voice channels</td></tr>
+</tbody>
+</table>
+</div>
+<p>A good path is:</p>
+<ol>
+<li>get text working first</li>
+<li>enable voice replies second</li>
+<li>move to Discord voice channels last if you want the full experience</li>
+</ol>
+<h2 id="step-1-make-sure-normal-hermes-works-first"><a class="header" href="#step-1-make-sure-normal-hermes-works-first">Step 1: make sure normal Hermes works first</a></h2>
+<p>Before touching voice mode, verify that:</p>
+<ul>
+<li>Hermes starts</li>
+<li>your provider is configured</li>
+<li>the agent can answer text prompts normally</li>
+</ul>
+<pre><code class="language-bash">hermes
+</code></pre>
+<p>Ask something simple:</p>
+<pre><code class="language-text">What tools do you have available?
+</code></pre>
+<p>If that is not solid yet, fix text mode first.</p>
+<h2 id="step-2-install-the-right-extras"><a class="header" href="#step-2-install-the-right-extras">Step 2: install the right extras</a></h2>
+<h3 id="cli-microphone--playback"><a class="header" href="#cli-microphone--playback">CLI microphone + playback</a></h3>
+<pre><code class="language-bash">pip install "hermes-agent[voice]"
+</code></pre>
+<h3 id="messaging-platforms"><a class="header" href="#messaging-platforms">Messaging platforms</a></h3>
+<pre><code class="language-bash">pip install "hermes-agent[messaging]"
+</code></pre>
+<h3 id="premium-elevenlabs-tts"><a class="header" href="#premium-elevenlabs-tts">Premium ElevenLabs TTS</a></h3>
+<pre><code class="language-bash">pip install "hermes-agent[tts-premium]"
+</code></pre>
+<h3 id="local-neutts-optional"><a class="header" href="#local-neutts-optional">Local NeuTTS (optional)</a></h3>
+<pre><code class="language-bash">python -m pip install -U neutts[all]
+</code></pre>
+<h3 id="everything"><a class="header" href="#everything">Everything</a></h3>
+<pre><code class="language-bash">pip install "hermes-agent[all]"
+</code></pre>
+<h2 id="step-3-install-system-dependencies"><a class="header" href="#step-3-install-system-dependencies">Step 3: install system dependencies</a></h2>
+<h3 id="macos"><a class="header" href="#macos">macOS</a></h3>
+<pre><code class="language-bash">brew install portaudio ffmpeg opus
+brew install espeak-ng
+</code></pre>
+<h3 id="ubuntu--debian"><a class="header" href="#ubuntu--debian">Ubuntu / Debian</a></h3>
+<pre><code class="language-bash">sudo apt install portaudio19-dev ffmpeg libopus0
+sudo apt install espeak-ng
+</code></pre>
+<p>Why these matter:</p>
+<ul>
+<li><code>portaudio</code> → microphone input / playback for CLI voice mode</li>
+<li><code>ffmpeg</code> → audio conversion for TTS and messaging delivery</li>
+<li><code>opus</code> → Discord voice codec support</li>
+<li><code>espeak-ng</code> → phonemizer backend for NeuTTS</li>
+</ul>
+<h2 id="step-4-choose-stt-and-tts-providers"><a class="header" href="#step-4-choose-stt-and-tts-providers">Step 4: choose STT and TTS providers</a></h2>
+<p>Hermes supports both local and cloud speech stacks.</p>
+<h3 id="easiest--cheapest-setup"><a class="header" href="#easiest--cheapest-setup">Easiest / cheapest setup</a></h3>
+<p>Use local STT and free Edge TTS:</p>
+<ul>
+<li>STT provider: <code>local</code></li>
+<li>TTS provider: <code>edge</code></li>
+</ul>
+<p>This is usually the best place to start.</p>
+<h3 id="environment-file-example"><a class="header" href="#environment-file-example">Environment file example</a></h3>
+<p>Add to <code>~/.hermes/.env</code>:</p>
+<pre><code class="language-bash"># Cloud STT options (local needs no key)
+GROQ_API_KEY=***
+VOICE_TOOLS_OPENAI_KEY=***
+
+# Premium TTS (optional)
+ELEVENLABS_API_KEY=***
+</code></pre>
+<h3 id="provider-recommendations"><a class="header" href="#provider-recommendations">Provider recommendations</a></h3>
+<h4 id="speech-to-text"><a class="header" href="#speech-to-text">Speech-to-text</a></h4>
+<ul>
+<li><code>local</code> → best default for privacy and zero-cost use</li>
+<li><code>groq</code> → very fast cloud transcription</li>
+<li><code>openai</code> → good paid fallback</li>
+</ul>
+<h4 id="text-to-speech"><a class="header" href="#text-to-speech">Text-to-speech</a></h4>
+<ul>
+<li><code>edge</code> → free and good enough for most users</li>
+<li><code>neutts</code> → free local/on-device TTS</li>
+<li><code>elevenlabs</code> → best quality</li>
+<li><code>openai</code> → good middle ground</li>
+<li><code>mistral</code> → multilingual, native Opus</li>
+</ul>
+<h3 id="if-you-use-hermes-setup"><a class="header" href="#if-you-use-hermes-setup">If you use <code>hermes setup</code></a></h3>
+<p>If you choose NeuTTS in the setup wizard, Hermes checks whether <code>neutts</code> is already installed. If it is missing, the wizard tells you NeuTTS needs the Python package <code>neutts</code> and the system package <code>espeak-ng</code>, offers to install them for you, installs <code>espeak-ng</code> with your platform package manager, and then runs:</p>
+<pre><code class="language-bash">python -m pip install -U neutts[all]
+</code></pre>
+<p>If you skip that install or it fails, the wizard falls back to Edge TTS.</p>
+<h2 id="step-5-recommended-config"><a class="header" href="#step-5-recommended-config">Step 5: recommended config</a></h2>
+<pre><code class="language-yaml">voice:
+  record_key: "ctrl+b"
+  max_recording_seconds: 120
+  auto_tts: false
+  silence_threshold: 200
+  silence_duration: 3.0
+
+stt:
+  provider: "local"
+  local:
+    model: "base"
+
+tts:
+  provider: "edge"
+  edge:
+    voice: "en-US-AriaNeural"
+</code></pre>
+<p>This is a good conservative default for most people.</p>
+<p>If you want local TTS instead, switch the <code>tts</code> block to:</p>
+<pre><code class="language-yaml">tts:
+  provider: "neutts"
+  neutts:
+    ref_audio: ''
+    ref_text: ''
+    model: neuphonic/neutts-air-q4-gguf
+    device: cpu
+</code></pre>
+<h2 id="use-case-1-cli-voice-mode"><a class="header" href="#use-case-1-cli-voice-mode">Use case 1: CLI voice mode</a></h2>
+<h2 id="turn-it-on"><a class="header" href="#turn-it-on">Turn it on</a></h2>
+<p>Start Hermes:</p>
+<pre><code class="language-bash">hermes
+</code></pre>
+<p>Inside the CLI:</p>
+<pre><code class="language-text">/voice on
+</code></pre>
+<h3 id="recording-flow"><a class="header" href="#recording-flow">Recording flow</a></h3>
+<p>Default key:</p>
+<ul>
+<li><code>Ctrl+B</code></li>
+</ul>
+<p>Workflow:</p>
+<ol>
+<li>press <code>Ctrl+B</code></li>
+<li>speak</li>
+<li>wait for silence detection to stop recording automatically</li>
+<li>Hermes transcribes and responds</li>
+<li>if TTS is on, it speaks the answer</li>
+<li>the loop can automatically restart for continuous use</li>
+</ol>
+<h3 id="useful-commands"><a class="header" href="#useful-commands">Useful commands</a></h3>
+<pre><code class="language-text">/voice
+/voice on
+/voice off
+/voice tts
+/voice status
+</code></pre>
+<h3 id="good-cli-workflows"><a class="header" href="#good-cli-workflows">Good CLI workflows</a></h3>
+<h4 id="walk-up-debugging"><a class="header" href="#walk-up-debugging">Walk-up debugging</a></h4>
+<p>Say:</p>
+<pre><code class="language-text">I keep getting a docker permission error. Help me debug it.
+</code></pre>
+<p>Then continue hands-free:</p>
+<ul>
+<li>“Read the last error again”</li>
+<li>“Explain the root cause in simpler terms”</li>
+<li>“Now give me the exact fix”</li>
+</ul>
+<h4 id="research--brainstorming"><a class="header" href="#research--brainstorming">Research / brainstorming</a></h4>
+<p>Great for:</p>
+<ul>
+<li>walking around while thinking</li>
+<li>dictating half-formed ideas</li>
+<li>asking Hermes to structure your thoughts in real time</li>
+</ul>
+<h4 id="accessibility--low-typing-sessions"><a class="header" href="#accessibility--low-typing-sessions">Accessibility / low-typing sessions</a></h4>
+<p>If typing is inconvenient, voice mode is one of the fastest ways to stay in the full Hermes loop.</p>
+<h2 id="tuning-cli-behavior"><a class="header" href="#tuning-cli-behavior">Tuning CLI behavior</a></h2>
+<h3 id="silence-threshold"><a class="header" href="#silence-threshold">Silence threshold</a></h3>
+<p>If Hermes starts/stops too aggressively, tune:</p>
+<pre><code class="language-yaml">voice:
+  silence_threshold: 250
+</code></pre>
+<p>Higher threshold = less sensitive.</p>
+<h3 id="silence-duration"><a class="header" href="#silence-duration">Silence duration</a></h3>
+<p>If you pause a lot between sentences, increase:</p>
+<pre><code class="language-yaml">voice:
+  silence_duration: 4.0
+</code></pre>
+<h3 id="record-key"><a class="header" href="#record-key">Record key</a></h3>
+<p>If <code>Ctrl+B</code> conflicts with your terminal or tmux habits:</p>
+<pre><code class="language-yaml">voice:
+  record_key: "ctrl+space"
+</code></pre>
+<h2 id="use-case-2-voice-replies-in-telegram-or-discord"><a class="header" href="#use-case-2-voice-replies-in-telegram-or-discord">Use case 2: voice replies in Telegram or Discord</a></h2>
+<p>This mode is simpler than full voice channels.</p>
+<p>Hermes stays a normal chat bot, but can speak replies.</p>
+<h3 id="start-the-gateway"><a class="header" href="#start-the-gateway">Start the gateway</a></h3>
+<pre><code class="language-bash">hermes gateway
+</code></pre>
+<h3 id="turn-on-voice-replies"><a class="header" href="#turn-on-voice-replies">Turn on voice replies</a></h3>
+<p>Inside Telegram or Discord:</p>
+<pre><code class="language-text">/voice on
+</code></pre>
+<p>or</p>
+<pre><code class="language-text">/voice tts
+</code></pre>
+<h3 id="modes"><a class="header" href="#modes">Modes</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>off</code></td><td>text only</td></tr>
+<tr><td><code>voice_only</code></td><td>speak only when the user sent voice</td></tr>
+<tr><td><code>all</code></td><td>speak every reply</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="when-to-use-which-mode"><a class="header" href="#when-to-use-which-mode">When to use which mode</a></h3>
+<ul>
+<li><code>/voice on</code> if you want spoken replies only for voice-originating messages</li>
+<li><code>/voice tts</code> if you want a full spoken assistant all the time</li>
+</ul>
+<h3 id="good-messaging-workflows"><a class="header" href="#good-messaging-workflows">Good messaging workflows</a></h3>
+<h4 id="telegram-assistant-on-your-phone"><a class="header" href="#telegram-assistant-on-your-phone">Telegram assistant on your phone</a></h4>
+<p>Use when:</p>
+<ul>
+<li>you are away from your machine</li>
+<li>you want to send voice notes and get quick spoken replies</li>
+<li>you want Hermes to function like a portable research or ops assistant</li>
+</ul>
+<h4 id="discord-dms-with-spoken-output"><a class="header" href="#discord-dms-with-spoken-output">Discord DMs with spoken output</a></h4>
+<p>Useful when you want private interaction without server-channel mention behavior.</p>
+<h2 id="use-case-3-discord-voice-channels"><a class="header" href="#use-case-3-discord-voice-channels">Use case 3: Discord voice channels</a></h2>
+<p>This is the most advanced mode.</p>
+<p>Hermes joins a Discord VC, listens to user speech, transcribes it, runs the normal agent pipeline, and speaks replies back into the channel.</p>
+<h2 id="required-discord-permissions"><a class="header" href="#required-discord-permissions">Required Discord permissions</a></h2>
+<p>In addition to the normal text-bot setup, make sure the bot has:</p>
+<ul>
+<li>Connect</li>
+<li>Speak</li>
+<li>preferably Use Voice Activity</li>
+</ul>
+<p>Also enable privileged intents in the Developer Portal:</p>
+<ul>
+<li>Presence Intent</li>
+<li>Server Members Intent</li>
+<li>Message Content Intent</li>
+</ul>
+<h2 id="join-and-leave"><a class="header" href="#join-and-leave">Join and leave</a></h2>
+<p>In a Discord text channel where the bot is present:</p>
+<pre><code class="language-text">/voice join
+/voice leave
+/voice status
+</code></pre>
+<h3 id="what-happens-when-joined"><a class="header" href="#what-happens-when-joined">What happens when joined</a></h3>
+<ul>
+<li>users speak in the VC</li>
+<li>Hermes detects speech boundaries</li>
+<li>transcripts are posted in the associated text channel</li>
+<li>Hermes responds in text and audio</li>
+<li>the text channel is the one where <code>/voice join</code> was issued</li>
+</ul>
+<h3 id="best-practices-for-discord-vc-use"><a class="header" href="#best-practices-for-discord-vc-use">Best practices for Discord VC use</a></h3>
+<ul>
+<li>keep <code>DISCORD_ALLOWED_USERS</code> tight</li>
+<li>use a dedicated bot/testing channel at first</li>
+<li>verify STT and TTS work in ordinary text-chat voice mode before trying VC mode</li>
+</ul>
+<h2 id="voice-quality-recommendations"><a class="header" href="#voice-quality-recommendations">Voice quality recommendations</a></h2>
+<h3 id="best-quality-setup"><a class="header" href="#best-quality-setup">Best quality setup</a></h3>
+<ul>
+<li>STT: local <code>large-v3</code> or Groq <code>whisper-large-v3</code></li>
+<li>TTS: ElevenLabs</li>
+</ul>
+<h3 id="best-speed--convenience-setup"><a class="header" href="#best-speed--convenience-setup">Best speed / convenience setup</a></h3>
+<ul>
+<li>STT: local <code>base</code> or Groq</li>
+<li>TTS: Edge</li>
+</ul>
+<h3 id="best-zero-cost-setup"><a class="header" href="#best-zero-cost-setup">Best zero-cost setup</a></h3>
+<ul>
+<li>STT: local</li>
+<li>TTS: Edge</li>
+</ul>
+<h2 id="common-failure-modes"><a class="header" href="#common-failure-modes">Common failure modes</a></h2>
+<h3 id="no-audio-device-found"><a class="header" href="#no-audio-device-found">“No audio device found”</a></h3>
+<p>Install <code>portaudio</code>.</p>
+<h3 id="bot-joins-but-hears-nothing"><a class="header" href="#bot-joins-but-hears-nothing">“Bot joins but hears nothing”</a></h3>
+<p>Check:</p>
+<ul>
+<li>your Discord user ID is in <code>DISCORD_ALLOWED_USERS</code></li>
+<li>you are not muted</li>
+<li>privileged intents are enabled</li>
+<li>the bot has Connect/Speak permissions</li>
+</ul>
+<h3 id="it-transcribes-but-does-not-speak"><a class="header" href="#it-transcribes-but-does-not-speak">“It transcribes but does not speak”</a></h3>
+<p>Check:</p>
+<ul>
+<li>TTS provider config</li>
+<li>API key / quota for ElevenLabs or OpenAI</li>
+<li><code>ffmpeg</code> install for Edge conversion paths</li>
+</ul>
+<h3 id="whisper-outputs-garbage"><a class="header" href="#whisper-outputs-garbage">“Whisper outputs garbage”</a></h3>
+<p>Try:</p>
+<ul>
+<li>quieter environment</li>
+<li>higher <code>silence_threshold</code></li>
+<li>different STT provider/model</li>
+<li>shorter, clearer utterances</li>
+</ul>
+<h3 id="it-works-in-dms-but-not-in-server-channels"><a class="header" href="#it-works-in-dms-but-not-in-server-channels">“It works in DMs but not in server channels”</a></h3>
+<p>That is often mention policy.</p>
+<p>By default, the bot needs an <code>@mention</code> in Discord server text channels unless configured otherwise.</p>
+<h2 id="suggested-first-week-setup"><a class="header" href="#suggested-first-week-setup">Suggested first-week setup</a></h2>
+<p>If you want the shortest path to success:</p>
+<ol>
+<li>get text Hermes working</li>
+<li>install <code>hermes-agent[voice]</code></li>
+<li>use CLI voice mode with local STT + Edge TTS</li>
+<li>then enable <code>/voice on</code> in Telegram or Discord</li>
+<li>only after that, try Discord VC mode</li>
+</ol>
+<p>That progression keeps the debugging surface small.</p>
+<h2 id="where-to-read-next"><a class="header" href="#where-to-read-next">Where to read next</a></h2>
+<ul>
+<li><a href="/docs/user-guide/features/voice-mode">Voice Mode feature reference</a></li>
+<li><a href="/docs/user-guide/messaging">Messaging Gateway</a></li>
+<li><a href="/docs/user-guide/messaging/discord">Discord setup</a></li>
+<li><a href="/docs/user-guide/messaging/telegram">Telegram setup</a></li>
+<li><a href="/docs/user-guide/configuration">Configuration</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/guides/use-soul-with-hermes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/guides/work-with-skills.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/guides/use-soul-with-hermes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/guides/work-with-skills.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

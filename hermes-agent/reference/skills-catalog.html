@@ -1,0 +1,779 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bundled Skills Catalog - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-68d2c33e.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-6421ac11.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/reference/skills-catalog.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-5-title-bundled-skills-catalog-description-catalog-of-bundled-skills-that-ship-with-hermes-agent"><a class="header" href="#sidebar_position-5-title-bundled-skills-catalog-description-catalog-of-bundled-skills-that-ship-with-hermes-agent">sidebar_position: 5
+title: “Bundled Skills Catalog”
+description: “Catalog of bundled skills that ship with Hermes Agent”</a></h2>
+<h1 id="bundled-skills-catalog"><a class="header" href="#bundled-skills-catalog">Bundled Skills Catalog</a></h1>
+<p>Hermes ships with a large built-in skill library copied into <code>~/.hermes/skills/</code> on install. This page catalogs the bundled skills that live in the repository under <code>skills/</code>.</p>
+<h2 id="apple"><a class="header" href="#apple">apple</a></h2>
+<p>Apple/macOS-specific skills — iMessage, Reminders, Notes, FindMy, and macOS automation. These skills only load on macOS systems.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>apple-notes</code></td><td>Manage Apple Notes via the memo CLI on macOS (create, view, search, edit).</td><td><code>apple/apple-notes</code></td></tr>
+<tr><td><code>apple-reminders</code></td><td>Manage Apple Reminders via remindctl CLI (list, add, complete, delete).</td><td><code>apple/apple-reminders</code></td></tr>
+<tr><td><code>findmy</code></td><td>Track Apple devices and AirTags via FindMy.app on macOS using AppleScript and screen capture.</td><td><code>apple/findmy</code></td></tr>
+<tr><td><code>imessage</code></td><td>Send and receive iMessages/SMS via the imsg CLI on macOS.</td><td><code>apple/imessage</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="autonomous-ai-agents"><a class="header" href="#autonomous-ai-agents">autonomous-ai-agents</a></h2>
+<p>Skills for spawning and orchestrating autonomous AI coding agents and multi-agent workflows — running independent agent processes, delegating tasks, and coordinating parallel workstreams.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>claude-code</code></td><td>Delegate coding tasks to Claude Code (Anthropic’s CLI agent). Use for building features, refactoring, PR reviews, and iterative coding. Requires the claude CLI installed.</td><td><code>autonomous-ai-agents/claude-code</code></td></tr>
+<tr><td><code>codex</code></td><td>Delegate coding tasks to OpenAI Codex CLI agent. Use for building features, refactoring, PR reviews, and batch issue fixing. Requires the codex CLI and a git repository.</td><td><code>autonomous-ai-agents/codex</code></td></tr>
+<tr><td><code>hermes-agent-spawning</code></td><td>Spawn additional Hermes Agent instances as autonomous subprocesses for independent long-running tasks. Supports non-interactive one-shot mode (-q) and interactive PTY mode for multi-turn collaboration. Different from delegate_task — this runs a full separate hermes process.</td><td><code>autonomous-ai-agents/hermes-agent</code></td></tr>
+<tr><td><code>opencode</code></td><td>Delegate coding tasks to OpenCode CLI agent for feature implementation, refactoring, PR review, and long-running autonomous sessions. Requires the opencode CLI installed and authenticated.</td><td><code>autonomous-ai-agents/opencode</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="data-science"><a class="header" href="#data-science">data-science</a></h2>
+<p>Skills for data science workflows — interactive exploration, Jupyter notebooks, data analysis, and visualization.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>jupyter-live-kernel</code></td><td>Use a live Jupyter kernel for stateful, iterative Python execution via hamelnb. Load this skill when the task involves exploration, iteration, or inspecting intermediate results.</td><td><code>data-science/jupyter-live-kernel</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="creative"><a class="header" href="#creative">creative</a></h2>
+<p>Creative content generation — ASCII art, hand-drawn style diagrams, and visual design tools.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ascii-art</code></td><td>Generate ASCII art using pyfiglet (571 fonts), cowsay, boxes, toilet, image-to-ascii, remote APIs (asciified, ascii.co.uk), and LLM fallback. No API keys required.</td><td><code>creative/ascii-art</code></td></tr>
+<tr><td><code>ascii-video</code></td><td>“Production pipeline for ASCII art video — any format. Converts video/audio/images/generative input into colored ASCII character video output (MP4, GIF, image sequence). Covers: video-to-ASCII conversion, audio-reactive music visualizers, generative ASCII art animations, hybrid…</td><td><code>creative/ascii-video</code></td></tr>
+<tr><td><code>excalidraw</code></td><td>Create hand-drawn style diagrams using Excalidraw JSON format. Generate .excalidraw files for architecture diagrams, flowcharts, sequence diagrams, concept maps, and more. Files can be opened at excalidraw.com or uploaded for shareable links.</td><td><code>creative/excalidraw</code></td></tr>
+<tr><td><code>p5js</code></td><td>Production pipeline for interactive and generative visual art using p5.js. Create sketches, render them to images/video via headless browser, and serve live previews. Supports canvas animations, data visualizations, and creative coding experiments.</td><td><code>creative/p5js</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="devops"><a class="header" href="#devops">devops</a></h2>
+<p>DevOps and infrastructure automation skills.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>webhook-subscriptions</code></td><td>Create and manage webhook subscriptions for event-driven agent activation. External services (GitHub, Stripe, CI/CD, IoT) POST events to trigger agent runs. Requires webhook platform to be enabled.</td><td><code>devops/webhook-subscriptions</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="dogfood"><a class="header" href="#dogfood">dogfood</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dogfood</code></td><td>Systematic exploratory QA testing of web applications — find bugs, capture evidence, and generate structured reports.</td><td><code>dogfood/dogfood</code></td></tr>
+<tr><td><code>hermes-agent-setup</code></td><td>Help users configure Hermes Agent — CLI usage, setup wizard, model/provider selection, tools, skills, voice/STT/TTS, gateway, and troubleshooting.</td><td><code>dogfood/hermes-agent-setup</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="email"><a class="header" href="#email">email</a></h2>
+<p>Skills for sending, receiving, searching, and managing email from the terminal.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>himalaya</code></td><td>CLI to manage emails via IMAP/SMTP. Use himalaya to list, read, write, reply, forward, search, and organize emails from the terminal. Supports multiple accounts and message composition with MML (MIME Meta Language).</td><td><code>email/himalaya</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="gaming"><a class="header" href="#gaming">gaming</a></h2>
+<p>Skills for setting up, configuring, and managing game servers, modpacks, and gaming-related infrastructure.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>minecraft-modpack-server</code></td><td>Set up a modded Minecraft server from a CurseForge/Modrinth server pack zip. Covers NeoForge/Forge install, Java version, JVM tuning, firewall, LAN config, backups, and launch scripts.</td><td><code>gaming/minecraft-modpack-server</code></td></tr>
+<tr><td><code>pokemon-player</code></td><td>Play Pokemon games autonomously via headless emulation. Starts a game server, reads structured game state from RAM, makes strategic decisions, and sends button inputs — all from the terminal.</td><td><code>gaming/pokemon-player</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="github"><a class="header" href="#github">github</a></h2>
+<p>GitHub workflow skills for managing repositories, pull requests, code reviews, issues, and CI/CD pipelines using the gh CLI and git via terminal.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>codebase-inspection</code></td><td>Inspect and analyze codebases using pygount for LOC counting, language breakdown, and code-vs-comment ratios. Use when asked to check lines of code, repo size, language composition, or codebase stats.</td><td><code>github/codebase-inspection</code></td></tr>
+<tr><td><code>github-auth</code></td><td>Set up GitHub authentication for the agent using git (universally available) or the gh CLI. Covers HTTPS tokens, SSH keys, credential helpers, and gh auth — with a detection flow to pick the right method automatically.</td><td><code>github/github-auth</code></td></tr>
+<tr><td><code>github-code-review</code></td><td>Review code changes by analyzing git diffs, leaving inline comments on PRs, and performing thorough pre-push review. Works with gh CLI or falls back to git + GitHub REST API via curl.</td><td><code>github/github-code-review</code></td></tr>
+<tr><td><code>github-issues</code></td><td>Create, manage, triage, and close GitHub issues. Search existing issues, add labels, assign people, and link to PRs. Works with gh CLI or falls back to git + GitHub REST API via curl.</td><td><code>github/github-issues</code></td></tr>
+<tr><td><code>github-pr-workflow</code></td><td>Full pull request lifecycle — create branches, commit changes, open PRs, monitor CI status, auto-fix failures, and merge. Works with gh CLI or falls back to git + GitHub REST API via curl.</td><td><code>github/github-pr-workflow</code></td></tr>
+<tr><td><code>github-repo-management</code></td><td>Clone, create, fork, configure, and manage GitHub repositories. Manage remotes, secrets, releases, and workflows. Works with gh CLI or falls back to git + GitHub REST API via curl.</td><td><code>github/github-repo-management</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="inference-sh"><a class="header" href="#inference-sh">inference-sh</a></h2>
+<p>Skills for AI app execution via inference.sh cloud platform.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>inference-sh-cli</code></td><td>Run 150+ AI apps via inference.sh CLI (infsh) — image generation, video creation, LLMs, search, 3D, social automation.</td><td><code>inference-sh/cli</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="leisure"><a class="header" href="#leisure">leisure</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>find-nearby</code></td><td>Find nearby places (restaurants, cafes, bars, pharmacies, etc.) using OpenStreetMap. Works with coordinates, addresses, cities, zip codes, or Telegram location pins. No API keys needed.</td><td><code>leisure/find-nearby</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcp"><a class="header" href="#mcp">mcp</a></h2>
+<p>Skills for working with MCP (Model Context Protocol) servers, tools, and integrations. Includes the built-in native MCP client (configure servers in config.yaml for automatic tool discovery) and the mcporter CLI bridge for ad-hoc server interaction.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>mcporter</code></td><td>Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation.</td><td><code>mcp/mcporter</code></td></tr>
+<tr><td><code>native-mcp</code></td><td>Built-in MCP (Model Context Protocol) client that connects to external MCP servers, discovers their tools, and registers them as native Hermes Agent tools. Supports stdio and HTTP transports with automatic reconnection, security filtering, and zero-config tool injection.</td><td><code>mcp/native-mcp</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="media"><a class="header" href="#media">media</a></h2>
+<p>Skills for working with media content — YouTube transcripts, GIF search, music generation, and audio visualization.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>gif-search</code></td><td>Search and download GIFs from Tenor using curl. No dependencies beyond curl and jq. Useful for finding reaction GIFs, creating visual content, and sending GIFs in chat.</td><td><code>media/gif-search</code></td></tr>
+<tr><td><code>heartmula</code></td><td>Set up and run HeartMuLa, the open-source music generation model family (Suno-like). Generates full songs from lyrics + tags with multilingual support.</td><td><code>media/heartmula</code></td></tr>
+<tr><td><code>songsee</code></td><td>Generate spectrograms and audio feature visualizations (mel, chroma, MFCC, tempogram, etc.) from audio files via CLI. Useful for audio analysis, music production debugging, and visual documentation.</td><td><code>media/songsee</code></td></tr>
+<tr><td><code>youtube-content</code></td><td>Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts).</td><td><code>media/youtube-content</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlops"><a class="header" href="#mlops">mlops</a></h2>
+<p>General-purpose ML operations tools — model hub management, dataset operations, and workflow orchestration.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>huggingface-hub</code></td><td>Hugging Face Hub CLI (hf) — search, download, and upload models and datasets, manage repos, deploy inference endpoints.</td><td><code>mlops/huggingface-hub</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopscloud"><a class="header" href="#mlopscloud">mlops/cloud</a></h2>
+<p>GPU cloud providers and serverless compute platforms for ML workloads.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>lambda-labs-gpu-cloud</code></td><td>Reserved and on-demand GPU cloud instances for ML training and inference. Use when you need dedicated GPU instances with simple SSH access, persistent filesystems, or high-performance multi-node clusters for large-scale training.</td><td><code>mlops/cloud/lambda-labs</code></td></tr>
+<tr><td><code>modal-serverless-gpu</code></td><td>Serverless GPU cloud platform for running ML workloads. Use when you need on-demand GPU access without infrastructure management, deploying ML models as APIs, or running batch jobs with automatic scaling.</td><td><code>mlops/cloud/modal</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopsevaluation"><a class="header" href="#mlopsevaluation">mlops/evaluation</a></h2>
+<p>Model evaluation benchmarks, experiment tracking, data curation, tokenizers, and interpretability tools.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>evaluating-llms-harness</code></td><td>Evaluates LLMs across 60+ academic benchmarks (MMLU, HumanEval, GSM8K, TruthfulQA, HellaSwag). Use when benchmarking model quality, comparing models, reporting academic results, or tracking training progress. Industry standard used by EleutherAI, HuggingFace, and major labs. Sup…</td><td><code>mlops/evaluation/lm-evaluation-harness</code></td></tr>
+<tr><td><code>huggingface-tokenizers</code></td><td>Fast tokenizers optimized for research and production. Rust-based implementation tokenizes 1GB in &lt;20 seconds. Supports BPE, WordPiece, and Unigram algorithms. Train custom vocabularies, track alignments, handle padding/truncation. Integrates seamlessly with transformers. Use…</td><td><code>mlops/evaluation/huggingface-tokenizers</code></td></tr>
+<tr><td><code>nemo-curator</code></td><td>GPU-accelerated data curation for LLM training. Supports text/image/video/audio. Features fuzzy deduplication (16× faster), quality filtering (30+ heuristics), semantic deduplication, PII redaction, NSFW detection. Scales across GPUs with RAPIDS. Use for preparing high-quality t…</td><td><code>mlops/evaluation/nemo-curator</code></td></tr>
+<tr><td><code>sparse-autoencoder-training</code></td><td>Provides guidance for training and analyzing Sparse Autoencoders (SAEs) using SAELens to decompose neural network activations into interpretable features. Use when discovering interpretable features, analyzing superposition, or studying monosemantic representations in language m…</td><td><code>mlops/evaluation/saelens</code></td></tr>
+<tr><td><code>weights-and-biases</code></td><td>Track ML experiments with automatic logging, visualize training in real-time, optimize hyperparameters with sweeps, and manage model registry with W&amp;B - collaborative MLOps platform</td><td><code>mlops/evaluation/weights-and-biases</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopsinference"><a class="header" href="#mlopsinference">mlops/inference</a></h2>
+<p>Model serving, quantization (GGUF/GPTQ), structured output, inference optimization, and model surgery tools for deploying and running LLMs.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>gguf-quantization</code></td><td>GGUF format and llama.cpp quantization for efficient CPU/GPU inference. Use when deploying models on consumer hardware, Apple Silicon, or when needing flexible quantization from 2-8 bit without GPU requirements.</td><td><code>mlops/inference/gguf</code></td></tr>
+<tr><td><code>guidance</code></td><td>Control LLM output with regex and grammars, guarantee valid JSON/XML/code generation, enforce structured formats, and build multi-step workflows with Guidance - Microsoft Research’s constrained generation framework</td><td><code>mlops/inference/guidance</code></td></tr>
+<tr><td><code>instructor</code></td><td>Extract structured data from LLM responses with Pydantic validation, retry failed extractions automatically, parse complex JSON with type safety, and stream partial results with Instructor - battle-tested structured output library</td><td><code>mlops/inference/instructor</code></td></tr>
+<tr><td><code>llama-cpp</code></td><td>Runs LLM inference on CPU, Apple Silicon, and consumer GPUs without NVIDIA hardware. Use for edge deployment, M1/M2/M3 Macs, AMD/Intel GPUs, or when CUDA is unavailable. Supports GGUF quantization (1.5-8 bit) for reduced memory and 4-10× speedup vs PyTorch on CPU.</td><td><code>mlops/inference/llama-cpp</code></td></tr>
+<tr><td><code>obliteratus</code></td><td>Remove refusal behaviors from open-weight LLMs using OBLITERATUS — mechanistic interpretability techniques (diff-in-means, SVD, whitened SVD, LEACE, SAE decomposition, etc.) to excise guardrails while preserving reasoning. 9 CLI methods, 28 analysis modules, 116 model presets ac…</td><td><code>mlops/inference/obliteratus</code></td></tr>
+<tr><td><code>outlines</code></td><td>Guarantee valid JSON/XML/code structure during generation, use Pydantic models for type-safe outputs, support local models (Transformers, vLLM), and maximize inference speed with Outlines - dottxt.ai’s structured generation library</td><td><code>mlops/inference/outlines</code></td></tr>
+<tr><td><code>serving-llms-vllm</code></td><td>Serves LLMs with high throughput using vLLM’s PagedAttention and continuous batching. Use when deploying production LLM APIs, optimizing inference latency/throughput, or serving models with limited GPU memory. Supports OpenAI-compatible endpoints, quantization (GPTQ/AWQ/FP8), an…</td><td><code>mlops/inference/vllm</code></td></tr>
+<tr><td><code>tensorrt-llm</code></td><td>Optimizes LLM inference with NVIDIA TensorRT for maximum throughput and lowest latency. Use for production deployment on NVIDIA GPUs (A100/H100), when you need 10-100x faster inference than PyTorch, or for serving models with quantization (FP8/INT4), in-flight batching, and mult…</td><td><code>mlops/inference/tensorrt-llm</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopsmodels"><a class="header" href="#mlopsmodels">mlops/models</a></h2>
+<p>Specific model architectures and tools — computer vision (CLIP, SAM, Stable Diffusion), speech (Whisper), audio generation (AudioCraft), and multimodal models (LLaVA).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>audiocraft-audio-generation</code></td><td>PyTorch library for audio generation including text-to-music (MusicGen) and text-to-sound (AudioGen). Use when you need to generate music from text descriptions, create sound effects, or perform melody-conditioned music generation.</td><td><code>mlops/models/audiocraft</code></td></tr>
+<tr><td><code>clip</code></td><td>OpenAI’s model connecting vision and language. Enables zero-shot image classification, image-text matching, and cross-modal retrieval. Trained on 400M image-text pairs. Use for image search, content moderation, or vision-language tasks without fine-tuning. Best for general-purpo…</td><td><code>mlops/models/clip</code></td></tr>
+<tr><td><code>llava</code></td><td>Large Language and Vision Assistant. Enables visual instruction tuning and image-based conversations. Combines CLIP vision encoder with Vicuna/LLaMA language models. Supports multi-turn image chat, visual question answering, and instruction following. Use for vision-language cha…</td><td><code>mlops/models/llava</code></td></tr>
+<tr><td><code>segment-anything-model</code></td><td>Foundation model for image segmentation with zero-shot transfer. Use when you need to segment any object in images using points, boxes, or masks as prompts, or automatically generate all object masks in an image.</td><td><code>mlops/models/segment-anything</code></td></tr>
+<tr><td><code>stable-diffusion-image-generation</code></td><td>State-of-the-art text-to-image generation with Stable Diffusion models via HuggingFace Diffusers. Use when generating images from text prompts, performing image-to-image translation, inpainting, or building custom diffusion pipelines.</td><td><code>mlops/models/stable-diffusion</code></td></tr>
+<tr><td><code>whisper</code></td><td>OpenAI’s general-purpose speech recognition model. Supports 99 languages, transcription, translation to English, and language identification. Six model sizes from tiny (39M params) to large (1550M params). Use for speech-to-text, podcast transcription, or multilingual audio proc…</td><td><code>mlops/models/whisper</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopsresearch"><a class="header" href="#mlopsresearch">mlops/research</a></h2>
+<p>ML research frameworks for building and optimizing AI systems with declarative programming.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dspy</code></td><td>Build complex AI systems with declarative programming, optimize prompts automatically, create modular RAG systems and agents with DSPy - Stanford NLP’s framework for systematic LM programming</td><td><code>mlops/research/dspy</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopstraining"><a class="header" href="#mlopstraining">mlops/training</a></h2>
+<p>Fine-tuning, RLHF/DPO/GRPO training, distributed training frameworks, and optimization tools for training LLMs and other models.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>axolotl</code></td><td>Expert guidance for fine-tuning LLMs with Axolotl - YAML configs, 100+ models, LoRA/QLoRA, DPO/KTO/ORPO/GRPO, multimodal support</td><td><code>mlops/training/axolotl</code></td></tr>
+<tr><td><code>distributed-llm-pretraining-torchtitan</code></td><td>Provides PyTorch-native distributed LLM pretraining using torchtitan with 4D parallelism (FSDP2, TP, PP, CP). Use when pretraining Llama 3.1, DeepSeek V3, or custom models at scale from 8 to 512+ GPUs with Float8, torch.compile, and distributed checkpointing.</td><td><code>mlops/training/torchtitan</code></td></tr>
+<tr><td><code>fine-tuning-with-trl</code></td><td>Fine-tune LLMs using reinforcement learning with TRL - SFT for instruction tuning, DPO for preference alignment, PPO/GRPO for reward optimization, and reward model training. Use when need RLHF, align model with preferences, or train from human feedback. Works with HuggingFace Tr…</td><td><code>mlops/training/trl-fine-tuning</code></td></tr>
+<tr><td><code>grpo-rl-training</code></td><td>Expert guidance for GRPO/RL fine-tuning with TRL for reasoning and task-specific model training</td><td><code>mlops/training/grpo-rl-training</code></td></tr>
+<tr><td><code>hermes-atropos-environments</code></td><td>Build, test, and debug Hermes Agent RL environments for Atropos training. Covers the HermesAgentBaseEnv interface, reward functions, agent loop integration, evaluation with tools, wandb logging, and the three CLI modes (serve/process/evaluate). Use when creating, reviewing, or f…</td><td><code>mlops/training/hermes-atropos-environments</code></td></tr>
+<tr><td><code>huggingface-accelerate</code></td><td>Simplest distributed training API. 4 lines to add distributed support to any PyTorch script. Unified API for DeepSpeed/FSDP/Megatron/DDP. Automatic device placement, mixed precision (FP16/BF16/FP8). Interactive config, single launch command. HuggingFace ecosystem standard.</td><td><code>mlops/training/accelerate</code></td></tr>
+<tr><td><code>optimizing-attention-flash</code></td><td>Optimizes transformer attention with Flash Attention for 2-4x speedup and 10-20x memory reduction. Use when training/running transformers with long sequences (&gt;512 tokens), encountering GPU memory issues with attention, or need faster inference. Supports PyTorch native SDPA,…</td><td><code>mlops/training/flash-attention</code></td></tr>
+<tr><td><code>peft-fine-tuning</code></td><td>Parameter-efficient fine-tuning for LLMs using LoRA, QLoRA, and 25+ methods. Use when fine-tuning large models (7B-70B) with limited GPU memory, when you need to train &lt;1% of parameters with minimal accuracy loss, or for multi-adapter serving. HuggingFace’s official library i…</td><td><code>mlops/training/peft</code></td></tr>
+<tr><td><code>pytorch-fsdp</code></td><td>Expert guidance for Fully Sharded Data Parallel training with PyTorch FSDP - parameter sharding, mixed precision, CPU offloading, FSDP2</td><td><code>mlops/training/pytorch-fsdp</code></td></tr>
+<tr><td><code>pytorch-lightning</code></td><td>High-level PyTorch framework with Trainer class, automatic distributed training (DDP/FSDP/DeepSpeed), callbacks system, and minimal boilerplate. Scales from laptop to supercomputer with same code. Use when you want clean training loops with built-in best practices.</td><td><code>mlops/training/pytorch-lightning</code></td></tr>
+<tr><td><code>simpo-training</code></td><td>Simple Preference Optimization for LLM alignment. Reference-free alternative to DPO with better performance (+6.4 points on AlpacaEval 2.0). No reference model needed, more efficient than DPO. Use for preference alignment when want simpler, faster training than DPO/PPO.</td><td><code>mlops/training/simpo</code></td></tr>
+<tr><td><code>slime-rl-training</code></td><td>Provides guidance for LLM post-training with RL using slime, a Megatron+SGLang framework. Use when training GLM models, implementing custom data generation workflows, or needing tight Megatron-LM integration for RL scaling.</td><td><code>mlops/training/slime</code></td></tr>
+<tr><td><code>unsloth</code></td><td>Expert guidance for fast fine-tuning with Unsloth - 2-5x faster training, 50-80% less memory, LoRA/QLoRA optimization</td><td><code>mlops/training/unsloth</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mlopsvector-databases"><a class="header" href="#mlopsvector-databases">mlops/vector-databases</a></h2>
+<p>Vector similarity search and embedding databases for RAG, semantic search, and AI application backends.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>chroma</code></td><td>Open-source embedding database for AI applications. Store embeddings and metadata, perform vector and full-text search, filter by metadata. Simple 4-function API. Scales from notebooks to production clusters. Use for semantic search, RAG applications, or document retrieval. Best…</td><td><code>mlops/vector-databases/chroma</code></td></tr>
+<tr><td><code>faiss</code></td><td>Facebook’s library for efficient similarity search and clustering of dense vectors. Supports billions of vectors, GPU acceleration, and various index types (Flat, IVF, HNSW). Use for fast k-NN search, large-scale vector retrieval, or when you need pure similarity search without…</td><td><code>mlops/vector-databases/faiss</code></td></tr>
+<tr><td><code>pinecone</code></td><td>Managed vector database for production AI applications. Fully managed, auto-scaling, with hybrid search (dense + sparse), metadata filtering, and namespaces. Low latency (&lt;100ms p95). Use for production RAG, recommendation systems, or semantic search at scale. Best for server…</td><td><code>mlops/vector-databases/pinecone</code></td></tr>
+<tr><td><code>qdrant-vector-search</code></td><td>High-performance vector similarity search engine for RAG and semantic search. Use when building production RAG systems requiring fast nearest neighbor search, hybrid search with filtering, or scalable vector storage with Rust-powered performance.</td><td><code>mlops/vector-databases/qdrant</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="note-taking"><a class="header" href="#note-taking">note-taking</a></h2>
+<p>Note taking skills, to save information, assist with research, and collab on multi-session planning and information sharing.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>obsidian</code></td><td>Read, search, and create notes in the Obsidian vault.</td><td><code>note-taking/obsidian</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="productivity"><a class="header" href="#productivity">productivity</a></h2>
+<p>Skills for document creation, presentations, spreadsheets, and other productivity workflows.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>google-workspace</code></td><td>Gmail, Calendar, Drive, Contacts, Sheets, and Docs integration via Python. Uses OAuth2 with automatic token refresh. No external binaries needed — runs entirely with Google’s Python client libraries in the Hermes venv.</td><td><code>productivity/google-workspace</code></td></tr>
+<tr><td><code>linear</code></td><td>Manage Linear issues, projects, and teams via the GraphQL API. Create, update, search, and organize issues.</td><td><code>productivity/linear</code></td></tr>
+<tr><td><code>nano-pdf</code></td><td>Edit PDFs with natural-language instructions using the nano-pdf CLI. Modify text, fix typos, update titles, and make content changes to specific pages without manual editing.</td><td><code>productivity/nano-pdf</code></td></tr>
+<tr><td><code>notion</code></td><td>Notion API for creating and managing pages, databases, and blocks via curl. Search, create, update, and query Notion workspaces directly from the terminal.</td><td><code>productivity/notion</code></td></tr>
+<tr><td><code>ocr-and-documents</code></td><td>Extract text from PDFs and scanned documents. Use web_extract for remote URLs, pymupdf for local text-based PDFs, marker-pdf for OCR/scanned docs. For DOCX use python-docx, for PPTX see the powerpoint skill.</td><td><code>productivity/ocr-and-documents</code></td></tr>
+<tr><td><code>powerpoint</code></td><td>“Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in a…</td><td><code>productivity/powerpoint</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="research"><a class="header" href="#research">research</a></h2>
+<p>Skills for academic research, paper discovery, literature review, domain reconnaissance, market data, content monitoring, and scientific knowledge retrieval.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>arxiv</code></td><td>Search and retrieve academic papers from arXiv using their free REST API. No API key needed. Search by keyword, author, category, or ID. Combine with web_extract or the ocr-and-documents skill to read full paper content.</td><td><code>research/arxiv</code></td></tr>
+<tr><td><code>blogwatcher</code></td><td>Monitor blogs and RSS/Atom feeds for updates using the blogwatcher CLI. Add blogs, scan for new articles, and track what you’ve read.</td><td><code>research/blogwatcher</code></td></tr>
+<tr><td><code>llm-wiki</code></td><td>Karpathy’s LLM Wiki — build and maintain a persistent, interlinked markdown knowledge base. Ingest sources, query compiled knowledge, and lint for consistency. Unlike RAG, the wiki compiles knowledge once and keeps it current. Works as an Obsidian vault. Configurable via <code>skills.config.wiki.path</code>.</td><td><code>research/llm-wiki</code></td></tr>
+<tr><td><code>domain-intel</code></td><td>Passive domain reconnaissance using Python stdlib. Subdomain discovery, SSL certificate inspection, WHOIS lookups, DNS records, domain availability checks, and bulk multi-domain analysis. No API keys required.</td><td><code>research/domain-intel</code></td></tr>
+<tr><td><code>duckduckgo-search</code></td><td>Free web search via DuckDuckGo — text, news, images, videos. No API key needed. Prefer the <code>ddgs</code> CLI when installed; use the Python DDGS library only after verifying that <code>ddgs</code> is available in the current runtime.</td><td><code>research/duckduckgo-search</code></td></tr>
+<tr><td><code>ml-paper-writing</code></td><td>Write publication-ready ML/AI papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM. Use when drafting papers from research repos, structuring arguments, verifying citations, or preparing camera-ready submissions. Includes LaTeX templates, reviewer guidelines, and citation verificatio…</td><td><code>research/ml-paper-writing</code></td></tr>
+<tr><td><code>polymarket</code></td><td>Query Polymarket prediction market data — search markets, get prices, orderbooks, and price history. Read-only via public REST APIs, no API key needed.</td><td><code>research/polymarket</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="red-teaming"><a class="header" href="#red-teaming">red-teaming</a></h2>
+<p>Skills for LLM red-teaming, jailbreaking, and safety filter bypass research.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>godmode</code></td><td>Jailbreak API-served LLMs using G0DM0D3 techniques — Parseltongue input obfuscation (33 techniques), GODMODE CLASSIC system prompt templates, ULTRAPLINIAN multi-model racing, encoding escalation, and Hermes-native prefill/system prompt integration. Works on any model accessible via API including closed-source models.</td><td><code>red-teaming/godmode</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="smart-home"><a class="header" href="#smart-home">smart-home</a></h2>
+<p>Skills for controlling smart home devices — lights, switches, sensors, and home automation systems.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>openhue</code></td><td>Control Philips Hue lights, rooms, and scenes via the OpenHue CLI. Turn lights on/off, adjust brightness, color, color temperature, and activate scenes.</td><td><code>smart-home/openhue</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="social-media"><a class="header" href="#social-media">social-media</a></h2>
+<p>Skills for interacting with social platforms — posting, reading, monitoring, and account operations.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>xitter</code></td><td>Interact with X/Twitter via the x-cli terminal client using official X API credentials.</td><td><code>social-media/xitter</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="software-development"><a class="header" href="#software-development">software-development</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>code-review</code></td><td>Guidelines for performing thorough code reviews with security and quality focus</td><td><code>software-development/code-review</code></td></tr>
+<tr><td><code>plan</code></td><td>Plan mode for Hermes — inspect context, write a markdown plan into <code>.hermes/plans/</code> in the active workspace/backend working directory, and do not execute the work.</td><td><code>software-development/plan</code></td></tr>
+<tr><td><code>requesting-code-review</code></td><td>Use when completing tasks, implementing major features, or before merging. Validates work meets requirements through systematic review process.</td><td><code>software-development/requesting-code-review</code></td></tr>
+<tr><td><code>subagent-driven-development</code></td><td>Use when executing implementation plans with independent tasks. Dispatches fresh delegate_task per task with two-stage review (spec compliance then code quality).</td><td><code>software-development/subagent-driven-development</code></td></tr>
+<tr><td><code>systematic-debugging</code></td><td>Use when encountering any bug, test failure, or unexpected behavior. 4-phase root cause investigation — NO fixes without understanding the problem first.</td><td><code>software-development/systematic-debugging</code></td></tr>
+<tr><td><code>test-driven-development</code></td><td>Use when implementing any feature or bugfix, before writing implementation code. Enforces RED-GREEN-REFACTOR cycle with test-first approach.</td><td><code>software-development/test-driven-development</code></td></tr>
+<tr><td><code>writing-plans</code></td><td>Use when you have a spec or requirements for a multi-step task. Creates comprehensive implementation plans with bite-sized tasks, exact file paths, and complete code examples.</td><td><code>software-development/writing-plans</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h1 id="optional-skills"><a class="header" href="#optional-skills">Optional Skills</a></h1>
+<p>Optional skills ship with the repository under <code>optional-skills/</code> but are <strong>not active by default</strong>. They cover heavier or niche use cases. Install them with:</p>
+<pre><code class="language-bash">hermes skills install official/&lt;category&gt;/&lt;skill&gt;
+</code></pre>
+<h2 id="autonomous-ai-agents-1"><a class="header" href="#autonomous-ai-agents-1">autonomous-ai-agents</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>blackbox</code></td><td>Delegate coding tasks to Blackbox AI CLI agent. Multi-model agent with built-in judge that runs tasks through multiple LLMs and picks the best result. Requires the blackbox CLI and a Blackbox AI API key.</td><td><code>autonomous-ai-agents/blackbox</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="blockchain"><a class="header" href="#blockchain">blockchain</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>base</code></td><td>Query Base (Ethereum L2) blockchain data with USD pricing — wallet balances, token info, transaction details, gas analysis, contract inspection, whale detection, and live network stats. Uses Base RPC + CoinGecko. No API key required.</td><td><code>blockchain/base</code></td></tr>
+<tr><td><code>solana</code></td><td>Query Solana blockchain data with USD pricing — wallet balances, token portfolios with values, transaction details, NFTs, whale detection, and live network stats. Uses Solana RPC + CoinGecko. No API key required.</td><td><code>blockchain/solana</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="creative-1"><a class="header" href="#creative-1">creative</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>blender-mcp</code></td><td>Control Blender directly from Hermes via socket connection to the blender-mcp addon. Create 3D objects, materials, animations, and run arbitrary Blender Python (bpy) code.</td><td><code>creative/blender-mcp</code></td></tr>
+<tr><td><code>meme-generation</code></td><td>Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.</td><td><code>creative/meme-generation</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="devops-1"><a class="header" href="#devops-1">devops</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>docker-management</code></td><td>Manage Docker containers, images, volumes, networks, and Compose stacks — lifecycle ops, debugging, cleanup, and Dockerfile optimization.</td><td><code>devops/docker-management</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="email-1"><a class="header" href="#email-1">email</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>agentmail</code></td><td>Give the agent its own dedicated email inbox via AgentMail. Send, receive, and manage email autonomously using agent-owned email addresses (e.g. hermes-agent@agentmail.to).</td><td><code>email/agentmail</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="health"><a class="header" href="#health">health</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>neuroskill-bci</code></td><td>Connect to a running NeuroSkill instance and incorporate the user’s real-time cognitive and emotional state (focus, relaxation, mood, cognitive load, drowsiness, heart rate, HRV, sleep staging, and 40+ derived EXG scores) into responses. Requires a BCI wearable (Muse 2/S or OpenBCI) and the NeuroSkill desktop app.</td><td><code>health/neuroskill-bci</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcp-1"><a class="header" href="#mcp-1">mcp</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>fastmcp</code></td><td>Build, test, inspect, install, and deploy MCP servers with FastMCP in Python. Use when creating a new MCP server, wrapping an API or database as MCP tools, exposing resources or prompts, or preparing a FastMCP server for HTTP deployment.</td><td><code>mcp/fastmcp</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="migration"><a class="header" href="#migration">migration</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>openclaw-migration</code></td><td>Migrate a user’s OpenClaw customization footprint into Hermes Agent. Imports Hermes-compatible memories, SOUL.md, command allowlists, user skills, and selected workspace assets from ~/.openclaw, then reports what could not be migrated and why.</td><td><code>migration/openclaw-migration</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="productivity-1"><a class="header" href="#productivity-1">productivity</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>telephony</code></td><td>Give Hermes phone capabilities — provision and persist a Twilio number, send and receive SMS/MMS, make direct calls, and place AI-driven outbound calls through Bland.ai or Vapi.</td><td><code>productivity/telephony</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="research-1"><a class="header" href="#research-1">research</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>bioinformatics</code></td><td>Gateway to 400+ bioinformatics skills from bioSkills and ClawBio. Covers genomics, transcriptomics, single-cell, variant calling, pharmacogenomics, metagenomics, structural biology, and more.</td><td><code>research/bioinformatics</code></td></tr>
+<tr><td><code>qmd</code></td><td>Search personal knowledge bases, notes, docs, and meeting transcripts locally using qmd — a hybrid retrieval engine with BM25, vector search, and LLM reranking. Supports CLI and MCP integration.</td><td><code>research/qmd</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="security"><a class="header" href="#security">security</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Skill</th><th>Description</th><th>Path</th></tr>
+</thead>
+<tbody>
+<tr><td><code>1password</code></td><td>Set up and use 1Password CLI (op). Use when installing the CLI, enabling desktop app integration, signing in, and reading/injecting secrets for commands.</td><td><code>security/1password</code></td></tr>
+<tr><td><code>oss-forensics</code></td><td>Supply chain investigation, evidence recovery, and forensic analysis for GitHub repositories. Covers deleted commit recovery, force-push detection, IOC extraction, multi-source evidence collection, and structured forensic reporting.</td><td><code>security/oss-forensics</code></td></tr>
+<tr><td><code>sherlock</code></td><td>OSINT username search across 400+ social networks. Hunt down social media accounts by username.</td><td><code>security/sherlock</code></td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/reference/profile-commands.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/reference/slash-commands.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/reference/profile-commands.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/reference/slash-commands.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
