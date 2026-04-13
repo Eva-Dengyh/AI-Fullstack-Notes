@@ -169,6 +169,75 @@
 - [Integrations](hermes-agent/integrations/index.md)
 - [AI Providers](hermes-agent/integrations/providers.md)
 
+# Hermes Agent · 入门（中文）
+
+- [安装](hermes-agent/getting-started/installation_zh.md)
+- [快速开始](hermes-agent/getting-started/quickstart_zh.md)
+- [学习路径](hermes-agent/getting-started/learning-path_zh.md)
+- [（1）本地启动与项目结构](hermes-agent/getting-started/01-setup-and-project-structure_zh.md)
+- [Nix & NixOS 设置](hermes-agent/getting-started/nix-setup_zh.md)
+- [更新和卸载](hermes-agent/getting-started/updating_zh.md)
+- [Android / Termux](hermes-agent/getting-started/termux_zh.md)
+
+# Hermes Agent · 用户指南（中文）
+
+- [CLI 界面](hermes-agent/user-guide/cli_zh.md)
+- [Profiles：运行多个 Agent](hermes-agent/user-guide/profiles_zh.md)
+- [功能概览](hermes-agent/user-guide/features/overview_zh.md)
+  - [批处理](hermes-agent/user-guide/features/batch-processing_zh.md)
+  - [浏览器自动化](hermes-agent/user-guide/features/browser_zh.md)
+  - [代码执行](hermes-agent/user-guide/features/code-execution_zh.md)
+  - [上下文文件](hermes-agent/user-guide/features/context-files_zh.md)
+  - [定时任务（Cron）](hermes-agent/user-guide/features/cron_zh.md)
+  - [子 Agent 委托](hermes-agent/user-guide/features/delegation_zh.md)
+  - [图像生成](hermes-agent/user-guide/features/image-generation_zh.md)
+  - [MCP（模型上下文协议）](hermes-agent/user-guide/features/mcp_zh.md)
+  - [持久记忆](hermes-agent/user-guide/features/memory_zh.md)
+  - [提供商路由](hermes-agent/user-guide/features/provider-routing_zh.md)
+  - [技能系统](hermes-agent/user-guide/features/skills_zh.md)
+  - [工具和工具集](hermes-agent/user-guide/features/tools_zh.md)
+  - [语音和文本转语音](hermes-agent/user-guide/features/tts_zh.md)
+  - [视觉和图像粘贴](hermes-agent/user-guide/features/vision_zh.md)
+  - [语音模式](hermes-agent/user-guide/features/voice-mode_zh.md)
+
+# Hermes Agent · 实践指南（中文）
+
+- [用 Cron 自动化任何事](hermes-agent/guides/automate-with-cron_zh.md)
+- [Cron 排障指南](hermes-agent/guides/cron-troubleshooting_zh.md)
+- [教程：每日简报机器人](hermes-agent/guides/daily-briefing-bot_zh.md)
+- [委派与并行工作](hermes-agent/guides/delegation-patterns_zh.md)
+- [在 Mac 上运行本地 LLM](hermes-agent/guides/local-llm-on-mac_zh.md)
+- [从 OpenClaw 迁移](hermes-agent/guides/migrate-from-openclaw_zh.md)
+- [把 Hermes 当作 Python 库使用](hermes-agent/guides/python-library_zh.md)
+- [教程：团队 Telegram 助手](hermes-agent/guides/team-telegram-assistant_zh.md)
+- [技巧与最佳实践](hermes-agent/guides/tips_zh.md)
+- [在 Hermes 中使用 MCP](hermes-agent/guides/use-mcp-with-hermes_zh.md)
+- [在 Hermes 中使用 SOUL.md](hermes-agent/guides/use-soul-with-hermes_zh.md)
+- [在 Hermes 中使用语音模式](hermes-agent/guides/use-voice-mode-with-hermes_zh.md)
+- [使用 Skills](hermes-agent/guides/work-with-skills_zh.md)
+
+# Hermes Agent · 开发者指南（中文）
+
+- [添加 Provider](hermes-agent/developer-guide/adding-providers_zh.md)
+- [添加工具](hermes-agent/developer-guide/adding-tools_zh.md)
+- [Agent Loop 内部机制](hermes-agent/developer-guide/agent-loop_zh.md)
+- [架构](hermes-agent/developer-guide/architecture_zh.md)
+- [贡献指南](hermes-agent/developer-guide/contributing_zh.md)
+- [创建技能](hermes-agent/developer-guide/creating-skills_zh.md)
+- [提示词组装](hermes-agent/developer-guide/prompt-assembly_zh.md)
+- [Provider 运行时解析](hermes-agent/developer-guide/provider-runtime_zh.md)
+- [会话存储](hermes-agent/developer-guide/session-storage_zh.md)
+- [工具运行时](hermes-agent/developer-guide/tools-runtime_zh.md)
+
+# Hermes Agent · 参考（中文）
+
+- [MCP 配置参考](hermes-agent/reference/mcp-config-reference_zh.md)
+- [可选技能目录](hermes-agent/reference/optional-skills-catalog_zh.md)
+- [Profile 命令参考](hermes-agent/reference/profile-commands_zh.md)
+- [斜杠命令参考](hermes-agent/reference/slash-commands_zh.md)
+- [内置工具参考](hermes-agent/reference/tools-reference_zh.md)
+- [工具集参考](hermes-agent/reference/toolsets-reference_zh.md)
+
 # 教程 / 上手指南
 
 - [用 mdBook + GitHub Pages 搭建个人技术笔记站](tutorials/mdbook-github-pages-tutorial.md)

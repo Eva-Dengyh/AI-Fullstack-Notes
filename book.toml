@@ -11,3 +11,7 @@ git-repository-url = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
 # fa-github omitted on mdBook 0.5+ (brand icons → "Missing font github").
 # git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/{path}"
+
+# 长目录（尤其 Hermes 中英文章节）侧栏章节默认可折叠，便于导航
+[output.html.fold]
+enable = true

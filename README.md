@@ -25,6 +25,7 @@
 | [关于本仓库](#关于本仓库) | 定位与读者 |
 | [仓库结构](#仓库结构) | 目录树（可展开） |
 | [笔记索引](#笔记索引) | 按主题跳转各篇笔记 |
+| [Hermes Agent 文档](#hermes-agent-文档) | 官方文档整理与中英对照 |
 | [教程索引](#教程索引) | 可复现的上手教程 |
 | [微信公众号](#微信公众号) | 同步更新渠道 |
 | [贡献与交流](#贡献与交流) | Issue 与反馈 |
@@ -55,6 +56,14 @@ AI-Fullstack-Notes/
 │   ├── high-concurrency-architecture.md
 │   ├── nginx-reverse-proxy-load-balance.md
 │   └── redis-cache-core-qa.md
+├── hermes-agent/                # Hermes Agent 文档（门户 + 各章）
+│   ├── index.md
+│   ├── getting-started/         # 安装、快速开始、学习路径等
+│   ├── user-guide/             # 配置、CLI、功能、消息网关等
+│   ├── guides/                  # 实践教程与技巧
+│   ├── developer-guide/        # 架构与扩展开发
+│   ├── reference/              # CLI / 工具 / 环境变量等参考
+│   └── integrations/           # 提供商与集成说明
 ├── infra/                       # 基础设施 / 运维笔记
 │   ├── docker-basics-dockerfile.md
 │   ├── docker-compose-vs-swarm.md
@@ -64,7 +73,10 @@ AI-Fullstack-Notes/
 ├── projects/                    # 项目实战笔记
 │   ├── fastsam-demo-v1-fullstack.md
 │   ├── fastsam-demo-v2-docker-export.md
-│   └── github-profile-readme-guide.md
+│   ├── github-profile-readme-guide.md
+│   └── hermes-agent/            # Hermes 个人实战系列（与 hermes-agent/ 文档区分）
+│       ├── README.md
+│       └── 01-setup-and-project-structure.md
 └── tutorials/                   # 教程 / 上手指南
     └── mdbook-github-pages-tutorial.md
 ```
@@ -117,6 +129,15 @@ AI-Fullstack-Notes/
 | [fastsam-demo-v1-fullstack.md](./projects/fastsam-demo-v1-fullstack.md) | FastSAM-Demo V1 — 基于 SAM 2.1 的图像分割全栈实践 |
 | [fastsam-demo-v2-docker-export.md](./projects/fastsam-demo-v2-docker-export.md) | FastSAM-Demo V2 — Docker 部署与导出功能落地 |
 
+### Hermes Agent 文档
+
+独立目录 [`hermes-agent/`](./hermes-agent/) 收录 Hermes Agent 的文档整理；与 [`projects/hermes-agent/`](./projects/hermes-agent/)（个人实战笔记系列）并列，用途不同。
+
+| 入口 | 说明 |
+|------|------|
+| [hermes-agent/index.md](./hermes-agent/index.md) | 文档门户与快速链接 |
+| 中文页面 | 与英文同目录下的 `*_zh.md`；在线阅读可在 [mdBook 站点](https://eva-dengyh.github.io/AI-Fullstack-Notes/) 侧栏进入「Hermes Agent · …（中文）」各章 |
+
 ---
 
 ## 教程索引
@@ -145,6 +166,6 @@ AI-Fullstack-Notes/
 
 <div align="center">
 
-<sub>持续更新中 · 最后更新：2026-04-10</sub>
+<sub>持续更新中 · 最后更新：2026-04-13</sub>
 
 </div>
