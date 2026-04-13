@@ -184,6 +184,8 @@
 - [CLI 界面](hermes-agent/user-guide/cli_zh.md)
 - [Profiles：运行多个 Agent](hermes-agent/user-guide/profiles_zh.md)
 - [功能概览](hermes-agent/user-guide/features/overview_zh.md)
+  - [ACP 编辑器集成](hermes-agent/user-guide/features/acp_zh.md)
+  - [API 服务器](hermes-agent/user-guide/features/api-server_zh.md)
   - [批处理](hermes-agent/user-guide/features/batch-processing_zh.md)
   - [浏览器自动化](hermes-agent/user-guide/features/browser_zh.md)
   - [代码执行](hermes-agent/user-guide/features/code-execution_zh.md)
@@ -194,6 +196,8 @@
   - [MCP（模型上下文协议）](hermes-agent/user-guide/features/mcp_zh.md)
   - [持久记忆](hermes-agent/user-guide/features/memory_zh.md)
   - [提供商路由](hermes-agent/user-guide/features/provider-routing_zh.md)
+  - [备用提供商](hermes-agent/user-guide/features/fallback-providers_zh.md)
+  - [RL 训练](hermes-agent/user-guide/features/rl-training_zh.md)
   - [技能系统](hermes-agent/user-guide/features/skills_zh.md)
   - [工具和工具集](hermes-agent/user-guide/features/tools_zh.md)
   - [语音和文本转语音](hermes-agent/user-guide/features/tts_zh.md)
@@ -203,6 +207,7 @@
 # Hermes Agent · 实践指南（中文）
 
 - [用 Cron 自动化任何事](hermes-agent/guides/automate-with-cron_zh.md)
+- [构建一个 Hermes 插件](hermes-agent/guides/build-a-hermes-plugin_zh.md)
 - [Cron 排障指南](hermes-agent/guides/cron-troubleshooting_zh.md)
 - [教程：每日简报机器人](hermes-agent/guides/daily-briefing-bot_zh.md)
 - [委派与并行工作](hermes-agent/guides/delegation-patterns_zh.md)
@@ -218,19 +223,31 @@
 
 # Hermes Agent · 开发者指南（中文）
 
+- [ACP 内部机制](hermes-agent/developer-guide/acp-internals_zh.md)
+- [添加平台适配器](hermes-agent/developer-guide/adding-platform-adapters_zh.md)
 - [添加 Provider](hermes-agent/developer-guide/adding-providers_zh.md)
 - [添加工具](hermes-agent/developer-guide/adding-tools_zh.md)
 - [Agent Loop 内部机制](hermes-agent/developer-guide/agent-loop_zh.md)
 - [架构](hermes-agent/developer-guide/architecture_zh.md)
+- [上下文压缩与缓存](hermes-agent/developer-guide/context-compression-and-caching_zh.md)
+- [构建 Context Engine 插件](hermes-agent/developer-guide/context-engine-plugin_zh.md)
 - [贡献指南](hermes-agent/developer-guide/contributing_zh.md)
 - [创建技能](hermes-agent/developer-guide/creating-skills_zh.md)
+- [Cron 内部机制](hermes-agent/developer-guide/cron-internals_zh.md)
+- [环境、评测与数据生成](hermes-agent/developer-guide/environments_zh.md)
+- [扩展 CLI](hermes-agent/developer-guide/extending-the-cli_zh.md)
+- [Gateway 内部机制](hermes-agent/developer-guide/gateway-internals_zh.md)
+- [构建 Memory Provider 插件](hermes-agent/developer-guide/memory-provider-plugin_zh.md)
 - [提示词组装](hermes-agent/developer-guide/prompt-assembly_zh.md)
 - [Provider 运行时解析](hermes-agent/developer-guide/provider-runtime_zh.md)
 - [会话存储](hermes-agent/developer-guide/session-storage_zh.md)
 - [工具运行时](hermes-agent/developer-guide/tools-runtime_zh.md)
+- [轨迹格式](hermes-agent/developer-guide/trajectory-format_zh.md)
 
 # Hermes Agent · 参考（中文）
 
+- [CLI 命令参考](hermes-agent/reference/cli-commands_zh.md)
+- [FAQ 与故障排查](hermes-agent/reference/faq_zh.md)
 - [MCP 配置参考](hermes-agent/reference/mcp-config-reference_zh.md)
 - [可选技能目录](hermes-agent/reference/optional-skills-catalog_zh.md)
 - [Profile 命令参考](hermes-agent/reference/profile-commands_zh.md)

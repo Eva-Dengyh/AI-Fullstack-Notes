@@ -58,11 +58,11 @@ AI-Fullstack-Notes/
 │   └── redis-cache-core-qa.md
 ├── hermes-agent/                # Hermes Agent 文档（门户 + 各章）
 │   ├── index.md
-│   ├── getting-started/         # 安装、快速开始、学习路径等
-│   ├── user-guide/             # 配置、CLI、功能、消息网关等
+│   ├── getting-started/         # 安装、快速开始、学习路径等（英 * .md / 中 *_zh.md）
+│   ├── user-guide/             # 配置、CLI、features、messaging、skills 等
 │   ├── guides/                  # 实践教程与技巧
-│   ├── developer-guide/        # 架构与扩展开发
-│   ├── reference/              # CLI / 工具 / 环境变量等参考
+│   ├── developer-guide/        # 架构与扩展开发（中文译本持续对齐英文章）
+│   ├── reference/              # CLI / FAQ / 工具 / 环境变量等参考
 │   └── integrations/           # 提供商与集成说明
 ├── infra/                       # 基础设施 / 运维笔记
 │   ├── docker-basics-dockerfile.md
@@ -136,7 +136,7 @@ AI-Fullstack-Notes/
 | 入口 | 说明 |
 |------|------|
 | [hermes-agent/index.md](./hermes-agent/index.md) | 文档门户与快速链接 |
-| 中文页面 | 与英文同目录下的 `*_zh.md`；在线阅读可在 [mdBook 站点](https://eva-dengyh.github.io/AI-Fullstack-Notes/) 侧栏进入「Hermes Agent · …（中文）」各章 |
+| 中文页面 | 与英文同目录下的 `*_zh.md`（含 `developer-guide/`、`guides/`、`reference/`、`user-guide/features/` 等）；在线阅读见 [mdBook](https://eva-dengyh.github.io/AI-Fullstack-Notes/) 侧栏「Hermes Agent · …（中文）」 |
 
 ---
 
