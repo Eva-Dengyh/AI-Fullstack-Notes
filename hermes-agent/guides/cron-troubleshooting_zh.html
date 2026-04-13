@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cron 排障指南 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-3cba3993.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-88c93c7a.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/guides/cron-troubleshooting_zh.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-12-title-cron-排障指南-description-诊断并修复常见的-hermes-cron-问题包括任务不触发投递失败skill-加载错误和性能问题"><a class="header" href="#sidebar_position-12-title-cron-排障指南-description-诊断并修复常见的-hermes-cron-问题包括任务不触发投递失败skill-加载错误和性能问题">sidebar_position: 12
+title: “Cron 排障指南”
+description: “诊断并修复常见的 Hermes cron 问题，包括任务不触发、投递失败、skill 加载错误和性能问题”</a></h2>
+<h1 id="cron-排障指南"><a class="header" href="#cron-排障指南">Cron 排障指南</a></h1>
+<p>当某个 cron 任务表现异常时，建议按顺序检查下面这些项目。大多数问题通常都落在四类：调度时间、消息投递、权限，或 skill 加载。</p>
+<hr>
+<h2 id="任务没有触发"><a class="header" href="#任务没有触发">任务没有触发</a></h2>
+<h3 id="检查-1确认任务存在且处于激活状态"><a class="header" href="#检查-1确认任务存在且处于激活状态">检查 1：确认任务存在且处于激活状态</a></h3>
+<pre><code class="language-bash">hermes cron list
+</code></pre>
+<p>找到目标任务，确认它的状态是 <code>[active]</code>，而不是 <code>[paused]</code> 或 <code>[completed]</code>。如果显示 <code>[completed]</code>，通常表示重复次数已经用完，需要编辑任务来重置。</p>
+<h3 id="检查-2确认调度表达式正确"><a class="header" href="#检查-2确认调度表达式正确">检查 2：确认调度表达式正确</a></h3>
+<p>格式错误的调度表达式可能会被静默降级为一次性任务，或者直接被拒绝。你可以用下面的对照来检查：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>你的表达式</th><th>应该表示</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0 9 * * *</code></td><td>每天早上 9:00</td></tr>
+<tr><td><code>0 9 * * 1</code></td><td>每周一早上 9:00</td></tr>
+<tr><td><code>every 2h</code></td><td>从现在起每 2 小时</td></tr>
+<tr><td><code>30m</code></td><td>从现在起 30 分钟后</td></tr>
+<tr><td><code>2025-06-01T09:00:00</code></td><td>2025 年 6 月 1 日 UTC 早上 9:00</td></tr>
+</tbody>
+</table>
+</div>
+<p>如果任务执行过一次后就从列表里消失，那么它大概率是一次性调度（例如 <code>30m</code>、<code>1d</code> 或 ISO 时间戳），这是预期行为。</p>
+<h3 id="检查-3gateway-是否正在运行"><a class="header" href="#检查-3gateway-是否正在运行">检查 3：Gateway 是否正在运行</a></h3>
+<p>Cron 任务是由 gateway 后台的 ticker 线程触发的，它默认每 60 秒 tick 一次。普通的 CLI 聊天会话<strong>不会</strong>自动触发 cron。</p>
+<p>如果你希望任务自动执行，就必须有一个运行中的 gateway（<code>hermes gateway</code> 或 <code>hermes serve</code>）。如果只是做单次调试，也可以手动触发一次：<code>hermes cron tick</code>。</p>
+<h3 id="检查-4系统时钟和时区"><a class="header" href="#检查-4系统时钟和时区">检查 4：系统时钟和时区</a></h3>
+<p>任务使用的是本地时区。如果机器时间不对，或者时区和你预期的不一致，任务触发时间就会偏掉。可以这样检查：</p>
+<pre><code class="language-bash">date
+hermes cron list   # 对比 next_run 和本地时间
+</code></pre>
+<hr>
+<h2 id="投递失败"><a class="header" href="#投递失败">投递失败</a></h2>
+<h3 id="检查-1确认-deliver-目标写对了"><a class="header" href="#检查-1确认-deliver-目标写对了">检查 1：确认 deliver 目标写对了</a></h3>
+<p>投递目标大小写敏感，而且必须对应的平台已经正确配置。目标写错时，响应通常会被静默丢弃。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Target</th><th>需要具备</th></tr>
+</thead>
+<tbody>
+<tr><td><code>telegram</code></td><td><code>~/.hermes/.env</code> 中有 <code>TELEGRAM_BOT_TOKEN</code></td></tr>
+<tr><td><code>discord</code></td><td><code>~/.hermes/.env</code> 中有 <code>DISCORD_BOT_TOKEN</code></td></tr>
+<tr><td><code>slack</code></td><td><code>~/.hermes/.env</code> 中有 <code>SLACK_BOT_TOKEN</code></td></tr>
+<tr><td><code>whatsapp</code></td><td>已配置 WhatsApp gateway</td></tr>
+<tr><td><code>signal</code></td><td>已配置 Signal gateway</td></tr>
+<tr><td><code>matrix</code></td><td>已配置 Matrix homeserver</td></tr>
+<tr><td><code>email</code></td><td><code>config.yaml</code> 中已配置 SMTP</td></tr>
+<tr><td><code>sms</code></td><td>已配置短信服务提供商</td></tr>
+<tr><td><code>local</code></td><td>对 <code>~/.hermes/cron/output/</code> 具有写权限</td></tr>
+<tr><td><code>origin</code></td><td>投递到创建该任务的聊天上下文</td></tr>
+</tbody>
+</table>
+</div>
+<p>其他支持的平台还包括 <code>mattermost</code>、<code>homeassistant</code>、<code>dingtalk</code>、<code>feishu</code>、<code>wecom</code>、<code>weixin</code>、<code>bluebubbles</code> 和 <code>webhook</code>。你也可以用 <code>platform:chat_id</code> 语法指定具体会话，例如 <code>telegram:-1001234567890</code>。</p>
+<p>如果投递失败，任务本身通常还是会执行，只是消息发不出去。可以在 <code>hermes cron list</code> 里查看 <code>last_error</code> 字段（如果该字段可用）。</p>
+<h3 id="检查-2确认-silent-没被误用"><a class="header" href="#检查-2确认-silent-没被误用">检查 2：确认 <code>[SILENT]</code> 没被误用</a></h3>
+<p>如果 cron 任务没有产生输出，或者 Agent 的最终回复中包含 <code>[SILENT]</code>，投递就会被抑制。这本来就是监控类任务的常见设计，但也要确保你的提示词没有误把所有结果都压成沉默。</p>
+<p>比如，“如果没变化就返回 <code>[SILENT]</code>”这种逻辑如果写得不严谨，也可能把本来应该发出的非空结果一起吞掉。</p>
+<h3 id="检查-3平台-token-权限"><a class="header" href="#检查-3平台-token-权限">检查 3：平台 Token 权限</a></h3>
+<p>不同消息平台的机器人都需要具备对应权限，否则可能“看起来没报错，但就是发不出来”：</p>
+<ul>
+<li><strong>Telegram</strong>：机器人必须在目标群组或频道中拥有管理员权限</li>
+<li><strong>Discord</strong>：机器人必须有向目标频道发送消息的权限</li>
+<li><strong>Slack</strong>：机器人必须已被加入工作区，并拥有 <code>chat:write</code> scope</li>
+</ul>
+<h3 id="检查-4响应包装"><a class="header" href="#检查-4响应包装">检查 4：响应包装</a></h3>
+<p>默认情况下，cron 响应会在外层包上头尾信息（<code>config.yaml</code> 中 <code>cron.wrap_response: true</code>）。某些平台或集成对这种包装处理不好。你可以关闭它：</p>
+<pre><code class="language-yaml">cron:
+  wrap_response: false
+</code></pre>
+<hr>
+<h2 id="skill-加载失败"><a class="header" href="#skill-加载失败">Skill 加载失败</a></h2>
+<h3 id="检查-1确认-skill-已安装"><a class="header" href="#检查-1确认-skill-已安装">检查 1：确认 skill 已安装</a></h3>
+<pre><code class="language-bash">hermes skills list
+</code></pre>
+<p>只有已安装的 skill 才能附加到 cron 任务上。如果缺失，请先用 <code>hermes skills install &lt;skill-name&gt;</code> 或在 CLI 里通过 <code>/skills</code> 安装。</p>
+<h3 id="检查-2核对-skill-名称"><a class="header" href="#检查-2核对-skill-名称">检查 2：核对 skill 名称</a></h3>
+<p>Skill 名称区分大小写，而且必须与安装后的 skill 目录名一致。如果任务里写的是某个 skill，最好用 <code>hermes skills list</code> 再确认一次名称完全匹配。</p>
+<h3 id="检查-3依赖交互式工具的-skill"><a class="header" href="#检查-3依赖交互式工具的-skill">检查 3：依赖交互式工具的 skill</a></h3>
+<p>Cron 任务会禁用 <code>cronjob</code>、<code>messaging</code> 和 <code>clarify</code> 工具集。这样可以防止递归创建 cron、直接消息发送（调度器会统一负责投递），以及需要人工交互的提示。如果某个 skill 依赖这些工具，它在 cron 环境中就不会正常工作。</p>
+<p>所以要查看 skill 文档，确认它是否支持无交互（headless）模式。</p>
+<h3 id="检查-4多-skill-加载顺序"><a class="header" href="#检查-4多-skill-加载顺序">检查 4：多 skill 加载顺序</a></h3>
+<p>如果你给任务配置了多个 skill，它们会按顺序加载。如果 Skill A 依赖 Skill B 提供的前置上下文，就必须保证 B 先加载：</p>
+<pre><code class="language-bash">/cron add "0 9 * * *" "..." --skill context-skill --skill target-skill
+</code></pre>
+<p>在这个例子里，<code>context-skill</code> 会先于 <code>target-skill</code> 加载。</p>
+<hr>
+<h2 id="任务执行报错或失败"><a class="header" href="#任务执行报错或失败">任务执行报错或失败</a></h2>
+<h3 id="检查-1查看最近一次输出"><a class="header" href="#检查-1查看最近一次输出">检查 1：查看最近一次输出</a></h3>
+<p>如果任务确实跑了但失败了，错误信息可能出现在：</p>
+<ol>
+<li>任务投递到的聊天里（如果投递成功）</li>
+<li><code>~/.hermes/logs/agent.log</code> 中的调度器日志（或 <code>errors.log</code> 中的警告）</li>
+<li><code>hermes cron list</code> 提供的 <code>last_run</code> 元数据</li>
+</ol>
+<h3 id="检查-2常见报错模式"><a class="header" href="#检查-2常见报错模式">检查 2：常见报错模式</a></h3>
+<p><strong>脚本提示 “No such file or directory”</strong>
+<code>script</code> 路径必须是绝对路径，或者是相对于 Hermes 配置目录的路径。确认如下：</p>
+<pre><code class="language-bash">ls ~/.hermes/scripts/your-script.py   # Must exist
+hermes cron edit &lt;job_id&gt; --script ~/.hermes/scripts/your-script.py
+</code></pre>
+<p><strong>任务执行时提示 “Skill not found”</strong>
+说明调度器所在的机器上并没有安装这个 skill。如果你在多台机器之间切换，skill 不会自动同步，需要重新安装。</p>
+<p><strong>任务跑了但没有任何投递</strong>
+一般是 deliver 目标有问题（见上面的投递失败部分），或者输出被 <code>[SILENT]</code> 静默抑制了。</p>
+<p><strong>任务挂住或超时</strong>
+调度器使用的是基于“不活跃时间”的超时机制（默认 600 秒，可通过环境变量 <code>HERMES_CRON_TIMEOUT</code> 配置，设为 <code>0</code> 表示无限制）。只要 Agent 一直在积极调用工具，它就可以持续运行；只有长时间没有动作时才会触发超时。对于耗时很长的任务，建议把数据采集工作交给脚本做，最终只让 Agent 接收结果并分析。</p>
+<h3 id="检查-3锁竞争"><a class="header" href="#检查-3锁竞争">检查 3：锁竞争</a></h3>
+<p>调度器通过文件锁防止同一时间发生重叠 tick。如果有两个 gateway 实例同时跑，或者 CLI 会话与 gateway 冲突，任务就可能被延迟甚至跳过。</p>
+<p>可以先检查并清理重复进程：</p>
+<pre><code class="language-bash">ps aux | grep hermes
+# Kill duplicate processes, keep only one
+</code></pre>
+<h3 id="检查-4jobsjson-权限"><a class="header" href="#检查-4jobsjson-权限">检查 4：<code>jobs.json</code> 权限</a></h3>
+<p>任务定义保存在 <code>~/.hermes/cron/jobs.json</code>。如果当前用户对这个文件没有读写权限，调度器可能静默失败：</p>
+<pre><code class="language-bash">ls -la ~/.hermes/cron/jobs.json
+chmod 600 ~/.hermes/cron/jobs.json   # Your user should own it
+</code></pre>
+<hr>
+<h2 id="性能问题"><a class="header" href="#性能问题">性能问题</a></h2>
+<h3 id="任务启动慢"><a class="header" href="#任务启动慢">任务启动慢</a></h3>
+<p>每个 cron 任务都会创建一个全新的 <code>AIAgent</code> 会话，这可能涉及 provider 鉴权和模型准备。对于时间要求很严的任务，建议预留缓冲，例如把实际需要 9 点看到的任务安排在 8 点跑，而不是卡着 9 点。</p>
+<h3 id="同时到点的任务太多"><a class="header" href="#同时到点的任务太多">同时到点的任务太多</a></h3>
+<p>调度器在每个 tick 中是顺序执行到期任务的。如果多个任务恰好同时到点，它们会一个接一个跑。为了减少排队延迟，可以把时间错开，例如用 <code>0 9 * * *</code> 和 <code>5 9 * * *</code>，而不是都堆在 <code>0 9 * * *</code>。</p>
+<h3 id="脚本输出太大"><a class="header" href="#脚本输出太大">脚本输出太大</a></h3>
+<p>如果脚本向 stdout 倾倒几 MB 内容，Agent 不仅会变慢，还可能直接撞上 token 上限。更好的做法是在脚本里先过滤和总结，只输出 Agent 真正需要推理的那部分。</p>
+<hr>
+<h2 id="常用诊断命令"><a class="header" href="#常用诊断命令">常用诊断命令</a></h2>
+<pre><code class="language-bash">hermes cron list                    # 查看所有任务、状态和 next_run
+hermes cron run &lt;job_id&gt;            # 让任务在下一个 tick 执行（测试用）
+hermes cron edit &lt;job_id&gt;           # 修复配置问题
+hermes logs                         # 查看最近日志
+hermes skills list                  # 确认已安装的 skills
+</code></pre>
+<hr>
+<h2 id="需要更多帮助时"><a class="header" href="#需要更多帮助时">需要更多帮助时</a></h2>
+<p>如果你已经按这篇指南逐项排查，问题仍未解决：</p>
+<ol>
+<li>使用 <code>hermes cron run &lt;job_id&gt;</code> 让任务在下一个 gateway tick 执行，并观察聊天输出中的错误</li>
+<li>查看 <code>~/.hermes/logs/agent.log</code> 里的调度器日志，以及 <code>~/.hermes/logs/errors.log</code> 里的警告</li>
+<li>前往 <a href="https://github.com/NousResearch/hermes-agent">github.com/NousResearch/hermes-agent</a> 提 issue，并附上：
+<ul>
+<li>任务 ID 和调度表达式</li>
+<li>投递目标</li>
+<li>你的预期行为与实际行为</li>
+<li>日志中的相关错误信息</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><em>完整的 cron 参考请同时查看 <a href="/docs/guides/automate-with-cron">用 Cron 自动化任何事</a> 和 <a href="/docs/user-guide/features/cron">Scheduled Tasks (Cron)</a>。</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/guides/automate-with-cron_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/guides/daily-briefing-bot_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/guides/automate-with-cron_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/guides/daily-briefing-bot_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

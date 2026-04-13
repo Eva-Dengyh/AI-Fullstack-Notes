@@ -1,0 +1,626 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>技能系统 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-3cba3993.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-88c93c7a.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/features/skills_zh.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-2-title-技能系统-description-按需知识文档--渐进式披露agent-管理的技能和技能中心"><a class="header" href="#sidebar_position-2-title-技能系统-description-按需知识文档--渐进式披露agent-管理的技能和技能中心">sidebar_position: 2
+title: “技能系统”
+description: “按需知识文档 — 渐进式披露、Agent 管理的技能和技能中心”</a></h2>
+<h1 id="技能系统"><a class="header" href="#技能系统">技能系统</a></h1>
+<p>技能是 Agent 按需加载的知识文档。它们遵循<strong>渐进式披露</strong>模式以最小化令牌使用，兼容 <a href="https://agentskills.io/specification">agentskills.io</a> 开放标准。</p>
+<p>所有技能都存储在 <strong><code>~/.hermes/skills/</code></strong> — 主要目录和真实来源。在新安装上，捆绑的技能从仓库复制。从中心安装和 Agent 创建的技能也放在这里。Agent 可以修改或删除任何技能。</p>
+<p>你也可以指向 Hermes <strong>外部技能目录</strong> — 附加文件夹与本地文件夹一起扫描。参见下面的 <a href="#external-skill-directories">External Skill Directories</a>。</p>
+<p>另请参见：</p>
+<ul>
+<li><a href="/docs/reference/skills-catalog">Bundled Skills Catalog</a></li>
+<li><a href="/docs/reference/optional-skills-catalog">Official Optional Skills Catalog</a></li>
+</ul>
+<h2 id="使用技能"><a class="header" href="#使用技能">使用技能</a></h2>
+<p>每个已安装的技能自动可用作斜杠命令：</p>
+<pre><code class="language-bash"># 在 CLI 或任何消息平台中：
+/gif-search funny cats
+/axolotl help me fine-tune Llama 3 on my dataset
+/github-pr-workflow create a PR for the auth refactor
+/plan design a rollout for migrating our auth provider
+
+# 仅技能名称加载它并让 Agent 询问你需要什么：
+/excalidraw
+</code></pre>
+<p>捆绑的 <code>plan</code> 技能是一个带自定义行为的技能支持的斜杠命令的好例子。运行 <code>/plan [request]</code> 告诉 Hermes 检查上下文（如需），写一个 markdown 实现计划而非执行任务，并将结果保存到相对于活跃工作区/后端工作目录的 <code>.hermes/plans/</code> 下。</p>
+<p>你也可以通过自然对话与技能交互：</p>
+<pre><code class="language-bash">hermes chat --toolsets skills -q "What skills do you have?"
+hermes chat --toolsets skills -q "Show me the axolotl skill"
+</code></pre>
+<h2 id="渐进式披露"><a class="header" href="#渐进式披露">渐进式披露</a></h2>
+<p>技能使用令牌高效加载模式：</p>
+<pre><code>Level 0: skills_list()           → [{name, description, category}, ...]   (~3k tokens)
+Level 1: skill_view(name)        → 完整内容 + 元数据       (varies)
+Level 2: skill_view(name, path)  → 特定参考文件       (varies)
+</code></pre>
+<p>Agent 仅在真正需要时加载完整的技能内容。</p>
+<h2 id="skillmd-格式"><a class="header" href="#skillmd-格式">SKILL.md 格式</a></h2>
+<pre><code class="language-markdown">---
+name: my-skill
+description: 此技能的作用简要描述
+version: 1.0.0
+platforms: [macos, linux]     # 可选 — 限制到特定 OS 平台
+metadata:
+  hermes:
+    tags: [python, automation]
+    category: devops
+    fallback_for_toolsets: [web]    # 可选 — 条件激活（见下文）
+    requires_toolsets: [terminal]   # 可选 — 条件激活（见下文）
+    config:                          # 可选 — config.yaml 设置
+      - key: my.setting
+        description: "这控制什么"
+        default: "value"
+        prompt: "设置提示"
+---
+
+# 技能标题
+
+## 何时使用
+此技能的触发条件。
+
+## 步骤
+1. 第一步
+2. 第二步
+
+## 陷阱
+- 已知失败模式和修复
+
+## 验证
+如何确认它有效。
+</code></pre>
+<h3 id="平台特定的技能"><a class="header" href="#平台特定的技能">平台特定的技能</a></h3>
+<p>技能可以使用 <code>platforms</code> 字段限制自己到特定操作系统：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>值</th><th>匹配</th></tr>
+</thead>
+<tbody>
+<tr><td><code>macos</code></td><td>macOS (Darwin)</td></tr>
+<tr><td><code>linux</code></td><td>Linux</td></tr>
+<tr><td><code>windows</code></td><td>Windows</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml">platforms: [macos]            # 仅 macOS（例如 iMessage、Apple Reminders、FindMy）
+platforms: [macos, linux]     # macOS 和 Linux
+</code></pre>
+<p>当设置时，技能在不兼容平台上自动从系统提示、<code>skills_list()</code> 和斜杠命令中隐藏。如果省略，技能在所有平台上加载。</p>
+<h3 id="条件激活回退技能"><a class="header" href="#条件激活回退技能">条件激活（回退技能）</a></h3>
+<p>技能可根据当前会话中可用的工具自动显示或隐藏自己。这对于<strong>回退技能</strong> — 应仅在高级工具不可用时出现的免费或本地替代品最有用。</p>
+<pre><code class="language-yaml">metadata:
+  hermes:
+    fallback_for_toolsets: [web]      # 仅当这些工具集不可用时显示
+    requires_toolsets: [terminal]     # 仅当这些工具集可用时显示
+    fallback_for_tools: [web_search]  # 仅当这些特定工具不可用时显示
+    requires_tools: [terminal]        # 仅当这些特定工具可用时显示
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>行为</th></tr>
+</thead>
+<tbody>
+<tr><td><code>fallback_for_toolsets</code></td><td>当列出的工具集可用时技能被<strong>隐藏</strong>。当它们丢失时显示。</td></tr>
+<tr><td><code>fallback_for_tools</code></td><td>相同，但检查单个工具而非工具集。</td></tr>
+<tr><td><code>requires_toolsets</code></td><td>当列出的工具集不可用时技能被<strong>隐藏</strong>。当它们存在时显示。</td></tr>
+<tr><td><code>requires_tools</code></td><td>相同，但检查单个工具。</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong> 内置 <code>duckduckgo-search</code> 技能使用 <code>fallback_for_toolsets: [web]</code>。当你设置了 <code>FIRECRAWL_API_KEY</code> 时，web 工具集可用，Agent 使用 <code>web_search</code> — DuckDuckGo 技能保持隐藏。如果 API 密钥丢失，web 工具集不可用，DuckDuckGo 技能自动作为回退出现。</p>
+<p>没有任何条件字段的技能表现如前 — 它们始终显示。</p>
+<h2 id="加载时安全设置"><a class="header" href="#加载时安全设置">加载时安全设置</a></h2>
+<p>技能可声明所需环境变量而不会从发现中消失：</p>
+<pre><code class="language-yaml">required_environment_variables:
+  - name: TENOR_API_KEY
+    prompt: Tenor API key
+    help: 从 https://developers.google.com/tenor 获取密钥
+    required_for: full functionality
+</code></pre>
+<p>当遇到缺失值时，Hermes 仅在本地 CLI 中实际加载技能时才安全地询问。你可跳过设置并继续使用技能。消息表面绝不在聊天中要求秘密 — 它们告诉你在本地使用 <code>hermes setup</code> 或 <code>~/.hermes/.env</code> 代替。</p>
+<p>一旦设置，声明的环境变量<strong>自动传递</strong> — 到 <code>execute_code</code> 和 <code>terminal</code> 沙箱中。技能的脚本可直接使用 <code>$TENOR_API_KEY</code>。对于非技能环境变量，使用 <code>terminal.env_passthrough</code> 配置选项。参见 <a href="/docs/user-guide/security#environment-variable-passthrough">Environment Variable Passthrough</a> 了解详情。</p>
+<h3 id="技能配置设置"><a class="header" href="#技能配置设置">技能配置设置</a></h3>
+<p>技能也可声明存储在 <code>config.yaml</code> 中的非秘密配置设置（路径、偏好）：</p>
+<pre><code class="language-yaml">metadata:
+  hermes:
+    config:
+      - key: wiki.path
+        description: wiki 目录路径
+        default: "~/wiki"
+        prompt: Wiki 目录路径
+</code></pre>
+<p>设置存储在 <code>config.yaml</code> 中的 <code>skills.config</code> 下。<code>hermes config migrate</code> 提示未配置的设置，<code>hermes config show</code> 显示它们。当技能加载时，其解析的配置值被注入到上下文中，以便 Agent 自动知道配置的值。</p>
+<p>参见 <a href="/docs/user-guide/configuration#skill-settings">Skill Settings</a> 和 <a href="/docs/developer-guide/creating-skills#config-settings-configyaml">Creating Skills — Config Settings</a> 了解详情。</p>
+<h2 id="技能目录结构"><a class="header" href="#技能目录结构">技能目录结构</a></h2>
+<pre><code class="language-text">~/.hermes/skills/                  # 单一真实来源
+├── mlops/                         # 类别目录
+│   ├── axolotl/
+│   │   ├── SKILL.md               # 主说明（必需）
+│   │   ├── references/            # 附加文档
+│   │   ├── templates/             # 输出格式
+│   │   ├── scripts/               # 可从技能调用的辅助脚本
+│   │   └── assets/                # 补充文件
+│   └── vllm/
+│       └── SKILL.md
+├── devops/
+│   └── deploy-k8s/                # Agent 创建的技能
+│       ├── SKILL.md
+│       └── references/
+├── .hub/                          # 技能中心状态
+│   ├── lock.json
+│   ├── quarantine/
+│   └── audit.log
+└── .bundled_manifest              # 跟踪已播种的捆绑技能
+</code></pre>
+<h2 id="外部技能目录"><a class="header" href="#外部技能目录">外部技能目录</a></h2>
+<p>如果你在 Hermes 外部维护技能 — 例如，一个多个 AI 工具使用的共享 <code>~/.agents/skills/</code> 目录 — 你可以告诉 Hermes 也扫描那些目录。</p>
+<p>在 <code>~/.hermes/config.yaml</code> 的 <code>skills</code> 部分下添加 <code>external_dirs</code>：</p>
+<pre><code class="language-yaml">skills:
+  external_dirs:
+    - ~/.agents/skills
+    - /home/shared/team-skills
+    - ${SKILLS_REPO}/skills
+</code></pre>
+<p>路径支持 <code>~</code> 展开和 <code>${VAR}</code> 环境变量替换。</p>
+<h3 id="工作原理"><a class="header" href="#工作原理">工作原理</a></h3>
+<ul>
+<li><strong>只读</strong>：外部目录仅用于技能发现扫描。当 Agent 创建或编辑技能时，它总是写到 <code>~/.hermes/skills/</code>。</li>
+<li><strong>本地优先</strong>：如果同一技能名称同时存在于本地目录和外部目录中，本地版本获胜。</li>
+<li><strong>完整集成</strong>：外部技能出现在系统提示索引、<code>skills_list</code>、<code>skill_view</code> 和 <code>/skill-name</code> 斜杠命令中 — 与本地技能无异。</li>
+<li><strong>非存在路径被静默跳过</strong>：如果配置的目录不存在，Hermes 无错误地忽略它。对于可能在每台计算机上不存在的可选共享目录很有用。</li>
+</ul>
+<h3 id="示例"><a class="header" href="#示例">示例</a></h3>
+<pre><code class="language-text">~/.hermes/skills/               # 本地（主要、读写）
+├── devops/deploy-k8s/
+│   └── SKILL.md
+└── mlops/axolotl/
+    └── SKILL.md
+
+~/.agents/skills/               # 外部（只读、共享）
+├── my-custom-workflow/
+│   └── SKILL.md
+└── team-conventions/
+    └── SKILL.md
+</code></pre>
+<p>所有四个技能出现在你的技能索引中。如果本地创建一个称为 <code>my-custom-workflow</code> 的新技能，它会遮蔽外部版本。</p>
+<h2 id="agent-管理的技能skill_manage-工具"><a class="header" href="#agent-管理的技能skill_manage-工具">Agent 管理的技能（skill_manage 工具）</a></h2>
+<p>Agent 可通过 <code>skill_manage</code> 工具创建、更新和删除自己的技能。这是 Agent 的<strong>程序记忆</strong> — 当它想出一个非平凡的工作流时，它将该方法保存为一个技能供将来重用。</p>
+<h3 id="何时-agent-创建技能"><a class="header" href="#何时-agent-创建技能">何时 Agent 创建技能</a></h3>
+<ul>
+<li>在成功完成复杂任务（5+ 工具调用）后</li>
+<li>当它遇到错误或死路并找到了工作路径时</li>
+<li>当用户纠正了它的方法时</li>
+<li>当它发现了一个非平凡工作流时</li>
+</ul>
+<h3 id="操作"><a class="header" href="#操作">操作</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>操作</th><th>用途</th><th>关键参数</th></tr>
+</thead>
+<tbody>
+<tr><td><code>create</code></td><td>从零开始的新技能</td><td><code>name</code>, <code>content</code>（完整 SKILL.md）, 可选 <code>category</code></td></tr>
+<tr><td><code>patch</code></td><td>有针对性的修复（首选）</td><td><code>name</code>, <code>old_string</code>, <code>new_string</code></td></tr>
+<tr><td><code>edit</code></td><td>主要结构重写</td><td><code>name</code>, <code>content</code>（完整 SKILL.md 替换）</td></tr>
+<tr><td><code>delete</code></td><td>完全删除技能</td><td><code>name</code></td></tr>
+<tr><td><code>write_file</code></td><td>添加/更新支持文件</td><td><code>name</code>, <code>file_path</code>, <code>file_content</code></td></tr>
+<tr><td><code>remove_file</code></td><td>删除支持文件</td><td><code>name</code>, <code>file_path</code></td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="tip-patch-操作对于更新是首选--它比-edit-令牌更高效因为仅更改的文本出现在工具调用中"><a class="header" href="#tip-patch-操作对于更新是首选--它比-edit-令牌更高效因为仅更改的文本出现在工具调用中">:::tip
+<code>patch</code> 操作对于更新是首选 — 它比 <code>edit</code> 令牌更高效，因为仅更改的文本出现在工具调用中。</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="技能中心"><a class="header" href="#技能中心">技能中心</a></h2>
+<p>浏览、搜索、安装和管理来自在线注册表、<code>skills.sh</code>、直接已知技能端点和官方可选技能的技能。</p>
+<h3 id="常见命令"><a class="header" href="#常见命令">常见命令</a></h3>
+<pre><code class="language-bash">hermes skills browse                              # 浏览所有中心技能（官方优先）
+hermes skills browse --source official            # 仅浏览官方可选技能
+hermes skills search kubernetes                   # 搜索所有来源
+hermes skills search react --source skills-sh     # 搜索 skills.sh 目录
+hermes skills search https://mintlify.com/docs --source well-known
+hermes skills inspect openai/skills/k8s           # 安装前预览
+hermes skills install openai/skills/k8s           # 使用安全扫描安装
+hermes skills install official/security/1password
+hermes skills install skills-sh/vercel-labs/json-render/json-render-react --force
+hermes skills install well-known:https://mintlify.com/docs/.well-known/skills/mintlify
+hermes skills list --source hub                   # 列表中心安装的技能
+hermes skills check                               # 检查已安装中心技能以获取上游更新
+hermes skills update                              # 有更新时重新安装中心技能
+hermes skills audit                               # 重新扫描所有中心技能以获得安全性
+hermes skills uninstall k8s                       # 删除中心技能
+hermes skills publish skills/my-skill --to github --repo owner/repo
+hermes skills snapshot export setup.json          # 导出技能配置
+hermes skills tap add myorg/skills-repo           # 添加自定义 GitHub 来源
+</code></pre>
+<h3 id="支持的中心来源"><a class="header" href="#支持的中心来源">支持的中心来源</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>来源</th><th>示例</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>official</code></td><td><code>official/security/1password</code></td><td>随 Hermes 发货的可选技能。</td></tr>
+<tr><td><code>skills-sh</code></td><td><code>skills-sh/vercel-labs/agent-skills/vercel-react-best-practices</code></td><td>可通过 <code>hermes skills search &lt;query&gt; --source skills-sh</code> 搜索。Hermes 当 skills.sh slug 与仓库文件夹不同时解析别名风格技能。</td></tr>
+<tr><td><code>well-known</code></td><td><code>well-known:https://mintlify.com/docs/.well-known/skills/mintlify</code></td><td>直接从网站的 <code>/.well-known/skills/index.json</code> 提供的技能。使用网站或文档 URL 搜索。</td></tr>
+<tr><td><code>github</code></td><td><code>openai/skills/k8s</code></td><td>直接 GitHub 仓库/路径安装和自定义 tap。</td></tr>
+<tr><td><code>clawhub</code>, <code>lobehub</code>, <code>claude-marketplace</code></td><td>来源特定标识符</td><td>社区或市场集成。</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="集成的中心和注册表"><a class="header" href="#集成的中心和注册表">集成的中心和注册表</a></h3>
+<p>Hermes 目前与这些技能生态系统和发现来源集成：</p>
+<h4 id="1-官方可选技能official"><a class="header" href="#1-官方可选技能official">1. 官方可选技能（<code>official</code>）</a></h4>
+<p>这些在 Hermes 仓库本身中维护并用内置信任安装。</p>
+<ul>
+<li>目录：<a href="../../reference/optional-skills-catalog">Official Optional Skills Catalog</a></li>
+<li>仓库中的来源：<code>optional-skills/</code></li>
+<li>示例：</li>
+</ul>
+<pre><code class="language-bash">hermes skills browse --source official
+hermes skills install official/security/1password
+</code></pre>
+<h4 id="2-skillsshskills-sh"><a class="header" href="#2-skillsshskills-sh">2. skills.sh（<code>skills-sh</code>）</a></h4>
+<p>这是 Vercel 的公共技能目录。Hermes 可直接搜索它、检查技能详情页面、解析别名风格的 slug，并从基础来源仓库安装。</p>
+<ul>
+<li>目录：<a href="https://skills.sh/">skills.sh</a></li>
+<li>CLI/工具仓库：<a href="https://github.com/vercel-labs/skills">vercel-labs/skills</a></li>
+<li>官方 Vercel 技能仓库：<a href="https://github.com/vercel-labs/agent-skills">vercel-labs/agent-skills</a></li>
+<li>示例：</li>
+</ul>
+<pre><code class="language-bash">hermes skills search react --source skills-sh
+hermes skills inspect skills-sh/vercel-labs/json-render/json-render-react
+hermes skills install skills-sh/vercel-labs/json-render/json-render-react --force
+</code></pre>
+<h4 id="3-已知技能端点well-known"><a class="header" href="#3-已知技能端点well-known">3. 已知技能端点（<code>well-known</code>）</a></h4>
+<p>这是来自发布 <code>/.well-known/skills/index.json</code> 的网站的基于 URL 的发现。它不是单一的集中中心 — 它是一个网络发现约定。</p>
+<ul>
+<li>示例实时端点：<a href="https://mintlify.com/docs/.well-known/skills/index.json">Mintlify 文档技能索引</a></li>
+<li>参考服务器实现：<a href="https://github.com/vercel-labs/skills-handler">vercel-labs/skills-handler</a></li>
+<li>示例：</li>
+</ul>
+<pre><code class="language-bash">hermes skills search https://mintlify.com/docs --source well-known
+hermes skills inspect well-known:https://mintlify.com/docs/.well-known/skills/mintlify
+hermes skills install well-known:https://mintlify.com/docs/.well-known/skills/mintlify
+</code></pre>
+<h4 id="4-直接-github-技能github"><a class="header" href="#4-直接-github-技能github">4. 直接 GitHub 技能（<code>github</code>）</a></h4>
+<p>Hermes 可直接从 GitHub 仓库和基于 GitHub 的 tap 安装。当你已经知道仓库/路径或想添加自己的自定义来源仓库时很有用。</p>
+<p>默认 tap（可无任何设置浏览）：</p>
+<ul>
+<li>
+<p><a href="https://github.com/openai/skills">openai/skills</a></p>
+</li>
+<li>
+<p><a href="https://github.com/anthropics/skills">anthropics/skills</a></p>
+</li>
+<li>
+<p><a href="https://github.com/VoltAgent/awesome-agent-skills">VoltAgent/awesome-agent-skills</a></p>
+</li>
+<li>
+<p><a href="https://github.com/garrytan/gstack">garrytan/gstack</a></p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<pre><code class="language-bash">hermes skills install openai/skills/k8s
+hermes skills tap add myorg/skills-repo
+</code></pre>
+<h4 id="5-clawhubclawhub"><a class="header" href="#5-clawhubclawhub">5. ClawHub（<code>clawhub</code>）</a></h4>
+<p>一个集成为社区来源的第三方技能市场。</p>
+<ul>
+<li>网站：<a href="https://clawhub.ai/">clawhub.ai</a></li>
+<li>Hermes 来源 ID：<code>clawhub</code></li>
+</ul>
+<h4 id="6-claude-市场风格仓库claude-marketplace"><a class="header" href="#6-claude-市场风格仓库claude-marketplace">6. Claude 市场风格仓库（<code>claude-marketplace</code>）</a></h4>
+<p>Hermes 支持发布 Claude 兼容插件/市场清单的市场仓库。</p>
+<p>已知集成来源包括：</p>
+<ul>
+<li><a href="https://github.com/anthropics/skills">anthropics/skills</a></li>
+<li><a href="https://github.com/aiskillstore/marketplace">aiskillstore/marketplace</a></li>
+</ul>
+<p>Hermes 来源 ID：<code>claude-marketplace</code></p>
+<h4 id="7-lobehublobehub"><a class="header" href="#7-lobehublobehub">7. LobeHub（<code>lobehub</code>）</a></h4>
+<p>Hermes 可搜索和将 LobeHub 公开目录中的 Agent 条目转换成可安装的 Hermes 技能。</p>
+<ul>
+<li>网站：<a href="https://lobehub.com/">LobeHub</a></li>
+<li>公开 Agent 索引：<a href="https://chat-agents.lobehub.com/">chat-agents.lobehub.com</a></li>
+<li>支持仓库：<a href="https://github.com/lobehub/lobe-chat-agents">lobehub/lobe-chat-agents</a></li>
+<li>Hermes 来源 ID：<code>lobehub</code></li>
+</ul>
+<h3 id="安全扫描和---force"><a class="header" href="#安全扫描和---force">安全扫描和 <code>--force</code></a></h3>
+<p>所有中心安装的技能都通过<strong>安全扫描仪</strong>进行检查，其检查数据泄露、提示注入、破坏性命令、供应链信号和其他威胁。</p>
+<p><code>hermes skills inspect ...</code> 现在也显示上游元数据（如可用）：</p>
+<ul>
+<li>仓库 URL</li>
+<li>skills.sh 详情页面 URL</li>
+<li>安装命令</li>
+<li>周安装数</li>
+<li>上游安全审计状态</li>
+<li>已知索引/端点 URL</li>
+</ul>
+<p>当你审查了第三方技能并想覆盖非危险政策块时使用 <code>--force</code>：</p>
+<pre><code class="language-bash">hermes skills install skills-sh/anthropics/skills/pdf --force
+</code></pre>
+<p>重要行为：</p>
+<ul>
+<li><code>--force</code> 可覆盖谨慎/警告风格发现的政策块。</li>
+<li><code>--force</code> <strong>不</strong>覆盖 <code>dangerous</code> 扫描判定。</li>
+<li>官方可选技能（<code>official/...</code>）被视为内置信任且不显示第三方警告面板。</li>
+</ul>
+<h3 id="信任级别"><a class="header" href="#信任级别">信任级别</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>级别</th><th>来源</th><th>政策</th></tr>
+</thead>
+<tbody>
+<tr><td><code>builtin</code></td><td>与 Hermes 一起发货</td><td>始终受信任</td></tr>
+<tr><td><code>official</code></td><td>仓库中的 <code>optional-skills/</code></td><td>内置信任，无第三方警告</td></tr>
+<tr><td><code>trusted</code></td><td>受信任的注册表/仓库如 <code>openai/skills</code>、<code>anthropics/skills</code></td><td>比社区来源更宽容的政策</td></tr>
+<tr><td><code>community</code></td><td>其他所有内容（<code>skills.sh</code>、已知端点、自定义 GitHub 仓库、大多数市场）</td><td>非危险发现可用 <code>--force</code> 覆盖；<code>dangerous</code> 判定保持阻止</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="更新生命周期"><a class="header" href="#更新生命周期">更新生命周期</a></h3>
+<p>中心现在跟踪足够的来源以重新检查已安装技能的上游副本：</p>
+<pre><code class="language-bash">hermes skills check          # 报告哪些已安装中心技能上游改变
+hermes skills update         # 仅重新安装有可用更新的技能
+hermes skills update react   # 更新一个特定已安装的中心技能
+</code></pre>
+<p>这使用存储的来源标识符加上当前上游包内容哈希以检测漂移。</p>
+<h3 id="斜杠命令聊天内部"><a class="header" href="#斜杠命令聊天内部">斜杠命令（聊天内部）</a></h3>
+<p>所有相同命令都与 <code>/skills</code> 一起工作：</p>
+<pre><code class="language-text">/skills browse
+/skills search react --source skills-sh
+/skills search https://mintlify.com/docs --source well-known
+/skills inspect skills-sh/vercel-labs/json-render/json-render-react
+/skills install openai/skills/skill-creator --force
+/skills check
+/skills update
+/skills list
+</code></pre>
+<p>官方可选技能仍使用 <code>official/security/1password</code> 和 <code>official/migration/openclaw-migration</code> 等标识符。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/features/provider-routing_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/tools_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/features/provider-routing_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/tools_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

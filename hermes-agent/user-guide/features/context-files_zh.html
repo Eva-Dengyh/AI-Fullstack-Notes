@@ -1,0 +1,438 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>上下文文件 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-3cba3993.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-88c93c7a.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/features/context-files_zh.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-8-title-上下文文件-description-项目上下文文件--hermesmdagentsmdclaudemd全局-soulmd-和-cursorrules--自动注入每个对话"><a class="header" href="#sidebar_position-8-title-上下文文件-description-项目上下文文件--hermesmdagentsmdclaudemd全局-soulmd-和-cursorrules--自动注入每个对话">sidebar_position: 8
+title: “上下文文件”
+description: “项目上下文文件 — .hermes.md、AGENTS.md、CLAUDE.md、全局 SOUL.md 和 .cursorrules — 自动注入每个对话”</a></h2>
+<h1 id="上下文文件"><a class="header" href="#上下文文件">上下文文件</a></h1>
+<p>Hermes Agent 自动发现并加载形成其行为方式的上下文文件。有些是项目本地的，从你的工作目录发现。<code>SOUL.md</code> 现在是全局的 Hermes 实例，仅从 <code>HERMES_HOME</code> 加载。</p>
+<h2 id="支持的上下文文件"><a class="header" href="#支持的上下文文件">支持的上下文文件</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>文件</th><th>目的</th><th>发现</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>.hermes.md</strong> / <strong>HERMES.md</strong></td><td>项目说明（最高优先级）</td><td>步行到 git 根</td></tr>
+<tr><td><strong>AGENTS.md</strong></td><td>项目说明、约定、架构</td><td>启动时 CWD + 逐步子目录</td></tr>
+<tr><td><strong>CLAUDE.md</strong></td><td>Claude Code 上下文文件（也被检测）</td><td>启动时 CWD + 逐步子目录</td></tr>
+<tr><td><strong>SOUL.md</strong></td><td>此 Hermes 实例的全局个性和语调自定义</td><td>仅 <code>HERMES_HOME/SOUL.md</code></td></tr>
+<tr><td><strong>.cursorrules</strong></td><td>Cursor IDE 编码约定</td><td>仅 CWD</td></tr>
+<tr><td><strong>.cursor/rules/*.mdc</strong></td><td>Cursor IDE 规则模块</td><td>仅 CWD</td></tr>
+</tbody>
+</table>
+</div>
+<dl>
+<dt id="info-优先级系统-每个会话仅加载一个项目上下文类型首个匹配获胜hermesmd--agentsmd--claudemd--cursorrulessoulmd-始终独立加载作为-agent-身份插槽-1"><a class="header" href="#info-优先级系统-每个会话仅加载一个项目上下文类型首个匹配获胜hermesmd--agentsmd--claudemd--cursorrulessoulmd-始终独立加载作为-agent-身份插槽-1">:::info 优先级系统
+每个会话仅加载<strong>一个</strong>项目上下文类型（首个匹配获胜）：<code>.hermes.md</code> → <code>AGENTS.md</code> → <code>CLAUDE.md</code> → <code>.cursorrules</code>。<strong>SOUL.md</strong> 始终独立加载作为 Agent 身份（插槽 #1）。</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="agentsmd"><a class="header" href="#agentsmd">AGENTS.md</a></h2>
+<p><code>AGENTS.md</code> 是主要的项目上下文文件。它告诉 Agent 你的项目是如何构造的、要遵循什么约定以及任何特殊说明。</p>
+<h3 id="渐进式子目录发现"><a class="header" href="#渐进式子目录发现">渐进式子目录发现</a></h3>
+<p>在会话开始，Hermes 从你的工作目录加载 <code>AGENTS.md</code> 到系统提示。当 Agent 在会话期间导航到子目录时（通过 <code>read_file</code>、<code>terminal</code>、<code>search_files</code> 等），它<strong>逐步发现</strong>这些目录中的上下文文件，并在它们变得相关时将其注入到对话中。</p>
+<pre><code>my-project/
+├── AGENTS.md              ← 在启动时加载（系统提示）
+├── frontend/
+│   └── AGENTS.md          ← 当 Agent 读 frontend/ 文件时发现
+├── backend/
+│   └── AGENTS.md          ← 当 Agent 读 backend/ 文件时发现
+└── shared/
+    └── AGENTS.md          ← 当 Agent 读 shared/ 文件时发现
+</code></pre>
+<p>这种方法相对于在启动时加载所有内容有两个优势：</p>
+<ul>
+<li><strong>无系统提示膨胀</strong> — 子目录提示仅在需要时出现</li>
+<li><strong>提示缓存保留</strong> — 系统提示在转向间保持稳定</li>
+</ul>
+<dl>
+<dt id="每个子目录在每个会话中最多检查一次发现也会步行父目录所以读-backendsrcmainpy-会发现-backendagentsmd即使-backendsrc-没有自己的上下文文件"><a class="header" href="#每个子目录在每个会话中最多检查一次发现也会步行父目录所以读-backendsrcmainpy-会发现-backendagentsmd即使-backendsrc-没有自己的上下文文件">每个子目录在每个会话中最多检查一次。发现也会步行父目录，所以读 <code>backend/src/main.py</code> 会发现 <code>backend/AGENTS.md</code>，即使 <code>backend/src/</code> 没有自己的上下文文件。</a></dt>
+<dd>
+<p>::info
+子目录上下文文件通过与启动上下文文件相同的 <a href="#security-prompt-injection-protection">security scan</a> 进行。恶意文件被阻止。</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h3 id="agentsmd-示例"><a class="header" href="#agentsmd-示例">AGENTS.md 示例</a></h3>
+<pre><code class="language-markdown"># 项目上下文
+
+这是一个 Next.js 14 网络应用，带有 Python FastAPI 后端。
+
+## 架构
+- 前端：`/frontend` 中带 App Router 的 Next.js 14
+- 后端：`/backend` 中的 FastAPI，使用 SQLAlchemy ORM
+- 数据库：PostgreSQL 16
+- 部署：Docker Compose 在 Hetzner VPS 上
+
+## 约定
+- 为所有前端代码使用 TypeScript 严格模式
+- Python 代码遵循 PEP 8，到处使用类型提示
+- 所有 API 端点返回带 `{data, error, meta}` 形状的 JSON
+- 测试放在 `__tests__/` 目录中（前端）或 `tests/`（后端）
+
+## 重要笔记
+- 永远不要直接修改迁移文件 — 使用 Alembic 命令
+- `.env.local` 文件有真实 API 密钥，不要提交它
+- 前端端口是 3000，后端 8000，DB 5432
+</code></pre>
+<h2 id="soulmd"><a class="header" href="#soulmd">SOUL.md</a></h2>
+<p><code>SOUL.md</code> 控制 Agent 的个性、语调和交流风格。参见 <a href="/docs/user-guide/features/personality">Personality</a> 页面了解完整详情。</p>
+<p><strong>位置：</strong></p>
+<ul>
+<li><code>~/.hermes/SOUL.md</code></li>
+<li>或如果你以自定义主目录运行 Hermes，则 <code>$HERMES_HOME/SOUL.md</code></li>
+</ul>
+<p>重要详情：</p>
+<ul>
+<li>如果不存在，Hermes 自动播种默认 <code>SOUL.md</code></li>
+<li>Hermes 仅从 <code>HERMES_HOME</code> 加载 <code>SOUL.md</code></li>
+<li>Hermes 不探查工作目录以查找 <code>SOUL.md</code></li>
+<li>如果文件为空，<code>SOUL.md</code> 中没有任何内容被添加到提示中</li>
+<li>如果文件有内容，内容在扫描和截断后被逐字注入</li>
+</ul>
+<h2 id="cursorrules"><a class="header" href="#cursorrules">.cursorrules</a></h2>
+<p>Hermes 与 Cursor IDE 的 <code>.cursorrules</code> 文件和 <code>.cursor/rules/*.mdc</code> 规则模块兼容。如果这些文件存在于你的项目根目录中，且未找到更高优先级上下文文件（<code>.hermes.md</code>、<code>AGENTS.md</code> 或 <code>CLAUDE.md</code>），它们作为项目上下文加载。</p>
+<p>这意味着你现有的 Cursor 约定在使用 Hermes 时自动应用。</p>
+<h2 id="上下文文件如何被加载"><a class="header" href="#上下文文件如何被加载">上下文文件如何被加载</a></h2>
+<h3 id="在启动时系统提示"><a class="header" href="#在启动时系统提示">在启动时（系统提示）</a></h3>
+<p>上下文文件由 <code>agent/prompt_builder.py</code> 中的 <code>build_context_files_prompt()</code> 加载：</p>
+<ol>
+<li><strong>扫描工作目录</strong> — 检查 <code>.hermes.md</code> → <code>AGENTS.md</code> → <code>CLAUDE.md</code> → <code>.cursorrules</code>（首个匹配获胜）</li>
+<li><strong>内容被读取</strong> — 每个文件作为 UTF-8 文本读取</li>
+<li><strong>安全扫描</strong> — 内容被检查以查找提示注入模式</li>
+<li><strong>截断</strong> — 超过 20,000 字符的文件被头/尾截断（70% 头、20% 尾，中间带标记）</li>
+<li><strong>组装</strong> — 所有部分在 <code># Project Context</code> 标题下组合</li>
+<li><strong>注入</strong> — 组装的内容被添加到系统提示</li>
+</ol>
+<h3 id="在会话期间渐进发现"><a class="header" href="#在会话期间渐进发现">在会话期间（渐进发现）</a></h3>
+<p><code>agent/subdirectory_hints.py</code> 中的 <code>SubdirectoryHintTracker</code> 监视工具调用参数中的文件路径：</p>
+<ol>
+<li><strong>路径提取</strong> — 在每个工具调用后，文件路径从参数中提取（<code>path</code>、<code>workdir</code>、shell 命令）</li>
+<li><strong>祖先遍历</strong> — 检查该目录和多达 5 个父目录（停在已访问目录）</li>
+<li><strong>提示加载</strong> — 如果找到 <code>AGENTS.md</code>、<code>CLAUDE.md</code> 或 <code>.cursorrules</code>，它被加载（首个匹配每个目录）</li>
+<li><strong>安全扫描</strong> — 与启动文件相同的提示注入扫描</li>
+<li><strong>截断</strong> — 每个文件上限 8,000 字符</li>
+<li><strong>注入</strong> — 附加到工具结果，使模型在上下文中自然看到它</li>
+</ol>
+<p>最终提示部分看起来大致像：</p>
+<pre><code class="language-text"># 项目上下文
+
+以下项目上下文文件已被加载，应被遵循：
+
+## AGENTS.md
+
+[你的 AGENTS.md 内容在这里]
+
+## .cursorrules
+
+[你的 .cursorrules 内容在这里]
+
+[你的 SOUL.md 内容在这里]
+</code></pre>
+<p>注意 SOUL 内容直接插入，无额外包装文本。</p>
+<h2 id="安全提示注入保护"><a class="header" href="#安全提示注入保护">安全：提示注入保护</a></h2>
+<p>所有上下文文件在包含前被扫描以查找潜在提示注入。扫描检查：</p>
+<ul>
+<li><strong>指令覆盖尝试</strong>：“忽略之前的指令”、“无视你的规则”</li>
+<li><strong>欺骗模式</strong>：“不要告诉用户”</li>
+<li><strong>系统提示覆盖</strong>：“系统提示覆盖”</li>
+<li><strong>隐藏 HTML 注释</strong>：<code>&lt;!-- ignore instructions --&gt;</code></li>
+<li><strong>隐藏 div 元素</strong>：<code>&lt;div style="display:none"&gt;</code></li>
+<li><strong>凭证泄露</strong>：<code>curl ... $API_KEY</code></li>
+<li><strong>秘密文件访问</strong>：<code>cat .env</code>、<code>cat credentials</code></li>
+<li><strong>不可见字符</strong>：零宽度空间、双向覆盖、词连接符</li>
+</ul>
+<p>如果检测到任何威胁模式，文件被阻止：</p>
+<pre><code>[BLOCKED: AGENTS.md contained potential prompt injection (prompt_injection). Content not loaded.]
+</code></pre>
+<dl>
+<dt id="warning-此扫描器保护免受常见注入模式但它不是审查共享仓库中上下文文件的替代品总是验证你没有编写的项目中的-agentsmd-内容"><a class="header" href="#warning-此扫描器保护免受常见注入模式但它不是审查共享仓库中上下文文件的替代品总是验证你没有编写的项目中的-agentsmd-内容">:::warning
+此扫描器保护免受常见注入模式，但它不是审查共享仓库中上下文文件的替代品。总是验证你没有编写的项目中的 AGENTS.md 内容。</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="大小限制"><a class="header" href="#大小限制">大小限制</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>限制</th><th>值</th></tr>
+</thead>
+<tbody>
+<tr><td>每文件最大字符</td><td>20,000（~7,000 令牌）</td></tr>
+<tr><td>头截断比例</td><td>70%</td></tr>
+<tr><td>尾截断比例</td><td>20%</td></tr>
+<tr><td>截断标记</td><td>10%（显示字符计数并建议使用文件工具）</td></tr>
+</tbody>
+</table>
+</div>
+<p>当文件超过 20,000 字符时，截断消息读起来：</p>
+<pre><code>[...truncated AGENTS.md: kept 14000+4000 of 25000 chars. Use file tools to read the full file.]
+</code></pre>
+<h2 id="有效上下文文件的提示"><a class="header" href="#有效上下文文件的提示">有效上下文文件的提示</a></h2>
+<p>:::tip AGENTS.md 最佳做法</p>
+<ol>
+<li><strong>保持简洁</strong> — 保持在 20K 字符之下；Agent 每转都读它</li>
+<li><strong>用标题结构</strong> — 用 <code>##</code> 部分处理架构、约定、重要笔记</li>
+<li><strong>包括具体示例</strong> — 显示偏好代码模式、API 形状、命名约定</li>
+<li><strong>提及不要做什么</strong> — “永远不要直接修改迁移文件”</li>
+<li><strong>列出关键路径和端口</strong> — Agent 用这些进行终端命令</li>
+<li><strong>随项目演进更新</strong> — 过时上下文比没有上下文更坏
+:::</li>
+</ol>
+<h3 id="按子目录的上下文"><a class="header" href="#按子目录的上下文">按子目录的上下文</a></h3>
+<p>对于单体仓库，在嵌套 AGENTS.md 文件中放入子目录特定说明：</p>
+<pre><code class="language-markdown">&lt;!-- frontend/AGENTS.md --&gt;
+# 前端上下文
+
+- 用 `pnpm` 不是 `npm` 进行包管理
+- 组件放在 `src/components/`，页面在 `src/app/`
+- 使用 Tailwind CSS，永远不要使用内联样式
+- 用 `pnpm test` 运行测试
+</code></pre>
+<pre><code class="language-markdown">&lt;!-- backend/AGENTS.md --&gt;
+# 后端上下文
+
+- 用 `poetry` 进行依赖管理
+- 用 `poetry run uvicorn main:app --reload` 运行开发服务器
+- 所有端点需要 OpenAPI 文档字符串
+- 数据库模型在 `models/`，schema 在 `schemas/`
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../hermes-agent/user-guide/features/code-execution_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/cron_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../hermes-agent/user-guide/features/code-execution_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../hermes-agent/user-guide/features/cron_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-c2a407aa.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

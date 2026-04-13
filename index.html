@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-68d2c33e.js";
+            window.path_to_searchindex_js = "searchindex-3cba3993.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-6421ac11.js"></script>
+        <script src="toc-88c93c7a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -202,6 +202,7 @@
 <tr><td><a href="#关于本仓库">关于本仓库</a></td><td>定位与读者</td></tr>
 <tr><td><a href="#仓库结构">仓库结构</a></td><td>目录树（可展开）</td></tr>
 <tr><td><a href="#笔记索引">笔记索引</a></td><td>按主题跳转各篇笔记</td></tr>
+<tr><td><a href="#hermes-agent-文档">Hermes Agent 文档</a></td><td>官方文档整理与中英对照</td></tr>
 <tr><td><a href="#教程索引">教程索引</a></td><td>可复现的上手教程</td></tr>
 <tr><td><a href="#微信公众号">微信公众号</a></td><td>同步更新渠道</td></tr>
 <tr><td><a href="#贡献与交流">贡献与交流</a></td><td>Issue 与反馈</td></tr>
@@ -227,6 +228,14 @@
 │   ├── high-concurrency-architecture.md
 │   ├── nginx-reverse-proxy-load-balance.md
 │   └── redis-cache-core-qa.md
+├── hermes-agent/                # Hermes Agent 文档（门户 + 各章）
+│   ├── index.md
+│   ├── getting-started/         # 安装、快速开始、学习路径等
+│   ├── user-guide/             # 配置、CLI、功能、消息网关等
+│   ├── guides/                  # 实践教程与技巧
+│   ├── developer-guide/        # 架构与扩展开发
+│   ├── reference/              # CLI / 工具 / 环境变量等参考
+│   └── integrations/           # 提供商与集成说明
 ├── infra/                       # 基础设施 / 运维笔记
 │   ├── docker-basics-dockerfile.md
 │   ├── docker-compose-vs-swarm.md
@@ -236,7 +245,10 @@
 ├── projects/                    # 项目实战笔记
 │   ├── fastsam-demo-v1-fullstack.md
 │   ├── fastsam-demo-v2-docker-export.md
-│   └── github-profile-readme-guide.md
+│   ├── github-profile-readme-guide.md
+│   └── hermes-agent/            # Hermes 个人实战系列（与 hermes-agent/ 文档区分）
+│       ├── README.md
+│       └── 01-setup-and-project-structure.md
 └── tutorials/                   # 教程 / 上手指南
     └── mdbook-github-pages-tutorial.md
 </code></pre>
@@ -310,6 +322,19 @@
 </tbody>
 </table>
 </div>
+<h3 id="hermes-agent-文档"><a class="header" href="#hermes-agent-文档">Hermes Agent 文档</a></h3>
+<p>独立目录 <a href="./hermes-agent/"><code>hermes-agent/</code></a> 收录 Hermes Agent 的文档整理；与 <a href="./projects/hermes-agent/"><code>projects/hermes-agent/</code></a>（个人实战笔记系列）并列，用途不同。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>入口</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="./hermes-agent/index.html">hermes-agent/index.md</a></td><td>文档门户与快速链接</td></tr>
+<tr><td>中文页面</td><td>与英文同目录下的 <code>*_zh.md</code>；在线阅读可在 <a href="https://eva-dengyh.github.io/AI-Fullstack-Notes/">mdBook 站点</a> 侧栏进入「Hermes Agent · …（中文）」各章</td></tr>
+</tbody>
+</table>
+</div>
 <hr>
 <h2 id="教程索引"><a class="header" href="#教程索引">教程索引</a></h2>
 <div class="table-wrapper">
@@ -334,7 +359,7 @@
 <p>个人学习向仓库；发现错误或有不同理解，欢迎 <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/issues">提交 Issue</a> 讨论。</p>
 <hr>
 <div align="center">
-<p><sub>持续更新中 · 最后更新：2026-04-10</sub></p>
+<p><sub>持续更新中 · 最后更新：2026-04-13</sub></p>
 </div>
 
 

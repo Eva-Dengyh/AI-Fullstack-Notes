@@ -1,0 +1,563 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CLI 界面 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-3cba3993.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-88c93c7a.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./hermes-agent/user-guide/cli_zh.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="sidebar_position-1-title-cli-界面-description-掌握-hermes-agent-终端界面--命令快捷键人格设定等"><a class="header" href="#sidebar_position-1-title-cli-界面-description-掌握-hermes-agent-终端界面--命令快捷键人格设定等">sidebar_position: 1
+title: “CLI 界面”
+description: “掌握 Hermes Agent 终端界面 — 命令、快捷键、人格设定等”</a></h2>
+<h1 id="cli-界面"><a class="header" href="#cli-界面">CLI 界面</a></h1>
+<p>Hermes Agent 的 CLI 是一个完整的终端用户界面（TUI）——而非网页界面。它支持多行编辑、斜杠命令自动补全、对话历史、打断重定向以及流式工具输出。专为热爱终端的用户打造。</p>
+<h2 id="运行-cli"><a class="header" href="#运行-cli">运行 CLI</a></h2>
+<pre><code class="language-bash"># 启动交互式会话（默认）
+hermes
+
+# 单次查询模式（非交互式）
+hermes chat -q "你好"
+
+# 指定模型
+hermes chat --model "anthropic/claude-sonnet-4"
+
+# 指定 provider
+hermes chat --provider nous        # 使用 Nous Portal
+hermes chat --provider openrouter  # 强制使用 OpenRouter
+
+# 指定工具集
+hermes chat --toolsets "web,terminal,skills"
+
+# 启动时预加载一个或多个技能
+hermes -s hermes-agent-dev,github-auth
+hermes chat -s github-pr-workflow -q "打开一个草稿 PR"
+
+# 恢复之前的会话
+hermes --continue             # 恢复最近的 CLI 会话 (-c)
+hermes --resume &lt;session_id&gt;  # 按 ID 恢复特定会话 (-r)
+
+# 详细模式（调试输出）
+hermes chat --verbose
+
+# 隔离的 git worktree（用于并行运行多个 agent）
+hermes -w                         # 在 worktree 中交互模式
+hermes -w -q "修复 issue #123"     # 在 worktree 中单次查询
+</code></pre>
+<h2 id="界面布局"><a class="header" href="#界面布局">界面布局</a></h2>
+<img classname="docs-terminal-figure" src="/img/docs/cli-layout.svg" alt="Hermes CLI 布局的示意图，展示横幅、对话区域和固定输入提示。" />
+<p classname="docs-figure-caption">Hermes CLI 横幅、对话流和固定输入提示，渲染为稳定的文档图形而非脆弱的 ASCII 艺术。</p>
+
+<p>欢迎横幅一目了然地显示您的模型、终端后端、工作目录、可用意具和已安装技能。</p>
+<h3 id="状态栏"><a class="header" href="#状态栏">状态栏</a></h3>
+<p>输入区域上方有一个持久状态栏，实时更新：</p>
+<pre><code> ⚕ claude-sonnet-4-20250514 │ 12.4K/200K │ [██████░░░░] 6% │ $0.06 │ 15m
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>元素</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>模型名称</td><td>当前模型（超过 26 字符则截断）</td></tr>
+<tr><td>Token 计数</td><td>已用上下文 token / 最大上下文窗口</td></tr>
+<tr><td>上下文条</td><td>带颜色阈值指示的可视填充指示器</td></tr>
+<tr><td>费用</td><td>估算会话费用（或未知/零价位型号的 <code>n/a</code>）</td></tr>
+<tr><td>时长</td><td>经过的会话时间</td></tr>
+</tbody>
+</table>
+</div>
+<p>状态栏适应终端宽度——≥ 76 列时完整布局，52–75 列时紧凑，52 列以下仅显示模型和时长。</p>
+<p><strong>上下文颜色编码：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>颜色</th><th>阈值</th><th>含义</th></tr>
+</thead>
+<tbody>
+<tr><td>绿色</td><td>&lt; 50%</td><td>空间充裕</td></tr>
+<tr><td>黄色</td><td>50–80%</td><td>逐渐填满</td></tr>
+<tr><td>橙色</td><td>80–95%</td><td>接近上限</td></tr>
+<tr><td>红色</td><td>≥ 95%</td><td>即将溢出——考虑使用 <code>/compress</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>使用 <code>/usage</code> 获取详细费用明细（包括输入 vs 输出 token 的分类费用）。</p>
+<h3 id="会话恢复显示"><a class="header" href="#会话恢复显示">会话恢复显示</a></h3>
+<p>恢复之前的会话时（<code>hermes -c</code> 或 <code>hermes --resume &lt;id&gt;</code>），横幅和输入提示之间会出现“之前的对话“面板，显示对话历史的简要回顾。详见 <a href="sessions.html#conversation-recap-on-resume">会话——恢复时的对话回顾</a>。</p>
+<h2 id="快捷键"><a class="header" href="#快捷键">快捷键</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>按键</th><th>操作</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Enter</code></td><td>发送消息</td></tr>
+<tr><td><code>Alt+Enter</code> 或 <code>Ctrl+J</code></td><td>新行（多行输入）</td></tr>
+<tr><td><code>Alt+V</code></td><td>当终端支持时，从剪贴板粘贴图片</td></tr>
+<tr><td><code>Ctrl+V</code></td><td>粘贴文本并尽可能附加剪贴板图片</td></tr>
+<tr><td><code>Ctrl+B</code></td><td>语音模式启用时开始/停止语音录制（<code>voice.record_key</code>，默认：<code>ctrl+b</code>）</td></tr>
+<tr><td><code>Ctrl+C</code></td><td>打断 agent（2 秒内双击强制退出）</td></tr>
+<tr><td><code>Ctrl+D</code></td><td>退出</td></tr>
+<tr><td><code>Ctrl+Z</code></td><td>将 Hermes 挂起到后台（仅 Unix）。在 shell 中运行 <code>fg</code> 恢复。</td></tr>
+<tr><td><code>Tab</code></td><td>接受自动建议（幽灵文本）或自动补全斜杠命令</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="斜杠命令"><a class="header" href="#斜杠命令">斜杠命令</a></h2>
+<p>输入 <code>/</code> 查看自动补全下拉菜单。Hermes 支持大量 CLI 斜杠命令、动态技能命令和用户定义的快速命令。</p>
+<p>常见示例：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>命令</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/help</code></td><td>显示命令帮助</td></tr>
+<tr><td><code>/model</code></td><td>显示或切换当前模型</td></tr>
+<tr><td><code>/tools</code></td><td>列出当前可用工具</td></tr>
+<tr><td><code>/skills browse</code></td><td>浏览技能中心和官方可选技能</td></tr>
+<tr><td><code>/background &lt;prompt&gt;</code></td><td>在独立后台会话中运行提示</td></tr>
+<tr><td><code>/skin</code></td><td>显示或切换活动 CLI 皮肤</td></tr>
+<tr><td><code>/voice on</code></td><td>启用 CLI 语音模式（按 <code>Ctrl+B</code> 录制）</td></tr>
+<tr><td><code>/voice tts</code></td><td>切换 Hermes 回复的语音播放</td></tr>
+<tr><td><code>/reasoning high</code></td><td>提高推理投入</td></tr>
+<tr><td><code>/title 我的会话</code></td><td>为当前会话命名</td></tr>
+</tbody>
+</table>
+</div>
+<p>完整的内置 CLI 和消息传递列表，参见 <a href="../reference/slash-commands.html">斜杠命令参考</a>。</p>
+<dl>
+<dt id="关于设置provider静音调优和消息discord-语音使用参见-语音模式"><a class="header" href="#关于设置provider静音调优和消息discord-语音使用参见-语音模式">关于设置、provider、静音调优和消息/Discord 语音使用，参见 <a href="features/voice-mode.html">语音模式</a>。</a></dt>
+<dd>
+<p>::tip
+命令不区分大小写——<code>/HELP</code> 与 <code>/help</code> 效果相同。已安装的技能也会自动注册为斜杠命令。</p>
+</dd>
+<dd>
+<p>::</p>
+</dd>
+</dl>
+<h2 id="快速命令"><a class="header" href="#快速命令">快速命令</a></h2>
+<p>您可以定义自定义命令，无需调用 LLM 即可立即运行 shell 命令。这些命令在 CLI 和消息平台（Telegram、Discord 等）均可使用。</p>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+quick_commands:
+  status:
+    type: exec
+    command: systemctl status hermes-agent
+  gpu:
+    type: exec
+    command: nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader
+</code></pre>
+<p>然后在任何聊天中输入 <code>/status</code> 或 <code>/gpu</code>。更多示例参见<a href="/docs/user-guide/configuration#quick-commands">配置指南</a>。</p>
+<h2 id="启动时预加载技能"><a class="header" href="#启动时预加载技能">启动时预加载技能</a></h2>
+<p>如果您已知道会话中需要哪些技能，可在启动时传入：</p>
+<pre><code class="language-bash">hermes -s hermes-agent-dev,github-auth
+hermes chat -s github-pr-workflow -s github-auth
+</code></pre>
+<p>Hermes 在第一个 turn 之前将每个命名技能加载到会话提示中。相同标志适用于交互模式和单次查询模式。</p>
+<h2 id="技能斜杠命令"><a class="header" href="#技能斜杠命令">技能斜杠命令</a></h2>
+<p><code>~/.hermes/skills/</code> 中的每个已安装技能都会自动注册为斜杠命令。技能名称成为命令：</p>
+<pre><code>/gif-search 好笑的猫
+/axolotl 帮我用我的数据集微调 Llama 3
+/github-pr-workflow 为 auth 重构创建一个 PR
+
+# 仅输入技能名称会加载它，让 agent 询问需要什么：
+/excalidraw
+</code></pre>
+<h2 id="人格设定"><a class="header" href="#人格设定">人格设定</a></h2>
+<p>设置预定义人格以改变 agent 的语气：</p>
+<pre><code>/personality pirate
+/personality kawaii
+/personality concise
+</code></pre>
+<p>内置人格包括：<code>helpful</code>、<code>concise</code>、<code>technical</code>、<code>creative</code>、<code>teacher</code>、<code>kawaii</code>、<code>catgirl</code>、<code>pirate</code>、<code>shakespeare</code>、<code>surfer</code>、<code>noir</code>、<code>uwu</code>、<code>philosopher</code>、<code>hype</code>。</p>
+<p>您也可以在 <code>~/.hermes/config.yaml</code> 中定义自定义人格：</p>
+<pre><code class="language-yaml">personalities:
+  helpful: "你是一个乐于助人、友好的 AI 助手。"
+  kawaii: "你是一个可爱的助手！使用可爱的表达方式..."
+  pirate: "啊哈！你正在和 Hermes 船长说话..."
+  # 添加你自己的！
+</code></pre>
+<h2 id="多行输入"><a class="header" href="#多行输入">多行输入</a></h2>
+<p>有两种方式输入多行消息：</p>
+<ol>
+<li><strong><code>Alt+Enter</code> 或 <code>Ctrl+J</code></strong> — 插入新行</li>
+<li><strong>反斜杠续行</strong> — 在行尾加 <code>\</code> 继续：</li>
+</ol>
+<pre><code>❯ 写一个函数：\
+  1. 接收一个数字列表\
+  2. 返回总和
+</code></pre>
+<dl>
+<dt id="info-支持粘贴多行文本使用-altenter-或-ctrlj-插入换行符或直接粘贴内容"><a class="header" href="#info-支持粘贴多行文本使用-altenter-或-ctrlj-插入换行符或直接粘贴内容">:::info
+支持粘贴多行文本——使用 <code>Alt+Enter</code> 或 <code>Ctrl+J</code> 插入换行符，或直接粘贴内容。</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="打断-agent"><a class="header" href="#打断-agent">打断 Agent</a></h2>
+<p>您可以随时打断 agent：</p>
+<ul>
+<li>在 agent 工作时输入新消息 + Enter——它会打断并处理您的新指令</li>
+<li><strong><code>Ctrl+C</code></strong> — 打断当前操作（2 秒内双击强制退出）</li>
+<li>进行中的终端命令会立即终止（SIGTERM，然后 1 秒后 SIGKILL）</li>
+<li>在打断期间输入的多条消息会合并为一个提示</li>
+</ul>
+<h3 id="忙碌输入模式"><a class="header" href="#忙碌输入模式">忙碌输入模式</a></h3>
+<p><code>display.busy_input_mode</code> 配置键控制当您在 agent 工作时按 Enter 时的行为：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>模式</th><th>行为</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"interrupt"</code>（默认）</td><td>您的消息打断当前操作并立即处理</td></tr>
+<tr><td><code>"queue"</code></td><td>您的消息被静默排队，在 agent 完成后作为下一个 turn 发送</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+display:
+  busy_input_mode: "queue"   # 或 "interrupt"（默认）
+</code></pre>
+<p>队列模式适用于您想准备后续消息而不意外取消进行中的工作时。不知道的值会回退到 <code>"interrupt"</code>。</p>
+<h3 id="挂起到后台"><a class="header" href="#挂起到后台">挂起到后台</a></h3>
+<p>在 Unix 系统上，按 <strong><code>Ctrl+Z</code></strong> 将 Hermes 挂起到后台——就像任何终端进程一样。shell 会打印确认：</p>
+<pre><code>Hermes Agent 已挂起。运行 `fg` 恢复 Hermes Agent。
+</code></pre>
+<p>在 shell 中输入 <code>fg</code> 从上次中断的地方恢复会话。不支持 Windows。</p>
+<h2 id="工具进度显示"><a class="header" href="#工具进度显示">工具进度显示</a></h2>
+<p>CLI 在 agent 工作时显示动画反馈：</p>
+<p><strong>思考动画</strong>（API 调用期间）：</p>
+<pre><code>  ◜ (｡•́︿•̀｡) 思考中... (1.2s)
+  ◠ (⊙_⊙) 深思中... (2.4s)
+  ✧٩(ˊᗜˋ*)و✧ 明白了！ (3.1s)
+</code></pre>
+<p><strong>工具执行流：</strong></p>
+<pre><code>  ┊ 💻 terminal `ls -la` (0.3s)
+  ┊ 🔍 web_search (1.2s)
+  ┊ 📄 web_extract (2.1s)
+</code></pre>
+<p>使用 <code>/verbose</code> 循环切换显示模式：<code>off → new → all → verbose</code>。此命令也可为消息平台启用——参见<a href="/docs/user-guide/configuration#display-settings">配置</a>。</p>
+<h3 id="工具预览长度"><a class="header" href="#工具预览长度">工具预览长度</a></h3>
+<p><code>display.tool_preview_length</code> 配置键控制工具调用预览行中显示的最大字符数（例如文件路径、终端命令）。默认值为 <code>0</code>，即无限制——显示完整路径和命令。</p>
+<pre><code class="language-yaml"># ~/.hermes/config.yaml
+display:
+  tool_preview_length: 80   # 将工具预览截断为 80 个字符（0 = 无限制）
+</code></pre>
+<p>这在窄终端或工具参数包含非常长文件路径时很有用。</p>
+<h2 id="会话管理"><a class="header" href="#会话管理">会话管理</a></h2>
+<h3 id="恢复会话"><a class="header" href="#恢复会话">恢复会话</a></h3>
+<p>退出 CLI 会话时，会打印恢复命令：</p>
+<pre><code>使用以下命令恢复此会话：
+  hermes --resume 20260225_143052_a1b2c3
+
+会话：        20260225_143052_a1b2c3
+时长：        12m 34s
+消息：        28（5 条用户消息，18 次工具调用）
+</code></pre>
+<p>恢复选项：</p>
+<pre><code class="language-bash">hermes --continue                          # 恢复最近的 CLI 会话
+hermes -c                                  # 短格式
+hermes -c "我的项目"                     # 按名称恢复会话（系谱中最新的）
+hermes --resume 20260225_143052_a1b2c3     # 按 ID 恢复特定会话
+hermes --resume "重构 auth"         # 按标题恢复
+hermes -r 20260225_143052_a1b2c3           # 短格式
+</code></pre>
+<p>恢复会从 SQLite 完整恢复对话历史。agent 可以看到所有先前的消息、工具调用和响应——就像您从未离开过一样。</p>
+<p>使用聊天中的 <code>/title 我的会话名称</code> 为当前会话命名，或从命令行使用 <code>hermes sessions rename &lt;id&gt; &lt;title&gt;</code>。使用 <code>hermes sessions list</code> 浏览过去的会话。</p>
+<h3 id="会话存储"><a class="header" href="#会话存储">会话存储</a></h3>
+<p>CLI 会话存储在 Hermes 的 SQLite 状态数据库 <code>~/.hermes/state.db</code> 中。数据库保留：</p>
+<ul>
+<li>会话元数据（ID、标题、时间戳、token 计数器）</li>
+<li>消息历史</li>
+<li>压缩/恢复会话的系谱</li>
+<li><code>session_search</code> 使用的全文搜索索引</li>
+</ul>
+<p>某些消息适配器也会在数据库旁边保留每个平台的转录文件，但 CLI 本身从 SQLite 会话存储恢复。</p>
+<h3 id="上下文压缩"><a class="header" href="#上下文压缩">上下文压缩</a></h3>
+<p>当对话接近上下文限制时，会自动汇总长对话：</p>
+<pre><code class="language-yaml"># 在 ~/.hermes/config.yaml 中
+compression:
+  enabled: true
+  threshold: 0.50    # 默认在上下文限制的 50% 时压缩
+  summary_model: "google/gemini-3-flash-preview"  # 用于摘要的模型
+</code></pre>
+<p>当压缩触发时，中间的 turns 会被汇总，而前 3 个和后 4 个 turns 始终保留。</p>
+<h2 id="后台会话"><a class="header" href="#后台会话">后台会话</a></h2>
+<p>在后台独立会话中运行提示，同时继续使用 CLI 进行其他工作：</p>
+<pre><code>/background 分析 /var/log 中的日志并总结今天的任何错误
+</code></pre>
+<p>Hermes 立即确认任务并返回提示：</p>
+<pre><code>🔄 后台任务 #1 已启动："分析 /var/log 中的日志并总结..."
+   任务 ID：bg_143022_a1b2c3
+</code></pre>
+<h3 id="工作原理"><a class="header" href="#工作原理">工作原理</a></h3>
+<p>每个 <code>/background</code> 提示都会在守护线程中生成一个<strong>完全独立的 agent 会话</strong>：</p>
+<ul>
+<li><strong>隔离对话</strong> — 后台 agent 不了解您当前会话的历史。它只接收您提供的提示。</li>
+<li><strong>相同配置</strong> — 后台 agent 继承当前会话的模型、provider、工具集、推理设置和回退模型。</li>
+<li><strong>非阻塞</strong> — 您的前台会话保持完全可交互。您可以聊天、运行命令，甚至启动更多后台任务。</li>
+<li><strong>多个任务</strong> — 您可以同时运行多个后台任务。每个任务都有一个编号 ID。</li>
+</ul>
+<h3 id="结果"><a class="header" href="#结果">结果</a></h3>
+<p>后台任务完成后，结果会显示在终端的面板中：</p>
+<pre><code>╭─ ⚕ Hermes（后台 #1）───────────────────────────────────╮
+│ 今天在 syslog 中发现 3 个错误：                          │
+│ 1. OOM killer 在 03:22 被调用——杀死进程 nginx          │
+│ 2. /dev/sda1 在 07:15 磁盘 I/O 错误                     │
+│ 3. 14:30 从 192.168.1.50 失败的 SSH 登录尝试             │
+╰──────────────────────────────────────────────────────────────╯
+</code></pre>
+<p>如果任务失败，您会看到错误通知。如果配置中启用了 <code>display.bell_on_complete</code>，任务完成时终端铃声会响。</p>
+<h3 id="使用场景"><a class="header" href="#使用场景">使用场景</a></h3>
+<ul>
+<li><strong>长时间研究</strong> — “/background 研究量子纠错的最新发展”，同时您在写代码</li>
+<li><strong>文件处理</strong> — “/background 分析此仓库中的所有 Python 文件并列出任何安全问题”，同时您继续对话</li>
+<li><strong>并行调查</strong> — 启动多个后台任务同时探索不同角度</li>
+</ul>
+<dl>
+<dt id="info-后台会话不会出现在您的主要对话历史中它们是独立会话有自己的任务-id例如-bg_143022_a1b2c3"><a class="header" href="#info-后台会话不会出现在您的主要对话历史中它们是独立会话有自己的任务-id例如-bg_143022_a1b2c3">:::info
+后台会话不会出现在您的主要对话历史中。它们是独立会话，有自己的任务 ID（例如 <code>bg_143022_a1b2c3</code>）。</a></dt>
+<dd>::</dd>
+</dl>
+<h2 id="安静模式"><a class="header" href="#安静模式">安静模式</a></h2>
+<p>默认情况下，CLI 以安静模式运行：</p>
+<ul>
+<li>抑制工具的详细日志</li>
+<li>启用 kawaii 风格的动画反馈</li>
+<li>保持输出简洁、用户友好</li>
+</ul>
+<p>要获取调试输出：</p>
+<pre><code class="language-bash">hermes chat --verbose
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../hermes-agent/getting-started/termux_zh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/user-guide/profiles_zh.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../hermes-agent/getting-started/termux_zh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/user-guide/profiles_zh.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
