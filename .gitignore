@@ -1,2 +1,17 @@
-# mdBook 构建输出（勿提交；勿误登记为 submodule）
+# Build outputs
+dist/
+.vitepress/cache/
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Legacy mdBook
 book/
+
