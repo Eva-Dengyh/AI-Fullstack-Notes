@@ -1,48 +1,40 @@
-name: Deploy VitePress to GitHub Pages
+# mdBook 构建产物推送到 gh-pages 分支。
+# 仓库 Settings → Pages：Source 选「Deploy from a branch」→ Branch 选 gh-pages / (root)。
+# 在线地址：https://eva-dengyh.github.io/AI-Fullstack-Notes/
+name: Deploy mdBook to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages-mdbook
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          submodules: false
 
-      - uses: pnpm/action-setup@v4
+      - name: Install mdBook
+        uses: peaceiris/actions-mdbook@v2
         with:
-          version: 9
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          mdbook-version: "latest"
 
       - name: Build
-        run: pnpm run docs:build
+        run: mdbook build
 
-      - uses: actions/configure-pages@v4
-
-      - uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: docs/.vitepress/dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+          force_orphan: true

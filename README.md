@@ -162,6 +162,8 @@ AI-Fullstack-Notes/
 
 个人学习向仓库；发现错误或有不同理解，欢迎 [提交 Issue](https://github.com/Eva-Dengyh/AI-Fullstack-Notes/issues) 讨论。
 
+**在线阅读（mdBook）**：推送 `main` 后由 [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) 执行 `mdbook build` 并将 `book/` 发布到 **`gh-pages`** 分支。若 [在线阅读](https://eva-dengyh.github.io/AI-Fullstack-Notes/) 返回 404，请到仓库 **Settings → Pages**，将 **Build and deployment** 的 Source 设为 **Deploy from a branch**，Branch 选 **`gh-pages`**、目录选 **`/ (root)`**（勿用 `main` 根目录，否则不是 mdBook 产物）。步骤说明见 [《mdBook + GitHub Pages》教程 · 第八节](./tutorials/mdbook-github-pages-tutorial.md)。
+
 ---
 
 <div align="center">
