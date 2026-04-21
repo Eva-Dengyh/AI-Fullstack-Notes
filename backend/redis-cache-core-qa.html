@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Redis 分布式缓存核心问答（上） - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-bcd64818.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-33aa50fe.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./backend/redis-cache-core-qa.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="redis--用问答的方式拆解分布式缓存的核心上"><a class="header" href="#redis--用问答的方式拆解分布式缓存的核心上">Redis — 用问答的方式拆解分布式缓存的核心（上）</a></h1>
+<hr>
+<h2 id="常规问题"><a class="header" href="#常规问题">常规问题</a></h2>
+<h3 id="什么是-redis为什么要使用它"><a class="header" href="#什么是-redis为什么要使用它">什么是 Redis，为什么要使用它？</a></h3>
+<p>Redis 是一个开源的、基于内存运行的键值型（Key-Value）NoSQL 数据库。它以极高的读写速度著称，常被用作缓存、数据库或消息中间件。使用 Redis 的原因有以下几点：</p>
+<ul>
+<li><strong>高性能</strong>：拦截大量请求，保护后端数据库不被大流量冲垮；</li>
+<li><strong>多数据结构</strong>：支持 String、Hash、List、Set、ZSet 等，能直接在内存中处理复杂的业务逻辑；</li>
+<li><strong>原子性</strong>：所有操作均为原子性，天然适合处理计数器、分布式锁等并发场景。</li>
+</ul>
+<hr>
+<h3 id="redis-一般有哪些使用场景"><a class="header" href="#redis-一般有哪些使用场景">Redis 一般有哪些使用场景？</a></h3>
+<ul>
+<li><strong>缓存</strong>：存储热点数据（如商品、用户信息等），大幅降低数据库压力，提升响应速度。</li>
+<li><strong>分布式锁</strong>：利用 <code>SETNX</code> 等原子操作，解决分布式系统下的资源竞争问题。</li>
+<li><strong>计数器 / 限流</strong>：实现点赞数、播放量统计，或通过计数器限制 API 的访问频率。</li>
+<li><strong>排行榜</strong>：利用 ZSet 自动排序功能，实现实时积分或热度榜单。</li>
+<li><strong>会话管理</strong>：在分布式集群中统一存储用户的登录状态，实现多机共享。</li>
+<li><strong>消息队列</strong>：利用 List 或 Stream 结构，实现简单的异步任务处理和解耦。</li>
+</ul>
+<hr>
+<h3 id="redis-为什么快"><a class="header" href="#redis-为什么快">Redis 为什么快？</a></h3>
+<ul>
+<li><strong>基于内存操作</strong>：数据直接存储在内存中，省去了磁盘 I/O 的寻道与读写开销（内存访问速度比磁盘快数万倍）。</li>
+<li><strong>单线程模型</strong>：核心网络处理采用单线程，避免了多线程环境下的上下文切换和锁竞争开销，保证了操作的原子性。</li>
+<li><strong>I/O 多路复用</strong>：使用 epoll 非阻塞 I/O 模型，单个线程即可高效处理数万个并发连接。</li>
+<li><strong>高效的数据结构</strong>：Redis 内部对各种结构（如 SDS 字符串、跳表 SkipList、压缩列表 ZipList）进行了极致的内存优化和算法优化。</li>
+</ul>
+<hr>
+<h2 id="数据类型和数据结构"><a class="header" href="#数据类型和数据结构">数据类型和数据结构</a></h2>
+<h3 id="redis-有哪些数据类型"><a class="header" href="#redis-有哪些数据类型">Redis 有哪些数据类型？</a></h3>
+<h4 id="五种基础数据类型"><a class="header" href="#五种基础数据类型">五种基础数据类型</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>类型</th><th>说明</th><th>应用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>String</strong></td><td>最基础类型，二进制安全，最大 512MB</td><td>缓存、计数器、分布式锁、验证码</td></tr>
+<tr><td><strong>Hash</strong></td><td>键值对集合（如 <code>user:101 {name: "Tom", age: 18}</code>）</td><td>存储对象、购物车</td></tr>
+<tr><td><strong>List</strong></td><td>简单的字符串列表，按插入顺序排序</td><td>消息队列、最新动态、时间轴</td></tr>
+<tr><td><strong>Set</strong></td><td>无序且不重复的字符串集合</td><td>标签、共同好友、抽奖去重</td></tr>
+<tr><td><strong>ZSet</strong></td><td>有序集合，每个元素关联一个 double 类型的分数，按分数排序</td><td>排行榜、热搜、延时队列</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="三种高级数据类型"><a class="header" href="#三种高级数据类型">三种高级数据类型</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>类型</th><th>说明</th><th>应用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Bitmap</strong></td><td>基于 String，通过位操作记录 0/1 状态，极省空间</td><td>用户签到、活跃状态统计</td></tr>
+<tr><td><strong>HyperLogLog</strong></td><td>概率型数据结构，统计基数，大数据量下仅占约 12KB 内存，误差约 0.81%</td><td>亿级 UV 统计</td></tr>
+<tr><td><strong>GeoSpatial (GEO)</strong></td><td>存储经纬度信息，用于计算附近的人或两点之间的距离</td><td>附近的人、打车距离计算</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="新一代数据类型"><a class="header" href="#新一代数据类型">新一代数据类型</a></h4>
+<ul>
+<li><strong>Stream</strong>：Redis 5.0 新增，主要用于实现持久化的消息队列（类似 Kafka），解决了 List 做队列时消息丢失的问题。</li>
+</ul>
+<hr>
+<h3 id="谈谈-redis-的对象机制redisobject"><a class="header" href="#谈谈-redis-的对象机制redisobject">谈谈 Redis 的对象机制（redisObject）</a></h3>
+<pre><code class="language-c">typedef struct redisObject {
+    unsigned type:4;       // 1. 类型（对外，即通常说的 5 大数据类型）
+    unsigned encoding:4;   // 2. 编码（对内，内部编码）
+    unsigned lru:24;       // 3. 记录 LRU/LFU 信息（用于淘汰）
+    int refcount;          // 4. 引用计数（用于内存回收）
+    void *ptr;             // 5. 指针（指向底层实际的数据结构）
+} robj;
+</code></pre>
+<p>设计这套对象机制的原因有以下三点：</p>
+<ul>
+<li><strong>解耦</strong>：命令（如 <code>LLEN</code>）只需要针对 List 类型，不需要关心底层是 ZipList 还是 LinkedList。</li>
+<li><strong>极致的内存优化</strong>：小数据量用紧凑存储（时间换空间），大数据量用高效索引（空间换时间）。</li>
+<li><strong>智能维护</strong>：自带引用计数和访问记录，自动处理内存回收和缓存淘汰。</li>
+</ul>
+<hr>
+<h3 id="redis-数据类型有哪些底层数据结构"><a class="header" href="#redis-数据类型有哪些底层数据结构">Redis 数据类型有哪些底层数据结构？</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>常用类型</th><th>底层数据结构</th></tr>
+</thead>
+<tbody>
+<tr><td>String</td><td>SDS（简单动态字符串）</td></tr>
+<tr><td>List</td><td>quicklist（双向链表 + ziplist/listpack 的结合体）</td></tr>
+<tr><td>Hash</td><td>ziplist（压缩列表）或 hashtable（哈希表）</td></tr>
+<tr><td>Set</td><td>intset（整数集合）或 hashtable</td></tr>
+<tr><td>ZSet</td><td>ziplist 或 skiplist + hashtable</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="为什么要设计-sds"><a class="header" href="#为什么要设计-sds">为什么要设计 SDS？</a></h3>
+<p>Redis 没有直接使用 C 语言的字符串（<code>char*</code>），而是自己封装了 SDS。C 语言原生的字符串（以 <code>\0</code> 结尾）无法满足 Redis 对高性能和安全性的要求。SDS 的设计优势如下：</p>
+<ul>
+<li><strong>常数复杂度获取长度</strong>：内部记录了 <code>len</code> 属性，读取长度的时间复杂度为 O(1)。</li>
+<li><strong>杜绝缓冲区溢出</strong>：修改前会先检查空间是否足够，不足则自动扩容。</li>
+<li><strong>减少内存重分配</strong>：采用空间预分配和惰性空间释放策略。</li>
+<li><strong>二进制安全</strong>：不以 <code>\0</code> 判断结束，可以存储图片、音频等二进制数据。</li>
+</ul>
+<hr>
+<h3 id="一个字符串类型的值能存储的最大容量是多少"><a class="header" href="#一个字符串类型的值能存储的最大容量是多少">一个字符串类型的值能存储的最大容量是多少？</a></h3>
+<p><strong>512 MB</strong></p>
+<hr>
+<h3 id="为什么会设计-stream"><a class="header" href="#为什么会设计-stream">为什么会设计 Stream？</a></h3>
+<p>在 Stream 出现之前，Redis 的消息发布订阅有明显痛点：</p>
+<ul>
+<li><strong>List 类型</strong>：虽能持久化，但不支持多消费组，确认机制（ACK）实现复杂。</li>
+<li><strong>Pub/Sub</strong>：无法持久化，消息“发完即丢“，消费者离线会导致消息丢失。</li>
+</ul>
+<p><strong>Stream 的设计目标</strong>：提供一个支持持久化、支持多消费组、支持消息确认机制的高可用消息队列模型。</p>
+<hr>
+<h3 id="stream-用在什么场景"><a class="header" href="#stream-用在什么场景">Stream 用在什么场景？</a></h3>
+<ul>
+<li><strong>异步任务处理</strong>：需要保证消息不丢失的任务流。</li>
+<li><strong>多端消费</strong>：同一个数据流需要被不同的业务系统（如结算系统、通知系统）同时消费。</li>
+<li><strong>高性能日志采集</strong>：利用其追加写入的特性，记录海量流水数据。</li>
+</ul>
+<hr>
+<h3 id="消息-id-的设计是否考虑了时间回拨的问题"><a class="header" href="#消息-id-的设计是否考虑了时间回拨的问题">消息 ID 的设计是否考虑了时间回拨的问题？</a></h3>
+<p><strong>考虑了。</strong> Stream 的 ID 默认格式是 <code>&lt;millisecondsTime&gt;-&lt;sequenceNumber&gt;</code>。</p>
+<ul>
+<li><strong>防御机制</strong>：Redis 会记录服务器当前最大的 ID 时间戳。</li>
+<li><strong>处理逻辑</strong>：如果系统时间发生回拨，导致产生的时间戳小于上一个 ID，Redis 会强制使用上一次的时间戳，并递增其序列号，从而保证 ID 的单调递增性。</li>
+</ul>
+<hr>
+<h2 id="持久化和内存"><a class="header" href="#持久化和内存">持久化和内存</a></h2>
+<h3 id="redis-的持久化机制是什么各自的优缺点一般怎么用"><a class="header" href="#redis-的持久化机制是什么各自的优缺点一般怎么用">Redis 的持久化机制是什么？各自的优缺点？一般怎么用？</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>机制</th><th>原理</th><th>优点</th><th>缺点</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>RDB（快照）</strong></td><td>定期将内存数据生成二进制文件保存</td><td>恢复快、文件体积小、性能开销低</td><td>数据丢失多（最后一次快照后会丢）、生成快照耗时</td></tr>
+<tr><td><strong>AOF（日志）</strong></td><td>记录每一个写命令，以追加方式保存</td><td>数据更安全（秒级丢失）、日志可读性强</td><td>文件大、恢复慢、高并发下有 I/O 瓶颈</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>一般用法</strong>：混合持久化（RDB + AOF）。用 RDB 做全量备份，用 AOF 做增量记录，兼顾安全与速度。</p>
+<hr>
+<h3 id="redis-过期键的删除策略有哪些"><a class="header" href="#redis-过期键的删除策略有哪些">Redis 过期键的删除策略有哪些？</a></h3>
+<p>Redis 采用 <strong>“惰性删除 + 定期删除”</strong> 配合使用：</p>
+<ul>
+<li><strong>惰性删除</strong>：访问 key 时才检查是否过期，过期则删除。（省 CPU，费内存）</li>
+<li><strong>定期删除</strong>：每隔一段时间随机抽取一部分 key 检查并删除。（折中方案）</li>
+</ul>
+<hr>
+<h3 id="redis-内存淘汰算法有哪些"><a class="header" href="#redis-内存淘汰算法有哪些">Redis 内存淘汰算法有哪些？</a></h3>
+<p>当内存达到 <code>maxmemory</code> 限制时，触发以下算法：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>算法</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>LRU</strong>（Least Recently Used）</td><td>淘汰最久没被访问的数据</td></tr>
+<tr><td><strong>LFU</strong>（Least Frequently Used）</td><td>淘汰访问频率最低的数据</td></tr>
+<tr><td><strong>Random</strong></td><td>随机淘汰</td></tr>
+<tr><td><strong>TTL</strong></td><td>优先淘汰快过期的数据</td></tr>
+<tr><td><strong>Noeviction</strong></td><td>不淘汰，写操作直接报错（默认配置）</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="redis-的内存用完了会发生什么"><a class="header" href="#redis-的内存用完了会发生什么">Redis 的内存用完了会发生什么？</a></h3>
+<ul>
+<li>如果设置了淘汰策略（如 <code>allkeys-lru</code>），Redis 会根据算法自动删除旧数据腾出空间。</li>
+<li>如果没有设置策略或策略为 <code>noeviction</code>，Redis 将<strong>拒绝所有写请求</strong>（报错 OOM），但读请求正常。</li>
+</ul>
+<hr>
+<h3 id="redis-如何做内存优化"><a class="header" href="#redis-如何做内存优化">Redis 如何做内存优化？</a></h3>
+<ul>
+<li><strong>控制 Key 长度</strong>：缩短键名。</li>
+<li><strong>避免存储大 Key</strong>：拆分大的 Hash 或 List。</li>
+<li><strong>使用高效编码</strong>：尽量利用 ZipList（压缩列表）存储小规模数据。</li>
+<li><strong>设置过期时间</strong>：确保冷数据能自动释放。</li>
+<li><strong>开启内存碎片整理</strong>：配置 <code>activedefrag yes</code>。</li>
+</ul>
+<hr>
+<h3 id="redis-key-的过期时间和永久有效分别怎么设置"><a class="header" href="#redis-key-的过期时间和永久有效分别怎么设置">Redis key 的过期时间和永久有效分别怎么设置？</a></h3>
+<ul>
+<li><strong>设置过期</strong>：<code>EXPIRE key seconds</code> 或 <code>PEXPIRE key milliseconds</code></li>
+<li><strong>永久有效</strong>：默认创建即永久。若需取消过期时间，使用 <code>PERSIST key</code></li>
+</ul>
+<hr>
+<h3 id="redis-中的管道有什么用"><a class="header" href="#redis-中的管道有什么用">Redis 中的管道有什么用？</a></h3>
+<ul>
+<li><strong>作用</strong>：将多个命令打包一次性发送给服务器，减少网络 RTT（往返时延）。</li>
+<li><strong>效果</strong>：极大提升批量操作的性能。从“发一个收一个“变成“发一堆收一堆“。</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../backend/nginx-reverse-proxy-load-balance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../infra/docker-basics-dockerfile.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../backend/nginx-reverse-proxy-load-balance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../infra/docker-basics-dockerfile.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
