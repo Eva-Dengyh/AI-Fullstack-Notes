@@ -10,7 +10,7 @@
 
 <br />
 
-**作者: Eva** · 全栈工程师 · **AI Agent** / **漫剧** 方向
+**作者: Eva** · 全栈工程师
 
 [在线阅读](https://eva-dengyh.github.io/AI-Fullstack-Notes/) · [提 Issue](https://github.com/Eva-Dengyh/AI-Fullstack-Notes/issues)
 
