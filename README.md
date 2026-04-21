@@ -25,7 +25,8 @@
 | [关于本仓库](#关于本仓库) | 定位与读者 |
 | [仓库结构](#仓库结构) | 目录树（可展开） |
 | [笔记索引](#笔记索引) | 按主题跳转各篇笔记 |
-| [Hermes Agent 文档](#hermes-agent-文档) | 官方文档整理与中英对照 |
+| [Hermes Agent 文档](#hermes-agent-文档) | 收录范围说明；实战见 projects |
+| [AI Skills](#ai-skills) | 仓库内可复用 Skill 原文 |
 | [教程索引](#教程索引) | 可复现的上手教程 |
 | [微信公众号](#微信公众号) | 同步更新渠道 |
 | [贡献与交流](#贡献与交流) | Issue 与反馈 |
@@ -56,14 +57,12 @@ AI-Fullstack-Notes/
 │   ├── high-concurrency-architecture.md
 │   ├── nginx-reverse-proxy-load-balance.md
 │   └── redis-cache-core-qa.md
-├── hermes-agent/                # Hermes Agent 文档（门户 + 各章）
-│   ├── index.md
-│   ├── getting-started/         # 安装、快速开始、学习路径等（英 * .md / 中 *_zh.md）
-│   ├── user-guide/             # 配置、CLI、features、messaging、skills 等
-│   ├── guides/                  # 实践教程与技巧
-│   ├── developer-guide/        # 架构与扩展开发（中文译本持续对齐英文章）
-│   ├── reference/              # CLI / FAQ / 工具 / 环境变量等参考
-│   └── integrations/           # 提供商与集成说明
+├── hermes-agent/                # Hermes：仅 index（为何不全量收录 mdBook）
+│   └── index.md
+├── skills/                      # 可复用 AI Agent Skill（原文 SKILL.md）
+│   ├── devils-advocate/
+│   ├── industry-xray-teardown/
+│   └── skill-acceptor/
 ├── infra/                       # 基础设施 / 运维笔记
 │   ├── docker-basics-dockerfile.md
 │   ├── docker-compose-vs-swarm.md
@@ -131,12 +130,20 @@ AI-Fullstack-Notes/
 
 ### Hermes Agent 文档
 
-独立目录 [`hermes-agent/`](./hermes-agent/) 收录 Hermes Agent 的文档整理；与 [`projects/hermes-agent/`](./projects/hermes-agent/)（个人实战笔记系列）并列，用途不同。
+上游全书**未**放入本仓库时，不会在 mdBook 侧栏挂出数百个空章节。请先读说明页；实战笔记在 `projects/hermes-agent/`。
 
 | 入口 | 说明 |
 |------|------|
-| [hermes-agent/index.md](./hermes-agent/index.md) | 文档门户与快速链接 |
-| 中文页面 | 与英文同目录下的 `*_zh.md`（含 `developer-guide/`、`guides/`、`reference/`、`user-guide/features/` 等）；在线阅读见 [mdBook](https://eva-dengyh.github.io/AI-Fullstack-Notes/) 侧栏「Hermes Agent · …（中文）」 |
+| [hermes-agent/index.md](./hermes-agent/index.md) | 为何不全量收录、如何自行 submodule / 同步上游 |
+| [projects/hermes-agent/](./projects/hermes-agent/) | 个人实战系列（本仓库已收录正文） |
+
+### AI Skills
+
+| 文件 | 说明 |
+|------|------|
+| [skills/industry-xray-teardown/SKILL.md](./skills/industry-xray-teardown/SKILL.md) | Industry X-Ray：行业深度拆解 |
+| [skills/devils-advocate/SKILL.md](./skills/devils-advocate/SKILL.md) | Devil's Advocate：重大决策前影子对手 |
+| [skills/skill-acceptor/SKILL.md](./skills/skill-acceptor/SKILL.md) | Skill Acceptor：代码验收简报协议 |
 
 ---
 
