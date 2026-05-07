@@ -1,0 +1,596 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>用 mdBook + GitHub Pages 搭建个人技术笔记站 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-bcd64818.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-33aa50fe.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./tutorials/mdbook-github-pages-tutorial.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="用-mdbook--github-pages-搭建个人技术笔记站从零到上线的完整流程"><a class="header" href="#用-mdbook--github-pages-搭建个人技术笔记站从零到上线的完整流程">用 mdBook + GitHub Pages 搭建个人技术笔记站：从零到上线的完整流程</a></h1>
+<blockquote>
+<p><strong>场景</strong>：你有一堆 Markdown 笔记，想把它们整理成一本可在线访问、带导航、支持搜索的“技术书“，并且每次 <code>git push</code> 就自动发布到网上。mdBook + GitHub Pages + GitHub Actions 可以在 30 分钟内帮你做到这一切，还是完全免费的。</p>
+</blockquote>
+<p>本文覆盖：</p>
+<ul>
+<li>本地安装与初始化</li>
+<li>目录结构与 <code>SUMMARY.md</code> 编写规则</li>
+<li><code>book.toml</code> 完整配置说明</li>
+<li>自定义外观（主题色、字体、favicon）</li>
+<li>GitHub Actions 自动部署、<code>.gitignore</code> 与 Pages 设置</li>
+<li>文末 <strong>「十一、常见错误与修复」</strong> 速查表</li>
+</ul>
+<hr>
+<h2 id="一前置条件"><a class="header" href="#一前置条件">一、前置条件</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>工具</th><th>版本要求</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>Rust / Cargo</td><td>任意稳定版</td><td>用于通过 <code>cargo install</code> 安装 mdBook</td></tr>
+<tr><td>Git</td><td>≥ 2.x</td><td>版本管理与推送</td></tr>
+<tr><td>GitHub 账号</td><td>—</td><td>托管仓库 + Pages 部署</td></tr>
+</tbody>
+</table>
+</div>
+<p>如果你不想安装 Rust，也可以直接从 <a href="https://github.com/rust-lang/mdBook/releases">GitHub Releases</a> 下载编译好的二进制文件，放到 <code>PATH</code> 即可。</p>
+<hr>
+<h2 id="二安装-mdbook"><a class="header" href="#二安装-mdbook">二、安装 mdBook</a></h2>
+<h3 id="方式-a通过-cargo-安装推荐"><a class="header" href="#方式-a通过-cargo-安装推荐">方式 A：通过 Cargo 安装（推荐）</a></h3>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<p>安装完成后验证：</p>
+<pre><code class="language-bash">mdbook --version
+# 常见为 v0.5.x（与 CI 里 mdbook-version: "latest" 一致）
+# 若需与旧版插件兼容，可固定为 0.4.x，例如：cargo install mdbook --locked --version 0.4.52
+</code></pre>
+<h3 id="方式-b下载二进制无需-rust"><a class="header" href="#方式-b下载二进制无需-rust">方式 B：下载二进制（无需 Rust）</a></h3>
+<pre><code class="language-bash"># macOS (Apple Silicon)
+curl -L https://github.com/rust-lang/mdBook/releases/latest/download/mdbook-aarch64-apple-darwin.tar.gz \
+  | tar xz -C /usr/local/bin
+
+# Linux x86_64
+curl -L https://github.com/rust-lang/mdBook/releases/latest/download/mdbook-x86_64-unknown-linux-gnu.tar.gz \
+  | tar xz -C /usr/local/bin
+</code></pre>
+<hr>
+<h2 id="三初始化项目"><a class="header" href="#三初始化项目">三、初始化项目</a></h2>
+<h3 id="31-全新项目"><a class="header" href="#31-全新项目">3.1 全新项目</a></h3>
+<pre><code class="language-bash">mdbook init my-notes
+cd my-notes
+</code></pre>
+<p><code>init</code> 会生成如下结构：</p>
+<pre><code>my-notes/
+├── book.toml        # 核心配置文件
+└── src/
+    ├── SUMMARY.md   # 目录（mdBook 的"地图"）
+    └── chapter_1.md
+</code></pre>
+<h3 id="32-已有-markdown-仓库接入"><a class="header" href="#32-已有-markdown-仓库接入">3.2 已有 Markdown 仓库接入</a></h3>
+<p>如果你已经有一个 git 仓库，里面放着若干 <code>.md</code> 文件，可以直接在根目录：</p>
+<pre><code class="language-bash">mdbook init --force .
+</code></pre>
+<p>然后手动调整 <code>book.toml</code> 中的 <code>src</code> 路径（下一节详解）。</p>
+<p><strong>注意</strong>：<code>mdbook build</code> 的默认输出目录是仓库根下的 <strong><code>book/</code></strong>。请尽早添加根目录 <strong><code>.gitignore</code></strong> 中的 <code>book/</code>（见第九节），<strong>不要</strong>把 <code>book/</code> 当成子模块提交；否则既没有 <code>.gitmodules</code> 里的 URL，又会在 CI 的 <code>actions/checkout</code> 拉子模块时报错。</p>
+<hr>
+<h2 id="四booktoml-完整配置详解"><a class="header" href="#四booktoml-完整配置详解">四、book.toml 完整配置详解</a></h2>
+<p><code>book.toml</code> 是 mdBook 的核心配置，使用 <a href="https://toml.io">TOML</a> 格式。以下是一份生产可用的完整配置，带逐行注释：</p>
+<pre><code class="language-toml"># ── 书籍基本信息 ──────────────────────────────────────────
+[book]
+title       = "AI-Fullstack-Notes"          # 显示在左上角的书名
+description = "全栈工程师的 AI/Agent 学习笔记"
+authors     = ["Eva"]
+language    = "zh"                           # 界面语言（影响搜索分词）
+src         = "."                            # Markdown 源文件根目录
+                                             # 默认 "src"；改成 "." 表示仓库根目录即源目录
+
+# ── HTML 输出配置 ─────────────────────────────────────────
+[output.html]
+site-url = "/AI-Fullstack-Notes/"           # GitHub Pages 子路径，必须与仓库名一致
+                                             # 本地预览时注释掉此行，否则资源路径会错
+
+git-repository-url  = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes"
+# mdBook 0.5+：品牌图标 fa-github 等会触发构建错误 Missing font github，请省略 git-repository-icon。
+# git-repository-icon = "fa-github"
+
+# 每个页面底部显示"在 GitHub 上编辑此页"链接
+edit-url-template = "https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/{path}"
+
+# 其他常用可选项（按需启用）：
+# theme            = "coal"                 # 默认主题：light/rust/coal/navy/ayu
+# default-theme    = "light"               # 读者首次打开时的主题
+# preferred-dark-theme = "navy"            # 系统暗色模式时使用的主题
+# mathjax-support  = true                  # 启用 LaTeX 数学公式
+# no-section-label = true                  # 目录标题前不显示章节编号
+# additional-css   = ["theme/custom.css"]  # 自定义 CSS
+# additional-js    = ["theme/custom.js"]   # 自定义 JS
+# search.enable    = true                  # 默认开启全文搜索
+</code></pre>
+<blockquote>
+<p><strong>关键踩坑点</strong>：<code>site-url</code> 必须与你的 GitHub 仓库名完全一致（含大小写），否则部署后图片、CSS 路径全部 404。</p>
+</blockquote>
+<hr>
+<h2 id="五summarymd-编写规则"><a class="header" href="#五summarymd-编写规则">五、SUMMARY.md 编写规则</a></h2>
+<p><code>SUMMARY.md</code> 是 mdBook 读取目录结构的唯一入口，<strong>文件路径相对于 <code>src</code> 目录</strong>（即 <code>book.toml</code> 中 <code>src</code> 指定的目录）。</p>
+<h3 id="51-基本语法"><a class="header" href="#51-基本语法">5.1 基本语法</a></h3>
+<pre><code class="language-markdown"># 目录
+
+&lt;!-- 前言：不计入章节编号，显示在最顶部 --&gt;
+[前言](README.md)
+
+---
+
+# 一级分组标题（纯文本，不可点击）
+
+- [章节标题](path/to/file.md)
+  - [子章节](path/to/sub.md)
+    - [孙章节](path/to/subsub.md)
+
+# 另一个分组
+
+- [另一章](another.md)
+
+---
+
+&lt;!-- 后记：不计入章节编号 --&gt;
+[附录](appendix.md)
+</code></pre>
+<h3 id="52-实战示例本项目的-summarymd-结构"><a class="header" href="#52-实战示例本项目的-summarymd-结构">5.2 实战示例（本项目的 SUMMARY.md 结构）</a></h3>
+<pre><code class="language-markdown"># 目录
+
+[前言](README.md)
+
+---
+
+# AI / Agent
+
+- [LangChain 架构浅析](ai/langchain-architecture.md)
+- [LangGraph — 通过图结构重新定义 LLM 应用](ai/langgraph-intro.md)
+- [RAG 实战：从手写 MVP 到生产级优化](ai/rag-mvp-to-production.md)
+
+# 架构 / 后端
+
+- [高并发架构设计思考](backend/high-concurrency-architecture.md)
+- [Nginx 全解析：反向代理与负载均衡](backend/nginx-reverse-proxy-load-balance.md)
+
+# 基础设施 / 运维
+
+- [Docker 基础与 Dockerfile 编写](infra/docker-basics-dockerfile.md)
+- [5 分钟用 Docker 自建 Supabase](infra/supabase-docker-self-host.md)
+</code></pre>
+<h3 id="53-规则速查"><a class="header" href="#53-规则速查">5.3 规则速查</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>规则</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>[标题](路径)</code></td><td>只有列在这里的文件才会出现在书中</td></tr>
+<tr><td><code>---</code></td><td>水平分隔线，仅用于视觉分隔</td></tr>
+<tr><td><code># 标题</code></td><td>分组标题，不可点击，不生成页面</td></tr>
+<tr><td>缩进（2 或 4 空格）</td><td>表示子章节，可无限嵌套</td></tr>
+<tr><td>文件路径</td><td>相对于 <code>src</code> 目录；未列出的 <code>.md</code> 文件不会被编译</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="六本地预览"><a class="header" href="#六本地预览">六、本地预览</a></h2>
+<pre><code class="language-bash"># 启动本地开发服务器，文件变动自动刷新
+mdbook serve --open
+
+# 仅构建，不启动服务器
+mdbook build
+# 输出目录：./book/
+</code></pre>
+<blockquote>
+<p>本地预览时，如果 <code>book.toml</code> 设置了 <code>site-url = "/AI-Fullstack-Notes/"</code>，访问 <code>http://localhost:3000</code> 时页面会空白。临时注释掉该行，或用 <code>http://localhost:3000/AI-Fullstack-Notes/</code> 访问。</p>
+</blockquote>
+<hr>
+<h2 id="七自定义外观可选"><a class="header" href="#七自定义外观可选">七、自定义外观（可选）</a></h2>
+<h3 id="71-覆盖主题变量"><a class="header" href="#71-覆盖主题变量">7.1 覆盖主题变量</a></h3>
+<p>在项目根目录创建 <code>theme/</code> 文件夹，添加 <code>custom.css</code>：</p>
+<pre><code class="language-css">/* theme/custom.css */
+:root {
+  --sidebar-bg: #1a1a2e;        /* 侧边栏背景色 */
+  --sidebar-fg: #e0e0e0;        /* 侧边栏文字色 */
+  --links: #4fc3f7;             /* 链接颜色 */
+}
+</code></pre>
+<p>在 <code>book.toml</code> 中引用：</p>
+<pre><code class="language-toml">[output.html]
+additional-css = ["theme/custom.css"]
+</code></pre>
+<h3 id="72-添加-favicon"><a class="header" href="#72-添加-favicon">7.2 添加 favicon</a></h3>
+<pre><code class="language-bash">mkdir -p theme
+cp your-favicon.png theme/favicon.png
+# 或 .ico 格式
+cp your-favicon.ico theme/favicon.ico
+</code></pre>
+<p>mdBook 会自动识别 <code>theme/favicon.png</code> 或 <code>theme/favicon.ico</code>，无需额外配置。</p>
+<h3 id="73-启用-mathjax数学公式"><a class="header" href="#73-启用-mathjax数学公式">7.3 启用 MathJax（数学公式）</a></h3>
+<pre><code class="language-toml">[output.html]
+mathjax-support = true
+</code></pre>
+<p>使用时：</p>
+<pre><code class="language-markdown">行内公式：$E = mc^2$
+
+块级公式：
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+</code></pre>
+<hr>
+<h2 id="八github-actions-自动部署"><a class="header" href="#八github-actions-自动部署">八、GitHub Actions 自动部署</a></h2>
+<h3 id="81-目录结构"><a class="header" href="#81-目录结构">8.1 目录结构</a></h3>
+<pre><code>your-repo/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml   ← 新建此文件
+├── book.toml
+├── SUMMARY.md
+├── .gitignore           ← 建议：忽略 book/（见第九节）
+└── ...（你的 .md 文件）
+</code></pre>
+<h3 id="82-deployyml-完整内容"><a class="header" href="#82-deployyml-完整内容">8.2 deploy.yml 完整内容</a></h3>
+<pre><code class="language-yaml">name: Deploy mdBook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main          # 只有推送到 main 分支才触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 必须：允许 Actions 向仓库写入（gh-pages 分支）
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false   # 若误把 book/ 登记成 submodule 且无 .gitmodules，拉子模块会失败；显式关闭更稳妥
+
+      - name: Install mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: "latest"   # 可固定版本号，如 "0.4.52"（需与本地/插件兼容时再考虑）
+
+      - name: Build
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book        # 只发布构建产物，勿把整个仓库推到 gh-pages
+          # force_orphan: true      # 可选：每次用单提交覆盖 gh-pages，清掉历史上误提交的源码/混杂文件
+</code></pre>
+<h3 id="83-github-仓库设置"><a class="header" href="#83-github-仓库设置">8.3 GitHub 仓库设置</a></h3>
+<ol>
+<li>进入仓库 → <strong>Settings</strong> → <strong>Pages</strong></li>
+<li>Source 选择 <strong>Deploy from a branch</strong></li>
+<li>Branch 选择 <code>gh-pages</code>，目录选 <code>/ (root)</code></li>
+<li>点击 <strong>Save</strong></li>
+</ol>
+<blockquote>
+<p><strong>Pages 源不要选错：</strong></p>
+<ul>
+<li><strong>不要</strong> <code>main</code> + <strong><code>/docs</code></strong>：会跑 <strong>Jekyll</strong>（日志里常见 <code>jekyll-build-pages</code>、<code>Source: .../docs</code>）。没有 Jekyll 项目时会报 <strong><code>/docs</code> 目录不存在</strong>。</li>
+<li><strong>不要</strong> <code>main</code> + <strong><code>/ (root)</code></strong>：GitHub 仍会用 Jekyll 处理仓库，首页往往是 <strong><code>README.md</code></strong>，看起来像「单页文档」，<strong>不是 mdBook 的书本界面</strong>。在线阅读必须来自 <strong><code>gh-pages</code></strong> 上的静态文件。</li>
+<li><strong>正确</strong>：<strong><code>gh-pages</code> + <code>/ (root)</code></strong>（内容由上一节的 <code>deploy.yml</code> 把 <strong><code>./book/</code></strong> 推送到 <code>gh-pages</code>）。</li>
+</ul>
+</blockquote>
+<p>第一次 <code>git push main</code> 后，Actions 跑完（约 1-2 分钟），访问：</p>
+<pre><code>https://&lt;你的用户名&gt;.github.io/&lt;仓库名&gt;/
+</code></pre>
+<h3 id="84-工作流说明"><a class="header" href="#84-工作流说明">8.4 工作流说明</a></h3>
+<pre><code>git push main
+     │
+     ▼
+GitHub Actions 触发
+     │
+     ├─ actions/checkout@v4        # 拉取代码（submodules: false）
+     ├─ peaceiris/actions-mdbook@v2 # 安装 mdBook 二进制
+     ├─ mdbook build               # 编译 → ./book/
+     └─ peaceiris/actions-gh-pages@v4
+           └─ 将 ./book/ 推送到 gh-pages 分支
+                    │
+                    ▼
+           GitHub Pages 自动部署
+</code></pre>
+<hr>
+<h2 id="九gitignore-配置"><a class="header" href="#九gitignore-配置">九、.gitignore 配置</a></h2>
+<p>构建输出目录 <strong><code>book/</code></strong> 应加入忽略，避免：</p>
+<ul>
+<li>把大量生成文件提交进 <code>main</code>；</li>
+<li>误将 <strong><code>book/</code> 登记为 git submodule</strong>（索引里出现 <code>160000</code> 模式且无 <code>.gitmodules</code> 时，CI 在拉子模块阶段会报 <strong><code>No url found for submodule path 'book'</code></strong>）。</li>
+</ul>
+<pre><code class="language-gitignore"># mdBook 构建输出（勿提交；勿误登记为 submodule）
+book/
+</code></pre>
+<hr>
+<h2 id="十项目最终结构参考"><a class="header" href="#十项目最终结构参考">十、项目最终结构参考</a></h2>
+<pre><code>AI-Fullstack-Notes/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        # CI/CD 自动部署
+├── ai/
+│   ├── langchain-architecture.md
+│   └── rag-mvp-to-production.md
+├── backend/
+│   └── high-concurrency-architecture.md
+├── infra/
+│   └── docker-basics-dockerfile.md
+├── projects/
+│   └── fastsam-demo-v1.md
+├── theme/
+│   ├── custom.css            # 可选：自定义样式
+│   └── favicon.png           # 可选：网站图标
+├── book.toml                 # 核心配置
+├── SUMMARY.md                # 目录结构
+├── README.md                 # 前言/首页
+└── .gitignore                # 排除 book/
+</code></pre>
+<hr>
+<h2 id="十一常见错误与修复"><a class="header" href="#十一常见错误与修复">十一、常见错误与修复</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>现象</th><th>原因与处理</th></tr>
+</thead>
+<tbody>
+<tr><td><strong><code>Missing font github</code></strong>，<code>Error rendering "index" line …</code></td><td>mdBook <strong>0.5+</strong> 与 <strong><code>git-repository-icon = "fa-github"</code></strong> 等品牌图标不兼容。第四节：注释掉 <strong><code>git-repository-icon</code></strong>；<code>index</code> 指内置模板而非某篇 Markdown 行号。</td></tr>
+<tr><td><strong><code>No url found for submodule path 'book' in .gitmodules</code></strong></td><td>曾把 <strong><code>book/</code></strong> 误登记为子模块。从索引移除该 gitlink（<code>git rm --cached book</code>），根目录保留 <strong><code>.gitignore</code></strong> 的 <code>book/</code>，<strong><code>deploy.yml</code></strong> 里 <strong><code>submodules: false</code></strong>（第八节）。</td></tr>
+<tr><td><strong>Jekyll 报错 <code>/docs</code> 不存在</strong></td><td>Pages 选成了 <strong><code>main</code> + <code>/docs</code></strong>。改为 <strong><code>gh-pages</code> + <code>/ (root)</code></strong>（第八节）。</td></tr>
+<tr><td><strong>网站只有 README、没有 mdBook 侧栏</strong></td><td>Pages 指向 <strong><code>main</code></strong>（含 <code>/ (root)</code>）而非 <strong><code>gh-pages</code></strong>。改为 <strong><code>gh-pages</code> + <code>/ (root)</code></strong>，并确认 <strong>Deploy mdBook</strong> 工作流已成功跑完。</td></tr>
+<tr><td><strong><code>gh-pages</code> 上混有 <code>book.toml</code>、<code>ai/</code> 等源码</strong></td><td>历史部署曾把整仓推上去。之后应用 <strong><code>publish_dir: ./book</code></strong>；必要时在 <strong><code>peaceiris/actions-gh-pages</code></strong> 上启用 <strong><code>force_orphan: true</code></strong> 做一次干净覆盖（第八节 YAML 注释）。</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>步骤</th><th>操作</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><code>cargo install mdbook</code> 或下载二进制</td></tr>
+<tr><td>2</td><td><code>mdbook init</code> 或在已有仓库根目录添加 <code>book.toml</code></td></tr>
+<tr><td>3</td><td>编写 <code>SUMMARY.md</code> 定义目录结构</td></tr>
+<tr><td>4</td><td>配置 <code>book.toml</code>（重点：<code>src</code>、<code>site-url</code>；0.5+ 勿启用 <code>fa-github</code> 图标）</td></tr>
+<tr><td>5</td><td>根目录 <code>.gitignore</code> 加入 <code>book/</code></td></tr>
+<tr><td>6</td><td><code>mdbook serve</code> 本地预览</td></tr>
+<tr><td>7</td><td>添加 <code>.github/workflows/deploy.yml</code>（<code>checkout</code> 建议 <code>submodules: false</code>）</td></tr>
+<tr><td>8</td><td>GitHub Pages：<strong><code>gh-pages</code> + <code>/ (root)</code></strong>，勿用 <code>main</code></td></tr>
+<tr><td>9</td><td><code>git push main</code> → Actions 构建并更新 <code>gh-pages</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>整个流程下来，你得到的是：一个<strong>自动化发布</strong>、<strong>全文可搜索</strong>、<strong>支持暗色模式</strong>、<strong>免费托管</strong>的技术知识库。以后在 <strong><code>main</code></strong> 上改 Markdown 并 <code>git push</code>，由 Actions 重新 <strong><code>mdbook build</code></strong> 后更新 <strong><code>gh-pages</code></strong>；读者通过 Pages 绑定的 <strong><code>gh-pages</code> 根目录</strong>访问的才是 mdBook 站点。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../skills/skill-acceptor/SKILL.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../skills/skill-acceptor/SKILL.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

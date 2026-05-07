@@ -1,0 +1,652 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>（1）本地启动与项目结构 - AI-Fullstack-Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="全栈工程师的 AI/Agent 学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-2459343d.css">
+        <link rel="stylesheet" href="../../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-bcd64818.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-33aa50fe.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">AI-Fullstack-Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/Eva-Dengyh/AI-Fullstack-Notes/edit/main/./projects/hermes-agent/01-setup-and-project-structure.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="hermes-agent-教程1本地启动与项目结构"><a class="header" href="#hermes-agent-教程1本地启动与项目结构">Hermes Agent 教程（1）：本地启动与项目结构</a></h1>
+<p>项目地址：<a href="https://github.com/NousResearch/hermes-agent">https://github.com/NousResearch/hermes-agent</a></p>
+<h2 id="启动项目"><a class="header" href="#启动项目">启动项目</a></h2>
+<h3 id="step-1拉取项目到本地"><a class="header" href="#step-1拉取项目到本地">Step 1：拉取项目到本地</a></h3>
+<pre><code class="language-bash">git clone https://github.com/NousResearch/hermes-agent.git
+</code></pre>
+<h3 id="step-2进入项目目录"><a class="header" href="#step-2进入项目目录">Step 2：进入项目目录</a></h3>
+<pre><code class="language-bash">cd hermes-agent
+</code></pre>
+<p>若你放在固定路径，也可使用绝对路径，例如：</p>
+<pre><code class="language-bash">cd /Users/YolieDeng/Code/hermes-agent
+</code></pre>
+<h3 id="step-3创建并进入虚拟环境"><a class="header" href="#step-3创建并进入虚拟环境">Step 3：创建并进入虚拟环境</a></h3>
+<pre><code class="language-bash">uv venv
+source .venv/bin/activate
+</code></pre>
+<h3 id="step-4安装项目依赖"><a class="header" href="#step-4安装项目依赖">Step 4：安装项目依赖</a></h3>
+<pre><code class="language-bash">uv sync
+</code></pre>
+<h3 id="step-5配置-env"><a class="header" href="#step-5配置-env">Step 5：配置 <code>.env</code></a></h3>
+<pre><code class="language-bash">cp .env.example .env
+</code></pre>
+<p>编辑 <code>.env</code>，填入你的 API 密钥。例如使用 MiniMax：</p>
+<pre><code class="language-bash"># MINIMAX_API_KEY=your-key-here
+</code></pre>
+<h3 id="step-6模型选择与启动"><a class="header" href="#step-6模型选择与启动">Step 6：模型选择与启动</a></h3>
+<pre><code class="language-bash">hermes doctor
+# 选择适合的模型
+hermes model
+hermes
+</code></pre>
+<p>成功启动后，终端会出现交互界面，即可开始对话。</p>
+<h2 id="项目结构讲解"><a class="header" href="#项目结构讲解">项目结构讲解</a></h2>
+<pre><code class="language-text">hermes-agent/
+     │
+     ├── 📁 核心框架模块
+     │   ├── agent/                              # Agent 核心逻辑和执行引擎
+     │   ├── gateway/                            # API 网关、请求路由、钩子系统
+     │   │   ├── builtin_hooks/                  # 内置钩子集合
+     │   │   └── platforms/                      # 多平台适配
+     │   ├── hermes_cli/                         # CLI 命令行接口
+     │   └── tools/                              # 工具系统和工具调用解析器
+     │       ├── browser_providers/              # 浏览器供应商
+     │       ├── environments/                   # 工具环境配置
+     │       └── neutts_samples/                 # 神经 TTS 示例
+     │
+     ├── 📁 配置与适配
+     │   ├── acp_adapter/                        # ACP 协议适配器
+     │   ├── acp_registry/                       # 服务注册表
+     │   ├── plugins/                            # 插件系统
+     │   │   └── memory/                         # 内存/记忆插件
+     │   │       ├── byterover/                  # Byterover 内存实现
+     │   │       ├── hindsight/                  # Hindsight 内存实现
+     │   │       ├── holographic/                # Holographic 内存实现
+     │   │       ├── honcho/                     # Honcho 内存实现
+     │   │       ├── mem0/                       # Mem0 内存实现
+     │   │       ├── openviking/                 # OpenViking 内存实现
+     │   │       ├── retaindb/                   # RetainDB 内存实现
+     │   │       └── supermemory/                # SuperMemory 内存实现
+     │   └── environments/                       # 环境配置和管理
+     │       ├── benchmarks/                     # 基准测试环境
+     │       │   ├── tblite/                     # TBLite 基准
+     │       │   ├── terminalbench_2/            # 终端基准 2
+     │       │   └── yc_bench/                   # YC 基准
+     │       ├── hermes_swe_env/                 # Hermes SWE 环境
+     │       ├── terminal_test_env/              # 终端测试环境
+     │       └── tool_call_parsers/              # 工具调用解析器
+     │
+     ├── 📁 功能扩展 - Skills（完整技能列表）
+     │   └── skills/                             # 完整技能模块集合
+     │       │
+     │       ├── 📂 苹果生态技能
+     │       │   └── apple/
+     │       │       ├── apple-notes/            # Apple Notes 集成
+     │       │       ├── apple-reminders/        # Apple Reminders 集成
+     │       │       ├── findmy/                 # Find My 定位服务
+     │       │       └── imessage/               # iMessage 消息
+     │       │
+     │       ├── 📂 AI Agent 技能
+     │       │   └── autonomous-ai-agents/
+     │       │       ├── claude-code/            # Claude Code 集成
+     │       │       ├── codex/                  # Codex AI 集成
+     │       │       ├── hermes-agent/           # Hermes Agent 自身
+     │       │       └── opencode/               # OpenCode 集成
+     │       │
+     │       ├── 📂 创意工具
+     │       │   └── creative/
+     │       │       ├── ascii-art/              # ASCII 艺术生成
+     │       │       ├── ascii-video/            # ASCII 视频生成
+     │       │       ├── excalidraw/             # Excalidraw 绘图
+     │       │       ├── manim-video/            # Manim 视频制作
+     │       │       ├── p5js/                   # P5.js 创意编程
+     │       │       └── songwriting-and-ai-music/  # 作曲和 AI 音乐
+     │       │
+     │       ├── 📂 数据科学
+     │       │   └── data-science/
+     │       │       └── jupyter-live-kernel/    # Jupyter 实时内核
+     │       │
+     │       ├── 📂 运维和开发工具
+     │       │   ├── devops/
+     │       │   │   └── webhook-subscriptions/  # Webhook 订阅
+     │       │   ├── diagramming/                # 图表工具
+     │       │   └── domain/                     # 域名工具
+     │       │
+     │       ├── 📂 Email 工具
+     │       │   └── email/
+     │       │       └── himalaya/               # Himalaya 邮件客户端
+     │       │
+     │       ├── 📂 Feed 和 RSS
+     │       │   └── feeds/                      # Feed 聚合工具
+     │       │
+     │       ├── 📂 游戏工具
+     │       │   └── gaming/
+     │       │       ├── minecraft-modpack-server/  # Minecraft 模组服务器
+     │       │       └── pokemon-player/         # 宝可梦玩家工具
+     │       │
+     │       ├── 📂 GIF 工具
+     │       │   └── gifs/                       # GIF 生成和处理
+     │       │
+     │       ├── 📂 GitHub 集成
+     │       │   └── github/
+     │       │       ├── codebase-inspection/    # 代码库检查
+     │       │       ├── github-auth/            # GitHub 认证
+     │       │       ├── github-code-review/     # 代码审查
+     │       │       ├── github-issues/          # Issue 管理
+     │       │       ├── github-pr-workflow/     # PR 工作流
+     │       │       └── github-repo-management/ # 仓库管理
+     │       │
+     │       ├── 📂 索引和缓存
+     │       │   └── index-cache/                # 索引缓存
+     │       │
+     │       ├── 📂 推理工具
+     │       │   └── inference-sh/               # 推理 Shell 脚本
+     │       │
+     │       ├── 📂 休闲娱乐
+     │       │   └── leisure/
+     │       │       └── find-nearby/            # 附近地点查找
+     │       │
+     │       ├── 📂 MCP（模型上下文协议）
+     │       │   └── mcp/
+     │       │       ├── mcporter/               # MCP 转换器
+     │       │       └── native-mcp/             # 原生 MCP 支持
+     │       │
+     │       ├── 📂 媒体工具
+     │       │   └── media/
+     │       │       ├── gif-search/             # GIF 搜索
+     │       │       ├── heartmula/              # 音乐播放器
+     │       │       ├── songsee/                # 歌曲识别
+     │       │       └── youtube-content/        # YouTube 内容工具
+     │       │
+     │       ├── 📂 MLOps 工具
+     │       │   └── mlops/
+     │       │       ├── cloud/                  # 云平台工具
+     │       │       ├── evaluation/             # 模型评估
+     │       │       ├── huggingface-hub/        # HuggingFace 集成
+     │       │       ├── inference/              # 模型推理
+     │       │       ├── models/                 # 模型管理
+     │       │       ├── research/               # 研究工具
+     │       │       ├── training/               # 模型训练
+     │       │       └── vector-databases/       # 向量数据库
+     │       │
+     │       ├── 📂 笔记应用
+     │       │   └── note-taking/
+     │       │       └── obsidian/               # Obsidian 笔记集成
+     │       │
+     │       ├── 📂 生产力工具
+     │       │   └── productivity/
+     │       │       ├── google-workspace/       # Google Workspace 集成
+     │       │       ├── linear/                 # Linear 项目管理
+     │       │       ├── nano-pdf/               # PDF 工具
+     │       │       ├── notion/                 # Notion 集成
+     │       │       ├── ocr-and-documents/      # OCR 和文档处理
+     │       │       └── powerpoint/             # PowerPoint 制作
+     │       │
+     │       ├── 📂 红队工具
+     │       │   └── red-teaming/
+     │       │       └── godmode/                # GodMode 工具
+     │       │
+     │       ├── 📂 研究工具
+     │       │   └── research/
+     │       │       ├── arxiv/                  # ArXiv 论文
+     │       │       ├── blogwatcher/            # 博客监控
+     │       │       ├── llm-wiki/               # LLM Wiki
+     │       │       ├── polymarket/             # Polymarket 数据
+     │       │       └── research-paper-writing/ # 论文写作
+     │       │
+     │       ├── 📂 智能家居
+     │       │   └── smart-home/
+     │       │       └── openhue/                # OpenHue 智能灯控
+     │       │
+     │       ├── 📂 社交媒体
+     │       │   └── social-media/
+     │       │       └── xitter/                 # X/Twitter 集成
+     │       │
+     │       └── 📂 软件开发
+     │           └── software-development/
+     │               ├── plan/                   # 计划工具
+     │               ├── requesting-code-review/ # 代码审查请求
+     │               ├── subagent-driven-development/  # 子 Agent 驱动开发
+     │               ├── systematic-debugging/   # 系统化调试
+     │               ├── test-driven-development/  # TDD 工具
+     │               └── writing-plans/          # 计划编写
+     │
+     ├── 📁 可选技能扩展
+     │   └── optional-skills/                    # 可选安装的高级技能包
+     │       │
+     │       ├── 📂 自主 AI Agent
+     │       │   └── autonomous-ai-agents/
+     │       │       ├── blackbox/               # BlackBox AI
+     │       │       └── honcho/                 # Honcho 框架
+     │       │
+     │       ├── 📂 区块链技能
+     │       │   └── blockchain/
+     │       │       ├── base/                   # Base 区块链
+     │       │       └── solana/                 # Solana 链
+     │       │
+     │       ├── 📂 通信工具
+     │       │   └── communication/
+     │       │       └── one-three-one-rule/     # 一对一通信规则
+     │       │
+     │       ├── 📂 创意能力
+     │       │   └── creative/
+     │       │       ├── blender-mcp/            # Blender 3D 建模
+     │       │       └── meme-generation/        # 梗图生成
+     │       │
+     │       ├── 📂 DevOps 高级工具
+     │       │   └── devops/
+     │       │       ├── cli/                    # DevOps CLI
+     │       │       └── docker-management/      # Docker 管理
+     │       │
+     │       ├── 📂 邮件服务
+     │       │   └── email/
+     │       │       └── agentmail/              # Agent 邮件服务
+     │       │
+     │       ├── 📂 健康工具
+     │       │   └── health/
+     │       │       └── neuroskill-bci/         # 脑机接口工具
+     │       │
+     │       ├── 📂 MCP 工具
+     │       │   └── mcp/
+     │       │       └── fastmcp/                # FastMCP 框架
+     │       │
+     │       ├── 📂 数据迁移
+     │       │   └── migration/
+     │       │       └── openclaw-migration/     # OpenClaw 迁移工具
+     │       │
+     │       ├── 📂 MLOps 高级功能（17 个子模块）
+     │       │   └── mlops/
+     │       │       ├── accelerate/             # Hugging Face Accelerate
+     │       │       ├── chroma/                 # Chroma 向量库
+     │       │       ├── faiss/                  # Facebook FAISS
+     │       │       ├── flash-attention/        # Flash Attention 优化
+     │       │       ├── hermes-atropos-environments/  # Atropos 环境
+     │       │       ├── huggingface-tokenizers/ # HF Tokenizers
+     │       │       ├── instructor/             # Instructor 框架
+     │       │       ├── lambda-labs/            # Lambda Labs GPU
+     │       │       ├── llava/                  # LLaVA 多模态
+     │       │       ├── nemo-curator/           # NeMo Curator
+     │       │       ├── pinecone/               # Pinecone 向量 DB
+     │       │       ├── pytorch-lightning/      # PyTorch Lightning
+     │       │       ├── qdrant/                 # Qdrant 向量 DB
+     │       │       ├── saelens/                # SAELENS 框架
+     │       │       ├── simpo/                  # SimPO 训练
+     │       │       ├── slime/                  # SLIME 框架
+     │       │       ├── tensorrt-llm/           # TensorRT LLM
+     │       │       └── torchtitan/             # TorchTitan 分布式
+     │       │
+     │       ├── 📂 生产力扩展
+     │       │   └── productivity/
+     │       │       ├── canvas/                 # Canvas 协作工具
+     │       │       ├── memento-flashcards/     # 闪卡工具
+     │       │       ├── siyuan/                 # 思源笔记
+     │       │       └── telephony/              # 电话集成
+     │       │
+     │       ├── 📂 研究高级工具（7 个子模块）
+     │       │   └── research/
+     │       │       ├── bioinformatics/         # 生物信息学
+     │       │       ├── domain-intel/           # 领域智能
+     │       │       ├── duckduckgo-search/      # DuckDuckGo 搜索
+     │       │       ├── gitnexus-explorer/      # Git 仓库浏览
+     │       │       ├── parallel-cli/           # 并行 CLI
+     │       │       ├── qmd/                    # Quarto Markdown
+     │       │       └── scrapling/              # 网页爬虫
+     │       │
+     │       └── 📂 安全工具
+     │           └── security/
+     │               ├── 1password/              # 1Password 集成
+     │               ├── oss-forensics/          # OSS 取证工具
+     │               └── sherlock/               # Sherlock 用户搜索
+     │
+     ├── 📁 应用与前端
+     │   ├── landingpage/                       # 落地页面
+     │   └── website/                            # 项目官网
+     │       ├── docs/                           # 网站文档
+     │       │   ├── developer-guide/            # 开发者指南
+     │       │   ├── getting-started/            # 入门指南
+     │       │   ├── guides/                     # 使用指南
+     │       │   ├── integrations/               # 集成文档
+     │       │   ├── reference/                  # API 参考
+     │       │   └── user-guide/                 # 用户指南
+     │       ├── scripts/                        # 网站脚本
+     │       ├── src/                            # 网站源代码
+     │       │   ├── css/                        # 样式文件
+     │       │   └── pages/                      # 页面组件
+     │       └── static/                         # 静态资源
+     │           └── img/                        # 图片资源
+     │
+     ├── 📁 测试与质量保证
+     │   └── tests/                              # 完整测试套件
+     │       ├── acp/                            # ACP 适配器测试
+     │       ├── agent/                          # Agent 核心测试
+     │       ├── cli/                            # CLI 测试
+     │       ├── cron/                           # 定时任务测试
+     │       ├── e2e/                            # 端到端测试
+     │       ├── environments/                   # 环境测试
+     │       │   └── benchmarks/                 # 基准测试
+     │       ├── fakes/                          # Mock 和 Fake 对象
+     │       ├── gateway/                        # 网关测试
+     │       ├── hermes_cli/                     # CLI 测试
+     │       ├── honcho_plugin/                  # Honcho 插件测试
+     │       ├── integration/                    # 集成测试
+     │       ├── plugins/                        # 插件测试
+     │       │   └── memory/                     # 内存插件测试
+     │       ├── run_agent/                      # Agent 运行测试
+     │       ├── skills/                         # Skill 单元测试
+     │       └── tools/                          # 工具测试
+     │
+     ├── 📁 构建与部署
+     │   ├── docker/                             # Docker 配置
+     │   ├── nix/                                # Nix 声明式配置
+     │   ├── packaging/                          # 包管理配置
+     │   │   └── homebrew/                       # Homebrew 公式
+     │   ├── scripts/                            # 辅助脚本
+     │   │   └── whatsapp-bridge/                # WhatsApp 桥接脚本
+     │   └── docs/                               # 项目文档
+     │       ├── migration/                      # 迁移文档
+     │       ├── plans/                          # 规划文档
+     │       └── skins/                          # 主题/皮肤文档
+     │
+     ├── 📁 项目资源
+     │   ├── assets/                             # 静态资源（图片、图标）
+     │   ├── plans/                              # 执行计划存储
+     │   ├── datagen-config-examples/            # 数据生成示例配置
+     │   └── tinker-atropos/                     # 实验性项目/工具
+     │
+     └── 📄 根目录核心文件
+         ├── 🐍 主要 Python 模块
+         │   ├── cli.py                          # 主 CLI 入口（约 410KB）
+         │   ├── run_agent.py                    # Agent 执行引擎（约 500KB）
+         │   ├── batch_runner.py                 # 批量任务运行器
+         │   ├── rl_cli.py                       # 强化学习 CLI
+         │   ├── mini_swe_runner.py              # 小型 SWE 运行器
+         │   ├── mcp_serve.py                    # MCP 服务入口
+         │   ├── trajectory_compressor.py        # 轨迹压缩工具
+         │   ├── toolsets.py                     # 工具集管理
+         │   ├── toolset_distributions.py        # 工具集分发
+         │   ├── model_tools.py                  # 模型工具集
+         │   ├── hermes_state.py                 # Agent 状态管理
+         │   ├── hermes_logging.py               # 日志系统
+         │   ├── hermes_time.py                  # 时间工具
+         │   ├── hermes_constants.py             # 常量定义
+         │   └── utils.py                        # 工具函数
+         │
+         ├── 📦 配置文件
+         │   ├── pyproject.toml                  # Python 项目配置
+         │   ├── requirements.txt                # Python 依赖
+         │   ├── setup-hermes.sh                 # 安装脚本
+         │   ├── flake.nix                       # Nix 开发环境
+         │   ├── flake.lock                      # Nix 依赖锁定
+         │   ├── package.json                    # Node.js 项目配置
+         │   ├── package-lock.json               # Node.js 依赖锁定
+         │   ├── uv.lock                         # UV 包管理器锁定文件
+         │   ├── MANIFEST.in                     # 包清单
+         │   └── constraints-termux.txt          # Termux 约束
+         │
+         ├── 🐳 部署配置
+         │   └── Dockerfile                      # 容器镜像
+         │
+         ├── 📝 文档和示例
+         │   ├── README.md                       # 项目自述文件
+         │   ├── CONTRIBUTING.md                 # 贡献指南
+         │   ├── AGENTS.md                       # Agent 文档
+         │   ├── LICENSE                         # 许可证
+         │   ├── cli-config.yaml.example         # CLI 配置示例
+         │   └── RELEASE_v*.md                   # 发版说明
+         │       ├── RELEASE_v0.2.0.md
+         │       ├── RELEASE_v0.3.0.md
+         │       ├── RELEASE_v0.4.0.md
+         │       ├── RELEASE_v0.5.0.md
+         │       ├── RELEASE_v0.6.0.md
+         │       ├── RELEASE_v0.7.0.md
+         │       └── RELEASE_v0.8.0.md
+         │
+         ├── 📂 开发工具
+         │   ├── .env                            # 环境变量（本地配置）
+         │   ├── .env.example                    # 环境变量模板
+         │   ├── .envrc                          # direnv 配置
+         │   ├── .gitignore                      # Git 忽略规则
+         │   ├── .gitmodules                     # Git 子模块配置
+         │   ├── .dockerignore                   # Docker 忽略规则
+         │   └── .github/                        # GitHub Actions 配置
+         │
+         └── 📁 项目管理
+             ├── .git/                           # Git 仓库
+             ├── .plans/                         # Claude Code 计划
+             ├── .venv/                          # Python 虚拟环境
+             ├── __pycache__/                    # Python 缓存
+             └── .idea/                          # IntelliJ IDEA 配置
+</code></pre>
+<blockquote>
+<p>说明：仓库体积与版本会变，上述树形结构用于建立整体心智模型；以你本地 <code>git clone</code> 后的实际目录为准。</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../projects/hermes-agent/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../hermes-agent/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../projects/hermes-agent/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../hermes-agent/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-c2a407aa.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

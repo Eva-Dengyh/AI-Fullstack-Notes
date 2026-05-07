@@ -1,0 +1,17 @@
+# Build outputs
+dist/
+.vitepress/cache/
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Legacy mdBook
+book/
+
